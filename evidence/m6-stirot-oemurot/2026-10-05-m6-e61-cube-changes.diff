@@ -1,0 +1,438 @@
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/Inc/flash_layout.h <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/Inc/flash_layout.h
+--- <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/Inc/flash_layout.h	2026-07-18 11:33:27.343238000 +0900
++++ <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/Inc/flash_layout.h	2026-10-05 00:31:04.483071132 +0900
+@@ -26,7 +26,7 @@
+ 
+ /* Flash layout configuration : begin ****************************************/
+ /* OEMiROT/STiROT_OEMuROT configuration */
+-/*#define OEMUROT_ENABLE*/         /* Defined: the project is used for STiROT_OEMuROT boot path */
++#define OEMUROT_ENABLE         /* Defined: the project is used for STiROT_OEMuROT boot path */
+                                    /* Undefined: the project is used for OEMiROT boot path */
+ #define MCUBOOT_OVERWRITE_ONLY     /* Defined: the FW installation uses overwrite method.
+                                       UnDefined: The FW installation uses swap mode. */
+@@ -35,7 +35,7 @@
+                                                To enter it, press user button at reset.
+                                       Undefined: Do not use system bootloader. */
+ 
+-#define MCUBOOT_APP_IMAGE_NUMBER 2      /* 1: S application only if FLASH_NS_PARTITION_SIZE = 0 ,
++#define MCUBOOT_APP_IMAGE_NUMBER 1      /* 1: S application only if FLASH_NS_PARTITION_SIZE = 0 ,
+                                               else S and NS application binaries assembled in one single image.
+                                            2: Two separated images for S and NS application binaries. */
+ 
+@@ -140,7 +140,7 @@
+ #endif /* not OEMUROT_ENABLE */
+ 
+ /* BL2 partitions size */
+-#define FLASH_NS_PARTITION_SIZE         (0xA0000) /* 640 KB for NS partition (except for FULL SECURE) */
++#define FLASH_NS_PARTITION_SIZE         (0x0) /* 640 KB for NS partition (except for FULL SECURE) */
+ #if (FLASH_NS_PARTITION_SIZE == 0x0)
+ #define FLASH_S_PARTITION_SIZE          (0x08000) /* 32 KB for S partition */
+ #elif !defined(MCUBOOT_OVERWRITE_ONLY)
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/auto_rot_update.sh <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/auto_rot_update.sh
+--- <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/auto_rot_update.sh	2026-07-18 11:33:27.367742700 +0900
++++ <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/auto_rot_update.sh	2026-10-05 00:31:04.354097492 +0900
+@@ -1,6 +1,6 @@
+ 
+ #flag to switch between OEMiROT and OEMuROT
+-oemurot_enable=0
++oemurot_enable=1
+ 
+ if [ "$oemurot_enable" == "1" ]; then
+     project=OEMuROT
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/map.properties <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/map.properties
+--- <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/map.properties	2026-07-18 11:33:27.367742700 +0900
++++ <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Boot/map.properties	2026-10-05 00:31:08.126920795 +0900
+@@ -1,18 +1,18 @@
+ [BootPathType]
+-bootPath=OEMiROT
++bootPath=OEMuROT
+ MCUBOOT_OVERWRITE_ONLY=0x1
+ CMSE_VENEER_REGION_SIZE=0x400
+-CODE_IMAGE_ASSEMBLY=0x0
++CODE_IMAGE_ASSEMBLY=0x1
+ [Secure]
+ S_CODE_REGION_START=0xC018000
+-S_CODE_REGION_SIZE=0x6000
++S_CODE_REGION_SIZE=0x8000
+ S_DATA=0x0
+ S_DATA_REGION_START=0x0
+ S_DATA_REGION_SIZE=0x0
+ HEADER_SIZE=0x400
+ [NonSecure]
+-NS_CODE_REGION_START=0x801E000
+-NS_CODE_REGION_SIZE=0xA0000
++NS_CODE_REGION_START=0x8020000
++NS_CODE_REGION_SIZE=0x0
+ NS_DATA=0x0
+ NS_DATA_REGION_START=0x0
+ NS_DATA_REGION_SIZE=0x0
+@@ -22,8 +22,8 @@
+ ROT_REGION_SIZE=0x18000
+ SCRATCH_REGION_START=0x18000
+ SCRATCH_REGION_SIZE=0x0
+-DOWNLOAD_ROT_REGION_START=0x0
+-DOWNLOAD_S_CODE_REGION_START=0xBE000
+-DOWNLOAD_NS_CODE_REGION_START=0xC4000
++DOWNLOAD_ROT_REGION_START=0x1E8000
++DOWNLOAD_S_CODE_REGION_START=0x20000
++DOWNLOAD_NS_CODE_REGION_START=0x0
+ DOWNLOAD_S_DATA_REGION_START=0x0
+ DOWNLOAD_NS_DATA_REGION_START=0x0
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/Inc/main.h <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/Inc/main.h
+--- <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/Inc/main.h	2026-07-18 11:33:27.275514100 +0900
++++ <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/Inc/main.h	2026-10-05 00:31:13.491355670 +0900
+@@ -29,8 +29,8 @@
+ 
+ /* Private includes ----------------------------------------------------------*/
+ /* Private define ------------------------------------------------------------*/
+-#define S_CODE_OFFSET      0x1A000 /* This define is updated automatically from ROT_BOOT project */
+-#define S_CODE_SIZE        0x6000 /* This define is updated automatically from ROT_BOOT project */
++#define S_CODE_OFFSET      0x18000 /* This define is updated automatically from ROT_BOOT project */
++#define S_CODE_SIZE        0x8000 /* This define is updated automatically from ROT_BOOT project */
+ #define IMAGE_HEADER_SIZE  (0x400)  /* mcuboot headre size */
+ #define S_CODE_START       (FLASH_BASE_S + S_CODE_OFFSET + IMAGE_HEADER_SIZE)
+ 
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/STM32CubeIDE/STM32H573IIKXQ_FLASH.ld <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/STM32CubeIDE/STM32H573IIKXQ_FLASH.ld
+--- <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/STM32CubeIDE/STM32H573IIKXQ_FLASH.ld	2026-07-18 11:33:27.283514100 +0900
++++ <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/STM32CubeIDE/STM32H573IIKXQ_FLASH.ld	2026-10-05 00:31:10.239183435 +0900
+@@ -31,8 +31,8 @@
+ **
+ ******************************************************************************
+ */
+-S_CODE_OFFSET = 0x1a000;          /* This definition is updated automatically from OEMiROT_Boot postbuild */
+-S_CODE_SIZE = 0x6000;             /* This definition is updated automatically from OEMiROT_Boot postbuild */
++S_CODE_OFFSET = 0x18000;          /* This definition is updated automatically from OEMiROT_Boot postbuild */
++S_CODE_SIZE = 0x8000;             /* This definition is updated automatically from OEMiROT_Boot postbuild */
+ IMAGE_HEADER_SIZE = 0x400;        /* mcuboot header size */
+ 
+ /* Entry Point */
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/STM32CubeIDE/postbuild.sh <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/STM32CubeIDE/postbuild.sh
+--- <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/STM32CubeIDE/postbuild.sh	2026-07-18 11:33:27.284964300 +0900
++++ <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/STM32CubeIDE/postbuild.sh	2026-10-05 00:31:09.974932560 +0900
+@@ -65,7 +65,7 @@
+ #Variables updated by OEMiROT_Boot postbuild
+ #=============================================================================================
+ #flag to switch between OEMiROT and OEMuROT
+-oemurot_enable=0
++oemurot_enable=1
+ 
+ if [ "$oemurot_enable" == "1" ]; then
+     project=OEMuROT
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/Secure_nsclib/appli_flash_layout.h <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/Secure_nsclib/appli_flash_layout.h
+--- <CubeH5>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/Secure_nsclib/appli_flash_layout.h	2026-07-18 11:33:27.285968000 +0900
++++ <copy>/Projects/STM32H573I-DK/Applications/ROT/OEMiROT_Appli/Secure_nsclib/appli_flash_layout.h	2026-10-05 00:31:16.988776751 +0900
+@@ -32,9 +32,9 @@
+ #define MCUBOOT_NS_DATA_IMAGE_NUMBER   0x0      /* 1: NS data image for NS application.
+                                                    0: No NS data image. */
+ 
+-#define FLASH_AREA_0_OFFSET            0x1A000 /* Secure app image primary slot offset */
++#define FLASH_AREA_0_OFFSET            0x18000 /* Secure app image primary slot offset */
+ 
+-#define FLASH_AREA_0_SIZE              0x6000   /* Secure app image primary slot size */
++#define FLASH_AREA_0_SIZE              0x8000   /* Secure app image primary slot size */
+ 
+ #define FLASH_AREA_1_OFFSET            0x0  /* Non-secure app image primary slot offset */
+ 
+@@ -42,35 +42,35 @@
+ 
+ #define FLASH_AREA_2_OFFSET            0x20000  /* Secure app image secondary slot */
+ 
+-#define FLASH_AREA_2_SIZE              0x6000   /* Secure app image secondary slot size */
++#define FLASH_AREA_2_SIZE              0x8000   /* Secure app image secondary slot size */
+ 
+ #define FLASH_AREA_3_OFFSET            0x0  /* Non-secure app image secondary slot offset */
+ 
+ #define FLASH_AREA_3_SIZE              0x0   /* Non-secure app image secondary slot size */
+ 
+-#define FLASH_AREA_4_OFFSET            0x18000 /* Secure data image primary slot offset */
++#define FLASH_AREA_4_OFFSET            0x0 /* Secure data image primary slot offset */
+ 
+-#define FLASH_AREA_4_SIZE              0x2000   /* Secure data image primary slot size */
++#define FLASH_AREA_4_SIZE              0x0   /* Secure data image primary slot size */
+ 
+ #define FLASH_AREA_5_OFFSET            0x0  /* Non-secure data image primary slot offset */
+ 
+ #define FLASH_AREA_5_SIZE              0x0   /* Non-secure data image primary slot size */
+ 
+-#define FLASH_AREA_6_OFFSET            0x26000 /* secure data image secondary slot offset */
++#define FLASH_AREA_6_OFFSET            0x0 /* secure data image secondary slot offset */
+ 
+-#define FLASH_AREA_6_SIZE              0x2000   /* secure data image secondary slot size */
++#define FLASH_AREA_6_SIZE              0x0   /* secure data image secondary slot size */
+ 
+ #define FLASH_AREA_7_OFFSET            0x0 /* Non-secure data image secondary slot offset */
+ 
+ #define FLASH_AREA_7_SIZE              0x0   /* Non-secure data image secondary slot size */
+ 
+-#define FLASH_PARTITION_SIZE           0x6000  /* Secure and Non Secure partition size */
++#define FLASH_PARTITION_SIZE           0x8000  /* Secure and Non Secure partition size */
+ 
+ #define FLASH_NS_PARTITION_SIZE        0x0  /* Non Secure partition size */
+ 
+-#define FLASH_S_PARTITION_SIZE         0x6000   /* secure partition size */
++#define FLASH_S_PARTITION_SIZE         0x8000   /* secure partition size */
+ 
+-#define FLASH_S_DATA_PARTITION_SIZE    0x2000   /* secure data partition size */
++#define FLASH_S_DATA_PARTITION_SIZE    0x0   /* secure data partition size */
+ 
+ #define FLASH_NS_DATA_PARTITION_SIZE   0x0   /* non secure data partition size */
+ 
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Config/STiRoT_Config.xml <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Config/STiRoT_Config.xml
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Config/STiRoT_Config.xml	2026-07-18 11:33:28.404445300 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Config/STiRoT_Config.xml	2026-10-05 00:29:54.487248978 +0900
+@@ -197,7 +197,7 @@
+     </Bool>
+ 	<Output>
+ 		<Name>Output File</Name>
+-		<Value>.\..\Binary\STiRoT_Config.obk</Value>
++		<Value>./../Binary/STiRoT_Config.obk</Value>
+ 		<Default>.\..\Binary\STiRoT_Config.obk</Default>
+ 		<Tooltip>Select the output file .obk including STiRoT configuration</Tooltip>
+ 	</Output>
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Code_Image.xml <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Code_Image.xml
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Code_Image.xml	2026-07-18 11:33:28.406492600 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Code_Image.xml	2026-10-05 00:31:27.631352697 +0900
+@@ -40,7 +40,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Firmware area size</Name>
+-		<Value>0x6000</Value>
++		<Value>0x8000</Value>
+ 		<Type>Data</Type>
+ 		<Command>-S</Command>
+ 		<Hidden>1</Hidden>
+@@ -101,8 +101,8 @@
+ 		<Command>-s</Command>
+ 		<Hidden>1</Hidden>
+ 		<Tooltip>Value of Security counter on which antirollback feature is relying.
+-		'auto' (default) : security counter value is automatically aligned to image version.
+-		'32 bits value': security counter value manually selected (not aligned with image version).
++		"auto" (default) : security counter value is automatically aligned to image version.
++		"32 bits value": security counter value manually selected (not aligned with image version).
+ 		Antirollback feature is inactive if security counter value remains unchanged at each version of image.
+ 		</Tooltip>
+ 		<Default>auto</Default>
+@@ -116,7 +116,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Firmware download area offset</Name>
+-		<Value>0x80BE000</Value>
++		<Value>0x8020000</Value>
+ 		<Type>Data</Type>
+ 		<Command>-x</Command>
+ 		<Hidden>1</Hidden>
+@@ -133,15 +133,15 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Firmware binary input file</Name>
+-		<Value>../../../Applications/ROT/OEMiROT_Appli_TrustZone/Binary/rot_tz_s_app.bin</Value>
++		<Value>../../../Applications/ROT/OEMiROT_Appli/Binary/rot_tz_s_app.bin</Value>
+ 		<Type>File</Type>
+ 		<Tooltip>Select the firmware binary file to be processed for the image generation</Tooltip>
+ 		<Default>../../../Applications/ROT/OEMiROT_Appli_TrustZone/Binary/rot_tz_s_app.bin</Default>
+ 	</Param>
+ 	<Output>
+ 		<Name>Image output file</Name>
+-		<Value>../../../Applications/ROT/OEMiROT_Appli_TrustZone/Binary/rot_tz_s_app_enc_sign.hex</Value>
++		<Value>../../../Applications/ROT/OEMiROT_Appli/Binary/rot_tz_s_app_enc_sign.hex</Value>
+ 		<Default>../../../Applications/ROT/OEMiROT_Appli_TrustZone/Binary/rot_tz_s_app_enc_sign.hex</Default>
+ 	</Output>
+   </McubootFormat>
+-</Root>
++</Root>
+\ No newline at end of file
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Code_Init_Image.xml <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Code_Init_Image.xml
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Code_Init_Image.xml	2026-07-18 11:33:28.407492600 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Code_Init_Image.xml	2026-10-05 00:31:28.551477315 +0900
+@@ -40,7 +40,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Firmware area size</Name>
+-		<Value>0x6000</Value>
++		<Value>0x8000</Value>
+ 		<Type>Data</Type>
+ 		<Command>-S</Command>
+ 		<Hidden>1</Hidden>
+@@ -82,8 +82,8 @@
+ 		<Command>-s</Command>
+ 		<Hidden>1</Hidden>
+ 		<Tooltip>Value of Security counter on which antirollback feature is relying.
+-		'auto' (default) : security counter value is automatically aligned to image version.
+-		'32 bits value': security counter value manually selected (not aligned with image version).
++		"auto" (default) : security counter value is automatically aligned to image version.
++		"32 bits value": security counter value manually selected (not aligned with image version).
+ 		Antirollback feature is inactive if security counter value remains unchanged at each version of image.
+ 		</Tooltip>
+ 		<Default>auto</Default>
+@@ -114,15 +114,15 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Firmware binary input file</Name>
+-		<Value>../../../Applications/ROT/OEMiROT_Appli_TrustZone/Binary/rot_tz_s_app.bin</Value>
++		<Value>../../../Applications/ROT/OEMiROT_Appli/Binary/rot_tz_s_app.bin</Value>
+ 		<Type>File</Type>
+ 		<Tooltip>Select the firmware binary file to be processed for the image generation</Tooltip>
+ 		<Default>../../../Applications/ROT/OEMiROT_Appli_TrustZone/Binary/rot_tz_s_app.bin</Default>
+ 	</Param>
+ 	<Output>
+ 		<Name>Image output file</Name>
+-		<Value>../../../Applications/ROT/OEMiROT_Appli_TrustZone/Binary/rot_tz_s_app_init_sign.hex</Value>
++		<Value>../../../Applications/ROT/OEMiROT_Appli/Binary/rot_tz_s_app_init_sign.hex</Value>
+ 		<Default>../../../Applications/ROT/OEMiROT_Appli_TrustZone/Binary/rot_tz_s_app_init_sign.hex</Default>
+ 	</Output>
+   </McubootFormat>
+-</Root>
++</Root>
+\ No newline at end of file
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Data_Image.xml <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Data_Image.xml
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Data_Image.xml	2026-07-18 11:33:28.407492600 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Data_Image.xml	2026-10-05 00:31:28.068899942 +0900
+@@ -38,7 +38,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Data download slot size</Name>
+-		<Value>0x2000</Value>
++		<Value>0x0</Value>
+ 		<Type>Data</Type>
+ 		<Command>-S</Command>
+ 		<Hidden>1</Hidden>
+@@ -89,8 +89,8 @@
+ 		<Command>-s</Command>
+ 		<Hidden>1</Hidden>
+ 		<Tooltip>Value of Security counter on which antirollback feature is relying.
+-		'auto' (default) : security counter value is automatically aligned to image version.
+-		'32 bits value': security counter value manually selected (not aligned with image version).
++		"auto" (default) : security counter value is automatically aligned to image version.
++		"32 bits value": security counter value manually selected (not aligned with image version).
+ 		Antirollback feature is inactive if security counter value remains unchanged at each version of image.
+ 		</Tooltip>
+ 		<Default>auto</Default>
+@@ -104,7 +104,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Firmware download area offset</Name>
+-		<Value>0x8160000</Value>
++		<Value>0x0</Value>
+ 		<Type>Data</Type>
+ 		<Command>-x</Command>
+ 		<Hidden>1</Hidden>
+@@ -128,7 +128,7 @@
+ 	</Param>
+ 	<Output>
+ 		<Name>Image output file</Name>
+-		<Value>../Binary/s_data_enc_sign.hex</Value>
++		<Value><copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Binary/s_data_enc_sign.hex</Value>
+ 		<Default>../Binary/s_data_enc_sign.bin</Default>
+ 	</Output>
+   </McubootFormat>
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Data_Init_Image.xml <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Data_Init_Image.xml
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Data_Init_Image.xml	2026-07-18 11:33:28.407492600 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/OEMuROT_S_Data_Init_Image.xml	2026-10-05 00:31:28.207154530 +0900
+@@ -38,7 +38,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Data download slot size</Name>
+-		<Value>0x2000</Value>
++		<Value>0x0</Value>
+ 		<Type>Data</Type>
+ 		<Command>-S</Command>
+ 		<Hidden>1</Hidden>
+@@ -80,8 +80,8 @@
+ 		<Command>-s</Command>
+ 		<Hidden>1</Hidden>
+ 		<Tooltip>Value of Security counter on which antirollback feature is relying.
+-		'auto' (default) : security counter value is automatically aligned to image version.
+-		'32 bits value': security counter value manually selected (not aligned with image version).
++		"auto" (default) : security counter value is automatically aligned to image version.
++		"32 bits value": security counter value manually selected (not aligned with image version).
+ 		Antirollback feature is inactive if security counter value remains unchanged at each version of image.
+ 		</Tooltip>
+ 		<Default>auto</Default>
+@@ -95,7 +95,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Firmware execution area offset</Name>
+-		<Value>0x8018000</Value>
++		<Value>0x0</Value>
+ 		<Type>Data</Type>
+ 		<Command>-x</Command>
+ 		<Hidden>1</Hidden>
+@@ -119,8 +119,8 @@
+ 	</Param>
+ 	<Output>
+ 		<Name>Image output file</Name>
+-		<Value>../Binary/s_data_init_sign.hex</Value>
++		<Value><copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Binary/s_data_init_sign.hex</Value>
+ 		<Default>../Binary/s_data_init_sign.bin</Default>
+ 	</Output>
+   </McubootFormat>
+-</Root>
++</Root>
+\ No newline at end of file
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/STiRoT_Code_Image.xml <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/STiRoT_Code_Image.xml
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/STiRoT_Code_Image.xml	2026-07-18 11:33:28.408994900 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/STiRoT_Code_Image.xml	2026-10-05 00:31:17.358520153 +0900
+@@ -84,7 +84,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Version</Name>
+-		<Value>1.0.0</Value>
++		<Value>2.0.0</Value>
+ 		<Type>Data</Type>
+ 		<Command>-v</Command>
+ 		<Tooltip>Version of the firmware binary. Format is x.y.z</Tooltip>
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/STiRoT_Code_Init_Image.xml <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/STiRoT_Code_Init_Image.xml
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/STiRoT_Code_Init_Image.xml	2026-07-18 11:33:28.408994900 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/Images/STiRoT_Code_Init_Image.xml	2026-10-05 00:31:17.733968466 +0900
+@@ -68,7 +68,7 @@
+ 	</Param>
+ 	<Param>
+ 		<Name>Version</Name>
+-		<Value>1.0.0</Value>
++		<Value>2.0.0</Value>
+ 		<Type>Data</Type>
+ 		<Command>-v</Command>
+ 		<Tooltip>Version of the firmware binary. Format is x.y.z</Tooltip>
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/img_config.sh <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/img_config.sh
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/img_config.sh	2026-07-18 11:33:28.416506200 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/img_config.sh	2026-10-05 00:31:05.149681788 +0900
+@@ -1,4 +1,4 @@
+-app_image_number=2
+-app_full_secure=0
++app_image_number=1
++app_full_secure=1
+ s_data_image_number=0
+ ns_data_image_number=0
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/ob_flash_programming.sh <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/ob_flash_programming.sh
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/ob_flash_programming.sh	2026-07-18 11:33:28.417509100 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT_OEMuROT/ob_flash_programming.sh	2026-10-05 00:31:09.845732670 +0900
+@@ -5,7 +5,7 @@
+ source img_config.sh
+ 
+ sec1_start=0
+-sec1_end=0xE
++sec1_end=0xF
+ sec2_start=0x7F
+ sec2_end=0x0
+ wrpgrp1=0xFFFFFFF8
+@@ -17,7 +17,7 @@
+ boot_lck=0xB4
+ bootaddress=0xC000400
+ bootob=0xC0004
+-app_image_number=2
++app_image_number=1
+ s_data_image_number=0
+ ns_data_image_number=0
+ 
+diff -ru --strip-trailing-cr -x Debug -x Binary -x '*.log' -x image_macros_preprocessed_bl2.c <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/env.sh <copy>/Projects/STM32H573I-DK/ROT_Provisioning/env.sh
+--- <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/env.sh	2026-07-18 11:33:28.420792800 +0900
++++ <copy>/Projects/STM32H573I-DK/ROT_Provisioning/env.sh	2026-10-05 00:29:54.320917557 +0900
+@@ -73,7 +73,7 @@
+ #oemirot_appli_path_project=Templates/ROT/OEMiROT_Appli
+ #oemirot_appli_path_project=Applications/ROT/OEMiROT_Appli
+ #oemirot_appli_path_project=Templates/ROT/OEMiROT_Appli_TrustZone
+-oemirot_appli_path_project=Applications/ROT/OEMiROT_Appli_TrustZone
++oemirot_appli_path_project=Applications/ROT/OEMiROT_Appli
+ #==============================================================================
+ 
+ #==============================================================================

@@ -1,0 +1,76 @@
+M6 E6.1: OEMuRoT and full-secure application build
+Date: 2026-10-05
+
+Command
+  scripts/build_stirot_oemurot.sh <CubeH5> build/stirot_oemurot 2.0.0
+
+Inputs
+  STM32CubeH5          e5c73ea1
+  ST MCUboot fork      v1.7.2.40 (CubeH5 Middlewares/Third_Party/mcuboot)
+  GCC                  arm-none-eabi-gcc 14.3.1 (GNU Tools for STM32 14.3.rel1.20251027-0700, STM32CubeCLT 1.22.0)
+  TPC                  STM32 Trusted Package Creator v2.23.0
+  Keys                 ST default keys from ROT_Provisioning/STiROT_OEMuROT/Keys (not for products)
+
+Method
+  The script copies OEMiROT_Boot, OEMiROT_Appli and ROT_Provisioning out of CubeH5 and symlinks
+  Drivers, Middlewares and Utilities. CubeH5 itself is only read. In the copy it:
+  - sets env.sh oemirot_appli_path_project to Applications/ROT/OEMiROT_Appli (full-secure app),
+  - uncomments OEMUROT_ENABLE with AppliCfg (as STiROT_OEMuROT/provisioning.sh does),
+  - sets MCUBOOT_APP_IMAGE_NUMBER 1 and FLASH_NS_PARTITION_SIZE 0x0 (full-secure layout, R-01),
+  - sets the STiRoT code image version (OEMuRoT image) to 2.0.0 (decision D-04),
+  - generates the obk files with the same TPC calls as provisioning.sh step 1,
+  - compiles both projects with the sources, defines and includes of their STM32CubeIDE
+    .project/.cproject (Debug), and runs ST's own postbuild.sh for each.
+  ST's boot postbuild propagates the preprocessed layout into the app linker script, app headers,
+  image XMLs, img_config.sh and ob_flash_programming.sh. Every change in the copy is in
+  2026-10-05-m6-e61-cube-changes.diff.
+
+Layout (preprocessed, 2026-10-05-m6-e61-layout-macros.txt)
+  RE_OEMUROT_ENABLE              1
+  RE_OEMIROT_APPLI_FULL_SECURE   1
+  RE_APP_IMAGE_NUMBER            1
+  OEMuRoT area                   0x000000 size 0x18000
+  App primary (area 0)           0x018000 size 0x8000
+  App secondary (area 2)         0x020000 size 0x8000
+  OEMuRoT download (STiRoT)      0x1E8000 size 0x18000 (STiRoT_Config.xml)
+  SECWM1 end computed            0xF (ob_flash_programming.sh sec1_end 0xE -> 0xF)
+  Overwrite-only, encryption     1, 1
+  WRP/HDP by OEMuRoT             none (HDP start 0x1 > end 0x0)
+
+Size (arm-none-eabi-size)
+  OEMiROT_Boot.elf   text 54182  data 572  bss 23356   area 0x18000 (98304)
+  rot_tz_s_app.elf   text 22192  data 104  bss 2072    slot 0x8000 incl. 0x400 header
+  Compiler warnings: 0 in both builds.
+
+Signed images (parsed from the Intel HEX, header at the first address)
+  file                        range                    magic       hdr    img      flags  version
+  rot_init_sign.hex           0x08000000-0x08017FFF   0x73AB1024  0x400  0x17AC0  0x4    2.0.0
+  rot_enc_sign.hex            0x081E8000-0x081FFFFF   0x73AB1024  0x400  0x17AC0  0x4    2.0.0
+  rot_tz_s_app_init_sign.hex  0x08018000-0x0801FFFF   0x96F3B83D  0x400  0x5720   0x4    1.0.0
+  rot_tz_s_app_enc_sign.hex   0x08020000-0x08027FFF   0x96F3B83D  0x400  0x5720   0x4    1.0.0
+  0x73AB1024 is the STiRoT image magic, 0x96F3B83D the MCUboot image magic.
+  The init images are the ones ST's ob_flash_programming.sh writes directly to the execution
+  areas; the enc images are for the download slots (M7/M8).
+
+obk files
+  file                 sha256 (first 8)  vs ST shipped Binary/
+  STiRoT_Config.obk    c0f86e2b          identical
+  STiRoT_Data.obk      719c5692          identical (shipped, no generator in the reference flow)
+  OEMuRoT_Config.obk   d0615a67          identical
+  OEMuRoT_Data.obk     f8b72fa4          identical (shipped, no generator in the reference flow)
+  M4/M5 STiRoT_Config.obk was c81b7326 (STiROT standalone layout).
+
+sha256
+  61bed7ec184917b306282a8ecf80a05daf91c772a4dddf74559686a21dc58318  OEMiROT_Boot.bin
+  11f0906a5dff97c8dfe7eadeaaebf51d2800c60afc82a41909453790c942c33a  rot_tz_s_app.bin
+  4d2411ee0fda2a234ec776b830450676cf79ea58978127e783857cf2479871f4  rot_init_sign.hex
+  6a827185ff6422cc0c01a0cc30e89536c7bc649293dc279085bf68405ea03110  rot_enc_sign.hex
+  7d012b45439614e970d44bd909bd3b0c65fb438124a93c73b71038ca96ce1113  rot_tz_s_app_init_sign.hex
+  0d63830d12b0f4968bde900241b26143b18435e14d5d44f55b02d5fae841c009  rot_tz_s_app_enc_sign.hex
+  c0f86e2bbf6304e16ea2a944e6bfc60eef3a6ebcc6e9940a3d8bb6f0243e5f0e  STiRoT_Config.obk
+  719c56928b8b205b5a9099f272a77ddd4eb001675844b7546e5dc9d3153c4aa6  STiRoT_Data.obk
+  d0615a67d0d208c875fb7acd29247d9c7b4f642b03cab78b506a67031c7159d7  OEMuRoT_Config.obk
+  f8b72fa4cf806b75b48deb20a4b09128bb43ec1aa903c0ed4383a6a36e7bdbb1  OEMuRoT_Data.obk
+
+Not shown by this record
+  That the images boot. That is E6.3.
