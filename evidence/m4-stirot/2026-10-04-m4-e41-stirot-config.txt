@@ -1,0 +1,45 @@
+# M4 E4.1 STiRoT configuration and image generation
+date: 2026-10-04 21:00:26 +0900
+reference: STM32CubeH5 e5c73ea1, Projects/STM32H573I-DK
+tools: arm-none-eabi-gcc (GNU Tools for STM32 14.3.rel1.20251027-0700) 14.3.1 20250623; STM32 Trusted Package Creator v2.23.0 (CubeCLT 1.22.0)
+command: scripts/build_stirot_appli.sh /mnt/c/workspaces/STM32CubeH5  (calls: TPC -obk STiRoT_Config.xml; TPC -pb STiRoT_Code_Image.xml)
+
+## STiRoT_Config.xml values (keys omitted; ST default keys from ROT_Provisioning/STiROT/Keys)
+Number of images managed = 0x01   (dependency Image)
+Clock selection = 0x01
+Is the firmware full secure = 0x1   (dependency Secure)
+Jump into ST bootloader when no valid image(s) = 0x01
+Firmware execution area offset = 0x00000000
+Firmware download area offset = 0x001E0000
+Firmware area size = 0x00020000
+Data area offset in HDPL2 OBkeys = 0x00000000   (dependency Image,0x02)
+Data slot size in HDPL2 OBKeys = 0x000002F0   (dependency Image,0x02)
+Data download area offset = 0x001DE000   (dependency Image,0x02)
+Data download slot size = 0x00002000   (dependency Image,0x02)
+Size of the secure area inside the firmware execution area = 0x00006000   (dependency Secure,0x00)
+SRAM2 erasing in case of reset = 0x00000000
+SRAM2 ECC management activation = 0x00000000
+Product state minimal allowed = 0x0000ED00
+Internal tampers activation = 0x0
+
+## ST app linker vs config
+S_CODE_OFFSET = 0x00000000;       /* Firmware execution area offset from STiROT_Config.xml */
+S_CODE_SIZE = 0x00020000;         /* Firmware area size from STiROT_Config.xml */
+IMAGE_HEADER_SIZE = 0x400;        /* mcuboot header size */
+appli.elf: .isr_vector 0x0c000400, .data 0x30000000, Reset_Handler 0x0c004108, initial SP 0x30040000
+   text	   data	    bss	    dec	    hex	filename
+  20908	    104	   2056	  23068	   5a1c	build/stirot_appli/appli.elf
+
+## Generated files (sha256)
+83d22e825c1c08972050b51c9bc9a1d543040e4315b463a870d6cb3b1bd44489  build/stirot_appli/appli.bin
+7bef8b1c084292177c514ae5498fb0bb622152d72808a7cc4f55e4f01ba0ffed  build/stirot_appli/appli_enc_sign.hex
+c81b73269e469085bbc5e5b495af22050c5afa3f31275b1de66bd93c45a578d1  build/stirot_appli/stirot/Binary/STiRoT_Config.obk
+STiRoT_Config.obk regenerated here is byte-identical to the shipped ROT_Provisioning/STiROT/Binary/STiRoT_Config.obk (c81b7326...).
+STiRoT_Data.obk is used as shipped: 719c56928b8b205b5a9099f272a77ddd4eb001675844b7546e5dc9d3153c4aa6
+
+## appli_enc_sign.hex
+address range 0x081E0000-0x081FFFFF (download area offset 0x1E0000, size 0x20000; outside SECWM1 0x0-0xF)
+header: magic 0x73ab1024, header size 0x400, image size 0x1fac0, flags 0x4 (encrypted AES-128), version 1.0.0+0
+protected TLVs: 0x50 security counter, 0x60
+TLVs: 0x10 SHA256, 0x01 key hash, 0x22 ECDSA-P256 signature, 0x32 ECIES-P256 encrypted key
+payload at +0x400 differs from appli.bin (encrypted)

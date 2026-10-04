@@ -1,0 +1,26 @@
+== M4 steps 7-8, 2026-10-04 21:24:36.826 +0900  (SW1=1, BOOT_UBE 0xB4)
+NOTE: the rc= lines below are the exit status of the sed filter, not of STM32_Programmer_CLI. Success is judged from the CLI text ("OBKey Provisioned successfully", "Option Bytes successfully programmed"). The "Cannot connect to access port 1" line on the STiRoT_Data step is a first connect attempt right after the reset; the CLI reconnected and provisioned (see -full.log lines 86-122).
+c81b73269e469085bbc5e5b495af22050c5afa3f31275b1de66bd93c45a578d1  build/stirot_appli/stirot/Binary/STiRoT_Config.obk
+719c56928b8b205b5a9099f272a77ddd4eb001675844b7546e5dc9d3153c4aa6  <CubeH5>/Projects/STM32H573I-DK/ROT_Provisioning/STiROT/Binary/STiRoT_Data.obk
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+Hard reset is performed
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -sdp build/stirot_appli/stirot/Binary/STiRoT_Config.obk
+Secure Data Provisioning Start. OBK Input file : build/stirot_appli/stirot/Binary/STiRoT_Config.obk
+[==================================================] 100% OBKey Provisioned successfully
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+Hard reset is performed
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -sdp /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/ROT_Provisioning/STiROT/Binary/STiRoT_Data.obk
+Error: Cannot connect to access port 1!  If you are trying to connect to a device with TrustZone enabled please try to connect with HotPlug mode.  If you are trying to connect to a device which supports Debug Authentication with certificate or password, please open your device using it.
+Secure Data Provisioning Start. OBK Input file : /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/ROT_Provisioning/STiROT/Binary/STiRoT_Data.obk
+[==================================================] 100% OBKey Provisioned successfully
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+Hard reset is performed
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -ob BOOT_UBE=0xC3
+Option Bytes successfully programmed
+rc=0
+== done 2026-10-04 21:24:43.936 +0900

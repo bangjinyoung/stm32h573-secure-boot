@@ -1,0 +1,83 @@
+2026-10-04 21:21:15.994 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -d build/stirot_appli/appli_enc_sign.hex
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: appli_enc_sign.hex
+
+
+Memory Programming ...
+  File          : appli_enc_sign.hex
+  Size          : 128.00 KB 
+  Address       : 0x081E0000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [240 255]
+Download in Progress:
+[=======================                           ]  46% [==============================================    ]  92% [==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:01.014
+rc=0
+
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x081E0000 0x20000 .workspace/tmp/m4-download-readback.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m4-download-readback.bin
+  Size          : 131072 Bytes
+  Address:      : 0x81E0000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.372
+rc=0
+
+$ cmp build/stirot_appli/appli_enc_sign.bin .workspace/tmp/m4-download-readback.bin
+cmp: identical
+rc=0
+14db881b6a65248e0bfd1dfe8bfe1d225f7ecd582390a6476cc60f27616da3b2  build/stirot_appli/appli_enc_sign.bin
+14db881b6a65248e0bfd1dfe8bfe1d225f7ecd582390a6476cc60f27616da3b2  .workspace/tmp/m4-download-readback.bin
+2026-10-04 21:21:18.284 +0900

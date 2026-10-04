@@ -1,0 +1,14 @@
+== M4 BOOT0 check (SW1=1 per user), 2026-10-04 21:23:49.433 +0900
+OB: TZEN 0xB4, BOOT_UBE 0xB4, user flash erased except download slot 0x081E0000
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+Reset mode  : Software reset
+Hard reset is performed
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED08 4   (VTOR)
+0xE000ED08 : 0BF97000
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -halt -coreReg -run
+LR       = 0x0BF9EE73
+PC       = 0x0BF9CD36
+MSP      = 0x20003B30
+PSP      = 0x20003B48
+CONTROL  = 0x00
+== done 2026-10-04 21:23:51.827 +0900

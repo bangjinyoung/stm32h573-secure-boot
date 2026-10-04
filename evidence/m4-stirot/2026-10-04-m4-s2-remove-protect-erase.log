@@ -1,0 +1,186 @@
+2026-10-04 21:20:37.547 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=UR -ob SECWM1_STRT=1 SECWM1_END=0 WRPSGn1=0xffffffff WRPSGn2=0xffffffff SECWM2_STRT=1 SECWM2_END=0 HDP1_STRT=1 HDP1_END=0 HDP2_STRT=1 HDP2_END=0 SECBOOT_LOCK=0xC3 -e all
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Under Reset
+Reset mode  : Hardware reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+
+PROGRAMMING OPTION BYTES AREA ...
+Warning: Option Byte: hdp1_end, value: 0x0, was not modified.
+Warning: Option Byte: hdp1_strt, value: 0x1, was not modified.
+Warning: Option Byte: hdp2_end, value: 0x0, was not modified.
+Warning: Option Byte: hdp2_strt, value: 0x1, was not modified.
+Warning: Option Byte: secboot_lock, value: 0xC3, was not modified.
+Warning: Option Byte: wrpsgn1, value: 0xFFFFFFFF, was not modified.
+Warning: Option Byte: wrpsgn2, value: 0xFFFFFFFF, was not modified.
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+
+
+
+
+Reconnecting...
+Reconnected !
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+OPTION BYTE PROGRAMMING VERIFICATION:
+
+Option Bytes successfully programmed
+
+Time elapsed during option Bytes configuration: 00:00:01.459
+
+Mass erase ... 
+
+Mass erase successfully achieved
+rc=0
+2026-10-04 21:20:40.424 +0900

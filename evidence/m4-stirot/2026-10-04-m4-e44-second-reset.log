@@ -1,0 +1,45 @@
+2026-10-04 21:30:48.824 +0900
+second SWD reset, download area already empty
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+cli_rc=0
+2026-10-04 21:30:49.304 +0900
+2026-10-04 21:30:49.337 
+2026-10-04 21:30:49.343 ======================================================================
+2026-10-04 21:30:49.350 =              (C) COPYRIGHT 2023 STMicroelectronics                 =
+2026-10-04 21:30:49.356 =                                                                    =
+2026-10-04 21:30:49.362 =                          User App #A                               =
+2026-10-04 21:30:49.369 ======================================================================
+2026-10-04 21:30:49.369 
+2026-10-04 21:30:49.371  Appli Code version: 1.0.0
+2026-10-04 21:30:49.372 
+2026-10-04 21:30:49.377 =================== Main Menu ============================
+2026-10-04 21:30:49.377 
+2026-10-04 21:30:49.382   Start BootLoader -------------------------------------- 1
+2026-10-04 21:30:49.383 
+2026-10-04 21:30:49.384   Selection :
+2026-10-04 21:30:49.384 
+0xE000ED08 : 0C000400
