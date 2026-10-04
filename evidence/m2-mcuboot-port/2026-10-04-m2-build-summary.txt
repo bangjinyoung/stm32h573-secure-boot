@@ -1,0 +1,78 @@
+# toolchain
+arm-none-eabi-gcc (GNU Tools for STM32 14.3.rel1.20251027-0700) 14.3.1 20250623
+imgtool 2.4.0
+mcuboot v2.4.0 mbedtls v3.6.6
+build_id: d4190a0-dirty
+
+# size
+   text	   data	    bss	    dec	    hex	filename
+  48060	    184	  11896	  60140	   eaec	build/debug/boot/mcuboot/bl2.elf
+  18500	    104	   2056	  20660	   50b4	build/debug/app/bare/bare_slot.elf
+
+# bl2 sections
+  0 .isr_vector   0000024c  08000000  08000000  00001000  2**0
+  1 .text         0000a898  0800024c  0800024c  0000124c  2**2
+  2 .rodata       000010c8  0800aae4  0800aae4  0000bae4  2**2
+  8 .data         000000b8  20000000  0800bbbc  0000d000  2**2
+  9 .bss          00000c78  200000b8  0800bc74  0000d0b8  2**2
+ 10 ._user_heap_stack 00002200  20000d30  0800bc74  0000dd30  2**0
+200a0000 R _estack
+2009e000 A _sstack
+
+# bare_slot sections
+  0 .isr_vector   0000024c  08018400  08018400  00000400  2**0
+  1 .text         000044cc  0801864c  0801864c  0000064c  2**2
+
+# public key (keys/mcuboot-ecdsa-p256.pub.pem) DER sha256
+1a1db9cfb3fce15c45662346d8f74bc90e8214eafedf0d7bd1c7d3cce24b3fea
+
+# imgtool verify
+Image was correctly validated
+Image version: 1.0.0+0
+Image digest: f57453b439c9766c71e2105141dd478860513c09dabdab2662b59d6ad7ef42a1
+
+# imgtool dumpinfo
+Printing content of signed image: bare_slot_signed.bin 
+
+#### Image header (offset: 0x0) ############################
+magic:              0x96f3b83d
+load_addr:          0x0
+hdr_size:           0x400
+protected_tlv_size: 0x0
+img_size:           0x48ac
+flags:              0x0
+version:            1.0.0+0
+############################################################
+#### Payload (offset: 0x400) ###############################
+|                                                          |
+|              FW image (size: 0x48ac Bytes)               |
+|                                                          |
+############################################################
+#### TLV area (offset: 0x4cac) #############################
+magic:     0x6907
+area size: 0x97
+        ---------------------------------------------
+        type: SHA256 (0x10)
+        len:  0x20
+        data: 0xf5 0x74 0x53 0xb4 0x39 0xc9 0x76 0x6c 
+              0x71 0xe2 0x10 0x51 0x41 0xdd 0x47 0x88 
+              0x60 0x51 0x3c 0x09 0xda 0xbd 0xab 0x26 
+              0x62 0xb5 0x9d 0x6a 0xd7 0xef 0x42 0xa1 
+        ---------------------------------------------
+        type: KEYHASH (0x1)
+        len:  0x20
+        data: 0x1a 0x1d 0xb9 0xcf 0xb3 0xfc 0xe1 0x5c 
+              0x45 0x66 0x23 0x46 0xd8 0xf7 0x4b 0xc9 
+              0x0e 0x82 0x14 0xea 0xfe 0xdf 0x0d 0x7b 
+              0xd1 0xc7 0xd3 0xcc 0xe2 0x4b 0x3f 0xea 
+        ---------------------------------------------
+        type: ECDSASIG (0x22)
+        len:  0x47
+        data: 0x30 0x45 0x02 0x21 0x00 0x83 0x83 0xbd 
+              0x80 0xc7 0x17 0x6a 0x50 0x51 0x97 0x46 
+              0x78 0x4e 0x28 0xa3 0x4b 0x5b 0x5d 0xc0 
+              0xaf 0xff 0x26 0x2a 0x86 0x54 0xff 0xca 
+
+# images
+06f5c13c5b1ff2091e7d97dacfe141c2bcda3a11b31968a26801b082edb9d7e9  boot/mcuboot/bl2.bin
+a67968b482f70864bf09bc5e135e80b2db1e0f9ec6607dd3822aff77738e2553  app/bare/bare_slot_signed.bin
