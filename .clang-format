@@ -1,0 +1,39 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+BreakBeforeBraces: Linux
+
+# Preserve a single hand-written blank line (e.g. between guard clauses).
+# clang-format will not insert blank lines, but it keeps up to this many.
+MaxEmptyLinesToKeep: 1
+
+AlignAfterOpenBracket: AlwaysBreak
+BracedInitializerIndentWidth: 4
+
+BinPackArguments: false
+IndentCaseLabels: false
+IndentGotoLabels: false
+InsertBraces: true
+
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: true
+  AcrossComments: false
+
+ColumnLimit: 150
+
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+SortIncludes: Never
+SpaceBeforeInheritanceColon: False
+
+# AlignAfterOpenBracket: Align
+AllowAllArgumentsOnNextLine: true
+BinPackParameters: false
