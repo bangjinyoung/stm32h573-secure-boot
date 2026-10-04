@@ -2,7 +2,7 @@
                         STM32CubeProgrammer v2.23.0                  
       -------------------------------------------------------------------
 
-ST-LINK SN  : 002D001D3532511631333430
+ST-LINK SN  : <masked>
 ST-LINK FW  : V3J17M10
 Board       : STM32H573I-DK
 Voltage     : 3.27V
@@ -30,7 +30,7 @@ Reading 32-bit memory content
                         STM32CubeProgrammer v2.23.0                  
       -------------------------------------------------------------------
 
-ST-LINK SN  : 002D001D3532511631333430
+ST-LINK SN  : <masked>
 ST-LINK FW  : V3J17M10
 Board       : STM32H573I-DK
 Voltage     : 3.27V
