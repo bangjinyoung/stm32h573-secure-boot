@@ -1,0 +1,1 @@
+# stm32h573-secure-boot
