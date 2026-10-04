@@ -1,0 +1,39 @@
+2026-10-04 21:51:17.139 +0900
+$ ... -u 0x081E0000 0x20000 .workspace/tmp/m5/t1-readback.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m5/t1-readback.bin
+  Size          : 131072 Bytes
+  Address:      : 0x81E0000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.373
+readback sha256: fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471  .workspace/tmp/m5/t1-readback.bin
+image    sha256: 30c4fb6cfa3e0fd36f143ad33fa4deee8a2f0169e1096562e772a4c4f1e15919  build/stirot_appli_1.1.0/appli_enc_sign_tampered.bin
+$ cmp build/stirot_appli_1.1.0/appli_enc_sign_tampered.bin readback
+build/stirot_appli_1.1.0/appli_enc_sign_tampered.bin .workspace/tmp/m5/t1-readback.bin differ: byte 1, line 1

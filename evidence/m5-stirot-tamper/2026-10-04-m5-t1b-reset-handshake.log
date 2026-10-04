@@ -1,0 +1,92 @@
+2026-10-04 23:32:30.643 +0900
+user-approved: (A) clear VC_CORERESET, (B) one hard reset, (C) UART handshake 115200 8E1, no SWD attach after reset, vcp_logger off. Dry run verified.
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EDFC 4 -w32 0xE000EDFC 0x00100000 -nv -r32 0xE000EDFC 4 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100001
+
+
+Write 32-bit data
+w @0xe000edfc:  0x00100000
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100000
+
+
+
+2026-10-04 23:32:31.127 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+
+2026-10-04 23:32:33.575 +0900
+VCP by-id -> /dev/ttyACM1
+$ STM32_Programmer_CLI -c port=/dev/ttyACM1 br=115200 P=EVEN 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+Serial Port /dev/ttyACM1 is successfully opened.
+Port configuration: parity = even, baudrate = 115200, data-bit = 8,                     stop-bit = 1.0, flow-control = off
+Activating device: OK
+Board       : --
+Chip ID: 0x484 
+BootLoader protocol version: 4.0
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Warning: Available NVM size can be less than displayed value depending on part number
+Device type : MCU
+Revision ID : --  
+Device CPU  : Cortex-M33
+exit=0

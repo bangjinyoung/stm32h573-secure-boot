@@ -1,0 +1,23 @@
+M5 side record: STiRoT boot with a truncated image in the download area
+Not E5.2 (T1) evidence. Recovery/failure record of the failed T1 SWD write.
+
+Condition before reset (22:1x):
+- download area 0x081E0000: sectors 240-243 hold the first 0x7700 bytes of
+  build/stirot_appli_1.1.0/appli_enc_sign_tampered.bin (valid header), rest 0xFF
+  (.workspace/tmp/m5/erase-s.bin)
+- core in lockup from the failed SWD flash loader, halted
+- OB: PRODUCT_STATE 0xED, BOOT_UBE 0xC3, TZEN 0xB4, SECBOOTADD 0x0C000000, SW1(BOOT0)=1 (user)
+  (2026-10-04-m5-t1-pre-reset-check.log)
+
+Action: one SWD -hardRst at 22:15:30 (user-approved). 2026-10-04-m5-trunc-hardrst.log
+
+Result:
+- VCP 22:15:30.478 "Appli Code version: 1.0.0", menu shown (2026-10-04-m5-trunc-vcp.log, -banner.png)
+- SWD, no halt: DHCSR 0x05100001 (running, no lockup), VTOR 0x0C000400,
+  execution header 73AB1024 ... 00000001 = 1.0.0+0, same words as C0
+- download area unchanged by STiRoT (byte-identical to pre-reset readback)
+- FLASH NSSR/SECSR/NSCR/SECCR all 0; SECBB2R1-4 0x00000000 (were 0xFFFFFFFF before reset)
+  (2026-10-04-m5-trunc-post-state.log)
+
+Reading: STiRoT did not install the truncated image and booted the existing 1.0.0.
+Whether it rejected it on authentication or ignored it earlier is not visible (STiRoT prints nothing).

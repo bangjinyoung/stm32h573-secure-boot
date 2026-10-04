@@ -1,0 +1,206 @@
+2026-10-04 22:36:05.167 +0900
+user-approved diagnosis: DEMCR vector catch VC_HARDERR(bit10)+VC_MMERR(bit4), menu 1, collect state on halt. No flash/OB/OBK/SECBB change, no reset, no resume.
+$ -r32 0xE000EDF0 4 -r32 0xE000EDFC 4 -w32 0xE000EDFC 0x00100410 -nv -r32 0xE000EDFC 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100000
+
+
+Write 32-bit data
+w @0xe000edfc:  0x00100410
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100410
+
+
+$ (new connection) -r32 0xE000EDFC 4 -r32 0xE000EDF0 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100410
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED30
+0xE000ED30 : 00000003
+
+
+
+2026-10-04 22:36:43.561 +0900
+read-only after menu 1 (no halt seen): DEMCR, RCC_RSR, CFSR, HFSR, DFSR, MMFAR, BFAR, SFSR, SFAR, VTOR_S, VTOR_NS(0xE002ED08), CFSR_NS(0xE002ED28)
+$ -r32 0xE000EDFC 4 -r32 0x54020CF4 4 -r32 0xE000ED28 0x14 -r32 0xE000EDE4 8 -r32 0xE000ED08 4 -r32 0xE002ED08 4 -r32 0xE002ED28 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100410
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 14000000
+
+
+
+Reading 32-bit memory content
+  Size          : 20 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 00000000 00000000 00000003 50013800
+0xE000ED38 : 50013800
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0xE000EDE4
+0xE000EDE4 : 00000000 30000120
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE002ED08
+0xE002ED08 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE002ED28
+0xE002ED28 : 00000000
+
+

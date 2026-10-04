@@ -1,0 +1,31 @@
+M5 E5.2 T1: tampered image in the download slot (STiRoT install refusal)
+
+Board/condition: STM32H573I-DK, PRODUCT_STATE 0xED Open, TZEN 0xB4, BOOT_UBE 0xC3 at judgment, SW1(BOOT0)=1,
+SECWM1 0x0-0xF, SECWM2 empty, ST default STiRoT keys. Installed before: STiROT_Appli 1.0.0 (header 1.0.0+0).
+
+Write path: LOADER_Run -> System Bootloader resets after entry (see T1 debug logs), so the image was written
+through the System Bootloader entered directly: BOOT_UBE 0xC3 -> 0xB4 (SWD Hotplug), -hardRst, UART 115200 8E1.
+  2026-10-04-m5-t1b-pre.log, -t1b-boot-ube-b4-hotplug.log, -t1b-reset-handshake.log
+
+Image: build/stirot_appli_1.1.0/appli_enc_sign_tampered.bin, 131072 B, sha256 30c4fb6c...5919
+       offset 0x1400 0x8b -> 0x8a (2026-10-04-m5-e51-download-tamper.txt)
+Write (UART bootloader, 23:3x): erase sectors [240 255], download, "Download verified successfully";
+  readback 0x081E0000-0x081FFFFF sha256 30c4fb6c...5919, cmp identical.   -> 2026-10-04-m5-t1b-uart-write.log
+
+Judgment boot: BOOT_UBE 0xB4 -> 0xC3 (SWD Hotplug, OPTSR_CUR back to 0x30F0EDF8), DEMCR 0x00100000,
+one SWD -hardRst at 23:36:4x.                                                 -> 2026-10-04-m5-t1b-judgment.log
+Result:
+- VCP 23:36:42.916 "Appli Code version: 1.0.0" + menu (-t1b-judgment-vcp.log, -t1b-judgment-banner.png)
+- SWD: VTOR 0x0C000400, PC 0x0C003D24 (app), HDPL 0x8A (HDPL2), CFSR/HFSR/SFSR 0
+- execution area header 73AB1024 ... 00000001 = 1.0.0+0 (unchanged; 1.1.0 not installed)
+- download area 0x081E0000-0x081FFFFF: all 0xFF after the boot (all 16 sectors erased; the written image had no
+  all-0xFF sector). .workspace/tmp/m5/t1b-post-download.bin sha256 b5a41c37...
+- FLASH NSCR 0x00000001, SECCR 0x80001FC1 (LOCK=1, BKSEL bank2, SNB 127): last flash op went through the secure
+  interface on bank-2 sector 127 (= sector 255, end of the download area)
+- RCC_RSR 0x04000000 (PINRSTF only); no further reset after the judgment boot
+
+Reading: STiRoT did not install the tampered 1.1.0, kept 1.0.0 running, and erased the download slot.
+STiRoT logs nothing; refusal is shown by the header and banner staying 1.0.0. Correction after C2: STiRoT also
+erases the slot after a successful install (2026-10-04-m5-e52-c2-valid-control.txt), so the erase is not by
+itself evidence of refusal. Criteria from the checklist:
+5 (tamper in flash, readback) met; 1 (valid-image control) and 6 (restore) come from C2/R4.

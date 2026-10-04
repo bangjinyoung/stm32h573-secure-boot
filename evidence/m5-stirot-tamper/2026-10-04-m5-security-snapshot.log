@@ -1,0 +1,251 @@
+2026-10-04 23:06:07.988 +0900
+read-only security snapshot (no write, no reset). FLASH S base 0x50022000: OPTSR_CUR+0x50 OPTSR2_CUR+0x70 SECBOOTR_CUR+0x88 SECBB1+0xA0 SECWM1R_CUR+0xE0 WRP1R_CUR+0xE8 EDATA1R_CUR+0xF0 HDP1R_CUR+0xF8 HDPEXTR+0x48 SECBB2+0x1A0 SECWM2R_CUR+0x1E0 WRP2R_CUR+0x1E8 HDP2R_CUR+0x1F8; SBS S base 0x54000400: HDPLCR+0x10 HDPLSR+0x14 DBGCR+0x20 DBGLOCKR+0x24
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -ob displ -r32 0x50022050 4 -r32 0x50022070 4 -r32 0x50022088 4 -r32 0x500220A0 0x10 -r32 0x500221A0 0x10 -r32 0x500220E0 0x20 -r32 0x500221E0 0x20 -r32 0x50022048 4 -r32 0x54000414 4 -r32 0x54000410 4 -r32 0x54000420 8 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+
+OPTION BYTES BANK: 0
+
+   Product state:
+
+     PRODUCT_STATE: 0xED (Open) 
+
+   BOR Level:
+
+     BOR_LEV      : 0x0 (BOR Level 1, the threshold level is low (around 2.1 V)) 
+     BORH_EN      : 0x0  (0x0) 
+
+   User Configuration:
+
+     IO_VDD_HSLV  : 0x0  (0x0) 
+     IO_VDDIO2_HSLV: 0x0  (0x0) 
+     IWDG_STOP    : 0x1  (0x1) 
+     IWDG_STDBY   : 0x1  (0x1) 
+     BOOT_UBE     : 0xC3 (ST-iRoT (system flash) selected) 
+     SWAP_BANK    : 0x0  (0x0) 
+     IWDG_SW      : 0x1  (0x1) 
+     NRST_STOP    : 0x1  (0x1) 
+     NRST_STDBY   : 0x1  (0x1) 
+OPTION BYTES BANK: 1
+
+   User Configuration 2:
+
+     TZEN         : 0xB4 (Trust zone enabled) 
+     USBPD_DIS    : 0x1 (Disabled) 
+     SRAM2_ECC    : 0x0 (SRAM2 ECC check enabled ) 
+     SRAM3_ECC    : 0x1 (SRAM3 ECC check disabled) 
+     BKPRAM_ECC   : 0x1 (BKPRAM ECC check disabled) 
+     SRAM2_RST    : 0x0 (SRAM2 erase when system reset) 
+     SRAM1_3_RST  : 0x1 (SRAM1 and SRAM3 not erased when a system reset occurs) 
+OPTION BYTES BANK: 2
+
+   Boot Configuration:
+
+     NSBOOTADD    : 0x80000  (0x8000000) 
+     NSBOOT_LOCK  : 0xC3 (The SWAP_BANK and NSBOOTADD can still be modified following their individual rules.) 
+     SECBOOT_LOCK : 0xC3 (The BOOT_UBE, SWAP_BANK and SECBOOTADD can still be modified following their individual rules.) 
+     SECBOOTADD   : 0xC0000  (0xC000000) 
+OPTION BYTES BANK: 3
+
+   Bank1 - Flash watermark area definition:
+
+     SECWM1_STRT  : 0x0  (0x8000000) 
+     SECWM1_END   : 0xF  (0x801E000) 
+
+   Write sector group protection 1:
+
+     WRPSGn1      : 0xFFFFFFFF  (0x0) 
+OPTION BYTES BANK: 4
+
+   Bank2 - Flash watermark area definition:
+
+     SECWM2_STRT  : 0x7F  (0x81FE000) 
+     SECWM2_END   : 0x0  (0x8100000) 
+
+   Write sector group protection 2:
+
+     WRPSGn2      : 0xFFFFFFFF  (0x8000000) 
+OPTION BYTES BANK: 5
+
+   OTP write protection:
+
+     LOCKBL       : 0x0  (0x0) 
+OPTION BYTES BANK: 6
+
+   Flash data bank 1 sectors:
+
+     EDATA1_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA1_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 7
+
+   Flash data bank 2 sectors :
+
+     EDATA2_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA2_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 8
+
+   Flash HDP bank 1:
+
+     HDP1_STRT    : 0x1  (0x2000) 
+     HDP1_END     : 0x0  (0x0) 
+OPTION BYTES BANK: 9
+
+   Flash HDP bank 2:
+
+     HDP2_STRT    : 0x1  (0x2000) 
+     HDP2_END     : 0x0  (0x0) 
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022050
+0x50022050 : 30F0EDF8
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022070
+0x50022070 : B4000134
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022088
+0x50022088 : 0C0000C3
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x500220A0
+0x500220A0 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x500221A0
+0x500221A0 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0x500220E0
+0x500220E0 : 000F0000 000F0000 FFFFFFFF FFFFFFFF
+0x500220F0 : 00000000 00000000 00000001 00000000
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0x500221E0
+0x500221E0 : 0000007F 0000007F FFFFFFFF FFFFFFFF
+0x500221F0 : 00000000 00000000 00000001 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022048
+0x50022048 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54000414
+0x54000414 : 0000008A
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54000410
+0x54000410 : 000000B4
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0x54000420
+0x54000420 : 00000000 00000000
+
+

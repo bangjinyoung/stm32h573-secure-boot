@@ -1,0 +1,279 @@
+2026-10-04 22:39:54.465 +0900
+user-approved: DWT watchpoints on AIRCR writes. Step A: DEMCR.TRCENA=1 (keep VC_HARDERR+VC_MMERR), read DWT_CTRL (NUMCOMP [31:28]) and FUNCTION0-3 (ID [31:27]). core_cm33.h: DWT_BASE 0xE0001000, COMPn 0x20+16n, FUNCTIONn 0x28+16n
+$ -r32 0xE000EDFC 4 -w32 0xE000EDFC 0x01100410 -nv -r32 0xE000EDFC 4 -r32 0xE0001000 4 -r32 0xE0001020 0x40
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100410
+
+
+Write 32-bit data
+w @0xe000edfc:  0x01100410
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 01100410
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE0001000
+0xE0001000 : 40000000
+
+
+
+Reading 32-bit memory content
+  Size          : 64 Bytes
+  Address:      : 0xE0001020
+0xE0001020 : 00000000 00000000 58000000 00000000
+0xE0001030 : 00000000 00000000 D0000000 00000000
+0xE0001040 : 00000000 00000000 50000000 00000000
+0xE0001050 : 00000000 00000000 F0000000 00000000
+
+2026-10-04 22:40:16.742 +0900
+Step B: FUNCTION = MATCH 0b0101 (data address, write) | ACTION<<4 | DATAVSIZE 0b10 (word)<<10. COMP0 0xE000ED0C ACTION=01 debug event (0x815); COMP1 0xE002ED0C 0x815; COMP2 0xE002ED08 (VTOR_NS, written by LOADER_Run) ACTION=00 trigger only (0x805) = positive control via MATCHED bit24. Encodings from Armv8-M ARM (not in CMSIS).
+$ -w32 COMP0/FUNCTION0/COMP1/FUNCTION1/COMP2/FUNCTION2 -nv, then -r32 0xE0001020 0x30
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+Write 32-bit data
+w @0xe0001020:  0xe000ed0c
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0xe0001028:  0x00000815
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0xe0001030:  0xe002ed0c
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0xe0001038:  0x00000815
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0xe0001040:  0xe002ed08
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0xe0001048:  0x00000805
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 48 Bytes
+  Address:      : 0xE0001020
+0xE0001020 : E000ED0C 00000000 58000815 00000000
+0xE0001030 : E002ED0C 00000000 D0000815 00000000
+0xE0001040 : E002ED08 00000000 50000805 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 01100410
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED30
+0xE000ED30 : 00000003
+
+
+
+2026-10-04 22:40:41.095 +0900
+Step C read-only (MATCHED bit24 clears on read; read once): DWT_CTRL, COMP/FUNCTION0-2, DEMCR, DHCSR, CFSR/HFSR, SFSR, RCC_RSR, VTOR_S, VTOR_NS
+$ -r32 0xE0001000 4 -r32 0xE0001020 0x30 -r32 0xE000EDFC 4 -r32 0xE000EDF0 4 -r32 0xE000ED28 8 -r32 0xE000EDE4 4 -r32 0x54020CF4 4 -r32 0xE000ED08 4 -r32 0xE002ED08 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE0001000
+0xE0001000 : 40000000
+
+
+
+Reading 32-bit memory content
+  Size          : 48 Bytes
+  Address:      : 0xE0001020
+0xE0001020 : E000ED0C 00000000 58000815 00000000
+0xE0001030 : E002ED0C 00000000 D0000815 00000000
+0xE0001040 : E002ED08 00000000 51000805 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 01100410
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 00000000 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDE4
+0xE000EDE4 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 14000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE002ED08
+0xE002ED08 : 00000000
+
+

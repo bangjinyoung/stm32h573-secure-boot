@@ -1,0 +1,12 @@
+2026-10-04 23:27:29.165 +0900
+T1b UART handshake (user-approved), read-only connect. VCP by-id -> /dev/ttyACM1, vcp_logger stopped.
+$ STM32_Programmer_CLI -c port=/dev/ttyACM1 br=115200 P=EVEN 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+Serial Port /dev/ttyACM1 is successfully opened.
+Port configuration: parity = even, baudrate = 115200, data-bit = 8,                     stop-bit = 1.0, flow-control = off
+Timeout error occured while waiting for acknowledgement.
+Error: Activating device: KO. Please, verify the boot mode configuration and check the serial port configuration. Reset your device then try again... 
+exit=1

@@ -1,0 +1,60 @@
+2026-10-04 21:51:15.755 +0900
+image sha256: 30c4fb6cfa3e0fd36f143ad33fa4deee8a2f0169e1096562e772a4c4f1e15919  build/stirot_appli_1.1.0/appli_enc_sign_tampered.bin
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -d build/stirot_appli_1.1.0/appli_enc_sign_tampered.bin 0x081E0000
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: appli_enc_sign_tampered.bin
+
+
+Memory Programming ...
+  File          : appli_enc_sign_tampered.bin
+  Size          : 128.00 KB 
+  Address       : 0x081E0000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [240 255]
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Download in Progress:
+[=======================                           ]  46% 
+
+Error: failed to download  Sector[0]
+Error: failed to download the File

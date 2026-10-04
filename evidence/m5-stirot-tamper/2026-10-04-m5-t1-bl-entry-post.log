@@ -1,0 +1,66 @@
+2026-10-04 22:17:30.655 +0900
+read-only after menu 1, no halt: DHCSR, VTOR, RCC_RSR 0x54020CF4 (PIN26 BOR27 SFT28 IWDG29 WWDG30 LPWR31), CFSR/HFSR, header, download area
+$ -r32 0xE000EDF0 4 -r32 0xE000ED08 4 -r32 0x54020CF4 4 -r32 0xE000ED28 8 -r32 0x0C000010 8 -r32 0x0C1E0000 0x10
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 14000000
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 00000000 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0x0C000010
+0x0C000010 : 00000004 00000001
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x0C1E0000
+0x0C1E0000 : 73AB1024 00000000 00130400 0001FAC0

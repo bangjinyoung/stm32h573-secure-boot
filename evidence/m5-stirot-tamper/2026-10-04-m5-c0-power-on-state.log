@@ -1,0 +1,146 @@
+2026-10-04 21:47:57.691 +0900
+read-only SWD hot-plug, no reset, after the user's USB power cycle (ttyACM re-enumerated 21:47)
+$ -r32 0xE000ED08 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+$ -halt -coreReg -run
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+Core halted
+R0       = 0x000002EA
+R1       = 0x50013800
+R2       = 0x50013800
+R3       = 0x00000000
+R4       = 0x3000008C
+R5       = 0x00000020
+R6       = 0x00000000
+R7       = 0x00000000
+R8       = 0x00009C83
+R9       = 0x000007D0
+R10      = 0x00000000
+R11      = 0x00000000
+R12      = 0x00000000
+SP       = 0x3003FF30
+LR       = 0x0C003D2B
+PC       = 0x0C003D18
+XPSR     = 0x09000000
+MSP      = 0x3003FF30
+PSP      = 0x00000000
+PRIMASK  = 0x00
+FAULTMASK= 0x00
+BASEPRI  = 0x00
+CONTROL  = 0x00
+Core run
+
+$ -r32 0x0C000000 0x20
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0x0C000000
+0x0C000000 : 73AB1024 00000000 00130400 0001FAC0
+0x0C000010 : 00000004 00000001 00000000 00000000
+
+$ -r32 0x081E0000 0x20
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0x081E0000
+0x081E0000 : FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
+0x081E0010 : FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
+

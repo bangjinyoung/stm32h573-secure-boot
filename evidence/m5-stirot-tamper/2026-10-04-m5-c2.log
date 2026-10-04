@@ -1,0 +1,1304 @@
+M5 C2 (user-approved): valid 1.1.0 through BOOT_UBE 0xB4 -> UART -> 0xC3. Dry run verified.
+[pre]
+2026-10-04 23:40:27.793 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -ob displ -r32 0x50022050 4 -r32 0xE000EDFC 4 -r32 0x0C000000 0x20 -r32 0xE000ED08 4 -u 0x0C1E0000 0x20000 .workspace/tmp/m5/c2-pre-download.bin 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+
+OPTION BYTES BANK: 0
+
+   Product state:
+
+     PRODUCT_STATE: 0xED (Open) 
+
+   BOR Level:
+
+     BOR_LEV      : 0x0 (BOR Level 1, the threshold level is low (around 2.1 V)) 
+     BORH_EN      : 0x0  (0x0) 
+
+   User Configuration:
+
+     IO_VDD_HSLV  : 0x0  (0x0) 
+     IO_VDDIO2_HSLV: 0x0  (0x0) 
+     IWDG_STOP    : 0x1  (0x1) 
+     IWDG_STDBY   : 0x1  (0x1) 
+     BOOT_UBE     : 0xC3 (ST-iRoT (system flash) selected) 
+     SWAP_BANK    : 0x0  (0x0) 
+     IWDG_SW      : 0x1  (0x1) 
+     NRST_STOP    : 0x1  (0x1) 
+     NRST_STDBY   : 0x1  (0x1) 
+OPTION BYTES BANK: 1
+
+   User Configuration 2:
+
+     TZEN         : 0xB4 (Trust zone enabled) 
+     USBPD_DIS    : 0x1 (Disabled) 
+     SRAM2_ECC    : 0x0 (SRAM2 ECC check enabled ) 
+     SRAM3_ECC    : 0x1 (SRAM3 ECC check disabled) 
+     BKPRAM_ECC   : 0x1 (BKPRAM ECC check disabled) 
+     SRAM2_RST    : 0x0 (SRAM2 erase when system reset) 
+     SRAM1_3_RST  : 0x1 (SRAM1 and SRAM3 not erased when a system reset occurs) 
+OPTION BYTES BANK: 2
+
+   Boot Configuration:
+
+     NSBOOTADD    : 0x80000  (0x8000000) 
+     NSBOOT_LOCK  : 0xC3 (The SWAP_BANK and NSBOOTADD can still be modified following their individual rules.) 
+     SECBOOT_LOCK : 0xC3 (The BOOT_UBE, SWAP_BANK and SECBOOTADD can still be modified following their individual rules.) 
+     SECBOOTADD   : 0xC0000  (0xC000000) 
+OPTION BYTES BANK: 3
+
+   Bank1 - Flash watermark area definition:
+
+     SECWM1_STRT  : 0x0  (0x8000000) 
+     SECWM1_END   : 0xF  (0x801E000) 
+
+   Write sector group protection 1:
+
+     WRPSGn1      : 0xFFFFFFFF  (0x0) 
+OPTION BYTES BANK: 4
+
+   Bank2 - Flash watermark area definition:
+
+     SECWM2_STRT  : 0x7F  (0x81FE000) 
+     SECWM2_END   : 0x0  (0x8100000) 
+
+   Write sector group protection 2:
+
+     WRPSGn2      : 0xFFFFFFFF  (0x8000000) 
+OPTION BYTES BANK: 5
+
+   OTP write protection:
+
+     LOCKBL       : 0x0  (0x0) 
+OPTION BYTES BANK: 6
+
+   Flash data bank 1 sectors:
+
+     EDATA1_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA1_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 7
+
+   Flash data bank 2 sectors :
+
+     EDATA2_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA2_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 8
+
+   Flash HDP bank 1:
+
+     HDP1_STRT    : 0x1  (0x2000) 
+     HDP1_END     : 0x0  (0x0) 
+OPTION BYTES BANK: 9
+
+   Flash HDP bank 2:
+
+     HDP2_STRT    : 0x1  (0x2000) 
+     HDP2_END     : 0x0  (0x0) 
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022050
+0x50022050 : 30F0EDF8
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100000
+
+
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0x0C000000
+0x0C000000 : 73AB1024 00000000 00130400 0001FAC0
+0x0C000010 : 00000004 00000001 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m5/c2-pre-download.bin
+  Size          : 131072 Bytes
+  Address:      : 0xC1E0000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.377
+pre download area: all 0xFF = True
+[obB4]
+2026-10-04 23:40:28.683 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -ob BOOT_UBE=0xB4 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+
+PROGRAMMING OPTION BYTES AREA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+
+
+
+
+Reconnecting...
+Reconnected !
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+OPTION BYTE PROGRAMMING VERIFICATION:
+
+Option Bytes successfully programmed
+
+Time elapsed during option Bytes configuration: 00:00:01.473
+[rb1]
+2026-10-04 23:40:30.633 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -ob displ -r32 0x50022050 4 -r32 0xE000EDFC 4 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+[==================================================] 100% 
+
+
+OPTION BYTES BANK: 0
+
+   Product state:
+
+     PRODUCT_STATE: 0xED (Open) 
+
+   BOR Level:
+
+     BOR_LEV      : 0x0 (BOR Level 1, the threshold level is low (around 2.1 V)) 
+     BORH_EN      : 0x0  (0x0) 
+
+   User Configuration:
+
+     IO_VDD_HSLV  : 0x0  (0x0) 
+     IO_VDDIO2_HSLV: 0x0  (0x0) 
+     IWDG_STOP    : 0x1  (0x1) 
+     IWDG_STDBY   : 0x1  (0x1) 
+     BOOT_UBE     : 0xB4 (OEM-iRoT (user flash) selected) 
+     SWAP_BANK    : 0x0  (0x0) 
+     IWDG_SW      : 0x1  (0x1) 
+     NRST_STOP    : 0x1  (0x1) 
+     NRST_STDBY   : 0x1  (0x1) 
+OPTION BYTES BANK: 1
+
+   User Configuration 2:
+
+     TZEN         : 0xB4 (Trust zone enabled) 
+     USBPD_DIS    : 0x1 (Disabled) 
+     SRAM2_ECC    : 0x0 (SRAM2 ECC check enabled ) 
+     SRAM3_ECC    : 0x1 (SRAM3 ECC check disabled) 
+     BKPRAM_ECC   : 0x1 (BKPRAM ECC check disabled) 
+     SRAM2_RST    : 0x0 (SRAM2 erase when system reset) 
+     SRAM1_3_RST  : 0x1 (SRAM1 and SRAM3 not erased when a system reset occurs) 
+OPTION BYTES BANK: 2
+
+   Boot Configuration:
+
+     NSBOOTADD    : 0x80000  (0x8000000) 
+     NSBOOT_LOCK  : 0xC3 (The SWAP_BANK and NSBOOTADD can still be modified following their individual rules.) 
+     SECBOOT_LOCK : 0xC3 (The BOOT_UBE, SWAP_BANK and SECBOOTADD can still be modified following their individual rules.) 
+     SECBOOTADD   : 0xC0000  (0xC000000) 
+OPTION BYTES BANK: 3
+
+   Bank1 - Flash watermark area definition:
+
+     SECWM1_STRT  : 0x0  (0x8000000) 
+     SECWM1_END   : 0xF  (0x801E000) 
+
+   Write sector group protection 1:
+
+     WRPSGn1      : 0xFFFFFFFF  (0x0) 
+OPTION BYTES BANK: 4
+
+   Bank2 - Flash watermark area definition:
+
+     SECWM2_STRT  : 0x7F  (0x81FE000) 
+     SECWM2_END   : 0x0  (0x8100000) 
+
+   Write sector group protection 2:
+
+     WRPSGn2      : 0xFFFFFFFF  (0x8000000) 
+OPTION BYTES BANK: 5
+
+   OTP write protection:
+
+     LOCKBL       : 0x0  (0x0) 
+OPTION BYTES BANK: 6
+
+   Flash data bank 1 sectors:
+
+     EDATA1_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA1_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 7
+
+   Flash data bank 2 sectors :
+
+     EDATA2_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA2_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 8
+
+   Flash HDP bank 1:
+
+     HDP1_STRT    : 0x1  (0x2000) 
+     HDP1_END     : 0x0  (0x0) 
+OPTION BYTES BANK: 9
+
+   Flash HDP bank 2:
+
+     HDP2_STRT    : 0x1  (0x2000) 
+     HDP2_END     : 0x0  (0x0) 
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022050
+0x50022050 : 2D30EDF8
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100000
+
+
+[dm1] skipped: DEMCR 0x00100000
+[rs1]
+2026-10-04 23:40:41.482 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+vcp_logger stopped; VCP by-id -> /dev/ttyACM1
+[uart]
+2026-10-04 23:40:43.950 +0900
+$ STM32_Programmer_CLI -c port=/dev/ttyACM1 br=115200 P=EVEN -d build/stirot_appli_1.1.0/appli_enc_sign.bin 0x081E0000 -v -u 0x081E0000 0x20000 .workspace/tmp/m5/c2-readback.bin 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+Serial Port /dev/ttyACM1 is successfully opened.
+Port configuration: parity = even, baudrate = 115200, data-bit = 8,                     stop-bit = 1.0, flow-control = off
+Activating device: OK
+Board       : --
+Chip ID: 0x484 
+BootLoader protocol version: 4.0
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Warning: Available NVM size can be less than displayed value depending on part number
+Device type : MCU
+Revision ID : --  
+Device CPU  : Cortex-M33
+
+
+Opening and parsing file: appli_enc_sign.bin
+
+
+Memory Programming ...
+  File          : appli_enc_sign.bin
+  Size          : 128.00 KB 
+  Address       : 0x081E0000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [240 255]
+Download in Progress:
+[=                                                 ]   2% [==                                                ]   4% [===                                               ]   6% [====                                              ]   8% [=====                                             ]  10% [======                                            ]  12% [=======                                           ]  14% [========                                          ]  16% [=========                                         ]  18% [==========                                        ]  20% [===========                                       ]  22% [============                                      ]  24% [=============                                     ]  26% [==============                                    ]  28% [===============                                   ]  30% [================                                  ]  32% [=================                                 ]  34% [==================                                ]  36% [===================                               ]  38% [====================                              ]  40% [=====================                             ]  42% [======================                            ]  44% [=======================                           ]  46% [========================                          ]  48% [=========================                         ]  50% [==========================                        ]  52% [===========================                       ]  54% [============================                      ]  56% [=============================                     ]  58% [==============================                    ]  60% [===============================                   ]  62% [================================                  ]  64% [=================================                 ]  66% [==================================                ]  68% [===================================               ]  70% [====================================              ]  72% [=====================================             ]  74% [======================================            ]  76% [=======================================           ]  78% [========================================          ]  80% [=========================================         ]  82% [==========================================        ]  84% [===========================================       ]  86% [============================================      ]  88% [=============================================     ]  90% [==============================================    ]  92% [===============================================   ]  94% [================================================  ]  96% [================================================= ]  98% [==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:14.098
+
+
+
+Verifying...
+
+
+Read progress:
+[=                                                 ]   2% [==                                                ]   4% [===                                               ]   6% [====                                              ]   8% [=====                                             ]  10% [======                                            ]  12% [=======                                           ]  14% [========                                          ]  16% [=========                                         ]  18% [==========                                        ]  20% [===========                                       ]  22% [============                                      ]  24% [=============                                     ]  26% [==============                                    ]  28% [===============                                   ]  30% [================                                  ]  32% [=================                                 ]  34% [==================                                ]  36% [===================                               ]  38% [====================                              ]  40% [=====================                             ]  42% [======================                            ]  44% [=======================                           ]  46% [========================                          ]  48% [=========================                         ]  50% [==========================                        ]  52% [===========================                       ]  54% [============================                      ]  56% [=============================                     ]  58% [==============================                    ]  60% [===============================                   ]  62% [================================                  ]  64% [=================================                 ]  66% [==================================                ]  68% [===================================               ]  70% [====================================              ]  72% [=====================================             ]  74% [======================================            ]  76% [=======================================           ]  78% [========================================          ]  80% [=========================================         ]  82% [==========================================        ]  84% [===========================================       ]  86% [============================================      ]  88% [=============================================     ]  90% [==============================================    ]  92% [===============================================   ]  94% [================================================  ]  96% [================================================= ]  98% [==================================================] 100% 
+
+Time elapsed during verifying operation: 00:00:13.712
+
+
+Download verified successfully
+
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m5/c2-readback.bin
+  Size          : 131072 Bytes
+  Address:      : 0x81E0000
+Read progress:
+[==================================================] 100% [=                                                 ]   2% [==                                                ]   4% [===                                               ]   6% [====                                              ]   8% [=====                                             ]  10% [======                                            ]  12% [=======                                           ]  14% [========                                          ]  16% [=========                                         ]  18% [==========                                        ]  20% [===========                                       ]  22% [============                                      ]  24% [=============                                     ]  26% [==============                                    ]  28% [===============                                   ]  30% [================                                  ]  32% [=================                                 ]  34% [==================                                ]  36% [===================                               ]  38% [====================                              ]  40% [=====================                             ]  42% [======================                            ]  44% [=======================                           ]  46% [========================                          ]  48% [=========================                         ]  50% [==========================                        ]  52% [===========================                       ]  54% [============================                      ]  56% [=============================                     ]  58% [==============================                    ]  60% [===============================                   ]  62% [================================                  ]  64% [=================================                 ]  66% [==================================                ]  68% [===================================               ]  70% [====================================              ]  72% [=====================================             ]  74% [======================================            ]  76% [=======================================           ]  78% [========================================          ]  80% [=========================================         ]  82% [==========================================        ]  84% [===========================================       ]  86% [============================================      ]  88% [=============================================     ]  90% [==============================================    ]  92% [===============================================   ]  94% [================================================  ]  96% [================================================= ]  98% [==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:13.713
+exit=0
+--- compare
+d4588d14acacbee9dc8bfe0b4f8a267f28f1a2f5e30e0e79f315f2d5afbbc19e  build/stirot_appli_1.1.0/appli_enc_sign.bin
+d4588d14acacbee9dc8bfe0b4f8a267f28f1a2f5e30e0e79f315f2d5afbbc19e  .workspace/tmp/m5/c2-readback.bin
+cmp: identical (131072 bytes)
+[obC3]
+2026-10-04 23:41:37.618 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -ob BOOT_UBE=0xC3 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+
+
+PROGRAMMING OPTION BYTES AREA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+
+
+
+
+Reconnecting...
+Reconnected !
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+
+OPTION BYTE PROGRAMMING VERIFICATION:
+
+Option Bytes successfully programmed
+
+Time elapsed during option Bytes configuration: 00:00:01.431
+[rb2]
+2026-10-04 23:41:39.525 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -ob displ -r32 0x50022050 4 -r32 0xE000EDFC 4 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+
+
+OPTION BYTES BANK: 0
+
+   Product state:
+
+     PRODUCT_STATE: 0xED (Open) 
+
+   BOR Level:
+
+     BOR_LEV      : 0x0 (BOR Level 1, the threshold level is low (around 2.1 V)) 
+     BORH_EN      : 0x0  (0x0) 
+
+   User Configuration:
+
+     IO_VDD_HSLV  : 0x0  (0x0) 
+     IO_VDDIO2_HSLV: 0x0  (0x0) 
+     IWDG_STOP    : 0x1  (0x1) 
+     IWDG_STDBY   : 0x1  (0x1) 
+     BOOT_UBE     : 0xC3 (ST-iRoT (system flash) selected) 
+     SWAP_BANK    : 0x0  (0x0) 
+     IWDG_SW      : 0x1  (0x1) 
+     NRST_STOP    : 0x1  (0x1) 
+     NRST_STDBY   : 0x1  (0x1) 
+OPTION BYTES BANK: 1
+
+   User Configuration 2:
+
+     TZEN         : 0xB4 (Trust zone enabled) 
+     USBPD_DIS    : 0x1 (Disabled) 
+     SRAM2_ECC    : 0x0 (SRAM2 ECC check enabled ) 
+     SRAM3_ECC    : 0x1 (SRAM3 ECC check disabled) 
+     BKPRAM_ECC   : 0x1 (BKPRAM ECC check disabled) 
+     SRAM2_RST    : 0x0 (SRAM2 erase when system reset) 
+     SRAM1_3_RST  : 0x1 (SRAM1 and SRAM3 not erased when a system reset occurs) 
+OPTION BYTES BANK: 2
+
+   Boot Configuration:
+
+     NSBOOTADD    : 0x80000  (0x8000000) 
+     NSBOOT_LOCK  : 0xC3 (The SWAP_BANK and NSBOOTADD can still be modified following their individual rules.) 
+     SECBOOT_LOCK : 0xC3 (The BOOT_UBE, SWAP_BANK and SECBOOTADD can still be modified following their individual rules.) 
+     SECBOOTADD   : 0xC0000  (0xC000000) 
+OPTION BYTES BANK: 3
+
+   Bank1 - Flash watermark area definition:
+
+     SECWM1_STRT  : 0x0  (0x8000000) 
+     SECWM1_END   : 0xF  (0x801E000) 
+
+   Write sector group protection 1:
+
+     WRPSGn1      : 0xFFFFFFFF  (0x0) 
+OPTION BYTES BANK: 4
+
+   Bank2 - Flash watermark area definition:
+
+     SECWM2_STRT  : 0x7F  (0x81FE000) 
+     SECWM2_END   : 0x0  (0x8100000) 
+
+   Write sector group protection 2:
+
+     WRPSGn2      : 0xFFFFFFFF  (0x8000000) 
+OPTION BYTES BANK: 5
+
+   OTP write protection:
+
+     LOCKBL       : 0x0  (0x0) 
+OPTION BYTES BANK: 6
+
+   Flash data bank 1 sectors:
+
+     EDATA1_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA1_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 7
+
+   Flash data bank 2 sectors :
+
+     EDATA2_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA2_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 8
+
+   Flash HDP bank 1:
+
+     HDP1_STRT    : 0x1  (0x2000) 
+     HDP1_END     : 0x0  (0x0) 
+OPTION BYTES BANK: 9
+
+   Flash HDP bank 2:
+
+     HDP2_STRT    : 0x1  (0x2000) 
+     HDP2_END     : 0x0  (0x0) 
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022050
+0x50022050 : 30F0EDF8
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100000
+
+
+[dm2] skipped: DEMCR 0x00100000
+[rs2]
+2026-10-04 23:41:41.000 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+[post]
+2026-10-04 23:41:59.528 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EDF0 4 -r32 0xE000ED08 4 -r32 0x54000414 4 -r32 0x54020CF4 4 -r32 0xE000ED28 8 -r32 0xE000EDE4 4 -r32 0x50022020 0x10 -r32 0x500221A0 0x10 -r32 0x0C000000 0x20 -r32 0x0C1E0000 0x20 -u 0x0C1E0000 0x20000 .workspace/tmp/m5/c2-post-download.bin -ob displ -halt -coreReg -run 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54000414
+0x54000414 : 0000008A
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 04000000
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 00000000 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDE4
+0xE000EDE4 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00000000 00000001 80001FC1
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x500221A0
+0x500221A0 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0x0C000000
+0x0C000000 : 73AB1024 00000000 00130400 0001FAC0
+0x0C000010 : 00000004 00000101 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0x0C1E0000
+0x0C1E0000 : FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
+0x0C1E0010 : FFFFFFFF FFFFFFFF FFFFFFFF FFFFFFFF
+
+UPLOADING ...
+  File          : .workspace/tmp/m5/c2-post-download.bin
+  Size          : 131072 Bytes
+  Address:      : 0xC1E0000
+Read progress:
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.377
+
+UPLOADING OPTION BYTES DATA ...
+
+  Bank          : 0x00
+  Address       : 0x50022050 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x01
+  Address       : 0x50022070 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x02
+  Address       : 0x50022080 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x03
+  Address       : 0x500220e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x04
+  Address       : 0x500221e0 
+  Size          : 16 Bytes
+
+
+  Bank          : 0x05
+  Address       : 0x50022090 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x06
+  Address       : 0x500220f0 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x07
+  Address       : 0x500221f0 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x08
+  Address       : 0x500220f8 
+  Size          : 8 Bytes
+
+
+  Bank          : 0x09
+  Address       : 0x500221f8 
+  Size          : 8 Bytes
+
+
+
+OPTION BYTES BANK: 0
+
+   Product state:
+
+     PRODUCT_STATE: 0xED (Open) 
+
+   BOR Level:
+
+     BOR_LEV      : 0x0 (BOR Level 1, the threshold level is low (around 2.1 V)) 
+     BORH_EN      : 0x0  (0x0) 
+
+   User Configuration:
+
+     IO_VDD_HSLV  : 0x0  (0x0) 
+     IO_VDDIO2_HSLV: 0x0  (0x0) 
+     IWDG_STOP    : 0x1  (0x1) 
+     IWDG_STDBY   : 0x1  (0x1) 
+     BOOT_UBE     : 0xC3 (ST-iRoT (system flash) selected) 
+     SWAP_BANK    : 0x0  (0x0) 
+     IWDG_SW      : 0x1  (0x1) 
+     NRST_STOP    : 0x1  (0x1) 
+     NRST_STDBY   : 0x1  (0x1) 
+OPTION BYTES BANK: 1
+
+   User Configuration 2:
+
+     TZEN         : 0xB4 (Trust zone enabled) 
+     USBPD_DIS    : 0x1 (Disabled) 
+     SRAM2_ECC    : 0x0 (SRAM2 ECC check enabled ) 
+     SRAM3_ECC    : 0x1 (SRAM3 ECC check disabled) 
+     BKPRAM_ECC   : 0x1 (BKPRAM ECC check disabled) 
+     SRAM2_RST    : 0x0 (SRAM2 erase when system reset) 
+     SRAM1_3_RST  : 0x1 (SRAM1 and SRAM3 not erased when a system reset occurs) 
+OPTION BYTES BANK: 2
+
+   Boot Configuration:
+
+     NSBOOTADD    : 0x80000  (0x8000000) 
+     NSBOOT_LOCK  : 0xC3 (The SWAP_BANK and NSBOOTADD can still be modified following their individual rules.) 
+     SECBOOT_LOCK : 0xC3 (The BOOT_UBE, SWAP_BANK and SECBOOTADD can still be modified following their individual rules.) 
+     SECBOOTADD   : 0xC0000  (0xC000000) 
+OPTION BYTES BANK: 3
+
+   Bank1 - Flash watermark area definition:
+
+     SECWM1_STRT  : 0x0  (0x8000000) 
+     SECWM1_END   : 0xF  (0x801E000) 
+
+   Write sector group protection 1:
+
+     WRPSGn1      : 0xFFFFFFFF  (0x0) 
+OPTION BYTES BANK: 4
+
+   Bank2 - Flash watermark area definition:
+
+     SECWM2_STRT  : 0x7F  (0x81FE000) 
+     SECWM2_END   : 0x0  (0x8100000) 
+
+   Write sector group protection 2:
+
+     WRPSGn2      : 0xFFFFFFFF  (0x8000000) 
+OPTION BYTES BANK: 5
+
+   OTP write protection:
+
+     LOCKBL       : 0x0  (0x0) 
+OPTION BYTES BANK: 6
+
+   Flash data bank 1 sectors:
+
+     EDATA1_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA1_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 7
+
+   Flash data bank 2 sectors :
+
+     EDATA2_EN    : 0x0 (No Flash high-cycle data area) 
+     EDATA2_STRT  : 0x0  (0x0) 
+OPTION BYTES BANK: 8
+
+   Flash HDP bank 1:
+
+     HDP1_STRT    : 0x1  (0x2000) 
+     HDP1_END     : 0x0  (0x0) 
+OPTION BYTES BANK: 9
+
+   Flash HDP bank 2:
+
+     HDP2_STRT    : 0x1  (0x2000) 
+     HDP2_END     : 0x0  (0x0) 
+Core halted
+R0       = 0x00000175
+R1       = 0x50013800
+R2       = 0xA0000000
+R3       = 0x0D000000
+R4       = 0x3000008C
+R5       = 0x00000020
+R6       = 0x00000000
+R7       = 0x00000000
+R8       = 0x00004688
+R9       = 0x000007D0
+R10      = 0x00000000
+R11      = 0x00000000
+R12      = 0x00000000
+SP       = 0x3003FF30
+LR       = 0x0C003D2B
+PC       = 0x0C003D0A
+XPSR     = 0x09000000
+MSP      = 0x3003FF30
+PSP      = 0x00000000
+PRIMASK  = 0x00
+FAULTMASK= 0x00
+BASEPRI  = 0x00
+CONTROL  = 0x00
+Core run
+--- download area after the C2 boot, sectors 240..255 [F=all 0xFF, ==written image, x=other]: FFFFFFFFFFFFFFFF ; 0xFF bytes 131072 of 131072

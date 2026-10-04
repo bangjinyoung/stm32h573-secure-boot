@@ -1,0 +1,119 @@
+2026-10-04 23:19:15.471 +0900
+user-approved: normalize debug config via gdb, detach, stop gdbserver, confirm return to 1.0.0
+----- normalize.gdb -----
+set pagination off
+set confirm off
+target extended-remote :61234
+delete
+set *(unsigned int *)0xE0002000 = 0x00000002
+set *(unsigned int *)0xE000EDFC = 0x00100000
+x/9wx 0xE0002000
+x/wx 0xE000EDFC
+detach
+----- output -----
+warning: No executable has been specified and target does not support
+determining executable automatically.  Try using the "file" command.
+0x0bf9f0f0 in ?? ()
+0xe0002000:	0x10000080	0x00000000	0x00000000	0x00000000
+0xe0002010:	0x00000000	0x00000000	0x00000000	0x00000000
+0xe0002020:	0x00000000
+0xe000edfc:	0x00100000
+[Inferior 1 (Remote target) detached]
+2026-10-04 23:19:15.930 ======================================================================
+2026-10-04 23:19:15.937 =              (C) COPYRIGHT 2023 STMicroelectronics                 =
+2026-10-04 23:19:15.943 =                                                                    =
+2026-10-04 23:19:15.950 =                          User App #A                               =
+2026-10-04 23:19:15.956 ======================================================================
+2026-10-04 23:19:15.959  Appli Code version: 1.0.0
+2026-10-04 23:19:15.964 =================== Main Menu ============================
+2026-10-04 23:19:15.970   Start BootLoader -------------------------------------- 1
+2026-10-04 23:19:15.971   Selection :
+
+read-only verification after detach:
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EDF0 4 -r32 0xE000EDFC 4 -r32 0xE000EE08 4 -r32 0xE0002000 4 -r32 0xE0002008 0x20 -r32 0xE0001020 0x40 -r32 0xE000ED08 4 -r32 0x0C000014 4 -r32 0x54020CF4 4 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00030000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE0002000
+0xE0002000 : 10000080
+
+
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0xE0002008
+0xE0002008 : 00000000 00000000 00000000 00000000
+0xE0002018 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 64 Bytes
+  Address:      : 0xE0001020
+0xE0001020 : 00000000 00000000 58000000 00000000
+0xE0001030 : 00000000 00000000 D0000000 00000000
+0xE0001040 : 00000000 00000000 50000000 00000000
+0xE0001050 : 00000000 00000000 F0000000 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x0C000014
+0x0C000014 : 00000001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 14000000
+
+

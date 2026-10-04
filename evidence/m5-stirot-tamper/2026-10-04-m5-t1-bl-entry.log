@@ -1,0 +1,174 @@
+2026-10-04 22:10:40.961 +0900
+user-approved: core resume, menu 1 -> system bootloader entry. No reset/erase/flash write/OB/OBK.
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EDF0 4 -run -r32 0xE000EDF0 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+Core run
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05180001
+
+
+
+2026-10-04 22:10:55.074 +0900
+read-only recheck after resume: DHCSR x2, CFSR/HFSR/SFSR/SFAR/MMFAR/BFAR
+$ -r32 0xE000EDF0 4 -r32 0xE000EDF0 4 -r32 0xE000ED28 4 -r32 0xE000ED2C 4 -r32 0xE000EDE4 8 -r32 0xE000ED34 8
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 01008201
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED2C
+0xE000ED2C : 40000000
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0xE000EDE4
+0xE000EDE4 : 00000000 04D4F8E7
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0xE000ED34
+0xE000ED34 : 04D4F8E7 04D4F8E7
+
+
+
+2026-10-04 22:11:10.670 +0900
+read-only: core already halted; DEMCR, DFSR, core registers (no -run)
+$ -r32 0xE000EDFC 4 -r32 0xE000ED30 4 -coreReg
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED30
+0xE000ED30 : 00000003
+
+
+R0       = 0x04D4F8DF
+R1       = 0x30000018
+R2       = 0x9C029906
+R3       = 0x0C1E76CC
+R4       = 0x0C1E7700
+R5       = 0x5002202C
+R6       = 0x80001FC2
+R7       = 0x00000000
+R8       = 0x00000001
+R9       = 0x20008660
+R10      = 0x00000000
+R11      = 0x00000000
+R12      = 0x00000000
+SP       = 0x20000500
+LR       = 0x0C000E1D
+PC       = 0xEFFFFFFE
+XPSR     = 0x01000003
+MSP      = 0x20000500
+PSP      = 0x00000000
+PRIMASK  = 0x00
+FAULTMASK= 0x00
+BASEPRI  = 0x00
+CONTROL  = 0x00

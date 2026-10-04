@@ -1,0 +1,190 @@
+2026-10-04 22:01:24.432 +0900
+user-approved: flash controller register cleanup only. No reset, no flash erase/write, no OB/OBK.
+regs (stm32h573xx.h): SECSR 0x50022024, SECCR 0x5002202C, SECCCR 0x50022034. SECCCR bit18 CLR_PGSERR. SECCR bit0 LOCK, bit1 PG, bits6-12 SNB, bit31 BKSEL.
+steps: [pre] -> -w32 0x50022034 0x00040000 (clear PGSERR) -> [r] -> -w32 0x5002202C 0x80001FC0 (PG=0) -> [r] -> -w32 0x5002202C 0x80001FC1 (LOCK=1) -> [r]
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00040000 00000000 80001FC2
+Write 32-bit data
+w @0x50022034:  0x00040000
+
+
+Downloading...
+[==================================================] 100% 
+
+Error: Failed to download data! If it's a Flash memory, it may be not erased or protected
+
+2026-10-04 22:01:31.618 +0900
+read-only check after the failed -w32
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 24 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00000000 00000000 80001FC2
+0x50022030 : 00000000 00000000
+
+
+
+2026-10-04 22:01:48.853 +0900
+step PG=0: -w32 0x5002202C 0x80001FC0, then read
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+Write 32-bit data
+w @0x5002202c:  0x80001fc0
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 24 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00000000 00000000 80001FC0
+0x50022030 : 00000000 00000000
+
+
+
+2026-10-04 22:01:49.333 +0900
+step LOCK=1: -w32 0x5002202C 0x80001FC1, then read
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+Write 32-bit data
+w @0x5002202c:  0x80001fc1
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 24 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00000000 00000000 80001FC1
+0x50022030 : 00000000 00000000
+
+

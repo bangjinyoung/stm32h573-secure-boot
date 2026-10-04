@@ -1,0 +1,141 @@
+A=/home/bjy/workspaces/stm32h573-secure-boot/build/stirot_appli/appli.elf
+B=/mnt/c/workspaces/h573-refbuild/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/STM32CubeIDE/Release/appli.elf
+== section headers (name size vma)
+A .isr_vector 0000024c 0c000400
+A .text 00004bd4 0c00064c
+A .rodata 0000037c 0c005220
+A .ARM.extab 00000000 0c00559c
+A .ARM 00000008 0c00559c
+A .preinit_array 00000000 0c0055a4
+A .init_array 00000004 0c0055a4
+A .fini_array 00000004 0c0055a8
+A .data 00000068 30000000
+A .bss 00000208 30000068
+A ._user_heap_stack 00000600 30000270
+A .ARM.attributes 00000036 00000000
+A .debug_info 00012583 00000000
+A .debug_abbrev 0000255f 00000000
+A .debug_loclists 0000793e 00000000
+A .debug_aranges 00000a80 00000000
+A .debug_rnglists 00000954 00000000
+A .debug_macro 00032c58 00000000
+A .debug_line 00011730 00000000
+A .debug_str 00138fd0 00000000
+A .comment 00000043 00000000
+A .debug_frame 000021f8 00000000
+B .isr_vector 0000024c 0c000400
+B .text 00004bd8 0c00064c
+B .rodata 00000380 0c005224
+B .ARM.extab 00000000 0c0055a4
+B .ARM 00000008 0c0055a4
+B .preinit_array 00000000 0c0055ac
+B .init_array 00000004 0c0055ac
+B .fini_array 00000004 0c0055b0
+B .data 00000068 30000000
+B .bss 00000208 30000068
+B ._user_heap_stack 00000600 30000270
+B .ARM.attributes 00000036 00000000
+B .comment 00000043 00000000
+B .debug_frame 000008f4 00000000
+== vector table first 16 words
+A  30040000 0c004109 0c004159 0c000e15 0c000e29 0c000e3d 0c000e3f 0c004159 00000000 00000000 00000000 0c000e41 0c000e43 00000000 0c000e45 0c000e47 
+B  30040000 0c003ad9 0c003b29 0c0040a5 0c0040b9 0c0040cd 0c0040cf 0c003b29 00000000 00000000 00000000 0c0040d1 0c0040d3 00000000 0c0040d5 0c0040d7 
+== full vector table identical:
+/tmp/tmp.vAa32Fqd9P/vA.bin /tmp/tmp.vAa32Fqd9P/vB.bin differ: byte 5, line 1
+== symbol addresses of key functions/data
+Reset_Handler        A=0c004108 W     B=0c003ad8 W
+LOADER_Run           A=0c000c58 T     B=0c003c5c T
+gtzc_loader_cfg      A=0c000ef0 T     B=0c003cf8 T
+gpio_loader_cfg      A=0c000f7c T     B=0c003d84 T
+mpu_loader_cfg       A=0c000ee0 T     B=0c003ce8 T
+sau_loader_cfg       A=0c001014 T     B=0c003e1c T
+nvic_loader_cfg      A=0c001084 T     B=0c003e8c T
+fpu_enable_cfg       A=0c001060 T     B=0c003e68 T
+HardFault_Handler    A=0c000e14 T     B=0c0040a4 T
+MemManage_Handler    A=0c000e28 T     B=0c0040b8 T
+SecureFault_Handler  A=0c004158 W     B=0c003b28 W
+main                 A=0c000b60 T     B=0c003fac T
+sau_load_cfg         A=0c00553c R     B=0c005558 R
+FW_APP_Run           A=0c000ad0 T     B=0c003f1c T
+SystemInit           A=0c000e4c T     B=0c000a0c T
+_estack              A=30040000 R     B=30040000 R
+_Min_Stack_Size      A=00000400 A     B=00000400 A
+== per-function disassembly (addresses and absolute literals stripped), diff A vs B
+Reset_Handler: identical (25 insns)
+LOADER_Run: DIFFERS (A 49, B 49)
+43,46c43,46
+< .word	0x0c0053e4
+< .word	0x0c005404
+< .word	0x0c005451
+< .word	0x0c0052bd
+---
+> .word	0x0c005254
+> .word	0x0c005274
+> .word	0x0c0052c1
+> .word	0x0c0053bc
+gtzc_loader_cfg: identical (50 insns)
+gpio_loader_cfg: identical (47 insns)
+mpu_loader_cfg: identical (6 insns)
+sau_loader_cfg: DIFFERS (A 23, B 23)
+22c22
+< .word	0x0c00553c
+---
+> .word	0x0c005558
+nvic_loader_cfg: identical (18 insns)
+fpu_enable_cfg: identical (10 insns)
+HardFault_Handler: DIFFERS (A 6, B 6)
+6c6
+< .word	0x0c0054af
+---
+> .word	0x0c0054e3
+== literal pools / constant data used by LOADER_Run path: sau_load_cfg bytes
+A sau_load_cfg 0c00553c 00000048
+B sau_load_cfg 0c005558 00000048
+== MSPLIM / PSPLIM / MSP_NS / VTOR-related instructions anywhere (msr/mrs)
+-- A
+      1 msr	CPSR_f, r1
+      1 msr	MSP_NS, r1
+-- B
+      1 msr	CPSR_f, r1
+      1 msr	MSP_NS, r1
+== bxns / blxns / sg
+A 1
+B 1
+functions compared: 256; identical: 227; differ only in literal addresses that resolve to the same symbol or string: 29; real differences: 0
+  lit-only COM_Flush -> UartHandle+0
+  lit-only COM_Init -> UartHandle+0
+  lit-only COM_Receive -> UartHandle+0
+  lit-only COM_Transmit -> UartHandle+0
+  lit-only FW_APP_PrintMainMenu -> str:'\r\n=================== Main Menu ========'; str:'  Start BootLoader ---------------------'; str:'  Selection :\r\n'
+  lit-only FW_APP_Run -> str:'Invalid Number !\r'
+  lit-only HAL_GetTick -> uwTick+0
+  lit-only HAL_IncTick -> uwTick+0
+  lit-only HAL_Init -> AHBPrescTable+0
+  lit-only HAL_RCC_ClockConfig -> AHBPrescTable+0
+  lit-only HAL_RCC_GetHCLKFreq -> AHBPrescTable+0
+  lit-only HAL_RCC_GetPCLK1Freq -> APBPrescTable+0
+  lit-only HAL_RCC_GetPCLK2Freq -> APBPrescTable+0
+  lit-only HAL_RCC_GetPCLK3Freq -> APBPrescTable+0
+  lit-only HardFault_Handler -> str:'\r\nHardFault'
+  lit-only LOADER_Run -> str:'\r\n  Standard Bootloader started'; str:'\r\n  If you want to connect through USART'; str:'\r\n  Start download with STM32CubeProgram'; str:'\r'
+  lit-only MemManage_Handler -> str:'\r\nMemManageFault'
+  lit-only TEST_VERSIONS_PrintVersions -> str:'\r\n Appli Code version: %d.%d.%d\r\n'
+  lit-only UART_SetConfig -> UARTPrescTable+0
+  lit-only __libc_init_array -> str:'q\x06'; str:'q\x06'; str:'q\x06'; str:'M\x06'
+  lit-only __sinit -> cleanup_stdio+1
+  lit-only _printf_i -> _printf_i+157; _printf_i+177; _printf_i+43; _printf_i+43; _printf_i+43; _printf_i+43; _printf_i+177; _printf_i+43; _printf_i+43; _printf_i+43; _printf_i+43; _printf_i+441; _printf_i+219; _printf_i+363; _printf_i+43; _printf_i+43; _printf_i+475; _printf_i+43; _printf_i+219; _printf_i+43; _printf_i+43
+  lit-only _sbrk -> __sbrk_heap_end+0
+  lit-only _vfiprintf_r -> str:'#-0+ '; str:'efgEFG'; __sfputs_r+1; str:'hlL'
+  lit-only global_stdio_init.part.0 -> stdio_exit_handler+1
+  lit-only main -> UserAppId+0; pUserAppId+0; str:'\r\n======================================'; str:'\r\n=              (C) COPYRIGHT 2023 STMi'; str:'\r\n=                                     '; str:'\r\n=                          User App #%'; str:'\r'
+  lit-only sau_loader_cfg -> sau_load_cfg+0
+  lit-only std -> __sread+1; __swrite+1; __sseek+1; __sclose+1
+  lit-only stdio_exit_handler -> _fflush_r+1
+symbols only in A: []
+symbols only in B: []
+sau_load_cfg bytes identical: True 0000000000000020ffff03200100000000000040ffffff4f0200000000000008ffff1f08030000000070f90bff03fa0b0400000000f8ff083ff8ff080500000000000520ffff0920
+.rodata string set identical: True onlyA [] onlyB []
+vector entries: 147 same handler names: True []
+distinct handlers: ['0', 'ADC1_IRQHandler', 'BusFault_Handler', 'DebugMon_Handler', 'HardFault_Handler', 'MemManage_Handler', 'PendSV_Handler', 'Reset_Handler', 'SVC_Handler', 'SysTick_Handler', 'UsageFault_Handler', '_estack']
+.data init bytes identical: True
+sum of function sizes A 20088 B 20088

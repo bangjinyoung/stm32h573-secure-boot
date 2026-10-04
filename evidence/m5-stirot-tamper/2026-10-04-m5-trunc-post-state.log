@@ -1,0 +1,67 @@
+2026-10-04 22:15:44.798 +0900
+read-only after the truncated-image reset, no halt
+$ -r32 0xE000EDF0 4 -r32 0xE000ED08 4 -r32 0x0C000000 0x20 -r32 0x50022020 0x10 -r32 0x500221A0 0x10 -u 0x0C1E0000 0x20000 trunc-after.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0x0C000000
+0x0C000000 : 73AB1024 00000000 00130400 0001FAC0
+0x0C000010 : 00000004 00000001 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x500221A0
+0x500221A0 : 00000000 00000000 00000000 00000000
+
+UPLOADING ...
+  File          : .workspace/tmp/m5/trunc-after.bin
+  Size          : 131072 Bytes
+  Address:      : 0xC1E0000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.376
+download area after reset: sectors 240..255 [F/0/x] xxxxFFFFFFFFFFFF; identical to pre-reset readback: True; diff bytes 0

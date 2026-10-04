@@ -1,0 +1,10 @@
+# E5.1 download-area tamper image (2026-10-04 21:38:12 +0900)
+base: build/stirot_appli_1.1.0/appli_enc_sign.bin (v1.1.0, encrypted+signed, header 0x400, img_size 0x1fac0)
+offset 0x1400 = header + 0x1000, inside the encrypted code payload, not header or TLV
+input:  build/stirot_appli_1.1.0/appli_enc_sign.bin
+output: build/stirot_appli_1.1.0/appli_enc_sign_tampered.bin
+offset: 0x1400  0x8b -> 0x8a
+sha256 before: d4588d14acacbee9dc8bfe0b4f8a267f28f1a2f5e30e0e79f315f2d5afbbc19e
+sha256 after:  30c4fb6cfa3e0fd36f143ad33fa4deee8a2f0169e1096562e772a4c4f1e15919
+$ cmp -l
+  5121 213 212

@@ -1,0 +1,713 @@
+gdb step-debug of LOADER_Run (user-approved). gdbserver: ST-LINK_gdbserver -p 61234 -d -g -e -m 1 (attach, no reset). Script below, then gdb output.
+----- step.gdb -----
+set pagination off
+set confirm off
+set breakpoint auto-hw on
+file /home/bjy/workspaces/stm32h573-secure-boot/build/stirot_appli/appli.elf
+target extended-remote :61234
+
+define common
+  printf "=== %s ===\n", $arg0
+  x/i $pc
+  info registers pc xpsr msp_s msp_ns psp_ns msplim_ns psplim_ns control_ns primask_ns basepri_ns faultmask_ns
+  printf "CFSR HFSR DFSR: "
+  x/3wx 0xE000ED28
+  printf "SFSR: "
+  x/wx 0xE000EDE4
+  printf "HDPLSR: "
+  x/wx 0x54000414
+  printf "DHCSR: "
+  x/wx 0xE000EDF0
+end
+
+define gtzc
+  printf "TZSC1 SECCFGR1-3: "
+  x/3wx 0x50032410
+  printf "TZSC1 PRIVCFGR1-3: "
+  x/3wx 0x50032420
+  printf "MPCBB1 CR: "
+  x/wx 0x50032C00
+  printf "MPCBB1 SECCFGR[0..31]:\n"
+  x/32wx 0x50032D00
+  printf "MPCBB1 PRIVCFGR[0..31]:\n"
+  x/32wx 0x50032E00
+  printf "MPCBB3 CR: "
+  x/wx 0x50033400
+  printf "MPCBB3 SECCFGR[0..31]:\n"
+  x/32wx 0x50033500
+  printf "MPCBB3 PRIVCFGR[0..31]:\n"
+  x/32wx 0x50033600
+end
+
+define gpio
+  printf "GPIOA-D SECCFGR: "
+  x/wx 0x52020030
+  x/wx 0x52020430
+  x/wx 0x52020830
+  x/wx 0x52020C30
+end
+
+define nvicsc
+  printf "AIRCR (S view 0xE000ED0C, NS view 0xE002ED0C): "
+  x/wx 0xE000ED0C
+  x/wx 0xE002ED0C
+  printf "ITNS[0..3]: "
+  x/4wx 0xE000E380
+  printf "VTOR_S VTOR_NS: "
+  x/wx 0xE000ED08
+  x/wx 0xE002ED08
+  printf "MPU_CTRL S: "
+  x/wx 0xE000ED94
+  printf "NSACR FPCCR: "
+  x/wx 0xE000ED8C
+  x/wx 0xE000EF34
+end
+
+define saudump
+  printf "SAU_CTRL SAU_TYPE SAU_RNR: "
+  x/3wx 0xE000EDD0
+  set $rnr0 = *(unsigned int *)0xE000EDD8
+  set $i = 0
+  while $i < 8
+    set *(unsigned int *)0xE000EDD8 = $i
+    printf "SAU region %d RBAR 0x%08x RLAR 0x%08x\n", $i, *(unsigned int *)0xE000EDDC, *(unsigned int *)0xE000EDE0
+    set $i = $i + 1
+  end
+  set *(unsigned int *)0xE000EDD8 = $rnr0
+  printf "SAU_RNR restored: "
+  x/wx 0xE000EDD8
+end
+
+define stepto
+  hbreak *$arg0
+  continue
+  delete $bpnum
+  if $pc != $arg0
+    printf "UNEXPECTED STOP at 0x%08x (expected %s), aborting with core halted\n", $pc, "$arg0"
+    common "unexpected stop"
+    disconnect
+    quit
+  end
+end
+
+hbreak HardFault_Handler
+hbreak MemManage_Handler
+hbreak *0x0c000c58
+printf "ARMED: waiting for menu 1 (LOADER_Run 0x0c000c58)\n"
+continue
+delete 3
+common "LOADER_Run entry"
+
+stepto 0x0c000c72
+common "before gtzc_loader_cfg"
+gtzc
+stepto 0x0c000c76
+common "after gtzc_loader_cfg"
+gtzc
+stepto 0x0c000c7a
+common "after gpio_loader_cfg"
+gpio
+stepto 0x0c000c7e
+common "after mpu_loader_cfg"
+nvicsc
+stepto 0x0c000c82
+common "after sau_loader_cfg"
+stepto 0x0c000c86
+common "after nvic_loader_cfg"
+nvicsc
+stepto 0x0c000c8a
+common "after fpu_enable_cfg"
+nvicsc
+stepto 0x0c000c96
+common "boot_address computed, before HDPL increment"
+info registers r0 r1 r2 r3
+stepto 0x0c000c98
+common "after HDPL increment store"
+stepto 0x0c000ca2
+common "after msr MSP_NS"
+info registers r1 r3
+stepto 0x0c000ca6
+common "after VTOR_NS store"
+nvicsc
+stepto 0x0c000cc4
+common "BXNS handoff snapshot"
+info registers
+nvicsc
+gpio
+gtzc
+saudump
+printf "Bootloader vector 0x0BF97000: "
+x/2wx 0x0BF97000
+hbreak *0x0BF9F0F0
+printf "ARMED: bootloader reset vector 0x0BF9F0F0, continuing from BXNS\n"
+continue
+common "after continue from BXNS"
+info registers
+printf "DONE: leaving core halted (disconnect)\n"
+disconnect
+----- gdb output -----
+0x0c003d2e in UART_WaitOnFlagUntilTimeout (huart=huart@entry=0x3000008c <UartHandle>, Flag=Flag@entry=32, Status=Status@entry=RESET, Tickstart=Tickstart@entry=412253, Timeout=Timeout@entry=2000) at /mnt/c/workspaces/STM32CubeH5/Drivers/STM32H5xx_HAL_Driver/Src/stm32h5xx_hal_uart.c:3500
+3500	      if (((HAL_GetTick() - Tickstart) > Timeout) || (Timeout == 0U))
+Hardware assisted breakpoint 1 at 0xc000e14: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/stm32h5xx_it.c, line 52.
+Hardware assisted breakpoint 2 at 0xc000e28: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/stm32h5xx_it.c, line 62.
+Hardware assisted breakpoint 3 at 0xc000c58: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 48.
+ARMED: waiting for menu 1 (LOADER_Run 0x0c000c58)
+
+Breakpoint 3, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:48
+48	  printf("\r\n  Standard Bootloader started");
+=== LOADER_Run entry ===
+=> 0xc000c58 <LOADER_Run>:	push	{r3, lr}
+pc             0xc000c58           0xc000c58 <LOADER_Run>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff78          0x3003ff78
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+Hardware assisted breakpoint 4 at 0xc000c72: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 55.
+
+Breakpoint 4, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:55
+55	  gtzc_loader_cfg();
+=== before gtzc_loader_cfg ===
+=> 0xc000c72 <LOADER_Run+26>:	bl	0xc000ef0 <gtzc_loader_cfg>
+pc             0xc000c72           0xc000c72 <LOADER_Run+26>
+xpsr           0x9000000           150994944
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+TZSC1 SECCFGR1-3: 0x50032410:	0x00000000	0x00000000	0x00080000
+TZSC1 PRIVCFGR1-3: 0x50032420:	0x00000000	0x00000000	0x00000000
+MPCBB1 CR: 0x50032c00:	0x00000000
+MPCBB1 SECCFGR[0..31]:
+0x50032d00:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50032d10:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50032d20:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50032d30:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50032d40:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d50:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d60:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d70:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB1 PRIVCFGR[0..31]:
+0x50032e00:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50032e10:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50032e20:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50032e30:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50032e40:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e50:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e60:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e70:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB3 CR: 0x50033400:	0x00000000
+MPCBB3 SECCFGR[0..31]:
+0x50033500:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033510:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033520:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033530:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033540:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033550:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033560:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033570:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB3 PRIVCFGR[0..31]:
+0x50033600:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033610:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033620:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033630:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033640:	0xffffffff	0xffffffff	0xffffffff	0xffffffff
+0x50033650:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033660:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033670:	0x00000000	0x00000000	0x00000000	0x00000000
+Hardware assisted breakpoint 5 at 0xc000c76: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 58.
+
+Breakpoint 5, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:58
+58	  gpio_loader_cfg();
+=== after gtzc_loader_cfg ===
+=> 0xc000c76 <LOADER_Run+30>:	bl	0xc000f7c <gpio_loader_cfg>
+pc             0xc000c76           0xc000c76 <LOADER_Run+30>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+TZSC1 SECCFGR1-3: 0x50032410:	0xfff783ff	0xf307f500	0x07ffee03
+TZSC1 PRIVCFGR1-3: 0x50032420:	0xfff783ff	0xf307f500	0x07ffee03
+MPCBB1 CR: 0x50032c00:	0x80000000
+MPCBB1 SECCFGR[0..31]:
+0x50032d00:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d10:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d20:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d30:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d40:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d50:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d60:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d70:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB1 PRIVCFGR[0..31]:
+0x50032e00:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e10:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e20:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e30:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e40:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e50:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e60:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e70:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB3 CR: 0x50033400:	0x00000000
+MPCBB3 SECCFGR[0..31]:
+0x50033500:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033510:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033520:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033530:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033540:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033550:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033560:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033570:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB3 PRIVCFGR[0..31]:
+0x50033600:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033610:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033620:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033630:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033640:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033650:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033660:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033670:	0x00000000	0x00000000	0x00000000	0x00000000
+Hardware assisted breakpoint 6 at 0xc000c7a: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 61.
+
+Breakpoint 6, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:61
+61	  mpu_loader_cfg();
+=== after gpio_loader_cfg ===
+=> 0xc000c7a <LOADER_Run+34>:	bl	0xc000ee0 <mpu_loader_cfg>
+pc             0xc000c7a           0xc000c7a <LOADER_Run+34>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+GPIOA-D SECCFGR: 0x52020030:	0x00006003
+0x52020430:	0x00008b1f
+0x52020830:	0x0000e1fd
+0x52020c30:	0x0000ccff
+Hardware assisted breakpoint 7 at 0xc000c7e: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 64.
+
+Breakpoint 7, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:64
+64	  sau_loader_cfg();
+=== after mpu_loader_cfg ===
+=> 0xc000c7e <LOADER_Run+38>:	bl	0xc001014 <sau_loader_cfg>
+pc             0xc000c7e           0xc000c7e <LOADER_Run+38>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+AIRCR (S view 0xE000ED0C, NS view 0xE002ED0C): 0xe000ed0c:	0xfa050300
+0xe002ed0c:	0x00000000
+ITNS[0..3]: 0xe000e380:	0x00000000	0x00000000	0x00000000	0x00000000
+VTOR_S VTOR_NS: 0xe000ed08:	0x0c000400
+0xe002ed08:	0x00000000
+MPU_CTRL S: 0xe000ed94:	0x00000000
+NSACR FPCCR: 0xe000ed8c:	0x00000000
+0xe000ef34:	0xc0000004
+Hardware assisted breakpoint 8 at 0xc000c82: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 67.
+
+Breakpoint 8, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:67
+67	  nvic_loader_cfg();
+=== after sau_loader_cfg ===
+=> 0xc000c82 <LOADER_Run+42>:	bl	0xc001084 <nvic_loader_cfg>
+pc             0xc000c82           0xc000c82 <LOADER_Run+42>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+Hardware assisted breakpoint 9 at 0xc000c86: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 70.
+
+Breakpoint 9, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:70
+70	  fpu_enable_cfg();
+=== after nvic_loader_cfg ===
+=> 0xc000c86 <LOADER_Run+46>:	bl	0xc001060 <fpu_enable_cfg>
+pc             0xc000c86           0xc000c86 <LOADER_Run+46>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+AIRCR (S view 0xE000ED0C, NS view 0xE002ED0C): 0xe000ed0c:	0xfa052300
+0xe002ed0c:	0x00000000
+ITNS[0..3]: 0xe000e380:	0x38000000	0x00000000	0x00000400	0x08000000
+VTOR_S VTOR_NS: 0xe000ed08:	0x0c000400
+0xe002ed08:	0x00000000
+MPU_CTRL S: 0xe000ed94:	0x00000000
+NSACR FPCCR: 0xe000ed8c:	0x00000000
+0xe000ef34:	0xc0000004
+Hardware assisted breakpoint 10 at 0xc000c8a: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 72.
+
+Breakpoint 10, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:72
+72	  uint32_t boot_address = cmse_nsfptr_create(*(uint32_t *)(BOOTLOADER_BASE_NS + 4U));
+=== after fpu_enable_cfg ===
+=> 0xc000c8a <LOADER_Run+50>:	ldr	r0, [pc, #76]	@ (0xc000cd8 <LOADER_Run+128>)
+pc             0xc000c8a           0xc000c8a <LOADER_Run+50>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+AIRCR (S view 0xE000ED0C, NS view 0xE002ED0C): 0xe000ed0c:	0xfa052300
+0xe002ed0c:	0x00000000
+ITNS[0..3]: 0xe000e380:	0x38000000	0x00000000	0x00000400	0x08000000
+VTOR_S VTOR_NS: 0xe000ed08:	0x0c000400
+0xe002ed08:	0x00000000
+MPU_CTRL S: 0xe000ed94:	0x00000000
+NSACR FPCCR: 0xe000ed8c:	0x00000c00
+0xe000ef34:	0xd0000004
+Hardware assisted breakpoint 11 at 0xc000c96: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 75.
+
+Breakpoint 11, 0x0c000c96 in LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:75
+75	  SET_BIT(SBS->HDPLCR,  SBS_HDPLCR_INCR_HDPL);
+=== boot_address computed, before HDPL increment ===
+=> 0xc000c96 <LOADER_Run+62>:	str	r1, [r0, #16]
+pc             0xc000c96           0xc000c96 <LOADER_Run+62>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000008a
+DHCSR: 0xe000edf0:	0x00130003
+r0             0x54000400          1409287168
+r1             0xff                255
+r2             0xbf97000           200896512
+r3             0xbf9f0f1           200929521
+Hardware assisted breakpoint 12 at 0xc000c98: file /mnt/c/workspaces/STM32CubeH5/Drivers/CMSIS/Include/cmsis_gcc.h, line 1167.
+
+Breakpoint 12, 0x0c000c98 in __TZ_set_MSP_NS (topOfMainStack=<optimized out>) at /mnt/c/workspaces/STM32CubeH5/Drivers/CMSIS/Include/cmsis_gcc.h:1167
+1167	  __ASM volatile ("MSR msp_ns, %0" : : "r" (topOfMainStack) : );
+=== after HDPL increment store ===
+=> 0xc000c98 <LOADER_Run+64>:	ldr	r1, [r2, #0]
+pc             0xc000c98           0xc000c98 <LOADER_Run+64>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x0                 0x0
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000006f
+DHCSR: 0xe000edf0:	0x00130003
+Hardware assisted breakpoint 13 at 0xc000ca2: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 78.
+
+Breakpoint 13, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:78
+78	  SCB_NS->VTOR = BOOTLOADER_BASE_NS;
+=== after msr MSP_NS ===
+=> 0xc000ca2 <LOADER_Run+74>:	ldr	r1, [pc, #60]	@ (0xc000ce0 <LOADER_Run+136>)
+pc             0xc000ca2           0xc000ca2 <LOADER_Run+74>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x20003b50          0x20003b50
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000006f
+DHCSR: 0xe000edf0:	0x00130003
+r1             0x20003b50          536886096
+r3             0xbf9f0f0           200929520
+Hardware assisted breakpoint 14 at 0xc000ca6: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 81.
+
+Breakpoint 14, LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:81
+81	  __asm volatile("movs r0, %0\n"
+=== after VTOR_NS store ===
+=> 0xc000ca6 <LOADER_Run+78>:	movs	r0, r3
+pc             0xc000ca6           0xc000ca6 <LOADER_Run+78>
+xpsr           0x69000000          1761607680
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x20003b50          0x20003b50
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000006f
+DHCSR: 0xe000edf0:	0x00130003
+AIRCR (S view 0xE000ED0C, NS view 0xE002ED0C): 0xe000ed0c:	0xfa052300
+0xe002ed0c:	0x00000000
+ITNS[0..3]: 0xe000e380:	0x38000000	0x00000000	0x00000400	0x08000000
+VTOR_S VTOR_NS: 0xe000ed08:	0x0c000400
+0xe002ed08:	0x00000000
+MPU_CTRL S: 0xe000ed94:	0x00000000
+NSACR FPCCR: 0xe000ed8c:	0x00000c00
+0xe000ef34:	0xd0000004
+Hardware assisted breakpoint 15 at 0xc000cc4: file /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c, line 81.
+
+Breakpoint 15, 0x0c000cc4 in LOADER_Run () at /mnt/c/workspaces/STM32CubeH5/Projects/STM32H573I-DK/Applications/ROT/STiROT_Appli/Src/loader.c:81
+81	  __asm volatile("movs r0, %0\n"
+=== BXNS handoff snapshot ===
+=> 0xc000cc4 <LOADER_Run+108>:	bxns	r0
+pc             0xc000cc4           0xc000cc4 <LOADER_Run+108>
+xpsr           0x1000000           16777216
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x20003b50          0x20003b50
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000006f
+DHCSR: 0xe000edf0:	0x00130003
+r0             0xbf9f0f0           200929520
+r1             0x0                 0
+r2             0x0                 0
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0x3003ff70          0x3003ff70
+lr             0xc000c8b           201329803
+pc             0xc000cc4           0xc000cc4 <LOADER_Run+108>
+xpsr           0x1000000           16777216
+fpscr          0x0                 0
+msp            0x3003ff70          0x3003ff70
+psp            0x0                 0x0
+msp_ns         0x20003b50          0x20003b50
+psp_ns         0xfffffffc          0xfffffffc
+msp_s          0x3003ff70          0x3003ff70
+psp_s          0x0                 0x0
+primask        0x0                 0
+basepri        0x0                 0
+faultmask      0x0                 0
+control        0x0                 0
+msplim_s       0x0                 0x0
+psplim_s       0x0                 0x0
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+primask_s      0x0                 0
+basepri_s      0x0                 0
+faultmask_s    0x0                 0
+control_s      0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+control_ns     0x0                 0
+AIRCR (S view 0xE000ED0C, NS view 0xE002ED0C): 0xe000ed0c:	0xfa052300
+0xe002ed0c:	0x00000000
+ITNS[0..3]: 0xe000e380:	0x38000000	0x00000000	0x00000400	0x08000000
+VTOR_S VTOR_NS: 0xe000ed08:	0x0c000400
+0xe002ed08:	0x00000000
+MPU_CTRL S: 0xe000ed94:	0x00000000
+NSACR FPCCR: 0xe000ed8c:	0x00000c00
+0xe000ef34:	0xd0000004
+GPIOA-D SECCFGR: 0x52020030:	0x00006003
+0x52020430:	0x00008b1f
+0x52020830:	0x0000e1fd
+0x52020c30:	0x0000ccff
+TZSC1 SECCFGR1-3: 0x50032410:	0xfff783ff	0xf307f500	0x07ffee03
+TZSC1 PRIVCFGR1-3: 0x50032420:	0xfff783ff	0xf307f500	0x07ffee03
+MPCBB1 CR: 0x50032c00:	0x80000000
+MPCBB1 SECCFGR[0..31]:
+0x50032d00:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d10:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d20:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d30:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d40:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d50:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d60:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032d70:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB1 PRIVCFGR[0..31]:
+0x50032e00:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e10:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e20:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e30:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e40:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e50:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e60:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50032e70:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB3 CR: 0x50033400:	0x00000000
+MPCBB3 SECCFGR[0..31]:
+0x50033500:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033510:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033520:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033530:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033540:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033550:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033560:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033570:	0x00000000	0x00000000	0x00000000	0x00000000
+MPCBB3 PRIVCFGR[0..31]:
+0x50033600:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033610:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033620:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033630:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033640:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033650:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033660:	0x00000000	0x00000000	0x00000000	0x00000000
+0x50033670:	0x00000000	0x00000000	0x00000000	0x00000000
+SAU_CTRL SAU_TYPE SAU_RNR: 0xe000edd0:	0x00000001	0x00000008	0x00000005
+SAU region 0 RBAR 0x20000000 RLAR 0x2003ffe1
+SAU region 1 RBAR 0x40000000 RLAR 0x4fffffe1
+SAU region 2 RBAR 0x08000000 RLAR 0x081fffe1
+SAU region 3 RBAR 0x0bf97000 RLAR 0x0bfa03e1
+SAU region 4 RBAR 0x08fff800 RLAR 0x08fff821
+SAU region 5 RBAR 0x20050000 RLAR 0x2009ffe1
+SAU region 6 RBAR 0x0bfa0760 RLAR 0x0bfa0761
+SAU region 7 RBAR 0x00000000 RLAR 0x00000000
+SAU_RNR restored: 0xe000edd8:	0x00000005
+Bootloader vector 0x0BF97000: 0xbf97000:	0x20003b50	0x0bf9f0f1
+Hardware assisted breakpoint 16 at 0xbf9f0f0
+ARMED: bootloader reset vector 0x0BF9F0F0, continuing from BXNS
+
+Breakpoint 16, 0x0bf9f0f0 in ?? ()
+=== after continue from BXNS ===
+=> 0xbf9f0f0:	ldr	r0, [pc, #4]	@ (0xbf9f0f8)
+pc             0xbf9f0f0           0xbf9f0f0
+xpsr           0x1000000           16777216
+msp_s          0x3003ff70          0x3003ff70
+msp_ns         0x20003b50          0x20003b50
+psp_ns         0xfffffffc          0xfffffffc
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+control_ns     0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+CFSR HFSR DFSR: 0xe000ed28:	0x00000000	0x00000000	0x00000000
+SFSR: 0xe000ede4:	0x00000000
+HDPLSR: 0x54000414:	0x0000006f
+DHCSR: 0xe000edf0:	0x00130003
+r0             0xbf9f0f0           200929520
+r1             0x0                 0
+r2             0x0                 0
+r3             0x0                 0
+r4             0x0                 0
+r5             0x0                 0
+r6             0x0                 0
+r7             0x0                 0
+r8             0x0                 0
+r9             0x0                 0
+r10            0x0                 0
+r11            0x0                 0
+r12            0x0                 0
+sp             0x20003b50          0x20003b50
+lr             0xc000c8b           201329803
+pc             0xbf9f0f0           0xbf9f0f0
+xpsr           0x1000000           16777216
+fpscr          0x0                 0
+msp            0x20003b50          0x20003b50
+psp            0xfffffffc          0xfffffffc
+msp_ns         0x20003b50          0x20003b50
+psp_ns         0xfffffffc          0xfffffffc
+msp_s          0x3003ff70          0x3003ff70
+psp_s          0x0                 0x0
+primask        0x0                 0
+basepri        0x0                 0
+faultmask      0x0                 0
+control        0x0                 0
+msplim_s       0x0                 0x0
+psplim_s       0x0                 0x0
+msplim_ns      0x0                 0x0
+psplim_ns      0x0                 0x0
+primask_s      0x0                 0
+basepri_s      0x0                 0
+faultmask_s    0x0                 0
+control_s      0x0                 0
+primask_ns     0x0                 0
+basepri_ns     0x0                 0
+faultmask_ns   0x0                 0
+control_ns     0x0                 0
+DONE: leaving core halted (disconnect)

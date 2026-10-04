@@ -1,0 +1,235 @@
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE0002000
+0xE0002000 : 10000080
+
+
+
+Reading 32-bit memory content
+  Size          : 32 Bytes
+  Address:      : 0xE0002008
+0xE0002008 : 00000000 00000000 00000000 00000000
+0xE0002018 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0x0C000CC0
+0x0C000CC0 : 8800F381 BD084704
+
+
+
+Reading 32-bit memory content
+  Size          : 20 Bytes
+  Address:      : 0xE000EDD0
+0xE000EDD0 : 00000001 00000008 00000006 0BFA0760
+0xE000EDE0 : 0BFA0761
+
+
+
+2026-10-04 23:07:22.751 +0900
+user-requested BXNS breakpoint: FPB v2 COMP0 = 0x0C000CC4|BE, FP_CTRL KEY|ENABLE (verified dry run)
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -w32 0xE0002008 0x0C000CC5 -nv -w32 0xE0002000 0x00000003 -nv -r32 0xE0002000 4 -r32 0xE0002008 4 -r32 0xE000EDF0 4 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+Write 32-bit data
+w @0xe0002008:  0x0c000cc5
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0xe0002000:  0x00000003
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE0002000
+0xE0002000 : 10000081
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE0002008
+0xE0002008 : 0C000CC5
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED30
+0xE000ED30 : 00000003
+
+
+R0       = 0x000004EE
+R1       = 0x50013800
+R2       = 0x50013800
+R3       = 0x30000120
+R4       = 0x3000008C
+R5       = 0x00000020
+R6       = 0x00000000
+R7       = 0x00000000
+R8       = 0x00000800
+R9       = 0x000007D0
+R10      = 0x00000000
+R11      = 0x00000000
+R12      = 0x00000000
+SP       = 0x3003FF30
+LR       = 0x0C003D2B
+PC       = 0x0C003D38
+XPSR     = 0x29000000
+MSP      = 0x3003FF30
+PSP      = 0x00000000
+PRIMASK  = 0x00
+FAULTMASK= 0x00
+BASEPRI  = 0x00
+CONTROL  = 0x00
+
+2026-10-04 23:07:56.870 +0900
+read-only after menu 1 (no BXNS halt seen)
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EDF0 4 -r32 0xE0002000 4 -r32 0xE0002008 4 -r32 0xE000EDFC 4 -r32 0x54020CF4 4 
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE0002000
+0xE0002000 : 10000081
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE0002008
+0xE0002008 : 0C000CC5
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 00100000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 14000000
+
+

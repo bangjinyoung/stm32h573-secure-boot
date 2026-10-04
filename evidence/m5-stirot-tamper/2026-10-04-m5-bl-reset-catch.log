@@ -1,0 +1,231 @@
+2026-10-04 22:43:18.326 +0900
+user-approved: VC_CORERESET + bootloader entry detection, menu 1 once. No flash/OB/OBK/SECBB change.
+Step A read-only: system bootloader vector table at BOOTLOADER_BASE_NS 0x0BF97000 (loader.c)
+$ -r32 0x0BF97000 8 -r32 0xE000EDFC 4 -r32 0xE0001020 0x40 -r32 0x54020CF4 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0x0BF97000
+0x0BF97000 : 20003B50 0BF9F0F1
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 01100410
+
+
+
+Reading 32-bit memory content
+  Size          : 64 Bytes
+  Address:      : 0xE0001020
+0xE0001020 : E000ED0C 00000000 58000815 00000000
+0xE0001030 : E002ED0C 00000000 D0000815 00000000
+0xE0001040 : E002ED08 00000000 50000805 00000000
+0xE0001050 : 00000000 00000000 F0000000 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 14000000
+
+
+
+2026-10-04 22:43:30.595 +0900
+Step B: COMP3 0x0BF9F0F0 (bootloader Reset_Handler, vector 0x0BF97004 = 0x0BF9F0F1), FUNCTION3 0x402 (MATCH 0b0010 instruction address, ACTION 00 trigger only, DATAVSIZE 0b01). DEMCR 0x01100411 (+VC_CORERESET bit0). RCC_RSR.RMVF (bit23) to clear sticky reset flags first.
+$ -w32 0xE0001050 0x0BF9F0F0 -nv -w32 0xE0001058 0x402 -nv -w32 0xE000EDFC 0x01100411 -nv -w32 0x54020CF4 0x00800000 -nv; read back
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+Write 32-bit data
+w @0xe0001050:  0x0bf9f0f0
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0xe0001058:  0x00000402
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0xe000edfc:  0x01100411
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+Write 32-bit data
+w @0x54020cf4:  0x00800000
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 64 Bytes
+  Address:      : 0xE0001020
+0xE0001020 : E000ED0C 00000000 58000815 00000000
+0xE0001030 : E002ED0C 00000000 D0000815 00000000
+0xE0001040 : E002ED08 00000000 50000805 00000000
+0xE0001050 : 0BF9F0F0 00000000 F0000402 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 01100411
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+2026-10-04 22:43:46.489 +0900
+Step C read-only after menu 1 (MATCHED clears on read; read once)
+$ -r32 0xE000EDF0 4 -r32 0xE000ED30 4 -r32 0x54020CF4 4 -r32 0xE0001020 0x40 -r32 0xE000EDFC 4 -r32 0xE000ED08 4 -r32 0xE002ED08 4 -r32 0xE000ED28 8 -r32 0xE000EDE4 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED30
+0xE000ED30 : 00000003
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 14000000
+
+
+
+Reading 32-bit memory content
+  Size          : 64 Bytes
+  Address:      : 0xE0001020
+0xE0001020 : E000ED0C 00000000 58000815 00000000
+0xE0001030 : E002ED0C 00000000 D0000815 00000000
+0xE0001040 : E002ED08 00000000 51000805 00000000
+0xE0001050 : 0BF9F0F0 00000000 F1000402 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDFC
+0xE000EDFC : 01100411
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE002ED08
+0xE002ED08 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 8 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 00000000 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDE4
+0xE000EDE4 : 00000000
+
+

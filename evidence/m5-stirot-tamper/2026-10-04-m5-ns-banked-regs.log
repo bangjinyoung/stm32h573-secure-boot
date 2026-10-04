@@ -1,0 +1,204 @@
+2026-10-04 23:00:52.221 +0900
+read-only intent: 1.0.0 app idle at menu. Brief halt, banked core regs via DCRSR(0xE000EDF4) REGSEL -> DCRDR(0xE000EDF8), cross-check with -coreReg, then -run. No reset, no flash/OB/OBK.
+REGSEL (Armv8-M ARM): 0x0F DebugReturnAddress(PC) 0x10 xPSR 0x1A MSP_S 0x1B PSP_S 0x1C MSPLIM_S 0x1D PSPLIM_S 0x18 MSP_NS 0x19 PSP_NS 0x1E MSPLIM_NS 0x1F PSPLIM_NS 0x14 CONTROL|FAULTMASK|BASEPRI|PRIMASK (current) 0x22 same (Secure) 0x23 same (Non-secure)
+$ -halt  -w32 0xE000EDF4 0x0F 0x10 0x1A 0x1B 0x1C 0x1D 0x18 0x19 0x1E 0x1F 0x14 0x22 0x23 -nv -r32 0xE000EDF0 4 -r32 0xE000EDF8 4 -coreReg -run
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+Core halted
+Write 32-bit data
+w @0xE000EDF4:  0x0000000F  0x00000010  0x0000001A  0x0000001B
+w @0xE000EE04:  0x0000001C  0x0000001D  0x00000018  0x00000019
+w @0xE000EE14:  0x0000001E  0x0000001F  0x00000014  0x00000022
+w @0xe000ee24:  0x00000023
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF8
+0xE000EDF8 : 00000010
+
+
+R0       = 0x000005A5
+R1       = 0x50013800
+R2       = 0xA0000000
+R3       = 0x0D000000
+R4       = 0x3000008C
+R5       = 0x00000020
+R6       = 0x00000000
+R7       = 0x00000000
+R8       = 0x000FB1D1
+R9       = 0x000007D0
+R10      = 0x00000000
+R11      = 0x00000000
+R12      = 0x00000000
+SP       = 0x00000000
+LR       = 0x0C003D2B
+PC       = 0x0C003D0A
+XPSR     = 0x09000000
+MSP      = 0x00000000
+PSP      = 0xFFFFFFFC
+PRIMASK  = 0x00
+FAULTMASK= 0x00
+BASEPRI  = 0x00
+CONTROL  = 0x00
+Core run
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+2026-10-04 23:01:43.250 +0900
+INCIDENT: zsh did not split $sels, so one '-w32 0xE000EDF4 0x0F 0x10 0x1A 0x1B 0x1C 0x1D 0x18 0x19 0x1E 0x1F 0x14 0x22 0x23 -nv' wrote 13 consecutive words 0xE000EDF4..0xE000EE24 (DCRSR, DCRDR, DEMCR, 0xE000EE00, DAUTHCTRL 0xE000EE04, DSCSR 0xE000EE08, 0xE000EE0C..0xE000EE24). Read-only state check:
+$ -r32 0xE000EDF0 0x38 -r32 0x54020CF4 4 -r32 0xE000ED08 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes (default)
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0x0
+SFSP Version: v0.0.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 56 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001 00000000 0C003D6A 00100010
+0xE000EE00 : 00000000 00000000 00030001 00000000
+0xE000EE10 : 00000000 00000000 00000000 00000000
+0xE000EE20 : 00000000 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54020CF4
+0x54020CF4 : 14000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 08000000
+
+
+
+2026-10-04 23:02:09.447 +0900
+read-only: FLASH SECBB1/2, SECWM1/2, NSSR/SECSR/NSCR/SECCR, header; VTOR via both views
+$ -r32 0x500220A0 0x10 -r32 0x500221A0 0x10 -r32 0x500220E0 4 -r32 0x500221E0 4 -r32 0x50022020 0x10 -r32 0xE002ED08 4 -r32 0x0C000014 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes (default)
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0x0
+SFSP Version: v0.0.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x500220A0
+0x500220A0 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x500221A0
+0x500221A0 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x500220E0
+0x500220E0 : 000F0000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x500221E0
+0x500221E0 : 0000007F
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE002ED08
+0xE002ED08 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x0C000014
+0x0C000014 : 00000001
+
+

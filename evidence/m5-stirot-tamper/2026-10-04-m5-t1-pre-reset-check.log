@@ -1,0 +1,69 @@
+2026-10-04 22:14:34.861 +0900
+read-only pre-reset check: OPTSR_CUR 0x50022050, OPTSR2_CUR 0x50022070, SECBOOTR_CUR 0x50022088, DHCSR
+$ -r32 0x50022050 4 -r32 0x50022070 4 -r32 0x50022088 4 -r32 0xE000EDF0 4 -r32 0x50022024 4 -r32 0x5002202C 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022050
+0x50022050 : 30F0EDF8
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022070
+0x50022070 : B4000134
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022088
+0x50022088 : 0C0000C3
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022024
+0x50022024 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x5002202C
+0x5002202C : 80001FC1
+
+
+PRODUCT_STATE 0xed BOOT_UBE 0xc3 SWAP_BANK 0 TZEN 0xb4

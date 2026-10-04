@@ -1,0 +1,129 @@
+2026-10-04 21:59:07.622 +0900
+user-approved: halt core, erase download sectors [240 255] only, readback via NS and S alias. No reset, no OB/OBK.
+reads: DHCSR 0xE000EDF0 (S_HALT bit17); FLASH NSSR/SECSR/NSCR/SECCR at 0x40022020 and 0x50022020
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug [pre: -r32 0xE000EDF0 4 -r32 0x40022020 0x10 -r32 0x50022020 0x10] -halt [halted: -r32 0xE000EDF0 4 -r32 0x40022020 0x10 -r32 0x50022020 0x10] -e [240 255] [post: -r32 0xE000EDF0 4 -r32 0x40022020 0x10 -r32 0x50022020 0x10] -u 0x081E0000 0x20000 ns.bin -u 0x0C1E0000 0x20000 s.bin -r32 0xE000EDF0 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00140000 00000000 80001FC2
+Core halted
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00140000 00000000 80001FC2
+Erase sector(s) ...
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Error: Fail to read NVM Size
+Existing specified sectors are erased successfully Protected sectors are not erased
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000 00000000 00000000 00000000
+
+Reading 32-bit memory content
+  Size          : 16 Bytes
+  Address:      : 0x50022020
+0x50022020 : 00000000 00040000 00000000 80001FC2
+
+UPLOADING ...
+  File          : .workspace/tmp/m5/erase-ns.bin
+  Size          : 131072 Bytes
+  Address:      : 0x81E0000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.383
+
+UPLOADING ...
+  File          : .workspace/tmp/m5/erase-s.bin
+  Size          : 131072 Bytes
+  Address:      : 0xC1E0000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.378
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+erase-ns.bin: 131072 B, 0xFF bytes 101722, 0x00 bytes 147, per 8KB sector 240..255 [F=all FF,0=all 00,x=mixed]: xxxxFFFFFFFFFFFF, sha256 b985ff98805004d3
+erase-s.bin: 131072 B, 0xFF bytes 101722, 0x00 bytes 147, per 8KB sector 240..255 [F=all FF,0=all 00,x=mixed]: xxxxFFFFFFFFFFFF, sha256 b985ff98805004d3
+sectors 240-243 vs T1 tampered image: 30476/32768 bytes equal; first mismatch at 0x7700
+last non-FF offset in 240-243: 0x76ff
+first 16 B: 2410ab730000000000041300c0fa0100  image: 2410ab730000000000041300c0fa0100

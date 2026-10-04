@@ -1,0 +1,20 @@
+M5 E5.2 C2: valid 1.1.0 in the download slot (control for T1)
+
+Same path as T1: BOOT_UBE 0xC3 -> 0xB4 (SWD Hotplug, OPTSR_CUR 0x2D30EDF8), -hardRst, UART 115200 8E1 bootloader.
+Pre: header 1.0.0+0, download area all 0xFF.                                  -> 2026-10-04-m5-c2.log
+Image: build/stirot_appli_1.1.0/appli_enc_sign.bin, 131072 B, sha256 d4588d14...c19e
+       (same version 1.1.0 as the T1 tampered image; only byte 0x1400 differs: 0x8b here, 0x8a in T1)
+Write (UART, 23:4x): erase [240 255], "Download verified successfully", readback sha256 d4588d14...c19e, cmp identical.
+Judgment boot: BOOT_UBE back to 0xC3 (OPTSR_CUR 0x30F0EDF8), DEMCR 0x00100000, one -hardRst at 23:41:4x.
+Result:
+- VCP 23:41:42.055 "Appli Code version: 1.1.0" + menu (2026-10-04-m5-c2-vcp.log, -c2-banner.png;
+  the PNG also shows the T1 boot at 23:36:42 still 1.0.0)
+- execution header word at +0x14: 0x00000001 (1.0.0) -> 0x00000101 (1.1.0); VTOR 0x0C000400, PC 0x0C003D0A,
+  HDPL 0x8A, CFSR/HFSR/SFSR 0, RSR PINRSTF only
+- download area all 0xFF after the install (all 16 sectors erased), SECCR 0x80001FC1 (SNB 127 bank2)
+
+Reading:
+- STiRoT installs a correctly signed image through the same write path, so the T1 refusal is not caused by the
+  path or the environment (checklist criterion 1).
+- T1 (refused) did not consume the 1.1.0 security counter: the same version installed afterwards.
+- STiRoT erases the download slot after both an install and a refusal; the erase alone does not show refusal.
