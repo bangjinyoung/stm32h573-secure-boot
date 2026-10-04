@@ -1,0 +1,6 @@
+## other key public DER sha256
+0dae0e5b9e0a38ac84f042b09f885498acb5c8116de3b8d1110e4591f00930b8
+## verify against project key
+No signature found for the given key
+## image sha256
+6ed0a66c1e447b0b96a344af871b5655c4347922ca8961cb4afd7e11e824622d  .workspace/tmp/m3/case4-other-key.bin

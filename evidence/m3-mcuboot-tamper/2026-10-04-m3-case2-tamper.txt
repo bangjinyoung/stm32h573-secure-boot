@@ -1,0 +1,11 @@
+input:  build/debug/app/bare/bare_slot_signed.bin
+output: .workspace/tmp/m3/case2-primary-payload.bin
+offset: 0x1400  0x42 -> 0x43
+sha256 before: a67968b482f70864bf09bc5e135e80b2db1e0f9ec6607dd3822aff77738e2553
+sha256 after:  8bd46fb830de6d0a72068b8b107b84e26af2f0d01c5ee9f7b4b18c123bb3992e
+ 5121 102 103
+## hexdump around 0x1400 (before / after)
+000013f0: eee7 7047 70b5 0446 0168 8368 0269 1343  ..pGp..F.h.h.i.C
+00001400: 4269 1343 c269 1343 0868 834a 0240 1a43  Bi.C.i.C.h.J.@.C
+000013f0: eee7 7047 70b5 0446 0168 8368 0269 1343  ..pGp..F.h.h.i.C
+00001400: 4369 1343 c269 1343 0868 834a 0240 1a43  Ci.C.i.C.h.J.@.C

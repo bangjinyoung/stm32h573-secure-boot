@@ -1,0 +1,1 @@
+a67968b482f70864bf09bc5e135e80b2db1e0f9ec6607dd3822aff77738e2553  build/debug/app/bare/bare_slot_signed.bin

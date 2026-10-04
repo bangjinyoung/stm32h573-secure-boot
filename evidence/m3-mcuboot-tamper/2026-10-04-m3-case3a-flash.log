@@ -1,0 +1,56 @@
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : 002D001D3532511631333430
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Normal
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: update-1.1.0.bin
+
+
+Memory Programming ...
+  File          : update-1.1.0.bin
+  Size          : 640.00 KB 
+  Address       : 0x080B8000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [92 171]
+Download in Progress:
+[====                                              ]   9% [=========                                         ]  18% [=============                                     ]  27% [==================                                ]  37% [=======================                           ]  46% [===========================                       ]  55% [================================                  ]  65% [=====================================             ]  74% [=========================================         ]  83% [==============================================    ]  92% [==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:03.781
+
+
+
+Verifying...
+
+
+Read progress:
+[==================================================] 100% 
+
+Time elapsed during verifying operation: 00:00:01.755
+
+
+Download verified successfully
+
+
+
+Hard reset is performed
