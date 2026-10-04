@@ -29,7 +29,8 @@ function(stm32h573_executable target flash_origin flash_length)
     set_source_files_properties(${DEVICE_DIR}/Source/Templates/system_stm32h5xx.c
         TARGET_DIRECTORY ${target} PROPERTIES COMPILE_DEFINITIONS VECT_TAB_OFFSET=${vector_offset}U)
 
-    target_compile_definitions(${target} PRIVATE BUILD_ID="${BUILD_ID}")
+    add_dependencies(${target} build_id)
+    target_include_directories(${target} PRIVATE ${CMAKE_BINARY_DIR}/generated)
     target_link_options(${target} PRIVATE -T${script} -Wl,-Map=$<TARGET_FILE_DIR:${target}>/${target}.map)
     set_target_properties(${target} PROPERTIES SUFFIX .elf LINK_DEPENDS ${script})
 

@@ -13,11 +13,10 @@ set(PLATFORM_DIR ${CMAKE_SOURCE_DIR}/platform/stm32h573)
 
 include(cmake/stm32h573.cmake)
 
-execute_process(
-  COMMAND git describe --always --dirty
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  OUTPUT_VARIABLE BUILD_ID
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
+set(BUILD_ID_HEADER ${CMAKE_BINARY_DIR}/generated/build_id.h)
+add_custom_target(build_id
+  COMMAND ${CMAKE_COMMAND} -DSOURCE_DIR=${CMAKE_SOURCE_DIR} -DOUTPUT=${BUILD_ID_HEADER} -P ${CMAKE_SOURCE_DIR}/cmake/build_id.cmake
+  BYPRODUCTS ${BUILD_ID_HEADER})
 
 add_library(stm32h5_hal STATIC
   ${HAL_DIR}/Src/stm32h5xx_hal.c

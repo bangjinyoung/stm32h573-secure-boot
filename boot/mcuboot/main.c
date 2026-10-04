@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#include "build_id.h"
+
 #include "board.h"
 #include "boot_handoff.h"
 #include "bootutil/bootutil.h"
