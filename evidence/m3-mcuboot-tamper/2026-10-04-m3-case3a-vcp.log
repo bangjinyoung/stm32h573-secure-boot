@@ -1,0 +1,13 @@
+2026-10-04 17:54:16.148 
+2026-10-04 17:54:16.151 [bl2] mcuboot build=d4190a0-dirty
+2026-10-04 17:54:16.156 [mcuboot INF] Image index: 0, Swap type: test
+2026-10-04 17:54:18.300 [mcuboot INF] Image 0 upgrade secondary slot -> primary slot
+2026-10-04 17:54:18.304 [mcuboot INF] Erasing the primary slot
+2026-10-04 17:54:18.444 [mcuboot INF] Image 0 copying the secondary slot to the primary slot: 0xa0000 bytes
+2026-10-04 17:54:20.971 [bl2] image ok version=1.1.0+0
+2026-10-04 17:54:20.976 [bl2] jump to 0x08018400 sp=0x200a0000 reset=0x08018b19
+2026-10-04 17:54:20.977 
+2026-10-04 17:54:20.981 [bare] stm32h573 bare app build=d4190a0-dirty
+2026-10-04 17:54:20.987 [bare] vtor=0x08018400 sp=0x200a0000 reset_handler=0x08018b19
+2026-10-04 17:54:20.992 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-04 17:54:20.993 [bare] heartbeat 0

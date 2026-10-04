@@ -1,0 +1,10 @@
+2026-10-04 17:54:22.927 
+2026-10-04 17:54:22.930 [bl2] mcuboot build=d4190a0-dirty
+2026-10-04 17:54:22.935 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-04 17:54:25.072 [bl2] image ok version=1.0.0+0
+2026-10-04 17:54:25.078 [bl2] jump to 0x08018400 sp=0x200a0000 reset=0x08018b19
+2026-10-04 17:54:25.078 
+2026-10-04 17:54:25.082 [bare] stm32h573 bare app build=d4190a0-dirty
+2026-10-04 17:54:25.088 [bare] vtor=0x08018400 sp=0x200a0000 reset_handler=0x08018b19
+2026-10-04 17:54:25.093 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-04 17:54:25.095 [bare] heartbeat 0

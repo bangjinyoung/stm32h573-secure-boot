@@ -33,7 +33,23 @@ Image hashes and the changed offsets are in the `*-tamper.txt` and `*-image.txt`
 - bl2 runs the application only when the primary slot image matches its SHA-256 TLV and carries an ECDSA P-256 signature from the embedded key (cases 1, 2, 4, 5).
 - The same check runs before an update is installed. A valid update replaces the primary image, and an altered one is erased without touching the primary image (cases 3a, 3b).
 
+## Serial logs
+
+The cases were rerun at 17:53–17:54 with the same image files and `scripts/vcp_logger.py` on the VCP (host timestamps). Files `*-vcp.log`.
+
+| Case | bl2 log | Time from MCUboot start to verdict |
+|---|---|---|
+| 2 Primary payload tamper | `Image in the primary slot is not valid!` then `[bl2] no bootable image` | 0.11 s |
+| 4 Unknown key | `Image in the primary slot is not valid!` then `[bl2] no bootable image` | 0.11 s |
+| 3b Secondary payload tamper | `Swap type: test`, `Image in the secondary slot is not valid!`, then `image ok version=1.0.0+0` and the jump | 0.11 s to the rejection |
+| 3a Valid update | `upgrade secondary slot -> primary slot`, `copying ... 0xa0000 bytes`, `image ok version=1.1.0+0` | 2.1 s to the upgrade decision |
+| 5 Restore | `image ok version=1.0.0+0`, jump to 0x08018400, app boot lines | 2.1 s |
+
+The valid path takes about 2.1 s at 32 MHz in the Debug build. The rejected images are refused after about 0.11 s. Inference, not measured inside the firmware: the hash check (case 2) and the key-hash lookup (case 4) fail before the ECDSA computation, which is what takes most of the 2.1 s. The MCUboot log line is the same for both, so the log alone does not name which check failed.
+
+`build=d4190a0-dirty` in these logs is stale. BUILD_ID was computed when CMake configured, before the M2 commits; the binaries are the ones built at `2103d65`. BUILD_ID is now generated at build time.
+
 ## Limits
 
-- No serial log was captured (picocom in the user's pane had no log file). The MCUboot messages that would name the failing check are not recorded yet, so the evidence does not distinguish a hash mismatch from a signature failure in case 2.
-- The bl2 failure path is identified by VTOR and by PC samples inside bl2's delay loop, not by a bl2 status variable.
+- The bl2 failure path is identified by its log, VTOR, and PC samples, not by a bl2 status variable.
+- The 0.11 s and 2.1 s figures are host-side timestamps of UART lines, not cycle counts.

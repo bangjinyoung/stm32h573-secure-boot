@@ -1,0 +1,5 @@
+2026-10-04 17:53:51.760 
+2026-10-04 17:53:51.763 [bl2] mcuboot build=d4190a0-dirty
+2026-10-04 17:53:51.768 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-04 17:53:51.878 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-04 17:53:51.881 [bl2] no bootable image

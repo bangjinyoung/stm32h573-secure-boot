@@ -3,7 +3,7 @@
 Date: 2026-10-04
 Board: STM32H573I-DK, PRODUCT_STATE Open, TZEN 0xC3, BOOT_UBE 0xB4 (unchanged from M0)
 Toolchain: STM32CubeCLT 1.22.0 (arm-none-eabi-gcc 14.3.1, CMake 4.3.1, Ninja)
-Firmware: `app/bare`, Debug preset, HSI 64 MHz, no PLL
+Firmware: `app/bare`, Debug preset, reset clock (HSI 64 MHz divided by 2, so 32 MHz; the app prints `core_clock_hz=32000000`), no PLL
 Key: none
 
 ## Commands
