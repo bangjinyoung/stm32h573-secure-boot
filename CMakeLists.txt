@@ -11,6 +11,8 @@ set(HAL_DIR ${MODULES_DIR}/stm32h5xx_hal_driver)
 set(DEVICE_DIR ${MODULES_DIR}/cmsis_device_h5)
 set(PLATFORM_DIR ${CMAKE_SOURCE_DIR}/platform/stm32h573)
 
+include(cmake/stm32h573.cmake)
+
 execute_process(
   COMMAND git describe --always --dirty
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
@@ -22,15 +24,15 @@ add_library(stm32h5_hal STATIC
   ${HAL_DIR}/Src/stm32h5xx_hal_cortex.c
   ${HAL_DIR}/Src/stm32h5xx_hal_dma.c
   ${HAL_DIR}/Src/stm32h5xx_hal_dma_ex.c
+  ${HAL_DIR}/Src/stm32h5xx_hal_flash.c
+  ${HAL_DIR}/Src/stm32h5xx_hal_flash_ex.c
   ${HAL_DIR}/Src/stm32h5xx_hal_gpio.c
   ${HAL_DIR}/Src/stm32h5xx_hal_pwr.c
   ${HAL_DIR}/Src/stm32h5xx_hal_pwr_ex.c
   ${HAL_DIR}/Src/stm32h5xx_hal_rcc.c
   ${HAL_DIR}/Src/stm32h5xx_hal_rcc_ex.c
   ${HAL_DIR}/Src/stm32h5xx_hal_uart.c
-  ${HAL_DIR}/Src/stm32h5xx_hal_uart_ex.c
-  ${DEVICE_DIR}/Source/Templates/system_stm32h5xx.c
-  ${DEVICE_DIR}/Source/Templates/gcc/startup_stm32h573xx.s)
+  ${HAL_DIR}/Src/stm32h5xx_hal_uart_ex.c)
 
 target_include_directories(stm32h5_hal PUBLIC
   ${PLATFORM_DIR}
@@ -42,3 +44,4 @@ target_compile_definitions(stm32h5_hal PUBLIC STM32H573xx USE_HAL_DRIVER)
 
 add_subdirectory(boards/stm32h573i_dk)
 add_subdirectory(app/bare)
+add_subdirectory(boot/mcuboot)

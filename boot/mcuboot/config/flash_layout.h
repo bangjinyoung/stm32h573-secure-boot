@@ -1,0 +1,41 @@
+#ifndef FLASH_LAYOUT_H
+#define FLASH_LAYOUT_H
+
+/* Offsets are relative to FLASH_BASE_ADDRESS. BL2 occupies the area STiRoT later assigns to OEMuRoT. */
+#define FLASH_BASE_ADDRESS           0x08000000U
+#define FLASH_TOTAL_SIZE             0x00200000U
+#define FLASH_AREA_IMAGE_SECTOR_SIZE 0x00002000U
+
+#define FLASH_AREA_BL2_OFFSET        0x00000000U
+#define FLASH_AREA_BL2_SIZE          0x00018000U
+
+#define BL2_IMAGE_HEADER_SIZE        0x00000400U
+
+#define FLASH_AREA_0_ID              1U
+#define FLASH_AREA_0_DEVICE_ID       0U
+#define FLASH_AREA_0_OFFSET          (FLASH_AREA_BL2_OFFSET + FLASH_AREA_BL2_SIZE)
+#define FLASH_AREA_0_SIZE            0x000A0000U
+
+#define FLASH_AREA_1_ID              2U
+#define FLASH_AREA_1_DEVICE_ID       0U
+#define FLASH_AREA_1_OFFSET          (FLASH_AREA_0_OFFSET + FLASH_AREA_0_SIZE)
+#define FLASH_AREA_1_SIZE            FLASH_AREA_0_SIZE
+
+#define FLASH_AREA_BEGIN_OFFSET      FLASH_AREA_0_OFFSET
+#define FLASH_AREA_END_OFFSET        (FLASH_AREA_1_OFFSET + FLASH_AREA_1_SIZE)
+
+#define BL2_APP_PAYLOAD_ADDRESS      (FLASH_BASE_ADDRESS + FLASH_AREA_0_OFFSET + BL2_IMAGE_HEADER_SIZE)
+
+#if (FLASH_AREA_BL2_SIZE % FLASH_AREA_IMAGE_SECTOR_SIZE) != 0
+#error "FLASH_AREA_BL2_SIZE not aligned on FLASH_AREA_IMAGE_SECTOR_SIZE"
+#endif
+
+#if (FLASH_AREA_0_SIZE % FLASH_AREA_IMAGE_SECTOR_SIZE) != 0
+#error "FLASH_AREA_0_SIZE not aligned on FLASH_AREA_IMAGE_SECTOR_SIZE"
+#endif
+
+#if FLASH_AREA_END_OFFSET > 0x001E6000U
+#error "Application slots overlap the STiRoT download areas planned for M6"
+#endif
+
+#endif /* FLASH_LAYOUT_H */
