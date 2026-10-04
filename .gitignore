@@ -53,3 +53,7 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# local agent state and build output
+.workspace/
+build/
