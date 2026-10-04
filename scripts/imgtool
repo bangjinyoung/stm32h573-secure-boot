@@ -1,0 +1,3 @@
+#!/bin/sh
+# Runs imgtool from the pinned mcuboot submodule so signing matches the bootloader version.
+exec uvx --from "$(dirname "$0")/../modules/mcuboot/scripts" imgtool "$@"
