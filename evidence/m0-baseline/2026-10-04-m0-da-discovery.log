@@ -1,0 +1,42 @@
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+
+Start Debug Authentication Sequence
+
+Open SDM Lib
+SDMOpen                       :   765 : open       : SDM API v1.0
+
+SDMOpen                       :   766 : open       : SDM Library version v1.4.0
+
+open_comms                    :   606 : open       : Asserting target reset
+
+open_comms                    :   614 : open       : Writing magic number
+
+open_comms                    :   678 : open       : De-asserting target reset
+
+open_comms                    :   713 : open       : Communication with the target established successfully
+
+response_packet_lock
+response_packet_lock
+discovery: target ID.......................:0x484
+discovery: SoC ID..........................:<masked>
+discovery: SDA version.....................:2.4.0
+discovery: Vendor ID.......................:STMicroelectronics
+discovery: PSA lifecycle...................:ST_LIFECYCLE_OPEN
+discovery: PSA auth version................:1.0
+discovery: ST HDPL1 status.................:0xFFFFFFFF
+discovery: ST HDPL2 status.................:0xFFFFFFFF
+discovery: ST HDPL3 status.................:0xFFFFFFFF
+discovery: Token Formats...................:0x00000200
+discovery: Certificate Formats.............:0x00000201
+discovery: cryptosystems...................:ST Password
+discovery: ST provisioning integrity status:0xF5F5F5F5
+discovery: ST provisioning integrity status message:INVALID
+discovery: permission if authorized...........:(a/14) ==> Full Regression
+To select multiple permission/actions:
+    Using numerical values: List the needed bit numbers, separated by commas without spaces.
+    Using symbolic letters: List the needed letters by concatenating them without separators.
+
+Debug Authentication: Discovery Success

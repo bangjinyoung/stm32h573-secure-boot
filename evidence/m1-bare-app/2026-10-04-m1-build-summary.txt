@@ -1,0 +1,68 @@
+# toolchain
+arm-none-eabi-gcc (GNU Tools for STM32 14.3.rel1.20251027-0700) 14.3.1 20250623
+cmake version 4.3.1
+build_id: 4a47799-dirty
+
+# size
+   text	   data	    bss	    dec	    hex	filename
+  18500	    104	   2056	  20660	   50b4	/home/bjy/workspaces/stm32h573-secure-boot/build/debug/app/bare/bare.elf
+
+# sections
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   0000024c  08000000  08000000  00001000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         000044cc  0800024c  0800024c  0000124c  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       0000011c  08004718  08004718  00005718  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .ARM.extab    00000000  08004834  08004834  00006068  2**0
+                  CONTENTS, READONLY
+  4 .ARM          00000008  08004834  08004834  00005834  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  5 .preinit_array 00000000  0800483c  0800483c  00006068  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .init_array   00000004  0800483c  0800483c  0000583c  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  7 .fini_array   00000004  08004840  08004840  00005840  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  8 .data         00000068  20000000  08004844  00006000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  9 .bss          00000208  20000068  080048ac  00006068  2**2
+                  ALLOC
+ 10 ._user_heap_stack 00000600  20000270  080048ac  00006270  2**0
+                  ALLOC
+ 11 .ARM.attributes 00000036  00000000  00000000  00006068  2**0
+                  CONTENTS, READONLY
+ 12 .debug_info   0001c073  00000000  00000000  0000609e  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 13 .debug_abbrev 00004836  00000000  00000000  00022111  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 14 .debug_loclists 0000a05d  00000000  00000000  00026947  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 15 .debug_aranges 00000c98  00000000  00000000  000309a8  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 16 .debug_rnglists 000009e5  00000000  00000000  00031640  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 17 .debug_macro  0003e789  00000000  00000000  00032025  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 18 .debug_line   00016016  00000000  00000000  000707ae  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 19 .debug_str    001aa01f  00000000  00000000  000867c4  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 20 .comment      00000043  00000000  00000000  002307e3  2**0
+                  CONTENTS, READONLY
+ 21 .debug_frame  00001cc8  00000000  00000000  00230828  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 22 .debug_line_str 000000a5  00000000  00000000  002324f0  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+
+# symbols
+0800155c W Reset_Handler
+200a0000 R _estack
+2009fc00 A _sstack
+08000000 R g_pfnVectors
+0800060c T main
+
+# bin
+size 18604
+361c3ab14b68f2614fef5be0ede62d598c4e5bc50c726aeb9e49f528e917d7c7  build/debug/app/bare/bare.bin
