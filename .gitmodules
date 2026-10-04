@@ -7,3 +7,9 @@
 [submodule "modules/stm32h5xx_hal_driver"]
 	path = modules/stm32h5xx_hal_driver
 	url = https://github.com/STMicroelectronics/stm32h5xx_hal_driver.git
+[submodule "modules/mcuboot"]
+	path = modules/mcuboot
+	url = https://github.com/mcu-tools/mcuboot.git
+[submodule "modules/mbedtls"]
+	path = modules/mbedtls
+	url = https://github.com/Mbed-TLS/mbedtls.git
