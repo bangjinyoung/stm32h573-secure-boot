@@ -1,0 +1,49 @@
+# 2026-10-05 20:19:27 W9 post-boot check, read-only
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C000000 0x18000 .workspace/tmp/m8/m8-w9-postboot-exec.bin -r32 0x54000414 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m8/m8-w9-postboot-exec.bin
+  Size          : 98304 Bytes
+  Address:      : 0xC000000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.288
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x54000414
+0x54000414 : 0000006F
+
+
+exec header+body identical to bl2_init.bin
+ 04
+image:    .workspace/tmp/m8/m8-w9-postboot-exec.bin
+magic:    0x73ab1024  version 2.0.0+0  hdr 0x400  img_size 0x17ac0  prot_tlv 0x13
+tlvs:     0x50/4 0x60/3 0x10/32 0x01/32 0x22/72 0x32/113
+hash tlv: MATCH  computed 1c7517f74019bd0e
+key STiRoT_Authentication_pub.pem: keyhash MATCH  signature VALID

@@ -1,0 +1,43 @@
+# M8 E8.5: M7 negative tests replayed on the custom chain (board, 2026-10-05)
+
+Chain under test: STiRoT (HDPL1) -> M2 MCUboot BL2 b055e82 (HDPL2, STiRoT image 2.0.0) ->
+bare_slot b055e82 (HDPL3, MCUboot image 1.0.0, M2 key). Images and sha256:
+`2026-10-05-m8-h6-images.txt` (rebuild section b055e82, list in `.workspace/tmp/m8/images-b055e82.log`).
+Every write: SW1=0, mode=UR (`scripts/tamper_step.sh -u m8`), Download verified, FLASH NSSR 0,
+SECSR 0, readback identical. Every verdict boot: SW1=1, DEMCR cleared, -hardRst, VCP and SWD
+(`2026-10-05-m8-boot.log` entries 6-11, `2026-10-05-m8-vcp.log`).
+
+Same CT ids, same flip (bit 0 at offset 0x1400), same image recipe and the same verdict rule as
+M7 (`evidence/m7-chain-tamper/2026-10-05-m7-e73-comparison.txt`).
+
+| CT id | boundary | blocked by (M7 / M8) | M7 log (OEMuRoT) | M8 log (custom BL2, DEBUG) | M7 end state | M8 end state |
+|---|---|---|---|---|---|---|
+| CT-APP-HASH (w1, 19:49) | HDPL2 -> HDPL3 | OEMuRoT / BL2 | counter ok, no signature line, `Image in the primary slot is not valid!` | `EXPECTED_HASH_TLV == 16`, no KEY/SIG line, `Image in the primary slot is not valid!`, `[bl2] no bootable image` | System Bootloader, VTOR 0x0BF97000, CDS=0 | BL2 LED loop (HAL_Delay), VTOR 0x0C000400, CDS=1, CFSR 0 |
+| CT-APP-SIG (w3, 20:14) | HDPL2 -> HDPL3 | OEMuRoT / BL2 | `verify sig key id 0`, `signature KO` | `EXPECTED_KEY_TLV == 1`, `EXPECTED_SIG_TLV == 34`, `bootutil_verify_sig: ECDSA builtin key 0`, `Image in the primary slot is not valid!`, `[bl2] no bootable image` | System Bootloader | BL2 LED loop, VTOR 0x0C000400, CDS=1, CFSR 0 |
+| CT-BL-EXEC (w7, 20:17) | HDPL1 -> HDPL2 | STiRoT / STiRoT | none (STiRoT logs nothing) | none | System Bootloader, image left in place | System Bootloader, VTOR 0x0BF97000, CDS=0, DWT_PCSR 0x0BF9A9FC-0x0BF9E48C, exec area readback = ct-bl-exec.bin |
+
+Controls and restores:
+
+| step | result |
+|---|---|
+| w2, w4 restore-app (20:13, 20:15) | `image ok` -> `hdpl=0x8a` jump via RSS -> app `hdpl=0x6f`, VTOR 0x0C018400, CDS=1 |
+| w9 CT-BL-DL-CTRL / restore-bl (20:19) | STiRoT installed the genuine BL2 download image (same version 2.0.0) over the tampered execution area: exec readback header+body = bl2_init.bin, offset 0x1400 back to 0x04, STiRoT signature VALID; chain boots to the app, HDPLSR 0x6F |
+| C9 (20:20) | option bytes as in prep: 37 fields, SECBOOTR_CUR 0x0C0004B4 both times; `-ob displ` now shows SECBOOT_LOCK 0xB4 and SECBOOTADD 0xC0004, which read 0 while the ST chain ran (display only) |
+
+Findings:
+
+- The hash failure and the signature failure take different paths on the board: the last
+  validation line is EXPECTED_HASH_TLV for CT-APP-HASH and EXPECTED_SIG_TLV plus
+  bootutil_verify_sig for CT-APP-SIG (D-08 kept with upstream MCUboot via D-14).
+- The HDPL1 -> HDPL2 boundary is unchanged by the bootloader swap: STiRoT rejects a one-bit
+  change in the HDPL2 image whether it is OEMuRoT or the custom BL2.
+- End state differs: OEMuRoT jumps to the System Bootloader when no image is valid
+  (MCUBOOT_EXT_LOADER); the custom BL2 stays in its own loop. Both leave the tampered app unexecuted.
+- E8-K: the 1059-line VCP log has no run of 16 or more hex bytes and no 32-hex-digit string.
+  BL2 has no image encryption and no key print path.
+
+Observation outside the verdicts (Open state, SW1=0): after each UR write the core ran from
+SECBOOTADD without STiRoT. With the tampered BL2 in place (after w7 and w9 writes) it still ran,
+printed `hdpl=0x51` (HDPL1) and booted the app through RSS to HDPL3. In Open, BOOT0 lets
+unverified code run at HDPL1, above the HDPL2 STiRoT gives the verified BL2. The closed-state
+behavior belongs to M11.

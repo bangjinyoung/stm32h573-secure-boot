@@ -1,0 +1,1059 @@
+2026-10-05 19:02:56.608 [INF] TAMPER Activated
+2026-10-05 19:02:56.613 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 19:02:56.616 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 19:02:56.618 [INF] Swap type: none
+2026-10-05 19:02:56.622 [INF] Starting validation of primary slot(s)
+2026-10-05 19:02:56.628 [INF] verify counter  0 1000000 1000000
+2026-10-05 19:02:56.630 [INF] counter  0 : ok
+2026-10-05 19:02:56.631 [INF] hash ref OK
+2026-10-05 19:02:56.636 [INF] Bootloader chainload address offset: 0x18000
+2026-10-05 19:02:56.639 [INF] Jumping to the first image slot
+2026-10-05 19:02:56.641 
+2026-10-05 19:02:56.647 ======================================================================
+2026-10-05 19:02:56.653 =              (C) COPYRIGHT 2025 STMicroelectronics                 =
+2026-10-05 19:02:56.660 =                                                                    =
+2026-10-05 19:02:56.666 =                          User App #A                               =
+2026-10-05 19:02:56.673 ======================================================================
+2026-10-05 19:02:56.673 
+2026-10-05 19:02:56.673 
+2026-10-05 19:02:56.678 =================== Main Menu ============================
+2026-10-05 19:02:56.678 
+2026-10-05 19:02:56.684   Start BootLoader -------------------------------------- 1
+2026-10-05 19:02:56.684 
+2026-10-05 19:02:56.685   Selection :
+2026-10-05 19:02:56.685 
+2026-10-05 19:16:36.323 [INF] TAMPER Activated
+2026-10-05 19:16:36.748 [ERR] read: Wrong OBK˛[INF] TAMPER Activated
+2026-10-05 19:16:36.782 [INF] TAMPER Activated
+2026-10-05 19:16:38.382 [ERR] read: Wrong ˇ[INF] TAMPER Activated
+2026-10-05 19:16:38.830 [ERR] read: Wrong O¬[INF] TAMPER Activated
+2026-10-05 19:16:38.866 [INF] TAMPER Activated
+2026-10-05 19:16:39.609 [ERR] read: Wrong OBK HDPL2‡[INF] TAMPER Activated
+2026-10-05 19:27:05.767 
+2026-10-05 19:27:05.770 [bl2] mcuboot build=4960d40-dirty
+2026-10-05 19:27:05.772 [mcuboot DBG] context_boot_go
+2026-10-05 19:34:14.547 
+2026-10-05 19:34:14.550 [bl2] mcuboot build=4960d40-dirty
+2026-10-05 19:34:14.975 [mcuboot DBG] conÙ
+2026-10-05 19:34:14.979 [bl2] mcuboot build=4960d40-dirty
+2026-10-05 19:34:14.981 [mcuboot DBG] context_boot_go
+2026-10-05 19:34:14.986 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:34:14.992 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:34:14.997 [mcuboot DBG] boot_validate_slot: header validation failed 0
+2026-10-05 19:34:15.002 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 19:34:15.014 [bl2] no bootable image˝
+2026-10-05 19:34:15.017 [bl2] mcuboot build=4960d40-dirty
+2026-10-05 19:34:15.019 [mcuboot DBG] context_boot_go
+2026-10-05 19:34:16.660 
+2026-10-05 19:34:16.664 [bl2] mcuboot build=4960d40-dirty
+2026-10-05 19:34:17.125 [mcuboot DBG] context_boot_goÌ
+2026-10-05 19:34:17.128 [bl2] mcuboot build=4960d40-dirty
+2026-10-05 19:34:17.131 [mcuboot DBG] context_boot_go
+2026-10-05 19:34:17.136 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:34:17.141 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:34:17.147 [mcuboot DBG] boot_validate_slot: header validation failed 0
+2026-10-05 19:34:17.152 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 19:34:17.154 [bl2] no bootable image
+2026-10-05 19:34:17.164 
+2026-10-05 19:34:17.167 [bl2] mcuboot build=4960d40-dirty
+2026-10-05 19:34:17.916 [mcuboot DBG] contexˇ
+2026-10-05 19:34:17.919 [bl2] mcuboot build=4960d40-dirty
+2026-10-05 19:34:17.922 [mcuboot DBG] context_boot_go
+2026-10-05 19:34:17.926 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:34:17.932 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:34:17.938 [mcuboot DBG] boot_validate_slot: header validation failed 0
+2026-10-05 19:34:17.943 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 19:34:17.945 [bl2] no bootable image
+2026-10-05 19:35:35.388 
+2026-10-05 19:35:35.390 [bl2] mcuboot build=4bf2865
+2026-10-05 19:35:35.393 [mcuboot DBG] context_boot_go
+2026-10-05 19:35:35.397 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:35:35.403 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:35:35.408 [mcuboot DBG] boot_validate_slot: header validation failed 0
+2026-10-05 19:35:35.413 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 19:35:35.415 [bl2] no bootable image
+2026-10-05 19:37:08.316 
+2026-10-05 19:37:08.319 [bl2] mcuboot build=4bf2865
+2026-10-05 19:37:08.322 [mcuboot DBG] context_boot_go
+2026-10-05 19:37:08.768 [mcub
+2026-10-05 19:37:08.771 [bl2] mcuboot build=4bf2865
+2026-10-05 19:37:08.774 [mcuboot DBG] context_boot_go
+2026-10-05 19:37:08.778 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:37:08.784 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:37:08.790 [mcuboot DBG] boot_validate_slot: header validation failed 0
+2026-10-05 19:37:08.795 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 19:37:08.797 [bl2] no bootable image
+2026-10-05 19:37:08.807 
+2026-10-05 19:37:08.810 [bl2] mcuboot build=4bf2865
+2026-10-05 19:37:09.649 [mcuboot DBG] context_boot_goˇ
+2026-10-05 19:37:09.651 [bl2] mcuboot build=4bf2865
+2026-10-05 19:37:09.654 [mcuboot DBG] context_boot_go
+2026-10-05 19:37:10.110 
+2026-10-05 19:37:10.112 [bl2] mcuboot build=4bf2865
+2026-10-05 19:37:10.115 [mcuboot DBG] context_boot_go
+2026-10-05 19:37:10.120 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:37:10.126 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:37:10.131 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:37:10.134 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:37:10.148 
+2026-10-05 19:37:10.150 [bl2] mcuboot build=4bf2865
+2026-10-05 19:37:10.153 [mcuboot DBG] context_boot_go
+2026-10-05 19:37:10.683 
+2026-10-05 19:37:10.686 [bl2] mcuboot build=4bf2865
+2026-10-05 19:37:10.689 [mcuboot DBG] context_boot_go
+2026-10-05 19:37:10.693 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:37:10.699 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:37:10.705 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:37:10.708 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:37:10.793 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 19:37:10.799 [mcuboot DBG] bootutil_img_validate: TLV off 17508, end 17655
+2026-10-05 19:37:10.809 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 17508 ending at 17655
+2026-10-05 19:37:10.816 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 17512 (size 32)
+2026-10-05 19:37:10.821 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 19:37:10.831 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 17544 ending at 17655
+2026-10-05 19:37:10.838 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 17548 (size 32)
+2026-10-05 19:37:10.843 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 19:37:10.846 [mcuboot DBG] bootutil_find_key
+2026-10-05 19:37:10.857 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 17580 ending at 17655
+2026-10-05 19:37:10.863 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 17584 (size 71)
+2026-10-05 19:37:10.869 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 19:37:10.874 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 19:37:12.934 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 17655 ending at 17655
+2026-10-05 19:37:12.939 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 19:37:12.943 [bl2] image ok version=1.0.0+0
+2026-10-05 19:37:12.950 [bl2] hdpl=0x00 jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b19 via rss 0x0ff95079
+2026-10-05 19:37:13.002 
+2026-10-05 19:37:13.006 [bare] stm32h573 bare app build=4bf2865
+2026-10-05 19:37:13.012 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b19
+2026-10-05 19:37:13.017 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-05 19:37:13.020 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 19:37:13.022 [bare] heartbeat 0
+2026-10-05 19:37:14.028 [bare] heartbeat 1
+2026-10-05 19:37:15.035 [bare] heartbeat 2
+2026-10-05 19:37:16.041 [bare] heartbeat 3
+2026-10-05 19:37:17.048 [bare] heartbeat 4
+2026-10-05 19:37:18.054 [bare] heartbeat 5
+2026-10-05 19:37:19.061 [bare] heartbeat 6
+2026-10-05 19:37:20.067 [bare] heartbeat 7
+2026-10-05 19:37:21.073 [bare] heartbeat 8
+2026-10-05 19:37:22.080 [bare] heartbeat 9
+2026-10-05 19:37:23.086 [bare] heartbeat 10
+2026-10-05 19:37:24.093 [bare] heartbeat 11
+2026-10-05 19:37:25.099 [bare] heartbeat 12
+2026-10-05 19:37:26.106 [bare] heartbeat 13
+2026-10-05 19:37:27.112 [bare] heartbeat 14
+2026-10-05 19:37:28.118 [bare] heartbeat 15
+2026-10-05 19:37:29.125 [bare] heartbeat 16
+2026-10-05 19:37:30.131 [bare] heartbeat 17
+2026-10-05 19:37:31.138 [bare] heartbeat 18
+2026-10-05 19:37:32.144 [bare] heartbeat 19
+2026-10-05 19:37:33.150 [bare] heartbeat 20
+2026-10-05 19:37:34.157 [bare] heartbeat 21
+2026-10-05 19:37:35.163 [bare] heartbeat 22
+2026-10-05 19:37:36.170 [bare] heartbeat 23
+2026-10-05 19:37:37.176 [bare] heartbeat 24
+2026-10-05 19:37:38.183 [bare] heartbeat 25
+2026-10-05 19:37:39.189 [bare] heartbeat 26
+2026-10-05 19:37:40.196 [bare] heartbeat 27
+2026-10-05 19:37:41.202 [bare] heartbeat 28
+2026-10-05 19:37:42.208 [bare] heartbeat 29
+2026-10-05 19:37:43.215 [bare] heartbeat 30
+2026-10-05 19:37:44.221 [bare] heartbeat 31
+2026-10-05 19:37:45.228 [bare] heartbeat 32
+2026-10-05 19:37:46.234 [bare] heartbeat 33
+2026-10-05 19:37:47.240 [bare] heartbeat 34
+2026-10-05 19:37:48.246 [bare] heartbeat 35
+2026-10-05 19:37:49.252 [bare] heartbeat 36
+2026-10-05 19:37:50.259 [bare] heartbeat 37
+2026-10-05 19:37:51.265 [bare] heartbeat 38
+2026-10-05 19:37:52.271 [bare] heartbeat 39
+2026-10-05 19:37:53.278 [bare] heartbeat 40
+2026-10-05 19:37:54.284 [bare] heartbeat 41
+2026-10-05 19:37:55.290 [bare] heartbeat 42
+2026-10-05 19:37:56.296 [bare] heartbeat 43
+2026-10-05 19:37:57.303 [bare] heartbeat 44
+2026-10-05 19:37:58.309 [bare] heartbeat 45
+2026-10-05 19:37:59.315 [bare] heartbeat 46
+2026-10-05 19:38:00.322 [bare] heartbeat 47
+2026-10-05 19:38:01.328 [bare] heartbeat 48
+2026-10-05 19:38:02.334 [bare] heartbeat 49
+2026-10-05 19:38:03.340 [bare] heartbeat 50
+2026-10-05 19:38:04.346 [bare] heartbeat 51
+2026-10-05 19:38:05.353 [bare] heartbeat 52
+2026-10-05 19:38:06.359 [bare] heartbeat 53
+2026-10-05 19:38:07.365 [bare] heartbeat 54
+2026-10-05 19:38:08.372 [bare] heartbeat 55
+2026-10-05 19:38:09.378 [bare] heartbeat 56
+2026-10-05 19:38:10.384 [bare] heartbeat 57
+2026-10-05 19:38:11.390 [bare] heartbeat 58
+2026-10-05 19:38:12.397 [bare] heartbeat 59
+2026-10-05 19:38:13.403 [bare] heartbeat 60
+2026-10-05 19:38:14.410 [bare] heartbeat 61
+2026-10-05 19:38:15.416 [bare] heartbeat 62
+2026-10-05 19:38:16.422 [bare] heartbeat 63
+2026-10-05 19:38:17.428 [bare] heartbeat 64
+2026-10-05 19:38:18.435 [bare] heartbeat 65
+2026-10-05 19:38:19.441 [bare] heartbeat 66
+2026-10-05 19:38:20.447 [bare] heartbeat 67
+2026-10-05 19:38:21.453 [bare] heartbeat 68
+2026-10-05 19:38:22.459 [bare] heartbeat 69
+2026-10-05 19:38:23.465 [bare] heartbeat 70
+2026-10-05 19:38:24.471 [bare] heartbeat 71
+2026-10-05 19:38:25.478 [bare] heartbeat 72
+2026-10-05 19:38:26.484 [bare] heartbeat 73
+2026-10-05 19:38:27.490 [bare] heartbeat 74
+2026-10-05 19:38:28.496 [bare] heartbeat 75
+2026-10-05 19:38:29.502 [bare] heartbeat 76
+2026-10-05 19:38:30.509 [bare] heartbeat 77
+2026-10-05 19:38:31.515 [bare] heartbeat 78
+2026-10-05 19:38:32.521 [bare] heartbeat 79
+2026-10-05 19:38:33.527 [bare] heartbeat 80
+2026-10-05 19:38:34.534 [bare] heartbeat 81
+2026-10-05 19:38:35.540 [bare] heartbeat 82
+2026-10-05 19:38:36.546 [bare] heartbeat 83
+2026-10-05 19:38:37.552 [bare] heartbeat 84
+2026-10-05 19:38:38.559 [bare] heartbeat 85
+2026-10-05 19:38:39.565 [bare] heartbeat 86
+2026-10-05 19:38:40.571 [bare] heartbeat 87
+2026-10-05 19:38:41.578 [bare] heartbeat 88
+2026-10-05 19:38:42.584 [bare] heartbeat 89
+2026-10-05 19:38:43.590 [bare] heartbeat 90
+2026-10-05 19:38:44.596 [bare] heartbeat 91
+2026-10-05 19:38:45.603 [bare] heartbeat 92
+2026-10-05 19:38:46.609 [bare] heartbeat 93
+2026-10-05 19:38:47.616 [bare] heartbeat 94
+2026-10-05 19:38:48.622 [bare] heartbeat 95
+2026-10-05 19:38:49.629 [bare] heartbeat 96
+2026-10-05 19:38:50.635 [bare] heartbeat 97
+2026-10-05 19:38:51.641 [bare] heartbeat 98
+2026-10-05 19:38:52.648 [bare] heartbeat 99
+2026-10-05 19:38:53.654 [bare] heartbeat 100
+2026-10-05 19:38:54.662 [bare] heartbeat 101
+2026-10-05 19:38:55.669 [bare] heartbeat 102
+2026-10-05 19:38:56.676 [bare] heartbeat 103
+2026-10-05 19:38:57.684 [bare] heartbeat 104
+2026-10-05 19:38:58.691 [bare] heartbeat 105
+2026-10-05 19:38:59.699 [bare] heartbeat 106
+2026-10-05 19:39:00.706 [bare] heartbeat 107
+2026-10-05 19:39:01.713 [bare] heartbeat 108
+2026-10-05 19:39:02.721 [bare] heartbeat 109
+2026-10-05 19:39:03.728 [bare] heartbeat 110
+2026-10-05 19:39:04.735 [bare] heartbeat 111
+2026-10-05 19:39:05.743 [bare] heartbeat 112
+2026-10-05 19:39:06.750 [bare] heartbeat 113
+2026-10-05 19:39:07.757 [bare] heartbeat 114
+2026-10-05 19:39:08.765 [bare] heartbeat 115
+2026-10-05 19:39:09.772 [bare] heartbeat 116
+2026-10-05 19:39:10.779 [bare] heartbeat 117
+2026-10-05 19:39:11.786 [bare] heartbeat 118
+2026-10-05 19:39:12.793 [bare] heartbeat 119
+2026-10-05 19:39:13.801 [bare] heartbeat 120
+2026-10-05 19:39:14.808 [bare] heartbeat 121
+2026-10-05 19:39:15.815 [bare] heartbeat 122
+2026-10-05 19:39:16.822 [bare] heartbeat 123
+2026-10-05 19:39:17.830 [bare] heartbeat 124
+2026-10-05 19:39:18.837 [bare] heartbeat 125
+2026-10-05 19:39:19.844 [bare] heartbeat 126
+2026-10-05 19:39:20.852 [bare] heartbeat 127
+2026-10-05 19:39:21.859 [bare] heartbeat 128
+2026-10-05 19:39:22.866 [bare] heartbeat 129
+2026-10-05 19:39:23.873 [bare] heartbeat 130
+2026-10-05 19:39:24.880 [bare] heartbeat 131
+2026-10-05 19:39:25.887 [bare] heartbeat 132
+2026-10-05 19:39:26.895 [bare] heartbeat 133
+2026-10-05 19:39:27.902 [bare] heartbeat 134
+2026-10-05 19:39:28.909 [bare] heartbeat 135
+2026-10-05 19:39:29.916 [bare] heartbeat 136
+2026-10-05 19:39:30.923 [bare] heartbeat 137
+2026-10-05 19:39:31.930 [bare] heartbeat 138
+2026-10-05 19:39:32.937 [bare] heartbeat 139
+2026-10-05 19:39:33.945 [bare] heartbeat 140
+2026-10-05 19:39:34.952 [bare] heartbeat 141
+2026-10-05 19:39:35.959 [bare] heartbeat 142
+2026-10-05 19:39:36.967 [bare] heartbeat 143
+2026-10-05 19:39:37.974 [bare] heartbeat 144
+2026-10-05 19:39:38.981 [bare] heartbeat 145
+2026-10-05 19:39:39.989 [bare] heartbeat 146
+2026-10-05 19:39:40.996 [bare] heartbeat 147
+2026-10-05 19:39:42.004 [bare] heartbeat 148
+2026-10-05 19:39:43.013 [bare] heartbeat 149
+2026-10-05 19:39:43.629 
+2026-10-05 19:39:43.632 [bl2] mcuboot build=4bf2865
+2026-10-05 19:39:43.635 [mcuboot DBG] context_boot_go
+2026-10-05 19:39:43.639 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:39:43.645 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:39:43.651 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:39:43.654 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:39:43.739 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 19:39:43.745 [mcuboot DBG] bootutil_img_validate: TLV off 17508, end 17655
+2026-10-05 19:39:43.755 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 17508 ending at 17655
+2026-10-05 19:39:43.762 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 17512 (size 32)
+2026-10-05 19:39:43.767 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 19:39:43.777 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 17544 ending at 17655
+2026-10-05 19:39:43.784 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 17548 (size 32)
+2026-10-05 19:39:43.789 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 19:39:43.792 [mcuboot DBG] bootutil_find_key
+2026-10-05 19:39:43.803 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 17580 ending at 17655
+2026-10-05 19:39:43.809 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 17584 (size 71)
+2026-10-05 19:39:43.815 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 19:39:43.820 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 19:39:45.880 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 17655 ending at 17655
+2026-10-05 19:39:45.885 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 19:39:45.888 [bl2] image ok version=1.0.0+0
+2026-10-05 19:39:45.896 [bl2] hdpl=0x00 jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b19 via rss 0x0ff95079
+2026-10-05 19:39:45.948 
+2026-10-05 19:39:45.952 [bare] stm32h573 bare app build=4bf2865
+2026-10-05 19:39:45.958 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b19
+2026-10-05 19:39:45.963 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-05 19:39:45.966 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 19:39:45.968 [bare] heartbeat 0
+2026-10-05 19:39:46.976 [bare] heartbeat 1
+2026-10-05 19:39:47.986 [bare] heartbeat 2
+2026-10-05 19:39:48.992 [bare] heartbeat 3
+2026-10-05 19:39:49.999 [bare] heartbeat 4
+2026-10-05 19:39:51.005 [bare] heartbeat 5
+2026-10-05 19:39:52.011 [bare] heartbeat 6
+2026-10-05 19:39:53.018 [bare] heartbeat 7
+2026-10-05 19:39:54.024 [bare] heartbeat 8
+2026-10-05 19:39:55.031 [bare] heartbeat 9
+2026-10-05 19:39:56.037 [bare] heartbeat 10
+2026-10-05 19:39:57.044 [bare] heartbeat 11
+2026-10-05 19:39:58.050 [bare] heartbeat 12
+2026-10-05 19:39:59.057 [bare] heartbeat 13
+2026-10-05 19:40:00.063 [bare] heartbeat 14
+2026-10-05 19:40:01.069 [bare] heartbeat 15
+2026-10-05 19:40:02.076 [bare] heartbeat 16
+2026-10-05 19:40:03.082 [bare] heartbeat 17
+2026-10-05 19:40:04.089 [bare] heartbeat 18
+2026-10-05 19:40:05.095 [bare] heartbeat 19
+2026-10-05 19:40:06.101 [bare] heartbeat 20
+2026-10-05 19:40:07.108 [bare] heartbeat 21
+2026-10-05 19:40:08.114 [bare] heartbeat 22
+2026-10-05 19:40:09.121 [bare] heartbeat 23
+2026-10-05 19:40:10.127 [bare] heartbeat 24
+2026-10-05 19:40:11.139 [bare] heartbeat 25
+2026-10-05 19:40:12.145 [bare] heartbeat 26
+2026-10-05 19:40:13.151 [bare] heartbeat 27
+2026-10-05 19:40:14.158 [bare] heartbeat 28
+2026-10-05 19:40:15.164 [bare] heartbeat 29
+2026-10-05 19:40:16.170 [bare] heartbeat 30
+2026-10-05 19:40:17.177 [bare] heartbeat 31
+2026-10-05 19:40:18.189 [bare] heartbeat 32
+2026-10-05 19:40:19.196 [bare] heartbeat 33
+2026-10-05 19:40:20.202 [bare] heartbeat 34
+2026-10-05 19:40:21.208 [bare] heartbeat 35
+2026-10-05 19:40:22.214 [bare] heartbeat 36
+2026-10-05 19:40:23.221 [bare] heartbeat 37
+2026-10-05 19:40:24.227 [bare] heartbeat 38
+2026-10-05 19:40:25.233 [bare] heartbeat 39
+2026-10-05 19:40:26.240 [bare] heartbeat 40
+2026-10-05 19:40:27.246 [bare] heartbeat 41
+2026-10-05 19:40:28.252 [bare] heartbeat 42
+2026-10-05 19:40:29.259 [bare] heartbeat 43
+2026-10-05 19:40:30.265 [bare] heartbeat 44
+2026-10-05 19:40:31.272 [bare] heartbeat 45
+2026-10-05 19:40:32.278 [bare] heartbeat 46
+2026-10-05 19:40:33.284 [bare] heartbeat 47
+2026-10-05 19:40:34.291 [bare] heartbeat 48
+2026-10-05 19:40:35.297 [bare] heartbeat 49
+2026-10-05 19:40:36.304 [bare] heartbeat 50
+2026-10-05 19:40:37.311 [bare] heartbeat 51
+2026-10-05 19:40:38.317 [bare] heartbeat 52
+2026-10-05 19:40:39.324 [bare] heartbeat 53
+2026-10-05 19:40:40.330 [bare] heartbeat 54
+2026-10-05 19:40:41.337 [bare] heartbeat 55
+2026-10-05 19:40:42.343 [bare] heartbeat 56
+2026-10-05 19:40:43.350 [bare] heartbeat 57
+2026-10-05 19:40:44.356 [bare] heartbeat 58
+2026-10-05 19:40:45.363 [bare] heartbeat 59
+2026-10-05 19:40:46.369 [bare] heartbeat 60
+2026-10-05 19:40:47.376 [bare] heartbeat 61
+2026-10-05 19:40:48.383 [bare] heartbeat 62
+2026-10-05 19:40:49.389 [bare] heartbeat 63
+2026-10-05 19:40:50.396 [bare] heartbeat 64
+2026-10-05 19:40:51.403 [bare] heartbeat 65
+2026-10-05 19:40:52.409 [bare] heartbeat 66
+2026-10-05 19:40:53.416 [bare] heartbeat 67
+2026-10-05 19:40:54.422 [bare] heartbeat 68
+2026-10-05 19:40:55.429 [bare] heartbeat 69
+2026-10-05 19:40:56.436 [bare] heartbeat 70
+2026-10-05 19:40:57.442 [bare] heartbeat 71
+2026-10-05 19:40:58.448 [bare] heartbeat 72
+2026-10-05 19:40:59.455 [bare] heartbeat 73
+2026-10-05 19:41:00.461 [bare] heartbeat 74
+2026-10-05 19:41:01.468 [bare] heartbeat 75
+2026-10-05 19:41:02.475 [bare] heartbeat 76
+2026-10-05 19:41:03.481 [bare] heartbeat 77
+2026-10-05 19:41:04.488 [bare] heartbeat 78
+2026-10-05 19:41:05.494 [bare] heartbeat 79
+2026-10-05 19:41:06.501 [bare] heartbeat 80
+2026-10-05 19:41:07.507 [bare] heartbeat 81
+2026-10-05 19:41:08.514 [bare] heartbeat 82
+2026-10-05 19:41:09.520 [bare] heartbeat 83
+2026-10-05 19:41:10.527 [bare] heartbeat 84
+2026-10-05 19:41:11.534 [bare] heartbeat 85
+2026-10-05 19:41:12.540 [bare] heartbeat 86
+2026-10-05 19:41:13.547 [bare] heartbeat 87
+2026-10-05 19:41:14.554 [bare] heartbeat 88
+2026-10-05 19:41:15.560 [bare] heartbeat 89
+2026-10-05 19:41:16.567 [bare] heartbeat 90
+2026-10-05 19:41:17.573 [bare] heartbeat 91
+2026-10-05 19:41:18.580 [bare] heartbeat 92
+2026-10-05 19:41:19.587 [bare] heartbeat 93
+2026-10-05 19:41:20.594 [bare] heartbeat 94
+2026-10-05 19:41:21.600 [bare] heartbeat 95
+2026-10-05 19:41:22.606 [bare] heartbeat 96
+2026-10-05 19:41:23.613 [bare] heartbeat 97
+2026-10-05 19:41:24.619 [bare] heartbeat 98
+2026-10-05 19:41:25.626 [bare] heartbeat 99
+2026-10-05 19:41:26.632 [bare] heartbeat 100
+2026-10-05 19:41:27.639 [bare] heartbeat 101
+2026-10-05 19:41:28.647 [bare] heartbeat 102
+2026-10-05 19:41:29.654 [bare] heartbeat 103
+2026-10-05 19:41:30.662 [bare] heartbeat 104
+2026-10-05 19:41:31.669 [bare] heartbeat 105
+2026-10-05 19:41:32.676 [bare] heartbeat 106
+2026-10-05 19:41:33.684 [bare] heartbeat 107
+2026-10-05 19:41:34.691 [bare] heartbeat 108
+2026-10-05 19:41:35.699 [bare] heartbeat 109
+2026-10-05 19:41:36.706 [bare] heartbeat 110
+2026-10-05 19:41:37.714 [bare] heartbeat 111
+2026-10-05 19:41:38.721 [bare] heartbeat 112
+2026-10-05 19:41:39.729 [bare] heartbeat 113
+2026-10-05 19:41:40.736 [bare] heartbeat 114
+2026-10-05 19:41:41.743 [bare] heartbeat 115
+2026-10-05 19:41:42.751 [bare] heartbeat 116
+2026-10-05 19:41:43.758 [bare] heartbeat 117
+2026-10-05 19:41:44.766 [bare] heartbeat 118
+2026-10-05 19:41:45.773 [bare] heartbeat 119
+2026-10-05 19:41:46.781 [bare] heartbeat 120
+2026-10-05 19:41:47.788 [bare] heartbeat 121
+2026-10-05 19:41:48.796 [bare] heartbeat 122
+2026-10-05 19:41:49.803 [bare] heartbeat 123
+2026-10-05 19:41:50.811 [bare] heartbeat 124
+2026-10-05 19:41:51.818 [bare] heartbeat 125
+2026-10-05 19:41:52.826 [bare] heartbeat 126
+2026-10-05 19:41:53.833 [bare] heartbeat 127
+2026-10-05 19:41:54.841 [bare] heartbeat 128
+2026-10-05 19:41:55.848 [bare] heartbeat 129
+2026-10-05 19:41:56.855 [bare] heartbeat 130
+2026-10-05 19:41:57.863 [bare] heartbeat 131
+2026-10-05 19:41:58.870 [bare] heartbeat 132
+2026-10-05 19:41:59.878 [bare] heartbeat 133
+2026-10-05 19:42:00.885 [bare] heartbeat 134
+2026-10-05 19:42:01.893 [bare] heartbeat 135
+2026-10-05 19:42:02.900 [bare] heartbeat 136
+2026-10-05 19:42:03.908 [bare] heartbeat 137
+2026-10-05 19:42:04.915 [bare] heartbeat 138
+2026-10-05 19:42:05.923 [bare] heartbeat 139
+2026-10-05 19:42:06.930 [bare] heartbeat 140
+2026-10-05 19:42:07.938 [bare] heartbeat 141
+2026-10-05 19:42:08.945 [bare] heartbeat 142
+2026-10-05 19:42:09.953 [bare] heartbeat 143
+2026-10-05 19:42:10.960 [bare] heartbeat 144
+2026-10-05 19:42:11.968 [bare] heartbeat 145
+2026-10-05 19:42:12.975 [bare] heartbeat 146
+2026-10-05 19:42:13.983 [bare] heartbeat 147
+2026-10-05 19:42:14.991 [bare] heartbeat 148
+2026-10-05 19:42:15.998 [bare] heartbeat 149
+2026-10-05 19:42:17.006 [bare] heartbeat 150
+2026-10-05 19:42:18.013 [bare] heartbeat 151
+2026-10-05 19:42:19.021 [bare] heartbeat 152
+2026-10-05 19:42:20.028 [bare] heartbeat 153
+2026-10-05 19:42:21.036 [bare] heartbeat 154
+2026-10-05 19:42:22.044 [bare] heartbeat 155
+2026-10-05 19:42:23.051 [bare] heartbeat 156
+2026-10-05 19:42:24.059 [bare] heartbeat 157
+2026-10-05 19:42:25.066 [bare] heartbeat 158
+2026-10-05 19:42:26.074 [bare] heartbeat 159
+2026-10-05 19:42:27.082 [bare] heartbeat 160
+2026-10-05 19:42:28.089 [bare] heartbeat 161
+2026-10-05 19:42:29.097 [bare] heartbeat 162
+2026-10-05 19:42:30.104 [bare] heartbeat 163
+2026-10-05 19:42:31.112 [bare] heartbeat 164
+2026-10-05 19:42:32.119 [bare] heartbeat 165
+2026-10-05 19:42:33.127 [bare] heartbeat 166
+2026-10-05 19:42:34.134 [bare] heartbeat 167
+2026-10-05 19:42:35.142 [bare] heartbeat 168
+2026-10-05 19:42:36.150 [bare] heartbeat 169
+2026-10-05 19:42:37.157 [bare] heartbeat 170
+2026-10-05 19:42:38.165 [bare] heartbeat 171
+2026-10-05 19:42:39.172 [bare] heartbeat 172
+2026-10-05 19:42:40.180 [bare] heartbeat 173
+2026-10-05 19:42:41.188 [bare] heartbeat 174
+2026-10-05 19:42:42.195 [bare] heartbeat 175
+2026-10-05 19:42:43.203 [bare] heartbeat 176
+2026-10-05 19:42:44.211 [bare] heartbeat 177
+2026-10-05 19:42:45.218 [bare] heartbeat 178
+2026-10-05 19:42:45.355 
+2026-10-05 19:42:45.358 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:45.801 [mcuboot DBG] context_boot_˜
+2026-10-05 19:42:45.803 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:45.806 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:45.811 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:42:45.816 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:42:45.822 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:42:45.825 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:42:45.842 
+2026-10-05 19:42:45.844 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:45.847 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:45.852 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:42:47.483 
+2026-10-05 19:42:47.486 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:47.940 [mcuboot DBG] context_boot_gÔ
+2026-10-05 19:42:47.943 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:47.946 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:47.950 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:42:47.956 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:42:47.962 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:42:47.964 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:42:47.979 
+2026-10-05 19:42:47.981 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:47.984 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:48.741 
+2026-10-05 19:42:48.744 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:48.747 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:48.751 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:42:48.757 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:42:48.763 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:42:48.766 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:42:48.788 
+2026-10-05 19:42:48.791 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:49.214 [mcuboot DBG] context_boot_goç
+2026-10-05 19:42:49.216 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:49.219 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:49.224 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:42:49.230 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:42:49.235 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:42:49.238 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:42:49.254 
+2026-10-05 19:42:49.257 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:50.105 [mcuboot DBG] context_boot
+2026-10-05 19:42:50.108 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:50.111 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:50.568 
+2026-10-05 19:42:50.570 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:50.573 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:50.578 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:42:50.584 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:42:50.589 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:42:50.592 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:42:50.606 
+2026-10-05 19:42:50.609 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:50.612 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:51.165 [m„
+2026-10-05 19:42:51.168 [bl2] mcuboot build=4bf2865
+2026-10-05 19:42:51.171 [mcuboot DBG] context_boot_go
+2026-10-05 19:42:51.175 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:42:51.181 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:42:51.186 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aad4
+2026-10-05 19:42:51.189 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:42:51.278 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 19:42:51.284 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 19:42:51.294 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 19:42:51.300 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 19:42:51.306 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 19:42:51.316 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 19:42:51.322 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 19:42:51.328 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 19:42:51.332 [mcuboot DBG] bootutil_find_key
+2026-10-05 19:42:51.342 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 19:42:51.348 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 19:42:51.354 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 19:42:51.359 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 19:42:53.423 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 19:42:53.429 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 19:42:53.432 [bl2] image ok version=1.0.0+0
+2026-10-05 19:42:53.440 [bl2] hdpl=0x00 jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 19:42:53.492 
+2026-10-05 19:42:53.495 [bare] stm32h573 bare app build=b055e82
+2026-10-05 19:42:53.501 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 19:42:53.506 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-05 19:42:53.509 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 19:42:53.515 [bare] running; press any key on the console for a status line
+2026-10-05 19:43:24.957 
+2026-10-05 19:43:24.960 [bl2] mcuboot build=b055e82
+2026-10-05 19:43:24.962 [mcuboot DBG] context_boot_go
+2026-10-05 19:43:24.967 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:43:24.972 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:43:24.978 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 19:43:24.980 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:43:25.010 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 19:43:25.015 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 19:43:25.025 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 19:43:25.031 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 19:43:25.037 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 19:43:25.046 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 19:43:25.052 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 19:43:25.058 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 19:43:25.061 [mcuboot DBG] bootutil_find_key
+2026-10-05 19:43:25.070 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 19:43:25.077 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 19:43:25.082 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 19:43:25.087 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 19:43:25.709 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 19:43:25.714 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 19:43:25.717 [bl2] image ok version=1.0.0+0
+2026-10-05 19:43:25.725 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 19:43:25.738 
+2026-10-05 19:43:25.741 [bare] stm32h573 bare app build=b055e82
+2026-10-05 19:43:25.747 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 19:43:25.752 [bare] reset_flags=0x00000000 core_clock_hz=64000000
+2026-10-05 19:43:25.755 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 19:43:25.761 [bare] running; press any key on the console for a status line
+2026-10-05 19:45:44.491 [bare] status uptime_ms=138121 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:10.554 [bare] status uptime_ms=164071 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:10.735 [bare] status uptime_ms=164250 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:11.485 [bare] status uptime_ms=164997 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:12.159 [bare] status uptime_ms=165669 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:12.639 [bare] status uptime_ms=166146 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:12.759 [bare] status uptime_ms=166266 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:12.836 [bare] status uptime_ms=166342 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.345 [bare] status uptime_ms=166849 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.359 [bare] status uptime_ms=166863 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.449 [bare] status uptime_ms=166953 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.464 [bare] status uptime_ms=166968 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.524 [bare] status uptime_ms=167028 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.554 [bare] status uptime_ms=167057 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.614 [bare] status uptime_ms=167117 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.630 [bare] status uptime_ms=167133 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.704 [bare] status uptime_ms=167207 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.719 [bare] status uptime_ms=167221 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.795 [bare] status uptime_ms=167297 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.810 [bare] status uptime_ms=167312 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.944 [bare] status uptime_ms=167446 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:13.974 [bare] status uptime_ms=167476 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+2026-10-05 19:46:57.286 
+2026-10-05 19:46:57.288 [bl2] mcuboot build=b055e82
+2026-10-05 19:46:57.291 [mcuboot DBG] context_boot_go
+2026-10-05 19:46:57.736 [mc
+2026-10-05 19:46:57.739 [bl2] mcuboot build=b055e82
+2026-10-05 19:46:57.742 [mcuboot DBG] context_boot_go
+2026-10-05 19:46:57.746 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:46:57.752 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:46:57.757 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 19:46:57.760 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:46:57.775 
+2026-10-05 19:46:57.778 [bl2] mcuboot build=b055e82
+2026-10-05 19:46:58.627 [mcuboot DBG] context_boot_goˇ
+2026-10-05 19:46:58.630 [bl2] mcuboot build=b055e82
+2026-10-05 19:46:58.633 [mcuboot DBG] context_boot_go
+2026-10-05 19:46:59.092 [
+2026-10-05 19:46:59.094 [bl2] mcuboot build=b055e82
+2026-10-05 19:46:59.097 [mcuboot DBG] context_boot_go
+2026-10-05 19:46:59.102 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:46:59.108 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:46:59.113 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 19:46:59.116 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:46:59.128 
+2026-10-05 19:46:59.131 [bl2] mcuboot build=b055e82
+2026-10-05 19:46:59.676 [mcuboot DBG] context_boot_
+2026-10-05 19:46:59.678 [bl2] mcuboot build=b055e82
+2026-10-05 19:46:59.681 [mcuboot DBG] context_boot_go
+2026-10-05 19:46:59.686 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:46:59.691 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:46:59.697 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 19:46:59.700 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:46:59.788 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 19:46:59.794 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 19:46:59.804 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 19:46:59.810 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 19:46:59.816 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 19:46:59.821 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 19:46:59.823 [bl2] no bootable image
+2026-10-05 19:49:18.341 
+2026-10-05 19:49:18.343 [bl2] mcuboot build=b055e82
+2026-10-05 19:49:18.346 [mcuboot DBG] context_boot_go
+2026-10-05 19:49:18.350 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:49:18.356 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:49:18.361 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 19:49:18.364 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:49:18.393 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 19:49:18.399 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 19:49:18.408 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 19:49:18.415 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 19:49:18.420 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 19:49:18.425 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 19:49:18.427 [bl2] no bootable image
+2026-10-05 19:50:20.542 
+2026-10-05 19:50:20.545 [bl2] mcuboot build=b055e82
+2026-10-05 19:50:20.548 [mcuboot DBG] context_boot_go
+2026-10-05 19:50:20.991 
+2026-10-05 19:50:20.994 [bl2] mcuboot build=b055e82
+2026-10-05 19:50:20.997 [mcuboot DBG] context_boot_go
+2026-10-05 19:50:21.001 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:50:21.007 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:50:21.013 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 19:50:21.016 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:50:21.031 
+2026-10-05 19:50:21.034 [bl2] mcuboot build=b055e82
+2026-10-05 19:50:21.037 [mcuboot DBG] context_boot_go
+2026-10-05 19:50:21.883 [mc˝
+2026-10-05 19:50:21.885 [bl2] mcuboot build=b055e82
+2026-10-05 19:50:21.888 [mcuboot DBG] context_boot_go
+2026-10-05 19:50:22.340 
+2026-10-05 19:50:22.343 [bl2] mcuboot build=b055e82
+2026-10-05 19:50:22.346 [mcuboot DBG] context_boot_go
+2026-10-05 19:50:22.350 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:50:22.356 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:50:22.362 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 19:50:22.365 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:50:22.378 
+2026-10-05 19:50:22.380 [bl2] mcuboot build=b055e82
+2026-10-05 19:50:22.383 [mcuboot DBG] context_boot_go
+2026-10-05 19:50:22.930 
+2026-10-05 19:50:22.933 [bl2] mcuboot build=b055e82
+2026-10-05 19:50:22.936 [mcuboot DBG] context_boot_go
+2026-10-05 19:50:22.940 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 19:50:22.946 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 19:50:22.951 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 19:50:22.954 [mcuboot DBG] bootutil_img_hash
+2026-10-05 19:50:23.042 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 19:50:23.048 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 19:50:23.058 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 19:50:23.065 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 19:50:23.070 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 19:50:23.080 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 19:50:23.087 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 19:50:23.092 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 19:50:23.095 [mcuboot DBG] bootutil_find_key
+2026-10-05 19:50:23.106 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 19:50:23.112 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 19:50:23.118 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 19:50:23.123 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 19:50:25.202 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 19:50:25.207 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 19:50:25.211 [bl2] image ok version=1.0.0+0
+2026-10-05 19:50:25.218 [bl2] hdpl=0x51 jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 19:50:25.270 
+2026-10-05 19:50:25.274 [bare] stm32h573 bare app build=b055e82
+2026-10-05 19:50:25.280 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 19:50:25.285 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-05 19:50:25.288 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 19:50:25.294 [bare] running; press any key on the console for a status line
+2026-10-05 20:13:11.971 
+2026-10-05 20:13:11.973 [bl2] mcuboot build=b055e82
+2026-10-05 20:13:11.976 [mcuboot DBG] context_boot_go
+2026-10-05 20:13:11.980 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:13:11.986 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:13:11.991 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:13:11.994 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:13:12.023 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 20:13:12.029 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 20:13:12.038 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 20:13:12.044 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 20:13:12.050 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 20:13:12.060 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 20:13:12.066 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 20:13:12.071 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 20:13:12.074 [mcuboot DBG] bootutil_find_key
+2026-10-05 20:13:12.084 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 20:13:12.090 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 20:13:12.095 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 20:13:12.100 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 20:13:12.722 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 20:13:12.727 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 20:13:12.730 [bl2] image ok version=1.0.0+0
+2026-10-05 20:13:12.738 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 20:13:12.751 
+2026-10-05 20:13:12.755 [bare] stm32h573 bare app build=b055e82
+2026-10-05 20:13:12.760 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 20:13:12.765 [bare] reset_flags=0x00000000 core_clock_hz=64000000
+2026-10-05 20:13:12.768 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 20:13:12.774 [bare] running; press any key on the console for a status line
+2026-10-05 20:14:17.501 
+2026-10-05 20:14:17.503 [bl2] mcuboot build=b055e82
+2026-10-05 20:14:17.506 [mcuboot DBG] context_boot_go
+2026-10-05 20:14:17.948 [m
+2026-10-05 20:14:17.950 [bl2] mcuboot build=b055e82
+2026-10-05 20:14:17.953 [mcuboot DBG] context_boot_go
+2026-10-05 20:14:17.958 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:14:17.964 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:14:17.969 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:14:17.972 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:14:17.987 
+2026-10-05 20:14:17.990 [bl2] mcuboot build=b055e82
+2026-10-05 20:14:18.830 [mcuboot DBG] context_boot_gˇ
+2026-10-05 20:14:18.833 [bl2] mcuboot build=b055e82
+2026-10-05 20:14:18.836 [mcuboot DBG] context_boot_go
+2026-10-05 20:14:19.286 
+2026-10-05 20:14:19.289 [bl2] mcuboot build=b055e82
+2026-10-05 20:14:19.292 [mcuboot DBG] context_boot_go
+2026-10-05 20:14:19.296 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:14:19.302 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:14:19.307 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:14:19.310 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:14:19.326 
+2026-10-05 20:14:19.328 [bl2] mcuboot build=b055e82
+2026-10-05 20:14:19.867 [mcuboot DBG] context_boot_gˇ
+2026-10-05 20:14:19.870 [bl2] mcuboot build=b055e82
+2026-10-05 20:14:19.873 [mcuboot DBG] context_boot_go
+2026-10-05 20:14:19.877 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:14:19.883 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:14:19.888 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:14:19.891 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:14:19.979 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 20:14:19.985 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 20:14:19.995 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 20:14:20.002 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 20:14:20.007 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 20:14:20.017 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 20:14:20.024 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 20:14:20.029 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 20:14:20.032 [mcuboot DBG] bootutil_find_key
+2026-10-05 20:14:20.043 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 20:14:20.049 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 20:14:20.055 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 20:14:20.060 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 20:14:22.134 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 20:14:22.139 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 20:14:22.144 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 20:14:22.146 [bl2] no bootable image
+2026-10-05 20:14:54.266 
+2026-10-05 20:14:54.268 [bl2] mcuboot build=b055e82
+2026-10-05 20:14:54.271 [mcuboot DBG] context_boot_go
+2026-10-05 20:14:54.275 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:14:54.281 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:14:54.286 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:14:54.289 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:14:54.318 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 20:14:54.324 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 20:14:54.334 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 20:14:54.340 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 20:14:54.345 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 20:14:54.355 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 20:14:54.361 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 20:14:54.366 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 20:14:54.369 [mcuboot DBG] bootutil_find_key
+2026-10-05 20:14:54.379 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 20:14:54.385 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 20:14:54.391 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 20:14:54.396 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 20:14:55.016 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 20:14:55.021 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 20:14:55.026 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-05 20:14:55.028 [bl2] no bootable image
+2026-10-05 20:15:27.881 
+2026-10-05 20:15:27.884 [bl2] mcuboot build=b055e82
+2026-10-05 20:15:27.887 [mcuboot DBG] context_boot_go
+2026-10-05 20:15:28.328 
+2026-10-05 20:15:28.331 [bl2] mcuboot build=b055e82
+2026-10-05 20:15:28.334 [mcuboot DBG] context_boot_go
+2026-10-05 20:15:28.338 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:15:28.344 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:15:28.350 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:15:28.353 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:15:28.369 
+2026-10-05 20:15:28.371 [bl2] mcuboot build=b055e82
+2026-10-05 20:15:28.374 [mcuboot DBG] context_boot_go
+2026-10-05 20:15:29.209 [
+2026-10-05 20:15:29.211 [bl2] mcuboot build=b055e82
+2026-10-05 20:15:29.676 [mcuboot DBG] context_boot_gÔ
+2026-10-05 20:15:29.679 [bl2] mcuboot build=b055e82
+2026-10-05 20:15:29.682 [mcuboot DBG] context_boot_go
+2026-10-05 20:15:29.686 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:15:29.692 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:15:29.697 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:15:29.712 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:15:29.727 
+2026-10-05 20:15:29.730 [bl2] mcuboot build=b055e82
+2026-10-05 20:15:29.732 [mcuboot DBG] context_boot_go
+2026-10-05 20:15:30.302 
+2026-10-05 20:15:30.305 [bl2] mcuboot build=b055e82
+2026-10-05 20:15:30.308 [mcuboot DBG] context_boot_go
+2026-10-05 20:15:30.312 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:15:30.318 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:15:30.324 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:15:30.327 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:15:30.415 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 20:15:30.420 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 20:15:30.430 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 20:15:30.437 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 20:15:30.442 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 20:15:30.452 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 20:15:30.459 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 20:15:30.464 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 20:15:30.467 [mcuboot DBG] bootutil_find_key
+2026-10-05 20:15:30.478 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 20:15:30.485 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 20:15:30.490 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 20:15:30.495 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 20:15:32.575 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 20:15:32.580 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 20:15:32.583 [bl2] image ok version=1.0.0+0
+2026-10-05 20:15:32.591 [bl2] hdpl=0x51 jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 20:15:32.643 
+2026-10-05 20:15:32.647 [bare] stm32h573 bare app build=b055e82
+2026-10-05 20:15:32.653 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 20:15:32.658 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-05 20:15:32.661 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 20:15:32.667 [bare] running; press any key on the console for a status line
+2026-10-05 20:15:56.420 
+2026-10-05 20:15:56.423 [bl2] mcuboot build=b055e82
+2026-10-05 20:15:56.426 [mcuboot DBG] context_boot_go
+2026-10-05 20:15:56.430 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:15:56.435 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:15:56.441 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:15:56.444 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:15:56.473 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 20:15:56.478 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 20:15:56.488 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 20:15:56.494 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 20:15:56.500 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 20:15:56.509 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 20:15:56.516 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 20:15:56.521 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 20:15:56.524 [mcuboot DBG] bootutil_find_key
+2026-10-05 20:15:56.534 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 20:15:56.540 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 20:15:56.545 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 20:15:56.550 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 20:15:57.172 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 20:15:57.177 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 20:15:57.180 [bl2] image ok version=1.0.0+0
+2026-10-05 20:15:57.188 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 20:15:57.201 
+2026-10-05 20:15:57.205 [bare] stm32h573 bare app build=b055e82
+2026-10-05 20:15:57.210 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 20:15:57.215 [bare] reset_flags=0x00000000 core_clock_hz=64000000
+2026-10-05 20:15:57.218 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 20:15:57.224 [bare] running; press any key on the console for a status line
+2026-10-05 20:16:45.354 
+2026-10-05 20:16:45.356 [bl2] mcuboot build=b055e82
+2026-10-05 20:16:45.359 [mcuboot DBG] context_boot_go
+2026-10-05 20:16:45.829 [mcuboˇ
+2026-10-05 20:16:45.832 [bl2] mcuboot build=b055e82
+2026-10-05 20:16:45.834 [mcuboot DBG] context_boot_go
+2026-10-05 20:16:45.839 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:16:45.845 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:16:45.850 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:16:45.853 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:16:45.868 
+2026-10-05 20:16:45.870 [bl2] mcuboot build=b055e82
+2026-10-05 20:16:45.873 [mcuboot DBG] context_boot_go
+2026-10-05 20:16:47.530 [mcuboˇ
+2026-10-05 20:16:47.532 [bl2] mcuboot build=b055e82
+2026-10-05 20:16:47.535 [mcuboot DBG] context_boot_go
+2026-10-05 20:16:48.008 [mcuboo
+2026-10-05 20:16:48.011 [bl2] mcuboot build=b055e82
+2026-10-05 20:16:48.014 [mcuboot DBG] context_boot_go
+2026-10-05 20:16:48.018 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:16:48.024 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:16:48.030 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:16:48.033 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:16:48.047 
+2026-10-05 20:16:48.050 [bl2] mcuboot build=b055e82
+2026-10-05 20:16:48.053 [mcuboot DBG] context_boot_go
+2026-10-05 20:16:48.819 
+2026-10-05 20:16:48.822 [bl2] mcuboot build=b055e82
+2026-10-05 20:16:48.825 [mcuboot DBG] context_boot_go
+2026-10-05 20:16:48.829 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:16:48.835 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:16:48.840 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:16:48.843 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:16:48.931 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 20:16:48.937 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 20:16:48.947 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 20:16:48.954 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 20:16:48.959 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 20:16:48.969 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 20:16:48.976 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 20:16:48.981 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 20:16:48.984 [mcuboot DBG] bootutil_find_key
+2026-10-05 20:16:48.995 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 20:16:49.001 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 20:16:49.007 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 20:16:49.012 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 20:16:51.092 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 20:16:51.097 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 20:16:51.100 [bl2] image ok version=1.0.0+0
+2026-10-05 20:16:51.108 [bl2] hdpl=0x51 jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 20:16:51.160 
+2026-10-05 20:16:51.164 [bare] stm32h573 bare app build=b055e82
+2026-10-05 20:16:51.169 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 20:16:51.174 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-05 20:16:51.178 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 20:16:51.183 [bare] running; press any key on the console for a status line
+2026-10-05 20:18:45.233 
+2026-10-05 20:18:45.236 [bl2] mcuboot build=b055e82
+2026-10-05 20:18:45.684 [mcuboot DBG] context_boot_goˇ
+2026-10-05 20:18:45.687 [bl2] mcuboot build=b055e82
+2026-10-05 20:18:45.690 [mcuboot DBG] context_boot_go
+2026-10-05 20:18:45.694 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:18:45.700 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:18:45.705 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:18:45.708 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:18:45.721 
+2026-10-05 20:18:45.724 [bl2] mcuboot build=b055e82
+2026-10-05 20:18:47.333 [mcuboot DBG] context_boot_g
+2026-10-05 20:18:47.336 [bl2] mcuboot build=b055e82
+2026-10-05 20:18:47.782 [mcuboot DBG] context_bootˇ
+2026-10-05 20:18:47.785 [bl2] mcuboot build=b055e82
+2026-10-05 20:18:47.788 [mcuboot DBG] context_boot_go
+2026-10-05 20:18:47.792 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:18:47.798 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:18:47.803 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:18:47.806 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:18:47.819 
+2026-10-05 20:18:47.822 [bl2] mcuboot build=b055e82
+2026-10-05 20:18:47.825 [mcuboot DBG] context_boot_go
+2026-10-05 20:18:48.561 
+2026-10-05 20:18:48.563 [bl2] mcuboot build=b055e82
+2026-10-05 20:18:48.566 [mcuboot DBG] context_boot_go
+2026-10-05 20:18:48.571 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:18:48.577 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:18:48.582 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:18:48.585 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:18:48.673 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 20:18:48.679 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 20:18:48.689 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 20:18:48.695 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 20:18:48.701 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 20:18:48.711 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 20:18:48.717 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 20:18:48.723 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 20:18:48.726 [mcuboot DBG] bootutil_find_key
+2026-10-05 20:18:48.736 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 20:18:48.743 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 20:18:48.749 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 20:18:48.754 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 20:18:50.833 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 20:18:50.839 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 20:18:50.842 [bl2] image ok version=1.0.0+0
+2026-10-05 20:18:50.849 [bl2] hdpl=0x51 jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 20:18:50.901 
+2026-10-05 20:18:50.905 [bare] stm32h573 bare app build=b055e82
+2026-10-05 20:18:50.911 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 20:18:50.916 [bare] reset_flags=0x00000000 core_clock_hz=32000000
+2026-10-05 20:18:50.919 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 20:18:50.925 [bare] running; press any key on the console for a status line
+2026-10-05 20:19:22.645 
+2026-10-05 20:19:22.647 [bl2] mcuboot build=b055e82
+2026-10-05 20:19:22.650 [mcuboot DBG] context_boot_go
+2026-10-05 20:19:22.654 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-05 20:19:22.660 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-05 20:19:22.665 [mcuboot DBG] bootutil_img_validate: flash area 0xc00aaf0
+2026-10-05 20:19:22.668 [mcuboot DBG] bootutil_img_hash
+2026-10-05 20:19:22.698 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-05 20:19:22.703 [mcuboot DBG] bootutil_img_validate: TLV off 18112, end 18258
+2026-10-05 20:19:22.713 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18112 ending at 18258
+2026-10-05 20:19:22.719 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 18116 (size 32)
+2026-10-05 20:19:22.724 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-05 20:19:22.734 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18148 ending at 18258
+2026-10-05 20:19:22.740 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 18152 (size 32)
+2026-10-05 20:19:22.746 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-05 20:19:22.749 [mcuboot DBG] bootutil_find_key
+2026-10-05 20:19:22.758 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18184 ending at 18258
+2026-10-05 20:19:22.765 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 18188 (size 70)
+2026-10-05 20:19:22.770 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-05 20:19:22.775 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-05 20:19:23.397 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 18258 ending at 18258
+2026-10-05 20:19:23.402 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-05 20:19:23.405 [bl2] image ok version=1.0.0+0
+2026-10-05 20:19:23.412 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+2026-10-05 20:19:23.426 
+2026-10-05 20:19:23.429 [bare] stm32h573 bare app build=b055e82
+2026-10-05 20:19:23.435 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+2026-10-05 20:19:23.440 [bare] reset_flags=0x00000000 core_clock_hz=64000000
+2026-10-05 20:19:23.443 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+2026-10-05 20:19:23.449 [bare] running; press any key on the console for a status line

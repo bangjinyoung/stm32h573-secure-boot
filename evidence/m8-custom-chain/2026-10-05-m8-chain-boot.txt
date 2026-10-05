@@ -1,0 +1,53 @@
+# M8 E8.1-E8.4: STiRoT -> custom MCUboot BL2 -> bare_slot (board, 2026-10-05)
+
+Verdict: E8.1-E8.4 VERIFIED (user, 2026-10-05).
+
+Firmware: BL2 and bare_slot built from b055e82 (code 15edd70 + evidence commits, clean tree,
+BUILD_ID b055e82). BL2 as STiRoT image 2.0.0 (bl2_enc.bin sha256 218ec843..., bl2_init.bin
+e3666da4...), app as MCUboot image 1.0.0 signed with the M2 key (app_signed.bin be2bcff2...).
+Keys: STiRoT and OEMuRoT keys are ST default keys; the app key is the M2 key.
+
+History to this run (records in this folder):
+- B1 19:16-19:27 (`-b1.txt`): STiRoT installed BL2 4960d40-dirty; BL2 faulted on the MPU STiRoT
+  leaves on (F-06). Fix 4bf2865.
+- B1 again 19:34-19:35 (`-b1r-*`): BL2 4bf2865 installed, ran at HDPL2 (SWD HDPLSR 0x8A), rejected
+  the ST app at header validation (IMAGE_F_ENCRYPTED_AES128 without MCUBOOT_ENC_IMAGES).
+- B2 19:37-19:39 (`-b2-*`): bare_slot installed; the chain booted to the app at HDPL3, but BL2
+  printed hdpl=0x00 (SBS clock off). Fix 19f669b; app console made quiet (15edd70).
+- Final writes 19:42 (`-final-write.png`), final boot 19:43 (this record).
+
+Final boot (SW1=1, NRST by -hardRst, `2026-10-05-m8-boot.log` 5th entry, `-final-boot-vcp.png`,
+`-final-boot-swd.png`, `-final-check.log`, `-final-status-vcp.png`):
+
+```
+19:43:24.960 [bl2] mcuboot build=b055e82
+19:43:25.037 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+19:43:25.058 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+19:43:25.082 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+19:43:25.087 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+19:43:25.717 [bl2] image ok version=1.0.0+0
+19:43:25.725 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b45 via rss 0x0ff95079
+19:43:25.741 [bare] stm32h573 bare app build=b055e82
+19:43:25.747 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b45
+19:43:25.755 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+19:43:25.761 [bare] running; press any key on the console for a status line
+19:45:44.491 [bare] status uptime_ms=138121 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+```
+
+SWD after boot: VTOR 0x0C018400, DSCSR 0x00030000 (CDS=1), CFSR 0, DWT_PCSR in the app; HDPLSR
+0x6F, MPU_CTRL 0x4, RCC_APB3ENR 0x00200002. Read-only readback: exec area header+body = bl2_init.bin,
+STiRoT signature VALID; primary = app_signed.bin.
+
+| claim | evidence |
+|---|---|
+| E8.1 STiRoT authenticates, installs and runs the custom BL2 | banner b055e82 after STiRoT installed the download image; installed image = bl2_init.bin with a valid STiRoT signature; same version 2.0.0 as the OEMuRoT it replaced |
+| E8.2 BL2 verifies the Secure slot | hash, key and signature TLVs of 0x0C018000 checked, `image ok`; L1a layout (D-11) |
+| E8.3 app runs at HDPL3 | BL2 hdpl 0x8A (HDPL2) -> RSS JumpHDPLvl3 -> app 0x6F (HDPL3), SWD reads 0x6F; raw VTOR/MSP jump removed (4960d40) |
+| E8.4 custom chain from NRST | one NRST, one VCP file from BL2 to the app, no ST app involved |
+
+Not taken from ST OEMuRoT in M8 (D-17 and the M8 rules): BL2 MPU policy (BL2 clears the STiRoT MPU
+and runs without one; RSS leaves the MPU off for the app, MPU_CTRL 0x4), option byte checks,
+hash reference store, tamper (TAMP) setup, anti-rollback (M9), image encryption.
+
+Observed, not measured: core_clock_hz reported 32 MHz on some boots and 64 MHz on others
+(64 MHz on every STiRoT boot with BL2 b055e82); cause not checked.
