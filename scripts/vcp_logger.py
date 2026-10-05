@@ -5,6 +5,7 @@ import datetime
 import os
 import subprocess
 import sys
+import time
 
 
 def main():
@@ -20,6 +21,10 @@ def main():
         while True:
             chunk = os.read(fd, 256)
             if not chunk:
+                # A replugged ST-LINK leaves the old tty returning EOF forever.
+                if not os.path.exists(tty):
+                    sys.exit("tty gone: " + tty)
+                time.sleep(0.05)
                 continue
             pending += chunk
             while b"\n" in pending:
