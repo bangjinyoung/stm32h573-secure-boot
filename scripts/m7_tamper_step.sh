@@ -66,8 +66,9 @@ case $step in
 observe) observe ;;
 ob) run "${hp[@]}" -ob displ ;;
 boot)
-  # OB programming can leave DEMCR at 0x00100001 (VC_CORERESET); clear it, keep bit 20 as M6 did.
-  run "${hp[@]}" -w32 0xE000EDFC 0x00100000
+  # OB programming can leave VC_CORERESET (bit 0) set (M6). Clear it, keep bit 20, and keep
+  # TRCENA (bit 24): DWT_PCSR samples need it (baseline DEMCR 0x01110000).
+  run "${hp[@]}" -w32 0xE000EDFC 0x01100000
   run "${hp[@]}" -hardRst
   [ $dry -eq 1 ] || sleep 3
   observe ;;
