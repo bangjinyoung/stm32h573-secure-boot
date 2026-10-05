@@ -1,0 +1,83 @@
+M6 E6.2: STiROT_OEMuROT provisioning (S2)
+Date: 2026-10-05
+Board: STM32H573I-DK, PRODUCT_STATE 0xED (Open), TZEN 0xB4 throughout. No regression.
+Tool: STM32CubeProgrammer v2.23.0, -c port=SWD speed=fast ap=1 mode=Hotplug for every step.
+Script: scripts/stirot_oemurot_provision.sh (steps ube-b4 erase secbootadd secwm flash readback obk ube-c3);
+  the OBK, final-state and lock steps were run as single CubeProgrammer calls with a live pane.
+ST-LINK serial number is masked in every log and capture.
+
+Steps (all user-approved; each step log is 2026-10-05-m6-s2-<step>.log)
+  09:37 ube-b4      BOOT_UBE 0xC3 -> 0xB4, -hardRst, VTOR 0x0BF97000 (System Bootloader, SW1=1)
+  09:42 erase       FAILED at connect: mode=UR "Cannot connect to access port 1". Nothing written.
+                    Script switched to Hotplug for erase and secbootadd.
+  09:47 (logger check, -logger-check.log) BOOT_UBE 0xC3 + DEMCR 0x00100000 + -hardRst: STiROT_Appli 1.1.0
+                    banner on the VCP; then ube-b4 again (VTOR 0x0BF97000)
+  09:48 erase       remove protections (SECWM1/2, WRP, HDP off, SRAM2_RST/ECC 0, BOOT_UBE 0xB4) + mass erase.
+                    Check (-erase-check.log): user flash 0xFF, protections off.
+  10:00 secbootadd  SECBOOTADD 0xC0004 (0x0C000400)
+  10:00 secwm       SECWM1 0x0-0xF (0x0C000000-0x0C01FFFF), SECWM2 off
+  10:00 flash       FAILED (SW1=1): app verify "0xFF instead of 0x3D" at 0x08018000
+  10:16 flash       FAILED again from a clean reset (NSCR.PG 0, SECSR 0), same result
+  10:23 flash       FAILED with secure-alias copies (.workspace/tmp/m6/*_secure.hex, 0x0C018000), same result
+                    After each failure: FLASH_NSCR 0x2 (PG), FLASH_SECSR 0x00040000 (PGSERR), target 0xFF
+                    (-flash-fail-check.log)
+  10:29 investigation (-state-investigation.log): bootloader runs Non-secure (DSCSR CDS 0, VTOR 0x0BF97000).
+                    ST provisioning.sh Step 3 requires SW1=0 before ob_flash_programming.sh; we had SW1=1.
+  10:34 flash       SW1=0 (user). After -hardRst: DSCSR 0x00030000 (CDS 1, Secure), VTOR 0x0C000400, halted.
+                    app (sectors 12-15) and OEMuRoT (sectors 0-11): "Download verified successfully"
+  10:35 readback    0x0C000000/0x18000 and 0x0C018000/0x8000 identical to the signed images
+                    (objcopy --gap-fill 0xFF). readback-oemurot.bin a1538d52...aa16, readback-app.bin 712af963...805b
+  10:40 obk         SW1=1 (user). -hardRst, boot context: OPTSR_CUR 0x2D30EDF8 (BOOT_UBE 0xB4),
+                    VTOR 0x0BF97000 (System Bootloader, BL 0xE4), DSCSR 0x00020000
+  10:42 obk         STiRoT_Config.obk  -sdp "OBKey Provisioned successfully" rc=0
+  10:42 obk         STiRoT_Data.obk    -sdp "OBKey Provisioned successfully" rc=0
+  10:43 obk         OEMuRoT_Config.obk -sdp "OBKey Provisioned successfully" rc=0
+  10:43 obk         OEMuRoT_Data.obk   -sdp "OBKey Provisioned successfully" rc=0
+                    Each -sdp preceded by -hardRst. Log: 2026-10-05-m6-s2-obk.log
+
+OBK files (identical to ST shipped, E6.1)
+  STiRoT_Config.obk   c0f86e2bbf6304e16ea2a944e6bfc60eef3a6ebcc6e9940a3d8bb6f0243e5f0e
+  STiRoT_Data.obk     719c56928b8b205b5a9099f272a77ddd4eb001675844b7546e5dc9d3153c4aa6
+  OEMuRoT_Config.obk  d0615a67d0d208c875fb7acd29247d9c7b4f642b03cab78b506a67031c7159d7
+  OEMuRoT_Data.obk    f8b72fa4cf806b75b48deb20a4b09128bb43ec1aa903c0ed4383a6a36e7bdbb1
+  DA_Config.obk       not provisioned (decision D-05)
+
+STiRoT OBK re-provisioning (user decision, 2026-10-05)
+  STiRoT_Config/Data were already provisioned in M4. Overwriting them was accepted in Open state.
+  The STiRoT_Data re-provisioning is taken as resetting the STiRoT image version, hash and
+  anti-rollback metadata to the M6 provisioning baseline. M4/M5 STiRoT state (1.1.0 installed,
+  1.0.0 no longer installable) is not carried into M6.
+
+Captures (Windows Terminal pane with the live CubeProgrammer output, serial masked)
+  2026-10-05-m6-s2-obk-0-boot-context.png    boot context before OBK
+  2026-10-05-m6-s2-obk-1-stirot-config.png
+  2026-10-05-m6-s2-obk-2-stirot-data.png
+  2026-10-05-m6-s2-obk-3-oemurot-config.png
+  2026-10-05-m6-s2-obk-4-oemurot-data.png
+
+Findings
+  - SWD Hotplug programming of SECWM-secure flash works only when the halted core is Secure.
+    With SW1=1 the System Bootloader runs Non-secure and the flash loader programs through
+    FLASH_NSCR, which the secure sectors reject (SECSR PGSERR). Inferred from the registers;
+    consistent with M4 S5 (SW1=0, success) and M5 T1 (SW1=1, failure).
+  - mode=UR connects failed with SW1=1 (M5 T1b, M6 09:42). Not retried with SW1=0.
+
+Final steps (user-approved)
+  10:44 final state  DEMCR 0x00100001 -> 0x00100000; FLASH_NSCR 0, SECSR 0; OB as intended
+                     (-s2-final-state.log/.png)
+  10:45 ube-c3       Hotplug -ob BOOT_UBE=0xC3: programmed, OPTSR_CUR 0x2D30EDF8 -> 0x30F0EDF8.
+                     No reset followed the OB launch (core stayed in the bootloader), as in M5 T1b
+                     (-s2-ube-c3.log, -s2-ube-c3-cli.png)
+  10:47 boot1        -hardRst. No VCP record: the agent had killed vcp_logger with its tmux pane at
+                     about 10:45. Core in system flash (VTOR 0x0FF8A280), no fault, no reset loop.
+  10:49 boot2        -hardRst with the logger running. OEMuRoT log: "BootLock 0xc3",
+                     "[ERR] Unexpected value for SEC BOOT LOCK" (OEMiROT_Boot low_level_security.c:849,
+                     expected OEMIROT_OB_BOOT_LOCK = OB_BOOT_LOCK_ENABLE 0xB4, boot_hal_cfg.h:61).
+                     STiRoT had verified and started OEMuRoT. (-s3-boot2.log, -s3-boot2-{vcp,cli}.png)
+  11:05 lock         Decision D-06: SECBOOT_LOCK=0xB4 as in ST ob_flash_programming.sh. Reversible in
+                     Open by an option-byte write (RM0481 Rev 5 p.152 note, p.300; AN6008 Rev 6 3.2.1:
+                     no regression from Open). Hotplug -ob SECBOOT_LOCK=0xB4: programmed; readback
+                     SECBOOT_LOCK 0xB4, BOOT_UBE 0xC3, SECBOOTADD 0xC0004, PRODUCT_STATE 0xED
+                     (-s2-secboot-lock.log/.png)
+
+The S3 boots are recorded in 2026-10-05-m6-e63-integrated-boot.txt.

@@ -1,0 +1,61 @@
+# 2026-10-05 11:07:15.214 +0900 user power cycle (USB replug) ~11:07-11:09; usbipd auto-attach re-attached the ST-LINK as ttyACM1; VCP boot output not captured (logger stuck on the stale tty, killed and restarted). Read-only state check:
+# 2026-10-05 11:07:16.227 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED08 4 -r32 0x44020CF0 4 -r32 0xE000EE08 4 -r32 0xE000EDF0 4 -r32 0xE000ED28 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Error: Fail to read NVM Size
+Device name : STM32H56x/573
+NVM size    : 2 MBytes (default)
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C018400
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x44020CF0
+0x44020CF0 : 08000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00030000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 00000000
+
+
+rc=0

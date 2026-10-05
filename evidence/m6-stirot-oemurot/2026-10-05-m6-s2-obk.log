@@ -1,0 +1,510 @@
+# 2026-10-05 10:40:45.833 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+rc=0
+# 2026-10-05 10:40:48.346 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0x50022050 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022050
+0x50022050 : 2D30EDF8
+
+
+rc=0
+# 2026-10-05 10:40:48.837 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED08 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0BF97000
+
+
+rc=0
+# 2026-10-05 10:40:49.332 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EE08 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00020000
+
+
+rc=0
+# 2026-10-05 10:40:49.849 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EDF0 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+rc=0
+# 2026-10-05 10:41:04.773 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0x50022050 4 -r32 0xE000ED08 4 -r32 0xE000EE08 4 -r32 0xE000EDF0 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022050
+0x50022050 : 2D30EDF8
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0BF97000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00020000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+rc=0
+# 2026-10-05 10:42:20.948 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0x50022050 4 -r32 0xE000ED08 4 -r32 0xE000EE08 4 -r32 0xE000EDF0 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022050
+0x50022050 : 2D30EDF8
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0BF97000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00020000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+rc=0
+# 2026-10-05 10:42:34.019 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+rc=0
+# 2026-10-05 10:42:34.521 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -sdp build/stirot_oemurot/STiRoT_Config.obk
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Reconnecting...
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Secure Data Provisioning Start. OBK Input file : build/stirot_oemurot/STiRoT_Config.obk
+[==================================================] 100% OBKey Provisioned successfully
+rc=0
+# 2026-10-05 10:42:49.194 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+rc=0
+# 2026-10-05 10:42:49.693 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -sdp build/stirot_oemurot/STiRoT_Data.obk
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Reconnecting...
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Secure Data Provisioning Start. OBK Input file : build/stirot_oemurot/STiRoT_Data.obk
+[==================================================] 100% OBKey Provisioned successfully
+rc=0
+# 2026-10-05 10:43:02.851 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+rc=0
+# 2026-10-05 10:43:03.358 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -sdp build/stirot_oemurot/OEMuRoT_Config.obk
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Reconnecting...
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Secure Data Provisioning Start. OBK Input file : build/stirot_oemurot/OEMuRoT_Config.obk
+[==================================================] 100% OBKey Provisioned successfully
+rc=0
+# 2026-10-05 10:43:22.711 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+rc=0
+# 2026-10-05 10:43:23.200 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -sdp build/stirot_oemurot/OEMuRoT_Data.obk
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Reconnecting...
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Secure Data Provisioning Start. OBK Input file : build/stirot_oemurot/OEMuRoT_Data.obk
+[==================================================] 100% OBKey Provisioned successfully
+rc=0

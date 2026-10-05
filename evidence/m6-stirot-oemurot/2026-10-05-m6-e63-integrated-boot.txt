@@ -1,0 +1,50 @@
+M6 E6.3: STiRoT -> OEMuRoT -> full-secure app integrated boot (S3)
+Date: 2026-10-05
+Board state: PRODUCT_STATE 0xED (Open), TZEN 0xB4, BOOT_UBE 0xC3, SECBOOT_LOCK 0xB4, SECBOOTADD 0x0C000400,
+  SECWM1 0x0-0xF, SW1 (BOOT0) = 1. Provisioning: 2026-10-05-m6-e62-provisioning.txt.
+VCP: 115200 8N1, host-timestamped by scripts/vcp_logger.py into 2026-10-05-m6-vcp.log.
+
+Boots
+  10:47 boot1   SWD -hardRst   no VCP record (logger not running, see E6.2). Not used as evidence.
+  10:49 boot2   SWD -hardRst   SECBOOT_LOCK 0xC3: OEMuRoT stopped at its OB check (see E6.2).
+  11:05 boot3   SWD -hardRst   first boot after SECBOOT_LOCK=0xB4. PASS.
+  11:07 power   USB replug     app running afterwards. VCP not recorded (see Limits). Supporting only.
+  11:09 reset   NRST button    PASS. No debugger action.
+
+boot3, 11:05:52 (2026-10-05-m6-s3-boot3.log, -s3-boot3-vcp.png, -s3-boot3-cli.png)
+  11:05:52.247 [INF] TAMPER Activated
+  11:05:52.255 [INF] Starting bootloader OEMuROT 2.0.0
+  11:05:52.266 [INF] verify counter  0 1000000 0
+  11:05:52.268 [INF] counter  0 : ok
+  11:05:52.273 [INF] checking public key 47 5b
+  11:05:52.292 [INF] signature OK
+  11:05:52.302 [INF] Bootloader chainload address offset: 0x18000
+  11:05:52.306 [INF] Jumping to the first image slot
+  11:05:52.338 User App #A banner, 11:05:52.350 Main Menu
+  After 6 s: VTOR 0x0C018400 (app vector table), DSCSR 0x00030000 (Secure), CFSR 0, RCC_RSR 0x08000000.
+
+power cycle, 11:07 (2026-10-05-m6-s3-powercycle.log, -s3-powercycle-cli.png)
+  After the replug: VTOR 0x0C018400, DSCSR Secure, CFSR 0. RCC_RSR 0x08000000 (PINRST only; the boot
+  code may clear the flags, not verified), so the power-on reset itself is not proven by the registers.
+
+NRST reset, 11:09:17 (2026-10-05-m6-vcp.log, -s3-reset-button-vcp.png)
+  11:09:17.885 [INF] TAMPER Activated
+  11:09:17.895 [INF] Starting bootloader OEMuROT 2.0.0
+  11:09:17.905 [INF] verify counter  0 1000000 1000000
+  11:09:17.907 [INF] counter  0 : ok
+  11:09:17.909 [INF] hash ref OK
+  11:09:17.917 [INF] Jumping to the first image slot
+  11:09:17.943 User App #A banner, 11:09:17.956 Main Menu
+
+Observations (interpretation in E6.4)
+  - boot3 verified the app signature and the stored counter went 0 -> 1000000; the NRST boot checked a
+    stored hash reference instead of the signature.
+  - STiRoT prints nothing; its verification of OEMuRoT is shown by OEMuRoT running at all, with the
+    STiRoT OBKs provisioned and BOOT_UBE 0xC3.
+
+Limits
+  - "From power-on" is not captured in one VCP file: the ST-LINK is passed to WSL by usbipd, which
+    re-attaches it only after the MCU has booted. In addition vcp_logger.py spun on the stale tty after
+    the replug instead of exiting (now fixed in scripts/vcp_logger.py, not yet exercised).
+  - E6.3 judgment (user, 2026-10-05): VERIFIED, with the start point redefined from power-on to NRST
+    reset because of the usbipd limit above.

@@ -1,0 +1,70 @@
+# 2026-10-05 10:35:10.291 +0900 step readback
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C000000 0x18000 build/stirot_oemurot/readback-oemurot.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : build/stirot_oemurot/readback-oemurot.bin
+  Size          : 98304 Bytes
+  Address:      : 0xC000000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.284
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C018000 0x8000 build/stirot_oemurot/readback-app.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : build/stirot_oemurot/readback-app.bin
+  Size          : 32768 Bytes
+  Address:      : 0xC018000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.114
+rc=0
+# 2026-10-05 10:35:29.493 +0900 host compare rerun (script cmp used objcopy without --gap-fill 0xFF; fixed)
+cmp rot_init_sign: identical
+cmp rot_tz_s_app_init_sign: identical

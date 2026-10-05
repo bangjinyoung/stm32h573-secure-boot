@@ -1,0 +1,96 @@
+# 2026-10-05 10:49:25.992 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+rc=0
+# 2026-10-05 10:49:31.470 +0900
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED08 4 -r32 0xE000EDF0 4 -r32 0xE000EE08 4 -r32 0x44020CF0 4 -r32 0xE000ED28 4 -r32 0xE000EDE4 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0FF8A280
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 05100001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00030000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x44020CF0
+0x44020CF0 : 08000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDE4
+0xE000EDE4 : 00000000
+
+
+rc=0

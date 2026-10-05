@@ -1,0 +1,562 @@
+# 2026-10-05 10:00:41.344 +0900 step flash
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -d build/stirot_oemurot/rot_tz_s_app_init_sign.hex -v
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: rot_tz_s_app_init_sign.hex
+
+
+Memory Programming ...
+  File          : rot_tz_s_app_init_sign.hex
+  Size          : 23.09 KB 
+  Address       : 0x08018000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [12 14]
+Erasing memory corresponding to segment 1:
+Erasing internal memory sector 15
+Download in Progress:
+[==                                                ]   4% [====                                              ]   8% [======                                            ]  12% [========                                          ]  17% [==========                                        ]  21% [============                                      ]  25% [===============                                   ]  30% [=================                                 ]  34% [===================                               ]  38% [=====================                             ]  43% [=======================                           ]  47% [=========================                         ]  51% [============================                      ]  56% [==============================                    ]  60% [================================                  ]  64% [==================================                ]  69% [====================================              ]  73% [======================================            ]  77% [=========================================         ]  82% [===========================================       ]  86% [=============================================     ]  90% [===============================================   ]  95% [================================================= ]  99% [==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:00.492
+
+
+
+Verifying...
+
+
+Read progress:
+[==================================================] 100% 
+
+Error: Data mismatch found at address  0x08018000 (byte = 0xFF instead of 0x3D)
+
+
+Time elapsed during verifying operation: 00:00:00.094
+
+
+Error: Download verification failed
+
+
+rc=1
+# 2026-10-05 10:16:25.759 +0900 step flash
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -d build/stirot_oemurot/rot_tz_s_app_init_sign.hex -v
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: rot_tz_s_app_init_sign.hex
+
+
+Memory Programming ...
+  File          : rot_tz_s_app_init_sign.hex
+  Size          : 23.09 KB 
+  Address       : 0x08018000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [12 14]
+Erasing memory corresponding to segment 1:
+Erasing internal memory sector 15
+Download in Progress:
+[==                                                ]   4% [====                                              ]   8% [======                                            ]  12% [========                                          ]  17% [==========                                        ]  21% [============                                      ]  25% [===============                                   ]  30% [=================                                 ]  34% [===================                               ]  38% [=====================                             ]  43% [=======================                           ]  47% [=========================                         ]  51% [============================                      ]  56% [==============================                    ]  60% [================================                  ]  64% [==================================                ]  69% [====================================              ]  73% [======================================            ]  77% [=========================================         ]  82% [===========================================       ]  86% [=============================================     ]  90% [===============================================   ]  95% [================================================= ]  99% [==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:00.469
+
+
+
+Verifying...
+
+
+Read progress:
+[==================================================] 100% 
+
+Error: Data mismatch found at address  0x08018000 (byte = 0xFF instead of 0x3D)
+
+
+Time elapsed during verifying operation: 00:00:00.094
+
+
+Error: Download verification failed
+
+
+rc=1
+# 2026-10-05 10:23:34.017 +0900 step flash (secure-alias copies, .workspace/tmp/m6/*_secure.hex)
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0x40022028 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x40022028
+0x40022028 : 00000000
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0x50022024 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022024
+0x50022024 : 00000000
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -d .workspace/tmp/m6/rot_tz_s_app_init_sign_secure.hex -v
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: rot_tz_s_app_init_sign_secure.hex
+
+
+Memory Programming ...
+  File          : rot_tz_s_app_init_sign_secure.hex
+  Size          : 23.09 KB 
+  Address       : 0x0C018000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [12 14]
+Erasing memory corresponding to segment 1:
+Erasing internal memory sector 15
+Download in Progress:
+[==                                                ]   4% [====                                              ]   8% [======                                            ]  12% [========                                          ]  17% [==========                                        ]  21% [============                                      ]  25% [===============                                   ]  30% [=================                                 ]  34% [===================                               ]  38% [=====================                             ]  43% [=======================                           ]  47% [=========================                         ]  51% [============================                      ]  56% [==============================                    ]  60% [================================                  ]  64% [==================================                ]  69% [====================================              ]  73% [======================================            ]  77% [=========================================         ]  82% [===========================================       ]  86% [=============================================     ]  90% [===============================================   ]  95% [================================================= ]  99% [==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:00.457
+
+
+
+Verifying...
+
+
+Read progress:
+[==================================================] 100% 
+
+Error: Data mismatch found at address  0x0C018000 (byte = 0xFF instead of 0x3D)
+
+
+Time elapsed during verifying operation: 00:00:00.094
+
+
+Error: Download verification failed
+
+
+rc=1
+# 2026-10-05 10:34:41.075 +0900 step flash (SW1=0 per user, original 0x08 hex; pre-check)
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -hardRst
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Hard reset is performed
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EE08 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00030000
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED08 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C000400
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000EDF0 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDF0
+0xE000EDF0 : 00130003
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0x40022028 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x40022028
+0x40022028 : 00000001
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0x50022024 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022024
+0x50022024 : 00000000
+
+
+rc=0
+# 2026-10-05 10:34:52.825 +0900 step flash
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -d build/stirot_oemurot/rot_tz_s_app_init_sign.hex -v
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: rot_tz_s_app_init_sign.hex
+
+
+Memory Programming ...
+  File          : rot_tz_s_app_init_sign.hex
+  Size          : 23.09 KB 
+  Address       : 0x08018000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [12 14]
+Erasing memory corresponding to segment 1:
+Erasing internal memory sector 15
+Download in Progress:
+[==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:00.415
+
+
+
+Verifying...
+
+
+Read progress:
+[==================================================] 100% 
+
+Time elapsed during verifying operation: 00:00:00.127
+
+
+Download verified successfully
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -d build/stirot_oemurot/rot_init_sign.hex -v
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: rot_init_sign.hex
+
+
+Memory Programming ...
+  File          : rot_init_sign.hex
+  Size          : 96.00 KB 
+  Address       : 0x08000000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [0 11]
+Download in Progress:
+[==============================                    ]  61% [==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:00.874
+
+
+
+Verifying...
+
+
+Read progress:
+[==================================================] 100% 
+
+Time elapsed during verifying operation: 00:00:00.288
+
+
+Download verified successfully
+
+
+rc=0
