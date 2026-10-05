@@ -1,0 +1,82 @@
+# M9 H: BL2 variants and images for the M9 board steps (host, 2026-10-05)
+
+Firmware: commits fad474c (boot), 3d5f3d1 (app), c2bdcda (scripts). Built at c2bdcda (BUILD_ID
+"c2bdcda" in both BL2 banners and the app), Release, STM32CubeCLT 1.22.0 GCC:
+
+    cmake -S . -B build/m9-a -G Ninja -DCMAKE_TOOLCHAIN_FILE=cmake/arm-none-eabi.cmake \
+          -DCMAKE_BUILD_TYPE=Release -DBL2_ROLLBACK=sw
+    cmake -S . -B build/m9-b ... -DBL2_ROLLBACK=hw
+    scripts/make_m9_images.sh build/m9-a build/m9-b
+
+Binaries stay in `.workspace/tmp/m9/` (not in git). ECDSA signing and the STiRoT download
+encryption are randomized: a rerun gives other sha256 values and is reproduced by the
+properties below. The script checks that both build trees produce the same bare_slot.bin.
+
+## BL2 variants
+
+| | BL2-a (build/m9-a) | BL2-b (build/m9-b) |
+|---|---|---|
+| CMake | BL2_ROLLBACK=sw | BL2_ROLLBACK=hw |
+| MCUboot | OVERWRITE_ONLY + DOWNGRADE_PREVENTION | OVERWRITE_ONLY + HW_ROLLBACK_PROT |
+| banner | `[bl2] mcuboot build=c2bdcda rollback=sw` | `... rollback=hw` |
+| size (text data bss) | 46200 192 10752 | 47428 192 10752 |
+| rollback record | read and log only | read, log, write on counter increase |
+| interrupted OBK swap | log `interrupted flash op=` only | log, then HAL_FLASH_OB_Launch |
+| HAL_FLASH_OB_Launch, HAL_FLASHEx_OBK_Swap linked | no, no | yes, yes |
+| reject string | `Insufficient version in secondary slot` | `Image security counter value %u lower than monotonic value %u` |
+
+Both: stop with `[bl2] hdpl=0x.., not started by stirot: stop` unless HDPLSR = 0x8A, log
+`[bl2] rollback record state=virgin|valid|invalid|unavailable [counter0=N]` and
+`[bl2] oemurot obk sha256=xxxxxxxx` (first 4 bytes of SHA-256 over OBK 0x0FFD0900-0x0FFD0B0F).
+M8 BL2 (build/m8-release) for comparison: 45116 192 10680.
+
+E8-K: no image encryption code in either BL2 (`nm` matches only the weak AES_IRQHandler and
+SAES_IRQHandler vector aliases, as in M8). New log lines print record state, counters and a
+4-byte hash prefix; no key bytes.
+
+Build warnings: upstream image_validate.c:468 `%u` with uint32_t (-Wformat, only in the hw
+build, where newlib uint32_t is unsigned long). Same width on this target; left as upstream.
+
+## Images
+
+| step | file | sha256 | content | write address |
+|---|---|---|---|---|
+| a1 | bl2a_enc.bin | 68a0be661d6f52023314bd87c13217ba86cbbd7eae0866b55ecb6541197c4dff | STiRoT download image of BL2-a, version 2.0.0, encrypted | 0x081E8000 |
+| (recovery) | bl2a_init.bin | c5b0991b6e15d8f3b9767807c8410a82fd30116f9c2da32dcf3c0997f70b650e | STiRoT execution image of BL2-a | 0x08000000 |
+| b2 | bl2b_enc.bin | 4d56c47395a5bb506f270d85e8a62fb0c097998db74384f0275ed490e4da2e7c | STiRoT download image of BL2-b, version 2.0.0, encrypted | 0x081E8000 |
+| (recovery) | bl2b_init.bin | eac5f588d68699c8897391fab0cd5a512d539ac88c142541d84678dc1daad1b0 | STiRoT execution image of BL2-b | 0x08000000 |
+| a2, a5, b5 | app_v1.bin | 7f349d82ad66d7e112bf8688c8f7d2921443ee76e76c9c664bd2854ed91822f8 | bare_slot 1.0.0, SEC_CNT 1, no trailer, 18451 B | 0x08018000 |
+| b6 | app_v2.bin | c2efa5b971421e37ec2f44bf6585829d76366a2d3fc55f47620a6f60c7ba3db4 | bare_slot 2.0.0, SEC_CNT 2, no trailer | 0x08018000 |
+| a4, b4 | app_v1_upd.bin | b3cb4e0660684ddcf1200c896115934220f2eedfeeaf8e35d0090e8905e86a35 | app_v1 padded to 0x8000 with trailer magic | 0x08020000 |
+| a3, b1 | app_v2_upd.bin | df2aecac5951b1b171a231b5cf9e09d8da5b13fd5208d5112ac685bedb013854 | app_v2 padded to 0x8000 with trailer magic | 0x08020000 |
+
+`mcuboot_image.py check` (app: M2 key; BL2: STiRoT key, ST default key):
+
+| image | version | sec_cnt | protected TLVs | hash TLV | keyhash | signature |
+|---|---|---|---|---|---|---|
+| app_v1(_upd) | 1.0.0+0 | 1 | 0x50/4 | MATCH | MATCH | VALID |
+| app_v2(_upd) | 2.0.0+0 | 2 | 0x50/4 | MATCH | MATCH | VALID |
+| bl2a_init | 2.0.0+0 | 0x02000000 | 0x50/4 0x60/3 | MATCH | MATCH | VALID |
+| bl2b_init | 2.0.0+0 | 0x02000000 | 0x50/4 0x60/3 | MATCH | MATCH | VALID |
+
+The BL2 STiRoT counter is 0x02000000, the value imgtool `auto` derives from 2.0.0; the same as
+the M8 BL2 and OEMuRoT 2.0.0, so installing BL2-a/b does not raise the STiRoT counter (D-12).
+Padded images end in `10 00 2d e1 5d 29 41 0b 8d 77 67 9c 11 0f 1f 8a` (align 16 + boot
+magic), the same trailer as the M3 update image that installed.
+
+## Test matrix (expected from source; the board decides)
+
+| step | BL2 | primary before | write | expected log | claim |
+|---|---|---|---|---|---|
+| a1 | M8 -> a | M8 1.0.0 (no SEC_CNT) | bl2a_enc -> download | STiRoT installs; `rollback=sw`, record state (virgin expected, unknown), oemurot hash; `image ok version=1.0.0+0` | baseline |
+| a2 | a | M8 1.0.0 | app_v1 -> primary | `image ok version=1.0.0+0` | v1 baseline |
+| a3 | a | v1 | app_v2_upd -> secondary | upgrade secondary -> primary, `image ok version=2.0.0+0` | E9.1 |
+| a4 | a | v2 | app_v1_upd -> secondary | `Insufficient version in secondary slot`, `image ok version=2.0.0+0` | E9.2 |
+| a5 | a | v2 | app_v1 -> primary | `image ok version=1.0.0+0` | E9.2-L |
+| b1 | a | v1 | app_v2_upd -> secondary | (no boot) | |
+| b2 | a -> b | v1 | bl2b_enc -> download | STiRoT installs; `rollback=hw`, state virgin, upgrade, `rollback counter image 0: 0 -> 2, record state=valid`, oemurot hash = a1; `image ok version=2.0.0+0` | E9.3 |
+| b3 | b | v2 | none (NRST) | state valid counter0=2, no write | E9.3 |
+| b4 | b | v2 | app_v1_upd -> secondary | `Image security counter value 1 lower than monotonic value 2`, secondary not valid, v2 runs | E9.3 |
+| b5 | b | v2 | app_v1 -> primary | same counter error for primary, `no bootable image` | E9.3 vs E9.2-L |
+| b6 | b | v1 (rejected) | app_v2 -> primary | `image ok version=2.0.0+0` | restore |
+| b7 | b | v2 | none (VCP `o`, SWD read) | app gets no record words; OBKERR or fault | E9.3b |
