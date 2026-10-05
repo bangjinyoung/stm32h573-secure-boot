@@ -9,6 +9,8 @@ struct board_boot_info {
     uint32_t reset_handler;
     uint32_t reset_flags;
     uint32_t core_clock_hz;
+    uint32_t hdpl;
+    uint32_t mpu_ctrl;
 };
 
 int board_init(void);

@@ -21,6 +21,7 @@ int main(void)
     printf("\r\n[bare] stm32h573 bare app build=%s\r\n", BUILD_ID);
     printf("[bare] vtor=0x%08lx sp=0x%08lx reset_handler=0x%08lx\r\n", boot_info.vtor, boot_info.initial_sp, boot_info.reset_handler);
     printf("[bare] reset_flags=0x%08lx core_clock_hz=%lu\r\n", boot_info.reset_flags, boot_info.core_clock_hz);
+    printf("[bare] hdpl=0x%02lx mpu_ctrl=0x%08lx\r\n", boot_info.hdpl, boot_info.mpu_ctrl);
 
     while (1) {
         board_led_toggle();

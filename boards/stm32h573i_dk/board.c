@@ -85,6 +85,8 @@ void board_get_boot_info(struct board_boot_info *info)
     info->reset_handler = vector_table[1];
     info->reset_flags = reset_flags;
     info->core_clock_hz = SystemCoreClock;
+    info->hdpl = SBS->HDPLSR & SBS_HDPLSR_HDPL;
+    info->mpu_ctrl = MPU->CTRL;
 }
 
 void board_led_toggle(void)
