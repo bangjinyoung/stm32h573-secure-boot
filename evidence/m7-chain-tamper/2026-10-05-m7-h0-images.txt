@@ -1,0 +1,75 @@
+# M7 H0: tamper images for the CT tests (2026-10-05, host only, no board access)
+
+Source build: build/stirot_oemurot (scripts/build_stirot_oemurot.sh, OEMuRoT 2.0.0, app 1.0.0,
+CubeH5 e5c73ea1, E6.1). The generated binaries stay out of git (.workspace/tmp/m7/); this record
+holds what is needed to regenerate and check them. CT ids are reused unchanged by M8.5.
+
+Every modification is bit 0 of the byte at offset 0x1400 (header 0x400 + 0x1000), inside the image
+body, not in the header or the TLVs, as in M5. Download images are AES-CTR encrypted, so the flip
+lands on the same plaintext bit after decryption.
+
+## Sources
+
+712af963b084067938150fad7b7b5ae0be0d102de21647ba4bcacab6b857805b  rot_tz_s_app_init_sign.bin  app 1.0.0, magic 0x96f3b83d, hdr 0x400, img_size 0x5720, plaintext
+a1538d52353984fd5acc8c9df4f15125fb797f9cb5cc1e36c958381ccbfdaa16  rot_init_sign.bin           OEMuRoT 2.0.0, magic 0x73ab1024, hdr 0x400, img_size 0x17ac0, plaintext
+0d63830d12b0f4968bde900241b26143b18435e14d5d44f55b02d5fae841c009  rot_tz_s_app_enc_sign.hex   app 1.0.0 download, 0x08020000-0x08027fff, encrypted, trailer boot magic at 0x7ff0
+6a827185ff6422cc0c01a0cc30e89536c7bc649293dc279085bf68405ea03110  rot_enc_sign.hex            OEMuRoT 2.0.0 download, 0x081e8000-0x081fffff, encrypted
+7c8517c30e5cf76fda02b47d1167995b96bae3a5a5f3996e6340cf7b414b7b8c  keys/mcuboot-ecdsa-p256.pub.pem  public half of the untrusted M2 key used for CT-APP-SIG
+
+## Generation
+
+B=build/stirot_oemurot T=.workspace/tmp/m7
+objcopy -I ihex -O binary --gap-fill 0xFF $B/rot_tz_s_app_enc_sign.hex $T/rot_tz_s_app_enc_sign.bin
+objcopy -I ihex -O binary --gap-fill 0xFF $B/rot_enc_sign.hex $T/rot_enc_sign.bin
+python3 scripts/tamper_image.py $B/rot_tz_s_app_init_sign.bin $T/b2-app-payload-flip.bin 0x1400
+uv run --with cryptography python3 scripts/mcuboot_image.py forge $B/rot_tz_s_app_init_sign.bin $T/b3-app-foreign-sig.bin 0x1400 .workspace/keys/mcuboot-ecdsa-p256.pem
+python3 scripts/tamper_image.py $T/rot_tz_s_app_enc_sign.bin $T/b1-app-dl-flip.bin 0x1400
+python3 scripts/tamper_image.py $B/rot_init_sign.bin $T/a2-oemurot-exec-flip.bin 0x1400
+python3 scripts/tamper_image.py $T/rot_enc_sign.bin $T/a1-oemurot-dl-flip.bin 0x1400
+
+## Generated
+
+| CT id | file | sha256 | modification | write at (step) |
+|---|---|---|---|---|
+| CT-APP-HASH | b2-app-payload-flip.bin | 1162246a90ed457bca364597fe4144353e09ac1639527f863ca85e1e9b8394dd | 0x1400 0x03 -> 0x02 | 0x08018000 (w1) |
+| CT-APP-SIG | b3-app-foreign-sig.bin | a6f13e91669b1e6e10f535cfda8bee0d410da3a4959ad90048ce63ee738bc13d | 0x1400 flip as B2, SHA256 TLV recomputed, keyhash TLV of the trusted key kept, ECDSA P-256 signature by the M2 key, same DER length (71 B); 97 bytes differ in 0x1400-0x5bc2 | 0x08018000 (w3) |
+| CT-APP-DL-CTRL | rot_tz_s_app_enc_sign.bin | b623fd75ac9c530f1affea27f5947f1a9ca3c7f45d7ef69a7ce4ea5d9e1aa848 | none (hex to bin) | 0x08020000 (w5) |
+| CT-APP-DL | b1-app-dl-flip.bin | ce04528adc349273812b719fc0d32a7bd1cce8787b86fd05e69a286c2119989a | 0x1400 ciphertext 0x16 -> 0x17 | 0x08020000 (w6) |
+| CT-BL-EXEC | a2-oemurot-exec-flip.bin | 800eb1786217d0f8fdc56a2e92a3ae0134536407e35422ca66854909e525ec7f | 0x1400 0x92 -> 0x93 | 0x08000000 (w7) |
+| CT-BL-DL-CTRL | rot_enc_sign.bin | 52e935428acbb998d0b1080f618160ad6d23c1a195ff57f1ff51da7152d7b280 | none (hex to bin) | 0x081e8000 (w9) |
+| CT-BL-DL | a1-oemurot-dl-flip.bin | fc578366736f2026b78134bb314b33d02ac8c687ed6102800baf821878684a4c | 0x1400 ciphertext 0x8a -> 0x8b | 0x081e8000 (w10) |
+
+ECDSA signing is randomized, so a regenerated b3 has another sha256. It is reproduced by its
+properties, checked with `mcuboot_image.py check <img> <trusted pub> <M2 key>`:
+
+| image | hash TLV | keyhash = trusted key | signature, trusted key | signature, M2 key |
+|---|---|---|---|---|
+| source app 1.0.0 | MATCH | MATCH | VALID | INVALID |
+| b2 | MISMATCH | MATCH | INVALID | INVALID |
+| b3 | MATCH | MATCH | INVALID | VALID |
+
+Trusted key for the app: OEMuRoT_Authentication_S.pem (ROT_Provisioning/STiROT_OEMuROT/Keys in the
+build copy). b3's image hash 32ab83f1... differs from the stored hash reference 1aa954b5... (app
+1.0.0), so OEMuRoT cannot take the hash-ref shortcut.
+
+## Expected validation path (prediction from code, the board decides)
+
+Why b3 has to look like this (ST MCUboot fork v1.7.2.40, bootutil/src/image_validate.c):
+- The SHA256 TLV is compared first; a mismatch leaves without a log line (443-459).
+- A keyhash that names no trusted key leaves before any signature log (463-482).
+- A body equal to the stored hash reference skips the signature (517-559).
+
+| CT id | expected OEMuRoT log | expected SWD |
+|---|---|---|
+| CT-APP-HASH | counter 0 : ok -> Image in the primary slot is not valid! -> Unable to find bootable image; no "signature" or "hash ref" line | PC 0x0C00D7A4 (Error_Handler, .BL2_Error_Code) |
+| CT-APP-SIG | verify sig key id 0 -> checking public key 47 5b -> verifying signature hlen 20 -> signature KO -> not valid -> Unable to find bootable image | PC 0x0C00D7A4 |
+| CT-APP-DL-CTRL | Image upgrade secondary slot -> primary slot -> hash ref OK -> app | download slot erased |
+| CT-APP-DL | Image in the secondary slot is not valid! -> hash ref OK -> app 1.0.0 | primary readback = source |
+| CT-BL-EXEC | no OEMuRoT banner | VTOR 0x0BF97000 / PC in System Bootloader, DSCSR CDS=0 |
+| CT-BL-DL-CTRL | Starting bootloader OEMuROT 2.0.0 again | execution area readback = rot_init_sign.bin |
+| CT-BL-DL | Starting bootloader OEMuROT 2.0.0 kept | execution area readback = rot_init_sign.bin |
+
+Not resolved, outside M7: checking rot_init_sign.bin the same way gives hash TLV MATCH and STiRoT
+keyhash MATCH but signature INVALID against STiRoT_Authentication_pub.pem. STiRoT's signed range or
+scheme apparently differs from the app image. M7 forges no STiRoT image; the question is an M8.1
+packaging/signing backlog item.
