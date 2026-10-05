@@ -114,7 +114,11 @@ __attribute__((naked, noreturn)) static void boot_handoff_rss_jump(__attribute__
                    : "i"(SRAM1_BASE));
 }
 
-/* Configured but left disabled: RSS enables it after raising HDPL, so only the image runs. */
+/*
+ * Configured but left disabled: RSS enables it after raising HDPL. BL2 runs with the MPU off
+ * (boot_security_init); PRIVDEFENA keeps the default map behind region 1 if RSS also turns the
+ * MPU on, so the privileged image can still reach SRAM and peripherals.
+ */
 static void boot_handoff_set_app_region(void)
 {
     uint32_t base = FLASH_BASE_ADDRESS + FLASH_AREA_0_OFFSET;
@@ -124,6 +128,7 @@ static void boot_handoff_set_app_region(void)
     MPU->RNR = BOOT_HANDOFF_MPU_APP_REGION;
     MPU->RBAR = ARM_MPU_RBAR(base, ARM_MPU_SH_NON, 1U, 0U, 0U);
     MPU->RLAR = (limit & MPU_RLAR_LIMIT_Msk) | ((BOOT_HANDOFF_MPU_APP_ATTR << MPU_RLAR_AttrIndx_Pos) & MPU_RLAR_AttrIndx_Msk);
+    MPU->CTRL = MPU_CTRL_PRIVDEFENA_Msk;
     __DSB();
     __ISB();
 }

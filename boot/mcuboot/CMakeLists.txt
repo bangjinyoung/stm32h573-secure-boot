@@ -62,7 +62,7 @@ add_custom_command(
 add_executable(bl2
     main.c
     port/boot_handoff.c
-    port/boot_sau.c
+    port/boot_security.c
     port/flash_map_backend.c
     port/low_level_device.c
     port/low_level_flash.c

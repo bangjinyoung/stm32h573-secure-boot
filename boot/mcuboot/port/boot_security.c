@@ -1,4 +1,4 @@
-#include "boot_sau.h"
+#include "boot_security.h"
 
 #include <stdint.h>
 
@@ -25,7 +25,30 @@ static const struct boot_sau_region boot_sau_regions[] = {
     {RSSLIB_SYS_FLASH_NS_PFUNC_START, RSSLIB_SYS_FLASH_NS_PFUNC_END},
 };
 
-void boot_sau_init(void)
+/*
+ * STiRoT starts HDPL2 with the MPU on, PRIVDEFENA clear and regions for its own idea of HDPL2
+ * (no Non-secure flash, no Non-secure peripherals). ST OEMuRoT clears them first too
+ * (LL_SECU_DisableCleanMpu) before it programs its own set.
+ */
+static void boot_mpu_clear(void)
+{
+    uint32_t region_count = (MPU->TYPE & MPU_TYPE_DREGION_Msk) >> MPU_TYPE_DREGION_Pos;
+    uint32_t i;
+
+    __DMB();
+    MPU->CTRL = 0U;
+
+    for (i = 0U; i < region_count; i++) {
+        MPU->RNR = i;
+        MPU->RLAR = 0U;
+        MPU->RBAR = 0U;
+    }
+
+    __DSB();
+    __ISB();
+}
+
+static void boot_sau_init(void)
 {
     uint32_t region_count = (SAU->TYPE & SAU_TYPE_SREGION_Msk) >> SAU_TYPE_SREGION_Pos;
     uint32_t i;
@@ -46,4 +69,10 @@ void boot_sau_init(void)
     SAU->CTRL = SAU_CTRL_ENABLE_Msk;
     __DSB();
     __ISB();
+}
+
+void boot_security_init(void)
+{
+    boot_mpu_clear();
+    boot_sau_init();
 }
