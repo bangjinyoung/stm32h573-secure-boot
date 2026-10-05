@@ -7,9 +7,9 @@
  * C library printf already wired to COM1 (115200-8N1) by Core/Src/main.c
  * via BSP_COM_Init.
  *
- * MCUBOOT_LOG_LEVEL selects the severity threshold. Start at INFO for
- * bring-up: DEBUG floods the port during header/sector iteration and
- * makes it hard to spot the actual failure point.
+ * MCUBOOT_LOG_LEVEL selects the severity threshold. DEBUG is the default:
+ * upstream reports which TLV check an image failed (hash or signature)
+ * only at DEBUG, and the M8 negative tests tell the two apart by it.
  */
 
 #ifndef MCUBOOT_LOGGING_H
@@ -27,7 +27,7 @@ void mcuboot_log_printf(const char *fmt, ...)
 #define MCUBOOT_LOG_LEVEL_DEBUG   4
 
 #ifndef MCUBOOT_LOG_LEVEL
-#define MCUBOOT_LOG_LEVEL MCUBOOT_LOG_LEVEL_INFO
+#define MCUBOOT_LOG_LEVEL MCUBOOT_LOG_LEVEL_DEBUG
 #endif
 
 #define MCUBOOT_LOG_MODULE_DECLARE(domain)  /* no-op */
