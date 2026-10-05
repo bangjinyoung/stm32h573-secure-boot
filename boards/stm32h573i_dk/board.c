@@ -71,6 +71,9 @@ int board_init(void)
         return -EIO;
     }
 
+    /* SBS registers (HDPLSR) read as 0 while its clock is off; under STiRoT only RSS turns it on. */
+    __HAL_RCC_SBS_CLK_ENABLE();
+
     board_init_led();
 
     return board_init_console();
