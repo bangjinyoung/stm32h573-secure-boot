@@ -1,0 +1,46 @@
+# 2026-10-05 13:42:22.142 +0900 read-only after boot: download slot and primary slot
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x08020000 0x8000 .workspace/tmp/m7/m7-w5-postboot-dl.bin -r 0x0C018000 0x8000 .workspace/tmp/m7/m7-w5-postboot-primary.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Error: Fail to read NVM Size
+Device name : STM32H56x/573
+NVM size    : 2 MBytes (default)
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m7/m7-w5-postboot-dl.bin
+  Size          : 32768 Bytes
+  Address:      : 0x8020000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.114
+
+UPLOADING ...
+  File          : .workspace/tmp/m7/m7-w5-postboot-primary.bin
+  Size          : 32768 Bytes
+  Address:      : 0xC018000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.119
+download slot all 0xFF: False non-FF bytes: 32768
+build/stirot_oemurot/rot_tz_s_app_init_sign.bin .workspace/tmp/m7/m7-w5-postboot-primary.bin differ: byte 23424, line 121

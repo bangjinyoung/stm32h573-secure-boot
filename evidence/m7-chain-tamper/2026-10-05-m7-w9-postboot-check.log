@@ -1,0 +1,48 @@
+# 2026-10-05 14:15:50.251 +0900 read-only after boot (app running): OEMuRoT execution area and STiRoT download slot
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C000000 0x18000 .workspace/tmp/m7/m7-w9-post-exec.bin -r 0x081E8000 0x18000 .workspace/tmp/m7/m7-w9-post-dl.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+Error: Fail to read NVM Size
+Device name : STM32H56x/573
+NVM size    : 2 MBytes (default)
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m7/m7-w9-post-exec.bin
+  Size          : 98304 Bytes
+  Address:      : 0xC000000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.290
+
+UPLOADING ...
+  File          : .workspace/tmp/m7/m7-w9-post-dl.bin
+  Size          : 98304 Bytes
+  Address:      : 0x81E8000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.286
+exec == rot_init_sign.bin: False | differing bytes: 176 ('0x17f28', '0x17fdf')
+exec header+body+prot TLVs == rot_init_sign.bin: True
+exec 0x1400: 0x92 (a2 0x93, genuine 0x92) | exec == a2: False
+download slot: 0xFF 0 0x00 98304 of 98304

@@ -1,0 +1,67 @@
+# E7.3 Normal / Test A / Test B on one board, one ST reference chain (2026-10-05)
+
+Chain: STiRoT (HDPL1, ST system flash) -> OEMuRoT 2.0.0 (HDPL2, ST OEMiROT_Boot with OEMUROT_ENABLE,
+DEV_MODE) -> full-secure app 1.0.0 (HDPL3). Open, TZEN 0xB4, BOOT_UBE 0xC3, SECBOOT_LOCK 0xB4.
+Every tamper is one bit at offset 0x1400 of the image body (H0 record). Per-test records:
+-m7-e71-ct-bl-*.txt, -m7-e72-ct-app-*.txt. Verdicts are the user's.
+
+## Final control (C9, 14:27:28, SW1=1, -hardRst), -m7-c9-boot-vcp.png, -m7-c9-state.png
+
+  OEMuRoT 2.0.0 -> counter 0 : ok -> hash ref OK -> Jumping to the first image slot -> User App #A.
+  VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0.
+  Option bytes (-m7-ob.log, second block): all 36 -ob displ fields identical to the 12:53 baseline
+  before W1. SECBOOTR_CUR 0x0C0004B4 and OPTSR_CUR 0x30F0EDF8 identical to the baseline
+  (-m7-c9-secboot-read.log, -m7-prep-secboot-read.log). No option byte was written in M7.
+  The planned C0 boot before W1 was not run as a separate step: the baseline is the read-only
+  state at 12:53 (app running from the M6 boot), and E6.3 and the W2/W4 restore boots are the
+  normal-boot controls.
+  Not restored byte for byte: the app primary and the OEMuRoT execution area now carry the
+  unprotected TLVs (signature) of the download images installed in W5 and W9; header, body and
+  protected TLVs are the M6 images, and the hash references still match.
+
+## Comparison
+
+| case | CT id | image changed | where | OEMuRoT log | first refusal line | end state |
+|---|---|---|---|---|---|---|
+| normal | CT-CTRL | none | | OEMuROT 2.0.0, hash ref OK, Jumping to the first image slot | | app, VTOR 0x0C018400 |
+| B | CT-APP-HASH | app, body bit | primary | counter ok, no signature line | Image in the primary slot is not valid! | System Bootloader, VTOR 0x0BF97000, CDS=0 |
+| B | CT-APP-SIG | app, body bit + re-hashed + foreign signature | primary | counter ok, verify sig key id 0 | signature KO | System Bootloader |
+| B ctrl | CT-APP-DL-CTRL | none (encrypted) | app download | signature OK, Image upgrade secondary slot -> primary slot | (installed) | app |
+| B | CT-APP-DL | app, ciphertext bit | app download | counter ok | Image in the secondary slot is not valid! | app 1.0.0 kept, primary unchanged |
+| A | CT-BL-EXEC | OEMuRoT, body bit | OEMuRoT execution area | none | (STiRoT logs nothing) | System Bootloader, image left in place; twice |
+| A ctrl | CT-BL-DL-CTRL | none (encrypted) | STiRoT download | OEMuROT 2.0.0 again | (installed over the tampered area) | app |
+| A | CT-BL-DL | OEMuRoT, ciphertext bit | STiRoT download | OEMuROT 2.0.0 | (STiRoT logs nothing) | app, execution area unchanged |
+
+## What the table shows
+
+- Each trust boundary is held by the layer above it. OEMuRoT refused every modified app image,
+  installed or offered as an update. STiRoT refused every modified OEMuRoT image, installed or
+  offered as an update.
+- The two refusal layers look the same from outside (both land in the System Bootloader when no
+  valid image is left) and differ in the log: an OEMuRoT refusal prints its reason; a STiRoT
+  refusal prints nothing, because OEMuRoT never runs.
+- Integrity and authenticity failures are separate paths in OEMuRoT: a bad body stops at the hash
+  check with no signature line (CT-APP-HASH); a consistent hash with a foreign signature stops at
+  "signature KO" (CT-APP-SIG). This closes the M3 log question.
+- The controls installed the same images through the same paths, so each refusal is attributable
+  to the modification, not to the path, the version or the counter. Both download controls reused
+  the installed version: OEMuRoT and STiRoT both accept an equal security counter.
+
+## Side results
+
+- Writing secure flash needs a core halted before the chain configures its protections (mode=UR,
+  SW1=0); Hotplug with the app running failed and left the app slot half written (F-05).
+- With SW1=0 the chain is bypassed and OEMuRoT runs from SECBOOTADD without STiRoT; it then stops
+  at "read: Wrong OBK HDPL2 cfg" because its HDPL2 OBK data is not readable at that HDPL.
+- While the app runs, both download slots read as zero over SWD; their real state was read under
+  reset.
+- Security finding: the ST MCUboot fork prints the decrypted image AES key at INFO
+  (encrypted.c:703), which DEV_MODE puts on the VCP. Masked in the M7 logs; an M8 requirement.
+
+## Limits
+
+- OEMuRoT ran in DEV_MODE (D-07). The release behaviour (logs off, reset instead of while(1) on
+  Error_Handler paths) was not tested.
+- Product state Open: BOOT0 bypasses STiRoT. Closed-state behaviour is M11.
+- STiRoT is closed ROM code; its refusals are shown by state (no OEMuRoT run, System Bootloader,
+  unchanged or tampered execution area), not by a log.

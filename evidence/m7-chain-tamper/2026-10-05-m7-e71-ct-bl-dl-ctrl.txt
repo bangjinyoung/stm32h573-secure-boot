@@ -1,0 +1,50 @@
+# E7.1 CT-BL-DL-CTRL: valid OEMuRoT 2.0.0 in the STiRoT download slot, STiRoT installs it (2026-10-05)
+
+Control for CT-BL-DL and restore for CT-BL-EXEC (D-10 order W7 -> W9 -> W10, user decision).
+Image rot_enc_sign.bin (objcopy of rot_enc_sign.hex, sha256 52e93542...), OEMuRoT 2.0.0, encrypted,
+same version as the installed OEMuRoT. Question settled here: does STiRoT reinstall the same version
+(D-10)? No STiRoT source exists; the board answers it.
+
+Starting state (W7): OEMuRoT execution area holds a2 (tampered), every boot ends in the System
+Bootloader with no VCP output (-m7-e71-ct-bl-exec.txt).
+
+## W9 write (14:14:06, mode=UR, SW1=0), -m7-w9.log, -m7-w9-write.png
+
+  Erasing internal memory sectors [244 255], File download complete, Download verified successfully,
+  NSSR 0, SECSR 0, readback 0x081E8000/0x18000 cmp: identical.
+  -m7-w9-preboot-check.log (Hotplug, read-only, SW1=0 run stopped at the OBK read):
+    execution area == a2 tampered: identical; download slot == rot_enc_sign.bin: identical.
+
+## Boot through STiRoT (14:15:28, SW1=1, -hardRst), -m7-boot.log (block 14:15:28), -m7-vcp.log
+
+  14:15:30.086 [INF] Starting bootloader OEMuROT 2.0.0
+  14:15:30.097 [INF] verify counter  0 1000000 1000000
+  14:15:30.099 [INF] counter  0 : ok
+  14:15:30.101 [INF] hash ref OK
+  14:15:30.109 [INF] Jumping to the first image slot
+  14:15:30.136 User App #A banner, Main Menu
+  STiRoT itself logs nothing. OEMuRoT is back: the first OEMuRoT banner since W7.
+SWD: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0, PC 0x0C01xxxx (app).
+-m7-w9-boot-vcp.png, -m7-w9-boot-swd.png.
+
+## Readback after the boot (Hotplug, read-only), -m7-w9-postboot-check.log
+
+  Execution area 0x0C000000/0x18000:
+    header + body + protected TLVs (0x0-0x17ed3) == rot_init_sign.bin
+    0x1400 = 0x92 (genuine; a2 had 0x93); not equal to a2
+    176 bytes differ from rot_init_sign.bin in 0x17f28-0x17fdf, the unprotected TLVs: the
+    download image's own signature and key TLVs, as in CT-APP-DL-CTRL. The content came from the
+    download slot.
+  Download slot 0x081E8000 reads 0x00 in all 98304 bytes while the app runs: read-as-zero, as for
+  the app download slot in W5; its real state is read under reset before W10.
+
+## Reading
+
+- STiRoT installed the encrypted OEMuRoT 2.0.0 over a tampered 2.0.0 execution area: the STiRoT
+  security counter accepts an equal version. The counter was not raised (same version).
+- CT-BL-EXEC criterion 6 (restore) is met by this install.
+- The tampered execution area was replaced only through the authenticated download path; nothing
+  wrote the execution area directly.
+
+Status: CT-BL-DL-CTRL board evidence collected (install observed). CT-BL-DL (W10) is interpretable.
+Verdict is the user's.

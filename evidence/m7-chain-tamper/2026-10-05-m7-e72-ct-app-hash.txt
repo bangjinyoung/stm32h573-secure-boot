@@ -1,0 +1,86 @@
+# E7.2 CT-APP-HASH: tampered app in the primary slot, OEMuRoT refuses (2026-10-05)
+
+Condition: Open, TZEN 0xB4, BOOT_UBE 0xC3, SECBOOT_LOCK 0xB4 (SECBOOTR_CUR 0x0C0004B4, read
+through 0x50022088 because -ob displ shows 0 while the app runs), SECWM1 0-0xF, OEMuRoT 2.0.0
+(DEV_MODE), OBKs at the M6 baseline. Image b2-app-payload-flip.bin, sha256 1162246a...,
+offset 0x1400 0x03 -> 0x02, signature and SHA256 TLV untouched (2026-10-05-m7-h0-images.txt).
+
+## Baseline before W1 (12:53-12:54, read-only)
+
+2026-10-05-m7-ob.log, -m7-prep-secboot-read.log, -m7-observe.log: app running, VTOR 0x0C018400,
+DSCSR 0x00030000, CFSR 0, PC samples 0x0C01C9xx.
+
+## W1 attempt 1, failed (13:08, Hotplug, SW1=1, app running)
+
+2026-10-05-m7-w1.log (first block), -m7-w1-fail-state.log.
+  CLI erased sectors 12-15 and stopped with "failed to download Sector[0]".
+  Readback: first 0x8b0 bytes of b2, then 0xFF; sectors 13-15 all 0xFF.
+  After: DHCSR 0x00130003 (halted), CFSR 0x00018201, HFSR 0x40000000, MPU_CTRL 0x2,
+  NSSR 0, SECSR 0x00010000 (EOP only, no PGSERR/WRPERR).
+  Every connect in this state printed "Fail to read NVM Size".
+  SECBOOT_LOCK 0xB4 did not block the secure-sector erase or the first writes.
+  Cause not proven. Inferred: the CubeProgrammer flash loader cannot run under the protections the
+  running chain set up. Failure F-05 in the checklist.
+
+## W1 attempt 2, passed (13:12, mode=UR, SW1=0)
+
+2026-10-05-m7-w1.log (block 13:12:18). scripts/m7_tamper_step.sh -u (commit f7e9406).
+  Connect mode: Under Reset, "NVM size : 2 MBytes" read normally.
+  File download complete, Download verified successfully, NSSR 0, SECSR 0.
+  Readback 0x0C018000/0x8000 cmp b2: identical (0x1400 = 0x02).
+After the UR session released reset with SW1=0, OEMuRoT ran from SECBOOTADD without STiRoT:
+  VCP "[ERR] read: Wrong OBK HDPL2 cfg" (13:12:18-13:12:20, once per UR reset),
+  -m7-observe.log 13:12:35: VTOR 0x0C000400, PC 0x0C00D7A4 x4 (Error_Handler), DSCSR 0x00030000.
+  It stopped at the HDPL2 OBK read, before any OBK write.
+
+## Boot through STiRoT (13:13:30, SW1=1, -hardRst)
+
+2026-10-05-m7-boot.log, 2026-10-05-m7-vcp.log, -m7-w1-boot-vcp.png, -m7-w1-boot-swd.png.
+
+  13:13:31.523 [INF] TAMPER Activated
+  13:13:31.528 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+  13:13:31.531 [INF] Starting bootloader OEMuROT 2.0.0
+  13:13:31.534 [INF] Swap type: none
+  13:13:31.538 [INF] Starting validation of primary slot(s)
+  13:13:31.543 [INF] verify counter  0 1000000 1000000
+  13:13:31.545 [INF] counter  0 : ok
+  13:13:31.549 [ERR] Image in the primary slot is not valid!
+  13:13:31.552 [ERR] Unable to find bootable image
+  13:13:31.555 [INF] Jumping to bootloader
+  13:13:31.559 [INF] Disconnect COM port if used by bootloader
+  No app banner. No "verify sig key id", "signature" or "hash ref" line.
+
+SWD after the boot and again at 13:14:32 (read-only):
+  VTOR 0x0BF97000 (System Bootloader), DSCSR 0x00020000 (CDS=0, Non-secure), CFSR 0,
+  PC samples 0x0BF9xxxx.
+
+## Reading
+
+- STiRoT accepted OEMuRoT 2.0.0 (its banner), so the HDPL1 -> HDPL2 boundary passed as before.
+- OEMuRoT checked the security counter (equal, ok) and rejected the primary slot before the
+  signature TLV: the hash-stage path the H0 code reading predicted (image_validate.c:443-459).
+- Prediction corrected: the end state is not Error_Handler. With no bootable image OEMuRoT calls
+  boot_platform_noimage() (MCUBOOT_EXT_LOADER, OEMiROT_Boot/Inc/flash_layout.h:34), which jumps
+  to the System Bootloader through RSS JumpHDPLvl3NS (boot_hal.c:113-145). ERROR_HANDLER_STOP_EXEC
+  only affects Error_Handler paths, such as the OBK error seen with SW1=0.
+- Test A (CT-BL-EXEC) is also expected to end in the System Bootloader, so the two are told apart
+  by the OEMuRoT log, not by the end state: B has OEMuRoT lines, A has none.
+
+## W2 restore (13:16:39, mode=UR, SW1=0) and boot (13:18:14, SW1=1)
+
+2026-10-05-m7-w2.log, -m7-boot.log (block 13:18:14), -m7-vcp.log, -m7-w2-boot-vcp.png,
+-m7-w2-boot-swd.png.
+  W2: rot_tz_s_app_init_sign.bin (712af963...) to 0x08018000, Download verified successfully,
+  NSSR 0, SECSR 0, readback cmp identical. With SW1=0 OEMuRoT again stopped at
+  "read: Wrong OBK HDPL2 cfg", PC 0x0C00D7A4 (-m7-observe.log 13:16:47).
+  Boot:
+    13:18:15.488 [INF] Starting bootloader OEMuROT 2.0.0
+    13:18:15.499 [INF] verify counter  0 1000000 1000000
+    13:18:15.501 [INF] counter  0 : ok
+    13:18:15.503 [INF] hash ref OK
+    13:18:15.511 [INF] Jumping to the first image slot
+    13:18:15.538 User App #A banner, 13:18:15.550 Main Menu
+  SWD: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0, PC 0x0C01C9xx (app).
+  The stored hash reference was not changed by the refused boot: the genuine image matched it.
+
+Status: CT-APP-HASH board evidence complete (tamper, refusal, restore). Verdict is the user's.

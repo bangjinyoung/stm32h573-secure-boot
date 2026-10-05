@@ -1,0 +1,50 @@
+# E7.2 CT-APP-DL: tampered encrypted app in the download slot, OEMuRoT refuses the install (2026-10-05)
+
+Image b1-app-dl-flip.bin, sha256 ce04528a..., rot_tz_s_app_enc_sign.bin with ciphertext byte 0x1400
+flipped (0x16 -> 0x17). AES-CTR, so the decrypted body differs in the same bit. Signature and TLVs
+untouched. Control: CT-APP-DL-CTRL (-m7-e72-ct-app-dl-ctrl.txt) installed the same image unmodified.
+
+## Pre-check under reset (13:48:29, mode=UR, SW1=0), -m7-w6-pre-dl-check.log
+
+  Download slot 0x08020000: 32768 of 32768 bytes 0xFF. The W5 install erased it; the 0x00 read while
+  the app ran (13:41) was read-as-zero, as inferred.
+  Primary under reset is identical to the post-W5 read (m7-w6-pre-primary.bin, kept locally).
+
+## W6 write (13:52:26, mode=UR, SW1=0), -m7-w6.log, -m7-w6-write.png
+
+  Erasing internal memory sectors [16 19], File download complete, Download verified successfully,
+  NSSR 0, SECSR 0, readback cmp b1: identical (0x1400 = 0x17).
+
+## Boot through STiRoT (13:53:29, SW1=1, -hardRst), -m7-boot.log (block 13:53:29), -m7-vcp.log
+
+  13:53:30.614 [INF] Starting bootloader OEMuROT 2.0.0
+  13:53:30.616 [INF] Swap type: test
+  13:53:30.636 [INF] <8 bytes of the decrypted image AES key masked>
+  13:53:30.639 [INF] <8 bytes of the decrypted image AES key masked>
+  13:53:30.667 [INF] verify counter  0 1000000 1000000
+  13:53:30.669 [INF] counter  0 : ok
+  13:53:30.681 [ERR] Image in the secondary slot is not valid!
+  13:53:30.685 [INF] Starting validation of primary slot(s)
+  13:53:30.690 [INF] verify counter  0 1000000 1000000
+  13:53:30.692 [INF] counter  0 : ok
+  13:53:30.694 [INF] hash ref OK
+  13:53:30.702 [INF] Jumping to the first image slot
+  13:53:30.729 User App #A banner, Main Menu
+  No "Image upgrade secondary slot -> primary slot", no "signature" line for the secondary: it failed
+  at the hash stage after decryption, as CT-APP-HASH did for the primary.
+SWD: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0 (app running).
+
+## Post-boot readback (Hotplug, read-only), -m7-w6-postboot-check.log
+
+  Primary 0x0C018000 after the boot is identical to the primary before W6 (read under reset).
+  The tampered image was not installed; app 1.0.0 kept running.
+  Download slot under reset at 14:01:58 (-m7-w7-pre-check.log): 32768 of 32768 bytes 0xFF, so
+  OEMuRoT erased the refused secondary (loader.c:728-731).
+
+## Captures
+
+-m7-w6-boot-vcp.png and -m7-w6-boot-swd.png were retaken at about 13:59 with dev-1 in front. The
+first pair, taken while another window was in front of Windows Terminal, showed unrelated content
+and was deleted.
+
+Status: CT-APP-DL board evidence collected (refusal, primary unchanged). Verdict is the user's.

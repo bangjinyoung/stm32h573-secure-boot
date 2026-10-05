@@ -1,0 +1,286 @@
+2026-10-05 13:12:18.087 [INF] TAMPER Activated
+2026-10-05 13:12:18.521 [ERR] read: Wro[INF] TAMPER Activated
+2026-10-05 13:12:18.560 [INF] TAMPER Activated
+2026-10-05 13:12:19.509 [ERR] read: Wrong ÿ[INF] TAMPER Activated
+2026-10-05 13:12:19.512 [ERR] read: Wrong OBK HDPL2 cfg
+2026-10-05 13:12:19.966 [INF] TAMPER Activated
+2026-10-05 13:12:20.003 [INF] TAMPER Activated
+2026-10-05 13:12:20.569 [ERR] read: Wrong OBK è[INF] TAMPER Activated
+2026-10-05 13:13:31.523 [INF] TAMPER Activated
+2026-10-05 13:13:31.528 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 13:13:31.531 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 13:13:31.534 [INF] Swap type: none
+2026-10-05 13:13:31.538 [INF] Starting validation of primary slot(s)
+2026-10-05 13:13:31.543 [INF] verify counter  0 1000000 1000000
+2026-10-05 13:13:31.545 [INF] counter  0 : ok
+2026-10-05 13:13:31.549 [ERR] Image in the primary slot is not valid!
+2026-10-05 13:13:31.552 [ERR] Unable to find bootable image
+2026-10-05 13:13:31.555 [INF] Jumping to bootloader
+2026-10-05 13:13:31.559 [INF] Disconnect COM port if used by bootloader
+2026-10-05 13:16:39.142 [INF] TAMPER Activated
+2026-10-05 13:16:39.590 [ERR] read: Wrong OBK HD[INF] TAMPER Activated
+2026-10-05 13:16:39.629 [INF] TAMPER Activated
+2026-10-05 13:16:40.554 [ERR] read: Wrong ï[INF] TAMPER Activated
+2026-10-05 13:16:40.982 [ERR] read: Wrong[INF] TAMPER Activated
+2026-10-05 13:16:41.017 [INF] TAMPER Activated
+2026-10-05 13:16:41.560 [ERR] read: Wrong[INF] TAMPER Activated
+2026-10-05 13:18:15.479 [INF] TAMPER Activated
+2026-10-05 13:18:15.484 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 13:18:15.488 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 13:18:15.490 [INF] Swap type: none
+2026-10-05 13:18:15.494 [INF] Starting validation of primary slot(s)
+2026-10-05 13:18:15.499 [INF] verify counter  0 1000000 1000000
+2026-10-05 13:18:15.501 [INF] counter  0 : ok
+2026-10-05 13:18:15.503 [INF] hash ref OK
+2026-10-05 13:18:15.507 [INF] Bootloader chainload address offset: 0x18000
+2026-10-05 13:18:15.511 [INF] Jumping to the first image slot
+2026-10-05 13:18:15.512 
+2026-10-05 13:18:15.518 ======================================================================
+2026-10-05 13:18:15.525 =              (C) COPYRIGHT 2025 STMicroelectronics                 =
+2026-10-05 13:18:15.531 =                                                                    =
+2026-10-05 13:18:15.538 =                          User App #A                               =
+2026-10-05 13:18:15.544 ======================================================================
+2026-10-05 13:18:15.544 
+2026-10-05 13:18:15.544 
+2026-10-05 13:18:15.550 =================== Main Menu ============================
+2026-10-05 13:18:15.550 
+2026-10-05 13:18:15.555   Start BootLoader -------------------------------------- 1
+2026-10-05 13:18:15.555 
+2026-10-05 13:18:15.556   Selection :
+2026-10-05 13:18:15.557 
+2026-10-05 13:19:44.647 [INF] TAMPER Activated
+2026-10-05 13:19:45.095 [ERR] read: Wrong OBK HDPL2 cfg[INF] TAMPER Activated
+2026-10-05 13:19:45.132 [INF] TAMPER Activated
+2026-10-05 13:19:46.053 [ERR] read: Wrong OBK ø[INF] TAMPER Activated
+2026-10-05 13:19:46.501 [ERR] read: Wrongÿ[INF] TAMPER Activated
+2026-10-05 13:19:46.538 [INF] TAMPER Activated
+2026-10-05 13:19:47.086 [ERR] read: Wronç[INF] TAMPER Activated
+2026-10-05 13:21:22.198 [INF] TAMPER Activated
+2026-10-05 13:21:22.203 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 13:21:22.206 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 13:21:22.208 [INF] Swap type: none
+2026-10-05 13:21:22.212 [INF] Starting validation of primary slot(s)
+2026-10-05 13:21:22.218 [INF] verify counter  0 1000000 1000000
+2026-10-05 13:21:22.220 [INF] counter  0 : ok
+2026-10-05 13:21:22.222 [INF] verify sig key id 0
+2026-10-05 13:21:22.225 [INF] checking public key 47 5b
+2026-10-05 13:21:22.228 [INF] verifying signature hlen 20
+2026-10-05 13:21:22.244 [INF] signature KO
+2026-10-05 13:21:22.248 [ERR] Image in the primary slot is not valid!
+2026-10-05 13:21:22.252 [ERR] Unable to find bootable image
+2026-10-05 13:21:22.254 [INF] Jumping to bootloader
+2026-10-05 13:21:22.258 [INF] Disconnect COM port if used by bootloader
+2026-10-05 13:28:32.304 [INF] TAMPER Activated
+2026-10-05 13:28:32.729 [ERR] read: Wrong OBû[INF] TAMPER Activated
+2026-10-05 13:28:32.768 [INF] TAMPER Activated
+2026-10-05 13:28:33.705 [ERR] read: Wrong OBK Hü[INF] TAMPER Activated
+2026-10-05 13:28:34.150 [ERR] read: Wrong OBK HDPL2 cfgý[INF] TAMPER Activated
+2026-10-05 13:28:34.186 [INF] TAMPER Activated
+2026-10-05 13:28:34.740 [ERR] read: Wronÿ[INF] TAMPER Activated
+2026-10-05 13:31:28.741 [INF] TAMPER Activated
+2026-10-05 13:31:28.745 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 13:31:28.749 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 13:31:28.751 [INF] Swap type: none
+2026-10-05 13:31:28.755 [INF] Starting validation of primary slot(s)
+2026-10-05 13:31:28.760 [INF] verify counter  0 1000000 1000000
+2026-10-05 13:31:28.762 [INF] counter  0 : ok
+2026-10-05 13:31:28.764 [INF] hash ref OK
+2026-10-05 13:31:28.769 [INF] Bootloader chainload address offset: 0x18000
+2026-10-05 13:31:28.772 [INF] Jumping to the first image slot
+2026-10-05 13:31:28.773 
+2026-10-05 13:31:28.780 ======================================================================
+2026-10-05 13:31:28.786 =              (C) COPYRIGHT 2025 STMicroelectronics                 =
+2026-10-05 13:31:28.793 =                                                                    =
+2026-10-05 13:31:28.799 =                          User App #A                               =
+2026-10-05 13:31:28.805 ======================================================================
+2026-10-05 13:31:28.806 
+2026-10-05 13:31:28.806 
+2026-10-05 13:31:28.811 =================== Main Menu ============================
+2026-10-05 13:31:28.811 
+2026-10-05 13:31:28.817   Start BootLoader -------------------------------------- 1
+2026-10-05 13:31:28.817 
+2026-10-05 13:31:28.818   Selection :
+2026-10-05 13:31:28.818 
+2026-10-05 13:38:23.668 [INF] TAMPER Activated
+2026-10-05 13:38:23.671 [ERR] read: Wrong OBK HDPL2 cfg
+2026-10-05 13:38:24.120 [INF] TAMPER Activated
+2026-10-05 13:38:24.158 [INF] TAMPER Activated
+2026-10-05 13:38:24.161 [ERR] read: Wrong OBK HDPL2 cfg
+2026-10-05 13:38:25.106 [INF] TAMPER Activated
+2026-10-05 13:38:25.109 [ERR] read: Wrong OBK HDPL2 cfg
+2026-10-05 13:38:25.574 [INF] TAMPER Activated
+2026-10-05 13:38:25.612 [INF] TAMPER Activated
+2026-10-05 13:38:26.227 [ERR] read: Wrong OBK HDPLú[INF] TAMPER Activated
+2026-10-05 13:39:53.392 [INF] TAMPER Activated
+2026-10-05 13:39:53.397 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 13:39:53.401 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 13:39:53.403 [INF] Swap type: test
+2026-10-05 13:39:53.422 [INF] <8 bytes of the decrypted image AES key masked>
+2026-10-05 13:39:53.426 [INF] <8 bytes of the decrypted image AES key masked>
+2026-10-05 13:39:53.453 [INF] verify counter  0 1000000 1000000
+2026-10-05 13:39:53.455 [INF] counter  0 : ok
+2026-10-05 13:39:53.458 [INF] verify sig key id 0
+2026-10-05 13:39:53.461 [INF] checking public key 47 5b
+2026-10-05 13:39:53.464 [INF] verifying signature hlen 20
+2026-10-05 13:39:53.480 [INF] signature OK
+2026-10-05 13:39:53.486 [INF] Image upgrade secondary slot -> primary slot
+2026-10-05 13:39:53.489 [INF] Erasing the primary slot
+2026-10-05 13:39:53.517 [INF] <8 bytes of the decrypted image AES key masked>
+2026-10-05 13:39:53.520 [INF] <8 bytes of the decrypted image AES key masked>
+2026-10-05 13:39:53.526 [INF] Copying the secondary slot to the primary slot: 0x8000 bytes
+2026-10-05 13:39:53.605 [INF] Starting validation of primary slot(s)
+2026-10-05 13:39:53.611 [INF] verify counter  0 1000000 1000000
+2026-10-05 13:39:53.613 [INF] counter  0 : ok
+2026-10-05 13:39:53.614 [INF] hash ref OK
+2026-10-05 13:39:53.627 [INF] Bootloader chainload address offset: 0x18000
+2026-10-05 13:39:53.631 [INF] Jumping to the first image slot
+2026-10-05 13:39:53.632 
+2026-10-05 13:39:53.638 ======================================================================
+2026-10-05 13:39:53.645 =              (C) COPYRIGHT 2025 STMicroelectronics                 =
+2026-10-05 13:39:53.651 =                                                                    =
+2026-10-05 13:39:53.658 =                          User App #A                               =
+2026-10-05 13:39:53.664 ======================================================================
+2026-10-05 13:39:53.664 
+2026-10-05 13:39:53.664 
+2026-10-05 13:39:53.670 =================== Main Menu ============================
+2026-10-05 13:39:53.670 
+2026-10-05 13:39:53.675   Start BootLoader -------------------------------------- 1
+2026-10-05 13:39:53.675 
+2026-10-05 13:39:53.677   Selection :
+2026-10-05 13:39:53.677 
+2026-10-05 13:48:29.169 [INF] TAMPER Activated
+2026-10-05 13:48:29.834 [ERR] read: Wrong OBK HÄ[INF] TAMPER Activated
+2026-10-05 13:52:26.792 [INF] TAMPER Activated
+2026-10-05 13:52:27.270 [ERR] read: Wrong OBK HDPL2 cfgí[INF] TAMPER Activated
+2026-10-05 13:52:27.309 [INF] TAMPER Activated
+2026-10-05 13:52:28.267 [ERR] read: Wrong OBK HDPL2 cfgú[INF] TAMPER Activated
+2026-10-05 13:52:28.734 [ERR] read: Wrong OBK þ[INF] TAMPER Activated
+2026-10-05 13:52:28.772 [INF] TAMPER Activated
+2026-10-05 13:52:29.402 [ERR] read: Wrong OBK HDPL2ð[INF] TAMPER Activated
+2026-10-05 13:53:30.606 [INF] TAMPER Activated
+2026-10-05 13:53:30.610 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 13:53:30.614 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 13:53:30.616 [INF] Swap type: test
+2026-10-05 13:53:30.636 [INF] <8 bytes of the decrypted image AES key masked>
+2026-10-05 13:53:30.639 [INF] <8 bytes of the decrypted image AES key masked>
+2026-10-05 13:53:30.667 [INF] verify counter  0 1000000 1000000
+2026-10-05 13:53:30.669 [INF] counter  0 : ok
+2026-10-05 13:53:30.681 [ERR] Image in the secondary slot is not valid!
+2026-10-05 13:53:30.685 [INF] Starting validation of primary slot(s)
+2026-10-05 13:53:30.690 [INF] verify counter  0 1000000 1000000
+2026-10-05 13:53:30.692 [INF] counter  0 : ok
+2026-10-05 13:53:30.694 [INF] hash ref OK
+2026-10-05 13:53:30.699 [INF] Bootloader chainload address offset: 0x18000
+2026-10-05 13:53:30.702 [INF] Jumping to the first image slot
+2026-10-05 13:53:30.704 
+2026-10-05 13:53:30.710 ======================================================================
+2026-10-05 13:53:30.716 =              (C) COPYRIGHT 2025 STMicroelectronics                 =
+2026-10-05 13:53:30.723 =                                                                    =
+2026-10-05 13:53:30.729 =                          User App #A                               =
+2026-10-05 13:53:30.736 ======================================================================
+2026-10-05 13:53:30.736 
+2026-10-05 13:53:30.736 
+2026-10-05 13:53:30.741 =================== Main Menu ============================
+2026-10-05 13:53:30.741 
+2026-10-05 13:53:30.747   Start BootLoader -------------------------------------- 1
+2026-10-05 13:53:30.747 
+2026-10-05 13:53:30.748   Selection :
+2026-10-05 13:53:30.748 
+2026-10-05 14:01:58.334 [INF] TAMPER Activated
+2026-10-05 14:01:58.881 [ERR] read: Wron[INF] TAMPER Activated
+2026-10-05 14:01:58.930 [INF] TAMPER Activated
+2026-10-05 14:01:59.364 [ERR] read: Wrong OBK ü[INF] TAMPER Activated
+2026-10-05 14:01:59.402 [INF] TAMPER Activated
+2026-10-05 14:02:01.015 [ERR] read: Wrong OBK HDPL2 cfç[INF] TAMPER Activated
+2026-10-05 14:02:01.478 [ERR] read: Wrong OBK HDPL2ÿ[INF] TAMPER Activated
+2026-10-05 14:02:01.516 [INF] TAMPER Activated
+2026-10-05 14:02:02.273 [ERR] read: Wrong OBK HDPþ[INF] TAMPER Activated
+2026-10-05 14:14:06.128 [INF] TAMPER Activated
+2026-10-05 14:14:06.130 [ERR] read: Wrong OBK HDPL2 cfg
+2026-10-05 14:14:06.565 [INF] TAMPER Activated
+2026-10-05 14:14:06.601 [INF] TAMPER Activated
+2026-10-05 14:14:08.234 [ERR] read: Wrong OBK HDPLÿ[INF] TAMPER Activated
+2026-10-05 14:14:08.679 [ERR] read: Wrong OBK HDPL2 ã[INF] TAMPER Activated
+2026-10-05 14:14:08.717 [INF] TAMPER Activated
+2026-10-05 14:14:09.491 [ERR] read: Wrong OBû[INF] TAMPER Activated
+2026-10-05 14:15:30.077 [INF] TAMPER Activated
+2026-10-05 14:15:30.082 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 14:15:30.086 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 14:15:30.088 [INF] Swap type: none
+2026-10-05 14:15:30.092 [INF] Starting validation of primary slot(s)
+2026-10-05 14:15:30.097 [INF] verify counter  0 1000000 1000000
+2026-10-05 14:15:30.099 [INF] counter  0 : ok
+2026-10-05 14:15:30.101 [INF] hash ref OK
+2026-10-05 14:15:30.105 [INF] Bootloader chainload address offset: 0x18000
+2026-10-05 14:15:30.109 [INF] Jumping to the first image slot
+2026-10-05 14:15:30.110 
+2026-10-05 14:15:30.116 ======================================================================
+2026-10-05 14:15:30.123 =              (C) COPYRIGHT 2025 STMicroelectronics                 =
+2026-10-05 14:15:30.129 =                                                                    =
+2026-10-05 14:15:30.136 =                          User App #A                               =
+2026-10-05 14:15:30.142 ======================================================================
+2026-10-05 14:15:30.142 
+2026-10-05 14:15:30.142 
+2026-10-05 14:15:30.148 =================== Main Menu ============================
+2026-10-05 14:15:30.148 
+2026-10-05 14:15:30.153   Start BootLoader -------------------------------------- 1
+2026-10-05 14:15:30.153 
+2026-10-05 14:15:30.155   Selection :
+2026-10-05 14:15:30.155 
+2026-10-05 14:21:45.034 [INF] TAMPER Activated
+2026-10-05 14:21:46.050 [ERR] read: Wrong OBû[INF] TAMPER Activated
+2026-10-05 14:21:46.101 [INF] TAMPER Activated
+2026-10-05 14:21:46.535 [ERR] read: Wrong OBK HDPL2[INF] TAMPER Activated
+2026-10-05 14:21:46.570 [INF] TAMPER Activated
+2026-10-05 14:21:48.185 [ERR] read: Wronÿ[INF] TAMPER Activated
+2026-10-05 14:21:48.646 [ERR] read: Wrong OBK HDPL2 cfg[INF] TAMPER Activated
+2026-10-05 14:21:48.682 [INF] TAMPER Activated
+2026-10-05 14:21:49.430 [ERR] read: Wrong OBK HDP[INF] TAMPER Activated
+2026-10-05 14:24:28.643 [INF] TAMPER Activated
+2026-10-05 14:24:28.647 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 14:24:28.651 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 14:24:28.653 [INF] Swap type: none
+2026-10-05 14:24:28.657 [INF] Starting validation of primary slot(s)
+2026-10-05 14:24:28.663 [INF] verify counter  0 1000000 1000000
+2026-10-05 14:24:28.665 [INF] counter  0 : ok
+2026-10-05 14:24:28.666 [INF] hash ref OK
+2026-10-05 14:24:28.671 [INF] Bootloader chainload address offset: 0x18000
+2026-10-05 14:24:28.674 [INF] Jumping to the first image slot
+2026-10-05 14:24:28.676 
+2026-10-05 14:24:28.682 ======================================================================
+2026-10-05 14:24:28.688 =              (C) COPYRIGHT 2025 STMicroelectronics                 =
+2026-10-05 14:24:28.695 =                                                                    =
+2026-10-05 14:24:28.701 =                          User App #A                               =
+2026-10-05 14:24:28.708 ======================================================================
+2026-10-05 14:24:28.708 
+2026-10-05 14:24:28.708 
+2026-10-05 14:24:28.713 =================== Main Menu ============================
+2026-10-05 14:24:28.713 
+2026-10-05 14:24:28.719   Start BootLoader -------------------------------------- 1
+2026-10-05 14:24:28.719 
+2026-10-05 14:24:28.720   Selection :
+2026-10-05 14:24:28.720 
+2026-10-05 14:27:29.218 [INF] TAMPER Activated
+2026-10-05 14:27:29.223 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+2026-10-05 14:27:29.227 [INF] Starting bootloader OEMuROT 2.0.0
+2026-10-05 14:27:29.229 [INF] Swap type: none
+2026-10-05 14:27:29.233 [INF] Starting validation of primary slot(s)
+2026-10-05 14:27:29.238 [INF] verify counter  0 1000000 1000000
+2026-10-05 14:27:29.240 [INF] counter  0 : ok
+2026-10-05 14:27:29.242 [INF] hash ref OK
+2026-10-05 14:27:29.247 [INF] Bootloader chainload address offset: 0x18000
+2026-10-05 14:27:29.250 [INF] Jumping to the first image slot
+2026-10-05 14:27:29.251 
+2026-10-05 14:27:29.258 ======================================================================
+2026-10-05 14:27:29.264 =              (C) COPYRIGHT 2025 STMicroelectronics                 =
+2026-10-05 14:27:29.271 =                                                                    =
+2026-10-05 14:27:29.277 =                          User App #A                               =
+2026-10-05 14:27:29.283 ======================================================================
+2026-10-05 14:27:29.284 
+2026-10-05 14:27:29.284 
+2026-10-05 14:27:29.289 =================== Main Menu ============================
+2026-10-05 14:27:29.289 
+2026-10-05 14:27:29.295   Start BootLoader -------------------------------------- 1
+2026-10-05 14:27:29.295 
+2026-10-05 14:27:29.296   Selection :
+2026-10-05 14:27:29.296 

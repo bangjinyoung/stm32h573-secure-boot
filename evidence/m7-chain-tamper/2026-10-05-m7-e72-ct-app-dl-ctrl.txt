@@ -1,0 +1,64 @@
+# E7.2 CT-APP-DL-CTRL: valid encrypted app 1.0.0 in the download slot, OEMuRoT installs it (2026-10-05)
+
+Control for CT-APP-DL. Image rot_tz_s_app_enc_sign.bin (objcopy of rot_tz_s_app_enc_sign.hex,
+sha256 b623fd75...), app 1.0.0, AES-CTR encrypted body, trailer boot magic at 0x7ff0. Same version as
+the installed app, so the security counter is not consumed (image_validate.c:625 rejects only <).
+Its header (first 0x400 bytes) equals the init image's byte for byte.
+
+## W5 write (13:38:23, mode=UR, SW1=0), the first write to non-secure flash
+
+2026-10-05-m7-w5.log, -m7-w5-write.png.
+  Erasing internal memory sectors [16 19], File download complete, Download verified successfully,
+  NSSR 0, SECSR 0, readback 0x08020000/0x8000 cmp: identical.
+  SW1=0 afterwards: OEMuRoT without STiRoT stopped at the OBK read (PC 0x0C00D7A4, observe 13:38:26).
+  2026-10-05-m7-w5-preboot-check.log (Hotplug, read-only): download slot still identical to the
+  image, so the standalone run did not consume it.
+
+## Boot through STiRoT (13:39:52, SW1=1, -hardRst, no USB replug)
+
+2026-10-05-m7-boot.log (block 13:39:52), -m7-vcp.log, -m7-w5-boot-vcp.png, -m7-w5-boot-swd.png.
+
+  13:39:53.401 [INF] Starting bootloader OEMuROT 2.0.0
+  13:39:53.403 [INF] Swap type: test
+  13:39:53.422 [INF] <8 bytes of the decrypted image AES key masked>
+  13:39:53.426 [INF] <8 bytes of the decrypted image AES key masked>
+  13:39:53.453 [INF] verify counter  0 1000000 1000000
+  13:39:53.455 [INF] counter  0 : ok
+  13:39:53.458 [INF] verify sig key id 0
+  13:39:53.461 [INF] checking public key 47 5b
+  13:39:53.464 [INF] verifying signature hlen 20
+  13:39:53.480 [INF] signature OK
+  13:39:53.486 [INF] Image upgrade secondary slot -> primary slot
+  13:39:53.489 [INF] Erasing the primary slot
+  13:39:53.517 [INF] <8 bytes of the decrypted image AES key masked>
+  13:39:53.520 [INF] <8 bytes of the decrypted image AES key masked>
+  13:39:53.526 [INF] Copying the secondary slot to the primary slot: 0x8000 bytes
+  13:39:53.605 [INF] Starting validation of primary slot(s)
+  13:39:53.611 [INF] verify counter  0 1000000 1000000
+  13:39:53.613 [INF] counter  0 : ok
+  13:39:53.614 [INF] hash ref OK
+  13:39:53.631 [INF] Jumping to the first image slot
+  13:39:53.658 User App #A banner, Main Menu
+SWD: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0, PC 0x0C01xxxx (app).
+
+## Readback after the boot (13:41, Hotplug, read-only), -m7-w5-postboot-check.log
+
+- Primary 0x0C018000: header and body equal rot_tz_s_app_init_sign.bin; 180 bytes differ in
+  0x5b7f-0x7fe0, which are the unprotected TLVs (signature and ENC TLV of the download image, not of
+  the init image) and the trailer (0x7fd0 01 -> ff). The primary now holds the decrypted download
+  image, so the content came from the download slot. The hash covers header, body and protected
+  TLVs only, which are unchanged, so the stored hash reference still matched (hash ref OK).
+- Download slot 0x08020000 read 0x00 in all 32768 bytes. 0x00 is not the erased value (0xFF), and the
+  same slot read correctly before the boot with OEMuRoT halted. Inferred: read-as-zero while the app
+  runs, not the slot content. The erase after the copy (loader.c:2181-2192) is to be checked under
+  reset before W6 writes the slot.
+
+## Security finding: the decrypted image key is printed to the UART
+
+The ST MCUboot fork prints the unwrapped AES-128 image key, 8 bytes per line, at INFO level
+(bootutil/src/encrypted.c:703, also :551 for RSA). OEMuRoT DEV_MODE sets BOOT_LOG_LEVEL_INFO
+(low_level_security.c:27-31), so every encrypted install leaks the key of that image on the VCP.
+The four lines are masked in 2026-10-05-m7-vcp.log and in the captures; the raw bytes were not
+kept. Release builds set BOOT_LOG_LEVEL_OFF. For M8: the custom MCUboot must not log key material.
+
+Status: CT-APP-DL-CTRL board evidence collected (install observed). Verdict is the user's.

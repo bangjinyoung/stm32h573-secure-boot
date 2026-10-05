@@ -1,0 +1,75 @@
+# E7.2 CT-APP-SIG: re-hashed app signed by an untrusted key, OEMuRoT refuses at the signature (2026-10-05)
+
+Condition: as in -m7-e72-ct-app-hash.txt; the app had been restored by W2 (hash ref OK at 13:18).
+Image b3-app-foreign-sig.bin, sha256 a6f13e91..., body flip at 0x1400 (0x03 -> 0x02) as b2, SHA256
+TLV recomputed, keyhash TLV of OEMuRoT_Authentication_S kept, ECDSA P-256 signature by the M2 key
+(2026-10-05-m7-h0-images.txt). Host check: hash TLV MATCH, keyhash MATCH, signature INVALID for
+the trusted key, VALID for the M2 key.
+
+## W3 write (13:19:44, mode=UR, SW1=0)
+
+2026-10-05-m7-w3.log, -m7-w3-write.png.
+  DSCSR 0x00030000, NVM size 2 MBytes, File download complete, Download verified successfully,
+  NSSR 0, SECSR 0, readback 0x0C018000/0x8000 cmp b3: identical (0x1400 = 0x02).
+  After the UR session (SW1=0): OEMuRoT without STiRoT, "read: Wrong OBK HDPL2 cfg",
+  VTOR 0x0C000400, PC 0x0C00D7A4 (-m7-observe.log 13:19:47).
+
+## Power-on boot from a USB replug (about 13:20, SW1=1)
+
+The user set SW1=1; the ST-LINK USB reconnected and the board powered up and booted on its own.
+VCP not captured: the logger loop reattached at 13:20:40, after the boot (same limit as E6.3).
+  -m7-observe.log 13:21:07 (read-only): VTOR 0x0BF97000, DSCSR 0x00020000, CFSR 0, PC 0x0BF9xxxx.
+  The power-on boot ended in the System Bootloader, as the NRST boot below.
+  Side result: vcp_logger.py exited on the vanished tty and its retry loop restarted it on the
+  re-enumerated port (logger start 13:20:40), the first replug that exercised that exit.
+
+## Boot through STiRoT (13:21:21, SW1=1, -hardRst)
+
+2026-10-05-m7-boot.log (block 13:21:21), -m7-vcp.log, -m7-w3-boot-vcp.png, -m7-w3-boot-swd.png.
+
+  13:21:22.198 [INF] TAMPER Activated
+  13:21:22.203 [INF] Flash operation: Op=0x0, Area=0x0, Address=0x0
+  13:21:22.206 [INF] Starting bootloader OEMuROT 2.0.0
+  13:21:22.208 [INF] Swap type: none
+  13:21:22.212 [INF] Starting validation of primary slot(s)
+  13:21:22.218 [INF] verify counter  0 1000000 1000000
+  13:21:22.220 [INF] counter  0 : ok
+  13:21:22.222 [INF] verify sig key id 0
+  13:21:22.225 [INF] checking public key 47 5b
+  13:21:22.228 [INF] verifying signature hlen 20
+  13:21:22.244 [INF] signature KO
+  13:21:22.248 [ERR] Image in the primary slot is not valid!
+  13:21:22.252 [ERR] Unable to find bootable image
+  13:21:22.254 [INF] Jumping to bootloader
+  13:21:22.258 [INF] Disconnect COM port if used by bootloader
+  No "hash ref OK", no app banner.
+
+SWD: VTOR 0x0BF97000, DSCSR 0x00020000 (CDS=0), CFSR 0, PC 0x0BF9xxxx (System Bootloader).
+
+## CT-APP-HASH vs CT-APP-SIG (same board, same OEMuRoT, same byte flipped)
+
+| step in image_validate.c | CT-APP-HASH (13:13:31) | CT-APP-SIG (13:21:22) |
+|---|---|---|
+| security counter | counter 0 : ok | counter 0 : ok |
+| SHA256 TLV vs computed hash | mismatch, leaves silently | match |
+| key lookup (keyhash TLV) | not reached | key id 0 |
+| hash reference | not reached | no "hash ref OK" (32ab83f1... vs stored 1aa954b5...) |
+| ECDSA P-256 verify | not reached | signature KO |
+| result | not valid -> no bootable image -> System Bootloader | same |
+
+Both refusals end in the same state; the log tells integrity failure from authenticity failure.
+This closes the hash-mismatch / signature-failure log distinction left open in M3 (D-08).
+
+## W4 restore (13:28:32, mode=UR, SW1=0) and boot (13:31:27, SW1=1)
+
+2026-10-05-m7-w4.log, -m7-boot.log (block 13:31:27), -m7-vcp.log, -m7-w4-write.png,
+-m7-w4-boot-vcp.png, -m7-w4-boot-swd.png.
+  A USB replug came before the write (logger reattached 13:28:19) and another before the boot
+  (power-on boot with SW1=1, logger reattached 13:31:16).
+  W4: rot_tz_s_app_init_sign.bin to 0x08018000, Download verified successfully, NSSR 0, SECSR 0,
+  readback cmp identical (0x1400 = 0x03). SW1=0 afterwards: VTOR 0x0C000400, PC 0x0C00D7A4.
+  After the power-on boot (13:31:26, read-only): VTOR 0x0C018400, app running.
+  NRST boot 13:31:28: counter 0 : ok -> hash ref OK -> Jumping to the first image slot ->
+  User App #A, Main Menu. SWD: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0, PC 0x0C01xxxx.
+
+Status: CT-APP-SIG board evidence complete (tamper, refusal, restore). Verdict is the user's.

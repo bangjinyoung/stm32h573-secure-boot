@@ -1,0 +1,41 @@
+# E7.1 CT-BL-DL: tampered encrypted OEMuRoT in the STiRoT download slot, STiRoT refuses it (2026-10-05)
+
+Image a1-oemurot-dl-flip.bin, sha256 fc578366..., rot_enc_sign.bin (OEMuRoT 2.0.0, encrypted) with
+ciphertext byte 0x1400 flipped (0x8a -> 0x8b). Same version as the installed OEMuRoT, which
+CT-BL-DL-CTRL showed STiRoT accepts, so a refusal here is about the image content, not the counter.
+
+## Pre-check under reset (14:21:44, mode=UR, SW1=0), -m7-w10-pre-check.log
+
+  STiRoT download slot 0x081E8000: 98304 of 98304 bytes 0xFF (STiRoT erased it after the W9 install;
+  the 0x00 seen with the app running was read-as-zero).
+  Execution area under reset == the post-W9 read (genuine 2.0.0, 0x1400 = 0x92).
+
+## W10 write (14:21:46, mode=UR, SW1=0), -m7-w10.log, -m7-w10-write.png
+
+  Erasing internal memory sectors [244 255], File download complete, Download verified successfully,
+  NSSR 0, SECSR 0, readback cmp a1: identical (0x1400 = 0x8b).
+
+## Boot through STiRoT (14:24:27, SW1=1, -hardRst), -m7-boot.log, -m7-vcp.log
+
+  14:24:28.651 [INF] Starting bootloader OEMuROT 2.0.0
+  14:24:28.665 [INF] counter  0 : ok
+  14:24:28.666 [INF] hash ref OK
+  14:24:28.674 [INF] Jumping to the first image slot
+  User App #A banner, Main Menu
+SWD: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0, PC 0x0C01xxxx.
+-m7-w10-boot-vcp.png, -m7-w10-boot-swd.png.
+
+## Readback after the boot (Hotplug, read-only), -m7-w10-postboot-check.log
+
+  Execution area 0x0C000000/0x18000 after the boot == before W10 (read under reset): identical,
+  0x1400 = 0x92. Had STiRoT installed a1, the body would carry the flipped bit.
+
+## Reading
+
+- STiRoT refused to install the tampered OEMuRoT and kept the installed 2.0.0, which went on to
+  boot the app. STiRoT logs nothing; the proof is the unchanged execution area next to the
+  CT-BL-DL-CTRL install that changed it with the same path and the same version.
+- Slot erasure is not used as evidence (M5: it happens on accept and on refuse).
+
+Status: CT-BL-DL board evidence collected. Verdict is the user's. All CT ids of M7 have board
+evidence; C9 (final control, option bytes) and H2 (comparison table E7.3) remain.
