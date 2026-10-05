@@ -1,0 +1,58 @@
+# M8 B1: STiRoT installs the custom BL2; BL2 faults on the STiRoT MPU (board, 2026-10-05)
+
+Board on entry: M7 end state, read in prep (`2026-10-05-m8-ob.log`): Open, TZEN 0xB4,
+BOOT_UBE 0xC3, SECWM1 0-0xF, SECBOOTR_CUR 0x0C0004B4 (SECBOOTADD 0x0C0004, SECBOOT_LOCK 0xB4).
+C0 control boot 19:02:56 (`2026-10-05-m8-boot.log` first entry, VCP): OEMuRoT 2.0.0 -> hash
+ref OK -> ST app, VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0.
+
+## Write (19:16, SW1=0, mode=UR, `2026-10-05-m8-b1.log`, `-b1-write.png`)
+
+bl2_enc.bin (sha256 31aada2879752355..., BL2 build 4960d40-dirty, see H2-H5/H6 records) to the
+STiRoT download slot 0x081E8000: Download verified successfully, FLASH NSSR 0, SECSR 0,
+readback of 0x18000 bytes identical. Between the UR connects the core ran OEMuRoT from
+SECBOOTADD without STiRoT; it printed `[ERR] read: Wrong OBK HDPL2` and stopped, as in M7.
+
+## Boot (19:27, SW1=1, `2026-10-05-m8-boot.log` second entry, `-b1-boot-vcp.png`, `-b1-boot-swd.png`)
+
+VCP:
+
+```
+19:27:05.770 [bl2] mcuboot build=4960d40-dirty
+19:27:05.772 [mcuboot DBG] context_boot_go
+```
+
+SWD: VTOR 0x0C000400, DSCSR 0x00030000 (CDS=1), CFSR 0x00000082 (MMFSR DACCVIOL, MMARVALID),
+DEMCR 0x01100000, DWT_PCSR 4 x 0x0C0012D0 (Default_Handler, the weak MemManage_Handler).
+
+Installed execution area (read-only readback of 0x0C000000, 0x18000 bytes, `-b1-fault.log`):
+bytes 0x0-0x17EBF (header and body) identical to bl2_init.bin, body = bl2.bin; only the TLVs from
+the download image differ (its own signature). `mcuboot_image.py check`: hash MATCH, STiRoT
+keyhash MATCH, signature VALID.
+
+So STiRoT decrypted, verified and installed the custom BL2 download image with the same
+version 2.0.0 as the OEMuRoT image it replaced, and started it at HDPL2 (E8.1; R4 settled).
+
+## Fault (read-only, `2026-10-05-m8-b1-fault.log`)
+
+| register | value | meaning |
+|---|---|---|
+| MMFAR | 0x08020000 | secondary slot header, Non-secure alias |
+| HFSR | 0x40000000 | FORCED |
+| SHCSR | 0x00000004 | |
+| MPU_CTRL | 0x00000003 | ENABLE, HFNMIENA; PRIVDEFENA clear |
+| MPU_TYPE | 0x00000C00 | 12 regions |
+
+MPU regions 0-7 as STiRoT left them (RBAR / RLAR): 0 0x0FF8A284/0x0FF93943 (system flash),
+1 0x0C000004/0x0C017FE5 (HDPL2 code, RO exec), 2 0x0C018001/0x0C1FFFE7 (rest of Secure flash,
+RW XN), 3 0x30000001/0x3009FFE5 (SRAM RW XN), 4 0x0FFD0901/0x0FFD1FE7, 5 0x08FFF001/0x08FFF7E7,
+6 0x08FFF805/0x08FFFFE7, 7 0x50000001/0x5FFFFFE1 (Secure peripherals). No region covers
+Non-secure flash. Reading the regions selected each with a debugger write to MPU_RNR
+(0xE000ED98); no other write.
+
+Root cause: STiRoT hands over to HDPL2 with its own MPU set on and no background map. The M2
+port assumed the MPU off, so the first Non-secure read of the secondary slot faulted. ST
+OEMuRoT clears the MPU first (LL_SECU_DisableCleanMpu) and programs its own regions.
+
+Fix: 4bf2865 (BL2 disables the MPU and clears all regions before the SAU setup; at the handoff
+it sets PRIVDEFENA with region 1 disabled). Board left as is: custom BL2 installed and stopped
+in MemManage_Handler, ST app in the primary slot, download slot as STiRoT left it.

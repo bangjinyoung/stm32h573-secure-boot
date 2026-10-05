@@ -36,3 +36,18 @@ signature check; the custom BL2 has no hash reference shortcut either way.
 The board steps run with `scripts/tamper_step.sh [-n] -u m8 <log dir> <step>` (renamed from
 m7_tamper_step.sh; `m7` keeps the M7 table unchanged). r1 and r2 write the M7 OEMuRoT
 download image and the ST app back for recovery to the M7 end state.
+
+## Rebuild at 4bf2865 (after B1, 2026-10-05)
+
+The MPU fix rebuilt BL2 and bare_slot (BUILD_ID 4bf2865, clean tree) and the script reran.
+The host checks give the same verdict table as above. These replace the sha256 values above
+for every board step after B1:
+
+| file | sha256 |
+|---|---|
+| bl2_init.bin | 39955efa403fa5030c1cb9db3da876dbcfb432dc4f4a30f9e3c7ec82d8d9b599 |
+| bl2_enc.bin | b61847aa1949af38e4c6150fa92d884601c61bb472ae263edad725b62d032810 |
+| app_signed.bin | 9b2d20344c2fb38352b23d2b668e40a13e78f17eb031c36c7f776dc35f754713 |
+| ct-app-hash.bin | 67fc173a0f078aa2efc27491a43f484ba20855914d5b19f3f06f35ae52276b10 |
+| ct-app-sig.bin | 05143831de56604ebb8c891a83632f76e70ed400773dd3586b2768d1cbc8ec43 |
+| ct-bl-exec.bin | cdcb516df14b13b3a89fc7b9ede47e09e6fee91d3245f8964862152847d53cf9 |

@@ -1,0 +1,278 @@
+# 2026-10-05 19:27:29 B1 boot fault, read-only (MMFAR, HFSR, SHCSR, MPU_CTRL, MPU_TYPE, regions 0-7)
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED34 4 -r32 0xE000ED2C 4 -r32 0xE000ED24 4 -r32 0xE000ED94 4 -r32 0xE000ED90 4 -r32 0xE000EDD0 4 -w32 0xE000ED98 0 -r32 0xE000ED9C 4 -r32 0xE000EDA0 4 -w32 0xE000ED98 1 -r32 0xE000ED9C 4 -r32 0xE000EDA0 4 -w32 0xE000ED98 2 -r32 0xE000ED9C 4 -r32 0xE000EDA0 4 -w32 0xE000ED98 3 -r32 0xE000ED9C 4 -r32 0xE000EDA0 4 -w32 0xE000ED98 4 -r32 0xE000ED9C 4 -r32 0xE000EDA0 4 -w32 0xE000ED98 5 -r32 0xE000ED9C 4 -r32 0xE000EDA0 4 -w32 0xE000ED98 6 -r32 0xE000ED9C 4 -r32 0xE000EDA0 4 -w32 0xE000ED98 7 -r32 0xE000ED9C 4 -r32 0xE000EDA0 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED34
+0xE000ED34 : 08020000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED2C
+0xE000ED2C : 40000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED24
+0xE000ED24 : 00000004
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED94
+0xE000ED94 : 00000003
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED90
+0xE000ED90 : 00000C00
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDD0
+0xE000EDD0 : 00000001
+
+
+Write 32-bit data
+w @0xe000ed98:  0x00000000
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED9C
+0xE000ED9C : 0FF8A284
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDA0
+0xE000EDA0 : 0FF93943
+
+
+Write 32-bit data
+w @0xe000ed98:  0x00000001
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED9C
+0xE000ED9C : 0C000004
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDA0
+0xE000EDA0 : 0C017FE5
+
+
+Write 32-bit data
+w @0xe000ed98:  0x00000002
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED9C
+0xE000ED9C : 0C018001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDA0
+0xE000EDA0 : 0C1FFFE7
+
+
+Write 32-bit data
+w @0xe000ed98:  0x00000003
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED9C
+0xE000ED9C : 30000001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDA0
+0xE000EDA0 : 3009FFE5
+
+
+Write 32-bit data
+w @0xe000ed98:  0x00000004
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED9C
+0xE000ED9C : 0FFD0901
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDA0
+0xE000EDA0 : 0FFD1FE7
+
+
+Write 32-bit data
+w @0xe000ed98:  0x00000005
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED9C
+0xE000ED9C : 08FFF001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDA0
+0xE000EDA0 : 08FFF7E7
+
+
+Write 32-bit data
+w @0xe000ed98:  0x00000006
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED9C
+0xE000ED9C : 08FFF805
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDA0
+0xE000EDA0 : 08FFFFE7
+
+
+Write 32-bit data
+w @0xe000ed98:  0x00000007
+
+
+Downloading...
+[==================================================] 100% 
+32-bit data download complete
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED9C
+0xE000ED9C : 50000001
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EDA0
+0xE000EDA0 : 5FFFFFE1
+
+
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C000000 0x18000 .workspace/tmp/m8/m8-b1-post-exec.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m8/m8-b1-post-exec.bin
+  Size          : 98304 Bytes
+  Address:      : 0xC000000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.288
+.workspace/tmp/m8/m8-b1-post-exec.bin .workspace/tmp/m8/bl2_init.bin differ: byte 98089, line 254
+differing bytes: 174
+exec body == bl2.bin
+image:    .workspace/tmp/m8/m8-b1-post-exec.bin
+magic:    0x73ab1024  version 2.0.0+0  hdr 0x400  img_size 0x17ac0  prot_tlv 0x13
+tlvs:     0x50/4 0x60/3 0x10/32 0x01/32 0x22/72 0x32/113
+hash tlv: MATCH  computed da52294a346045d8
+key STiRoT_Authentication_pub.pem: keyhash MATCH  signature VALID
+header+body identical to bl2_init.bin (0x0-0x17ebf)
