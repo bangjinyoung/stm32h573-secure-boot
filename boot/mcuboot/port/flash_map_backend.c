@@ -18,9 +18,9 @@
  *
  * Address contract with Driver_FLASH0:
  *   Driver_FLASH0.ReadData(addr, buf, cnt) treats 'addr' as a byte
- *   offset from FLASH_BASE (0x08000000). See
- *   port/stm32h5/src/low_level_flash.c:Flash_ReadData, which internally
- *   does 'memcpy(dst, (void *)(addr + FLASH_BASE_NS), cnt)'.
+ *   offset from the start of flash. low_level_flash.c:Flash_ReadData
+ *   adds FLASH_BASE (Secure alias) inside the Secure partition and
+ *   FLASH_BASE_NS outside it.
  *
  *   flash_area.fa_off carries the same semantics: it is an offset from
  *   FLASH_BASE, not an absolute CPU address. flash_area_read therefore

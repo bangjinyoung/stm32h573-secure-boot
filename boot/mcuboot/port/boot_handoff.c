@@ -8,8 +8,8 @@
 #include "flash_layout.h"
 #include "stm32h5xx.h"
 
-#define BOOT_HANDOFF_SRAM_START 0x20000000U
-#define BOOT_HANDOFF_SRAM_END   0x200A0000U
+#define BOOT_HANDOFF_SRAM_START SRAM1_BASE
+#define BOOT_HANDOFF_SRAM_END   (SRAM1_BASE + 0x000A0000U)
 
 struct boot_handoff_vectors {
     uint32_t initial_sp;

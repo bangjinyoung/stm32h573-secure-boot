@@ -4,6 +4,7 @@
 
 #include "board.h"
 #include "boot_handoff.h"
+#include "boot_sau.h"
 #include "bootutil/bootutil.h"
 #include "bootutil/image.h"
 
@@ -27,6 +28,8 @@ int main(void)
     }
 
     printf("\r\n[bl2] mcuboot build=%s\r\n", BUILD_ID);
+
+    boot_sau_init();
 
     FIH_CALL(boot_go, fih_rc, &rsp);
     if (FIH_NOT_EQ(fih_rc, FIH_SUCCESS)) {

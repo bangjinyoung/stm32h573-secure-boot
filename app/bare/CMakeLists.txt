@@ -1,11 +1,7 @@
-add_executable(bare main.c)
-target_link_libraries(bare PRIVATE board)
-stm32h573_executable(bare 0x08000000 2048K)
-
-# Same application linked into the MCUboot primary slot, after the image header.
+# The application linked into the MCUboot primary slot, after the image header; 30K leaves room for the TLVs in the 0x8000 slot.
 add_executable(bare_slot main.c)
 target_link_libraries(bare_slot PRIVATE board)
-stm32h573_executable(bare_slot 0x08018400 639K)
+stm32h573_executable(bare_slot 0x0C018400 30K)
 
 set(APP_VERSION "1.0.0" CACHE STRING "Version written into the signed image header")
 set(MCUBOOT_SIGNING_KEY ${CMAKE_SOURCE_DIR}/.workspace/keys/mcuboot-ecdsa-p256.pem CACHE FILEPATH "Private key for imgtool sign")
@@ -16,7 +12,7 @@ if(EXISTS ${MCUBOOT_SIGNING_KEY})
             --key ${MCUBOOT_SIGNING_KEY}
             --header-size 0x400 --pad-header
             --align 16
-            --slot-size 0xA0000
+            --slot-size 0x8000
             --version ${APP_VERSION}
             $<TARGET_FILE_DIR:bare_slot>/bare_slot.bin
             $<TARGET_FILE_DIR:bare_slot>/bare_slot_signed.bin)
