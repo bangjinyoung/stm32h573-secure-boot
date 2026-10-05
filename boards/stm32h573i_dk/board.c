@@ -102,6 +102,20 @@ void board_delay_ms(uint32_t delay_ms)
     HAL_Delay(delay_ms);
 }
 
+uint32_t board_uptime_ms(void)
+{
+    return HAL_GetTick();
+}
+
+int board_console_getc(char *c)
+{
+    if (HAL_UART_Receive(&console_uart, (uint8_t *)c, 1U, 0U) != HAL_OK) {
+        return -EAGAIN;
+    }
+
+    return 0;
+}
+
 int _write(int file, char *ptr, int len)
 {
     (void)file;

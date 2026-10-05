@@ -17,5 +17,8 @@ int board_init(void);
 void board_get_boot_info(struct board_boot_info *info);
 void board_led_toggle(void);
 void board_delay_ms(uint32_t delay_ms);
+uint32_t board_uptime_ms(void);
+/* Returns 0 with one received console character, or -EAGAIN at once when none is waiting. */
+int board_console_getc(char *c);
 
 #endif /* BOARD_H */
