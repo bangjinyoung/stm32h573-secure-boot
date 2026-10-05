@@ -52,6 +52,14 @@ target_include_directories(mcuboot_bootutil PRIVATE ${MCUBOOT_DIR}/boot/bootutil
 target_compile_options(mcuboot_bootutil PRIVATE ${VENDOR_WARNING_OPTIONS})
 target_link_libraries(mcuboot_bootutil PUBLIC mbedcrypto stm32h5_hal)
 
+set(BL2_ROLLBACK hw CACHE STRING "Rollback protection: hw (HDPL2 OBK security counter) or sw (version check only)")
+set_property(CACHE BL2_ROLLBACK PROPERTY STRINGS hw sw)
+if(BL2_ROLLBACK STREQUAL hw)
+    target_compile_definitions(mcuboot_bootutil PUBLIC BL2_ROLLBACK_HW)
+elseif(NOT BL2_ROLLBACK STREQUAL sw)
+    message(FATAL_ERROR "BL2_ROLLBACK must be hw or sw, got ${BL2_ROLLBACK}")
+endif()
+
 set(BL2_PUBLIC_KEY ${CMAKE_SOURCE_DIR}/keys/mcuboot-ecdsa-p256.pub.pem)
 set(BL2_KEYS_C ${CMAKE_CURRENT_BINARY_DIR}/bootutil_keys.c)
 add_custom_command(
@@ -62,6 +70,7 @@ add_custom_command(
 add_executable(bl2
     main.c
     port/boot_handoff.c
+    port/boot_rollback.c
     port/boot_security.c
     port/flash_map_backend.c
     port/low_level_device.c
