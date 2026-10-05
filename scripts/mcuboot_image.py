@@ -20,6 +20,7 @@ TLV_PROT_MAGIC = 0x6908
 TLV_INFO_MAGIC = 0x6907
 TLV_KEYHASH = 0x01
 TLV_SHA256 = 0x10
+TLV_SEC_CNT = 0x50
 TLV_ECDSA256 = 0x22
 
 
@@ -105,6 +106,8 @@ def check(path, key_paths):
     print(f"magic:    0x{img.magic:08x}  version {img.version}  hdr 0x{img.hdr_size:x}  "
           f"img_size 0x{img.img_size:x}  prot_tlv 0x{img.prot_size:x}")
     print(f"tlvs:     {' '.join(f'0x{t[0]:02x}/{len(t[2])}' for t in img.tlvs)}")
+    sec_cnt = [t[2] for t in img.tlvs if t[0] == TLV_SEC_CNT and len(t[2]) == 4]
+    print(f"sec_cnt:  {struct.unpack('<I', sec_cnt[0])[0] if sec_cnt else 'none'}")
     print(f"hash tlv: {'MATCH' if img.tlv(TLV_SHA256)[2] == digest else 'MISMATCH'}  "
           f"computed {digest.hex()[:16]}")
     keyhash, sig = img.tlv(TLV_KEYHASH)[2], img.tlv(TLV_ECDSA256)[2]

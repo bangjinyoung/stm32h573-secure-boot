@@ -1,9 +1,10 @@
 #!/bin/bash
-# Runs one M7 or M8 step on the board and appends the CLI output to
+# Runs one M7, M8 or M9 step on the board and appends the CLI output to
 # <log dir>/<date>-<milestone>-<step>.log with the ST-LINK serial number masked.
 # Board state on entry: Open, TZEN 0xB4, BOOT_UBE 0xC3, SECBOOT_LOCK 0xB4 (left locked, D-09).
 # M7 runs the ST chain (OEMuRoT); M8 the custom one (M2 BL2 and bare_slot, images from
-# make_m8_images.sh). The HDPL2 bootloader is called OEMuRoT below; in M8 it is BL2.
+# make_m8_images.sh); M9 the update and rollback steps (make_m9_images.sh). The HDPL2
+# bootloader is called OEMuRoT below; in M8 and M9 it is BL2.
 #
 # Hotplug programs SECWM-secure flash only while the halted core is Secure (M6). The w* steps
 # halt whatever runs now (the full-secure app, or OEMuRoT stopped in Error_Handler) and refuse
@@ -15,13 +16,13 @@
 # reset with SW1=0, so the core halts at the SECBOOTADD reset vector before OEMuRoT configures
 # anything, which is the state the M6 flash step programmed in. Set SW1 back to 1 before boot.
 #
-# usage: tamper_step.sh [-n] [-u] <m7|m8> <log dir> <step>
+# usage: tamper_step.sh [-n] [-u] <m7|m8|m9> <log dir> <step>
 #   -n       print the commands only
 #   -u       w* steps connect under reset (mode=UR, SW1=0) instead of Hotplug
 #   observe  read-only: VTOR, DSCSR, CFSR, DEMCR, 4 DWT_PCSR samples
 #   ob       read-only: option bytes
 #   boot     clear DEMCR vector catch, NRST via -hardRst, wait, observe
-#   b*, w*, r*  write one image (tables below), read it back into .workspace/tmp/<milestone>
+#   a*, b*, w*, r*  write one image (tables below), read it back into .workspace/tmp/<milestone>
 #               and compare
 set -euo pipefail
 
@@ -29,13 +30,14 @@ dry=0
 ur=0
 if [ "${1:-}" = -n ]; then dry=1; shift; fi
 if [ "${1:-}" = -u ]; then ur=1; shift; fi
-ms=${1:?usage: $0 [-n] [-u] <m7|m8> <log dir> <step>}
-logdir=${2:?usage: $0 [-n] [-u] <m7|m8> <log dir> <step>}
-step=${3:?usage: $0 [-n] [-u] <m7|m8> <log dir> <step>}
+ms=${1:?usage: $0 [-n] [-u] <m7|m8|m9> <log dir> <step>}
+logdir=${2:?usage: $0 [-n] [-u] <m7|m8|m9> <log dir> <step>}
+step=${3:?usage: $0 [-n] [-u] <m7|m8|m9> <log dir> <step>}
 
 repo=$(cd "$(dirname "$0")/.." && pwd)
 b=$repo/build/stirot_oemurot
 m7=$repo/.workspace/tmp/m7
+m8=$repo/.workspace/tmp/m8
 t=$repo/.workspace/tmp/$ms
 clt=${STM32CUBECLT:-/opt/st/stm32cubeclt_1.22.0}
 cli=$clt/STM32CubeProgrammer/bin/STM32_Programmer_CLI
@@ -71,6 +73,20 @@ m8) img=(
   [r1]="$m7/rot_enc_sign.bin 0x081E8000 0x081E8000 recover-oemurot"
   [r2]="$b/rot_tz_s_app_init_sign.bin 0x08018000 0x0C018000 recover-st-app"
 ) ;;
+# a: BL2-a (version check), b: BL2-b (HDPL2 OBK counter), r: back to the M8 BL2
+m9) img=(
+  [a1]="$t/bl2a_enc.bin 0x081E8000 0x081E8000 install-bl2a"
+  [a2]="$t/app_v1.bin 0x08018000 0x0C018000 primary-v1"
+  [a3]="$t/app_v2_upd.bin 0x08020000 0x08020000 E9.1-update-v2"
+  [a4]="$t/app_v1_upd.bin 0x08020000 0x08020000 E9.2-secondary-v1"
+  [a5]="$t/app_v1.bin 0x08018000 0x0C018000 E9.2L-primary-v1"
+  [b1]="$t/app_v2_upd.bin 0x08020000 0x08020000 secondary-v2"
+  [b2]="$t/bl2b_enc.bin 0x081E8000 0x081E8000 install-bl2b"
+  [b4]="$t/app_v1_upd.bin 0x08020000 0x08020000 E9.3-secondary-v1"
+  [b5]="$t/app_v1.bin 0x08018000 0x0C018000 E9.3-primary-v1"
+  [b6]="$t/app_v2.bin 0x08018000 0x0C018000 restore-v2"
+  [r1]="$m8/bl2_enc.bin 0x081E8000 0x081E8000 recover-m8-bl2"
+) ;;
 *) echo "unknown milestone: $ms" >&2; exit 2 ;;
 esac
 
@@ -103,7 +119,7 @@ boot)
   run "${hp[@]}" -hardRst
   [ $dry -eq 1 ] || sleep 3
   observe ;;
-[bwr][0-9]*)
+[abwr][0-9]*)
   [ -n "${img[$step]:-}" ] || { echo "unknown step: $step" >&2; exit 2; }
   read -r file addr rb id <<< "${img[$step]}"
   [ $ur -eq 1 ] && hp=(-c port=SWD speed=fast ap=1 mode=UR)
