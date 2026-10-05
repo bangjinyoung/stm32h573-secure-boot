@@ -1,7 +1,9 @@
 #!/bin/bash
-# Runs one M7 step on the board and appends the CLI output to
-# <log dir>/<date>-m7-<step>.log with the ST-LINK serial number masked.
+# Runs one M7 or M8 step on the board and appends the CLI output to
+# <log dir>/<date>-<milestone>-<step>.log with the ST-LINK serial number masked.
 # Board state on entry: Open, TZEN 0xB4, BOOT_UBE 0xC3, SECBOOT_LOCK 0xB4 (left locked, D-09).
+# M7 runs the ST chain (OEMuRoT); M8 the custom one (M2 BL2 and bare_slot, images from
+# make_m8_images.sh). The HDPL2 bootloader is called OEMuRoT below; in M8 it is BL2.
 #
 # Hotplug programs SECWM-secure flash only while the halted core is Secure (M6). The w* steps
 # halt whatever runs now (the full-secure app, or OEMuRoT stopped in Error_Handler) and refuse
@@ -13,32 +15,37 @@
 # reset with SW1=0, so the core halts at the SECBOOTADD reset vector before OEMuRoT configures
 # anything, which is the state the M6 flash step programmed in. Set SW1 back to 1 before boot.
 #
-# usage: m7_tamper_step.sh [-n] [-u] <log dir> <step>
+# usage: tamper_step.sh [-n] [-u] <m7|m8> <log dir> <step>
 #   -n       print the commands only
 #   -u       w* steps connect under reset (mode=UR, SW1=0) instead of Hotplug
 #   observe  read-only: VTOR, DSCSR, CFSR, DEMCR, 4 DWT_PCSR samples
 #   ob       read-only: option bytes
 #   boot     clear DEMCR vector catch, NRST via -hardRst, wait, observe
-#   w1..w10  write one image (table below), read it back into .workspace/tmp/m7 and compare
+#   b*, w*, r*  write one image (tables below), read it back into .workspace/tmp/<milestone>
+#               and compare
 set -euo pipefail
 
 dry=0
 ur=0
 if [ "${1:-}" = -n ]; then dry=1; shift; fi
 if [ "${1:-}" = -u ]; then ur=1; shift; fi
-logdir=${1:?usage: $0 [-n] <log dir> <step>}
-step=${2:?usage: $0 [-n] <log dir> <step>}
+ms=${1:?usage: $0 [-n] [-u] <m7|m8> <log dir> <step>}
+logdir=${2:?usage: $0 [-n] [-u] <m7|m8> <log dir> <step>}
+step=${3:?usage: $0 [-n] [-u] <m7|m8> <log dir> <step>}
 
 repo=$(cd "$(dirname "$0")/.." && pwd)
 b=$repo/build/stirot_oemurot
-t=$repo/.workspace/tmp/m7
+m7=$repo/.workspace/tmp/m7
+t=$repo/.workspace/tmp/$ms
 clt=${STM32CUBECLT:-/opt/st/stm32cubeclt_1.22.0}
 cli=$clt/STM32CubeProgrammer/bin/STM32_Programmer_CLI
 hp=(-c port=SWD speed=fast ap=1 mode=Hotplug)
-log=$logdir/$(date +%F)-m7-$step.log
+log=$logdir/$(date +%F)-$ms-$step.log
 
 # step: image, write address (0x08 alias as in M6), readback address, test id
-declare -A img=(
+declare -A img
+case $ms in
+m7) img=(
   [w1]="$t/b2-app-payload-flip.bin 0x08018000 0x0C018000 CT-APP-HASH"
   [w2]="$b/rot_tz_s_app_init_sign.bin 0x08018000 0x0C018000 restore-app"
   [w3]="$t/b3-app-foreign-sig.bin 0x08018000 0x0C018000 CT-APP-SIG"
@@ -49,7 +56,23 @@ declare -A img=(
   [w8]="$b/rot_init_sign.bin 0x08000000 0x0C000000 restore-bl"
   [w9]="$t/rot_enc_sign.bin 0x081E8000 0x081E8000 CT-BL-DL-CTRL"
   [w10]="$t/a1-oemurot-dl-flip.bin 0x081E8000 0x081E8000 CT-BL-DL"
-)
+) ;;
+# b: install the custom chain, w: the M7 CT ids that M8.5 replays, r: back to the M7 end state
+m8) img=(
+  [b1]="$t/bl2_enc.bin 0x081E8000 0x081E8000 install-bl2"
+  [b2]="$t/app_signed.bin 0x08018000 0x0C018000 install-app"
+  [w1]="$t/ct-app-hash.bin 0x08018000 0x0C018000 CT-APP-HASH"
+  [w2]="$t/app_signed.bin 0x08018000 0x0C018000 restore-app"
+  [w3]="$t/ct-app-sig.bin 0x08018000 0x0C018000 CT-APP-SIG"
+  [w4]="$t/app_signed.bin 0x08018000 0x0C018000 restore-app"
+  [w7]="$t/ct-bl-exec.bin 0x08000000 0x0C000000 CT-BL-EXEC"
+  [w8]="$t/bl2_init.bin 0x08000000 0x0C000000 restore-bl"
+  [w9]="$t/bl2_enc.bin 0x081E8000 0x081E8000 CT-BL-DL-CTRL"
+  [r1]="$m7/rot_enc_sign.bin 0x081E8000 0x081E8000 recover-oemurot"
+  [r2]="$b/rot_tz_s_app_init_sign.bin 0x08018000 0x0C018000 recover-st-app"
+) ;;
+*) echo "unknown milestone: $ms" >&2; exit 2 ;;
+esac
 
 run() {
   echo "\$ STM32_Programmer_CLI $*" | tee -a "$log"
@@ -80,7 +103,7 @@ boot)
   run "${hp[@]}" -hardRst
   [ $dry -eq 1 ] || sleep 3
   observe ;;
-w[0-9]*)
+[bwr][0-9]*)
   [ -n "${img[$step]:-}" ] || { echo "unknown step: $step" >&2; exit 2; }
   read -r file addr rb id <<< "${img[$step]}"
   [ $ur -eq 1 ] && hp=(-c port=SWD speed=fast ap=1 mode=UR)
@@ -95,9 +118,9 @@ w[0-9]*)
   run "${hp[@]}" -d "$file" "$addr" -v || true
   # FLASH NSSR, SECSR: PGSERR and friends if the write was refused (D-09 evidence)
   run "${hp[@]}" -r32 0x40022020 4 -r32 0x50022024 4
-  run "${hp[@]}" -r "$rb" "$(printf 0x%x "$size")" "$t/m7-$step-readback.bin"
+  run "${hp[@]}" -r "$rb" "$(printf 0x%x "$size")" "$t/$ms-$step-readback.bin"
   if [ $dry -eq 0 ]; then
-    if cmp "$file" "$t/m7-$step-readback.bin"; then
+    if cmp "$file" "$t/$ms-$step-readback.bin"; then
       echo "cmp $id: identical" | tee -a "$log"
     else
       echo "cmp $id: DIFFERENT" | tee -a "$log"; exit 1
