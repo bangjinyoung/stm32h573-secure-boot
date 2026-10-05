@@ -1,0 +1,44 @@
+# M8 H1: STiRoT image signature check (host, 2026-10-05)
+
+Closes the M7 H0 backlog item: `rot_init_sign.bin` (STiRoT-format OEMuRoT 2.0.0) matched its
+hash TLV and the STiRoT keyhash but its signature checked INVALID.
+
+## Cause
+
+The STiRoT image is signed the same way as an MCUboot app image: ECDSA P-256 / SHA-256 over
+header + body + protected TLVs. The ST imgtool binary (2.1.0.3, STM32CubeCLT 1.22.0,
+`STM32CubeProgrammer/bin/Utilities/Linux/imgtool`) pads r and s to 33 bytes each, giving a
+72-byte DER signature. When an integer's top bit is clear the leading 0x00 is not valid DER,
+and python `cryptography` rejects the signature before checking it. The app image in M7 had a
+canonical 71-byte signature, so it passed.
+
+Direct check of the same bytes, before the fix:
+
+```
+0x73ab1024 0x400 0x13 0x17ac0 siglen 72
+strict DER: INVALID InvalidSignature
+canonical re-encode: VALID
+```
+
+## Fix
+
+`scripts/mcuboot_image.py` rebuilds the DER signature from the two parsed integers before
+verifying (`canonical_der`). The signed bytes and the key are unchanged.
+
+## Result (`mcuboot_image.py check`, keys from ROT_Provisioning/STiROT_OEMuROT/Keys of the build copy, ST default key)
+
+| image | magic | sig len | hash TLV | keyhash | signature |
+|---|---|---|---|---|---|
+| rot_init_sign.bin (OEMuRoT 2.0.0 exec) | 0x73ab1024 | 72 | MATCH | STiRoT MATCH | STiRoT VALID |
+| a2-oemurot-exec-flip.bin (M7 CT-BL-EXEC) | 0x73ab1024 | 72 | MISMATCH | STiRoT MATCH | STiRoT INVALID |
+
+M7 H0 table reproduced unchanged (trusted key OEMuRoT_Authentication_S, M2 key):
+
+| image | hash TLV | keyhash = trusted | sig, trusted | sig, M2 key |
+|---|---|---|---|---|
+| rot_tz_s_app_init_sign.bin | MATCH | MATCH | VALID | INVALID |
+| b2-app-payload-flip.bin | MISMATCH | MATCH | INVALID | INVALID |
+| b3-app-foreign-sig.bin | MATCH | MATCH | INVALID | VALID |
+
+STiRoT image TLVs: protected 0x50 (security counter, 4 B), 0x60 (ST specific, 3 B, not
+decoded); unprotected 0x10 SHA256, 0x01 keyhash, 0x22 ECDSA256 (72 B), 0x32 ENC_EC256 (113 B).
