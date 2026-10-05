@@ -11,6 +11,10 @@
 #define BOOT_HANDOFF_SRAM_START SRAM1_BASE
 #define BOOT_HANDOFF_SRAM_END   (SRAM1_BASE + 0x000A0000U)
 
+/* MPU region RSS JumpHDPLvl3 enables for the image, as in ST OEMuRoT (region 1). */
+#define BOOT_HANDOFF_MPU_APP_REGION 1U
+#define BOOT_HANDOFF_MPU_APP_ATTR   0U
+
 struct boot_handoff_vectors {
     uint32_t initial_sp;
     uint32_t reset_handler;
@@ -70,10 +74,64 @@ static void boot_handoff_quiesce(void)
     }
 }
 
+/*
+ * Clears the whole SRAM (BL2 data, heap and this stack), clears the registers that could carry
+ * BL2 state, then calls RSS JumpHDPLvl3(vector_table, mpu_region). RSS raises HDPL to 3, enables
+ * the MPU region and starts the image; it returns only on a parameter error, and then the core
+ * stays in the loop below with the RSS status in r0 for SWD to read.
+ */
+__attribute__((naked, noreturn)) static void boot_handoff_rss_jump(__attribute__((unused)) uint32_t rss_jump, __attribute__((unused)) uint32_t vector_table,
+                                                                       __attribute__((unused)) uint32_t mpu_region)
+{
+    __ASM volatile(".syntax unified            \n"
+                   "mov     r4, r0             \n"
+                   "mov     r5, r1             \n"
+                   "mov     r6, r2             \n"
+                   "ldr     r0, =%c0           \n"
+                   "ldr     r1, =_estack       \n"
+                   "movs    r2, #0             \n"
+                   "1:                         \n"
+                   "str     r2, [r0], #4       \n"
+                   "cmp     r0, r1             \n"
+                   "blo     1b                 \n"
+                   "mov     r12, r4            \n"
+                   "mov     r0, r5             \n"
+                   "mov     r1, r6             \n"
+                   "movs    r2, #0             \n"
+                   "mov     r3, r2             \n"
+                   "mov     r4, r2             \n"
+                   "mov     r5, r2             \n"
+                   "mov     r6, r2             \n"
+                   "mov     r7, r2             \n"
+                   "mov     r8, r2             \n"
+                   "mov     r9, r2             \n"
+                   "mov     r10, r2            \n"
+                   "mov     r11, r2            \n"
+                   "blx     r12                \n"
+                   "2:                         \n"
+                   "b       2b                 \n"
+                   :
+                   : "i"(SRAM1_BASE));
+}
+
+/* Configured but left disabled: RSS enables it after raising HDPL, so only the image runs. */
+static void boot_handoff_set_app_region(void)
+{
+    uint32_t base = FLASH_BASE_ADDRESS + FLASH_AREA_0_OFFSET;
+    uint32_t limit = base + FLASH_AREA_0_SIZE - 1U;
+
+    ARM_MPU_SetMemAttr(BOOT_HANDOFF_MPU_APP_ATTR, ARM_MPU_ATTR(ARM_MPU_ATTR_MEMORY_(1U, 0U, 1U, 0U), ARM_MPU_ATTR_MEMORY_(1U, 0U, 1U, 0U)));
+    MPU->RNR = BOOT_HANDOFF_MPU_APP_REGION;
+    MPU->RBAR = ARM_MPU_RBAR(base, ARM_MPU_SH_NON, 1U, 0U, 0U);
+    MPU->RLAR = (limit & MPU_RLAR_LIMIT_Msk) | ((BOOT_HANDOFF_MPU_APP_ATTR << MPU_RLAR_AttrIndx_Pos) & MPU_RLAR_AttrIndx_Msk);
+    __DSB();
+    __ISB();
+}
+
 int boot_handoff_jump(const struct boot_rsp *rsp)
 {
     const struct boot_handoff_vectors *vectors;
-    void (*reset_handler)(void);
+    uint32_t rss_jump;
     int ret;
 
     ret = boot_handoff_validate_rsp(rsp);
@@ -88,22 +146,17 @@ int boot_handoff_jump(const struct boot_rsp *rsp)
         return ret;
     }
 
-    printf("[bl2] jump to 0x%08lx sp=0x%08lx reset=0x%08lx\r\n", (uint32_t)vectors, vectors->initial_sp, vectors->reset_handler);
+    rss_jump = (uint32_t)RSSLIB_PFUNC->S.JumpHDPLvl3;
 
-    reset_handler = (void (*)(void))vectors->reset_handler;
+    printf("[bl2] hdpl=0x%02lx jump to 0x%08lx sp=0x%08lx reset=0x%08lx via rss 0x%08lx\r\n", SBS->HDPLSR & SBS_HDPLSR_HDPL, (uint32_t)vectors,
+           vectors->initial_sp, vectors->reset_handler, rss_jump);
 
     boot_handoff_quiesce();
-
-    SCB->VTOR = (uint32_t)vectors;
+    boot_handoff_set_app_region();
     __set_MSPLIM(0U);
     __set_PSPLIM(0U);
-    __set_MSP(vectors->initial_sp);
-    __DSB();
-    __ISB();
 
     /* Every interrupt source is disabled above, and the application startup does not clear PRIMASK. */
     __enable_irq();
-    reset_handler();
-
-    return -EFAULT;
+    boot_handoff_rss_jump(rss_jump, (uint32_t)vectors, BOOT_HANDOFF_MPU_APP_REGION);
 }
