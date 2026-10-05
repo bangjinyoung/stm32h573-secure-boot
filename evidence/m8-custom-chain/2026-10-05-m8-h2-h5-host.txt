@@ -1,0 +1,66 @@
+# M8 H2-H5: secure BL2 and app build, RSS handoff, STiRoT packaging (host, 2026-10-05)
+
+Host only. No board access. Build: `cmake -S . -B build/m8-release -G Ninja
+-DCMAKE_TOOLCHAIN_FILE=cmake/arm-none-eabi.cmake -DCMAKE_BUILD_TYPE=Release`, STM32CubeCLT
+1.22.0 (GCC 14.3). Commits 13c8a81 (secure build, D-11 layout, SAU), f072954 (DEBUG log,
+D-14), 4960d40 (RSS JumpHDPLvl3 handoff), 1a3af09 (app HDPL print).
+
+## Layout (D-11 L1a, SECWM1 0-0xF unchanged)
+
+| area | offset / size | address used |
+|---|---|---|
+| BL2 (STiRoT HDPL2 code area) | 0x0 / 0x18000, header 0x400 | vectors 0x0C000400 |
+| primary slot (Secure) | 0x18000 / 0x8000 | 0x0C018000, app vectors 0x0C018400 |
+| secondary slot (Non-secure) | 0x20000 / 0x8000 | 0x08020000 |
+
+`flash_layout.h` fails the build if the primary leaves SECWM1 (0x20000) or the secondary enters it.
+
+## Build output (arm-none-eabi-size, readelf)
+
+| image | text | data | bss | entry | g_pfnVectors | RAM | _estack |
+|---|---|---|---|---|---|---|---|
+| bl2.elf | 45032 | 192 | 10680 | 0x0C001275 | 0x0C000400 | 0x30000000 | 0x300A0000 |
+| bare_slot.elf | 16380 | 104 | 2056 | 0x0C018B09 | 0x0C018400 | 0x30000000 | 0x300A0000 |
+
+VECT_TAB_OFFSET: bl2 0x400, bare_slot 0x18400 (added to FLASH_BASE = FLASH_BASE_S 0x0C000000
+under -mcmse). bl2.bin starts `300a0000 0c001275`.
+
+## App image (MCUboot format, M2 key)
+
+`bare_slot_signed.bin` from the CMake POST_BUILD (`scripts/imgtool sign`, header 0x400,
+slot 0x8000, version 1.0.0): hash TLV MATCH, keyhash MATCH, signature VALID with
+`keys/mcuboot-ecdsa-p256.pub.pem`. Vectors at +0x400: `300a0000 0c018b09`.
+
+## RSS handoff (bl2.elf disassembly)
+
+- MPU region 1 written before the jump, not enabled: RBAR 0x0C018004 (RO, privileged,
+  executable), RLAR limit 0x0C01FFE0, attribute index 0, MAIR0 attr0 0xAA.
+- MSPLIM and PSPLIM 0, PRIMASK cleared, then `boot_handoff_rss_jump(rss, 0x0C018400, 1)`.
+- Trampoline clears 0x30000000-0x300A0000, clears r2-r11, `blx` JumpHDPLvl3; on return it
+  spins at `b .` with the RSS status in r0.
+- SBS base in the image is 0x54000400 (HDPLSR 0x54000414, same address M5 read 0x8A at HDPL2).
+
+## STiRoT packaging (scripts/package_bl2_stirot.sh)
+
+The script runs STM32TrustedPackageCreator_CLI on copies of STiRoT_Code_Init_Image.xml and
+STiRoT_Code_Image.xml from the provisioned build tree (keys and areas from the linked
+STiRoT_Config.xml), with only the input, output and version replaced.
+
+Reference run on OEMiROT_Boot.bin against the provisioned `rot_init_sign.bin`: header, body,
+protected TLVs, SHA256 and keyhash TLVs identical; only the ECDSA signature and the ENC_EC256
+TLV (random ephemeral key, 0x17F70-0x17FDF) differ. Signature VALID with the STiRoT key.
+
+Custom BL2, version 2.0.0 (D-12), in `.workspace/tmp/m8/` (not in git):
+
+| file | sha256 | check |
+|---|---|---|
+| bl2_init.bin (exec image, clear, confirmed) | e155ac631fcd7d162e5ed556e0f6ba50b3f95629325691a7c59a3555adde0400 | magic 0x73ab1024, img_size 0x17ac0, hash MATCH, STiRoT keyhash MATCH, signature VALID; body = bl2.bin (45224 B) then 0x00 padding |
+| bl2_enc.bin (download image, encrypted) | 1ed1f7a2751789feb90dd44db9b743319dcaa2d078a08f0379b841596e6e997a | same TLV set and sizes; hash and signature cover the plaintext, so the check of the ciphertext reports MISMATCH/INVALID, as for the provisioned rot_enc_sign.bin |
+
+## E8-K host check (no key material in logs)
+
+- MCUBOOT_ENC_IMAGES in boot/mcuboot/config: 0. encrypted.c is not in the bl2 sources.
+- bl2.elf symbols matching boot_enc|enc_key|aes: only the weak AES_IRQHandler and
+  SAES_IRQHandler vectors.
+- bl2.elf strings with the ST fork's key print format `%x, %x`: 0.
+- The VCP log scan (16 or more hex byte runs) is done on the board logs.
