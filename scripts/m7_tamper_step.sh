@@ -8,8 +8,14 @@
 # when DSCSR.CDS is 0. They never reset: a reset with SW1=0 would run OEMuRoT from SECBOOTADD
 # without STiRoT, at the wrong HDPL, with the HDPL2 OBKs provisioned. SW1 stays 1.
 #
-# usage: m7_tamper_step.sh [-n] <log dir> <step>
+# W1 showed that a halted running chain is not enough: with the app running, the flash loader
+# erased sectors 12-15, programmed 0x8b0 bytes and faulted (CFSR 0x00018201). -u connects under
+# reset with SW1=0, so the core halts at the SECBOOTADD reset vector before OEMuRoT configures
+# anything, which is the state the M6 flash step programmed in. Set SW1 back to 1 before boot.
+#
+# usage: m7_tamper_step.sh [-n] [-u] <log dir> <step>
 #   -n       print the commands only
+#   -u       w* steps connect under reset (mode=UR, SW1=0) instead of Hotplug
 #   observe  read-only: VTOR, DSCSR, CFSR, DEMCR, 4 DWT_PCSR samples
 #   ob       read-only: option bytes
 #   boot     clear DEMCR vector catch, NRST via -hardRst, wait, observe
@@ -17,7 +23,9 @@
 set -euo pipefail
 
 dry=0
+ur=0
 if [ "${1:-}" = -n ]; then dry=1; shift; fi
+if [ "${1:-}" = -u ]; then ur=1; shift; fi
 logdir=${1:?usage: $0 [-n] <log dir> <step>}
 step=${2:?usage: $0 [-n] <log dir> <step>}
 
@@ -75,6 +83,7 @@ boot)
 w[0-9]*)
   [ -n "${img[$step]:-}" ] || { echo "unknown step: $step" >&2; exit 2; }
   read -r file addr rb id <<< "${img[$step]}"
+  [ $ur -eq 1 ] && hp=(-c port=SWD speed=fast ap=1 mode=UR)
   size=$(stat -c %s "$file")
   echo "# $id $(basename "$file") sha256 $(sha256sum "$file" | cut -c1-16) -> $addr" | tee -a "$log"
   run "${hp[@]}" -r32 0xE000EE08 4
