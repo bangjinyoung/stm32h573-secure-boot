@@ -14,7 +14,7 @@ import sys
 from dataclasses import dataclass
 
 from cryptography.hazmat.primitives import hashes, serialization
-from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives.asymmetric import ec, utils
 
 TLV_PROT_MAGIC = 0x6908
 TLV_INFO_MAGIC = 0x6907
@@ -74,9 +74,24 @@ def key_hash(pub):
     return hashlib.sha256(der).digest()
 
 
+def canonical_der(sig):
+    # ST's imgtool binary pads r and s to 33 bytes (72-byte DER); strict DER parsing rejects the
+    # padding when the top bit is clear, so rebuild the signature from the two integers.
+    if sig[0] != 0x30:
+        return sig
+    off, ints = 2, []
+    for _ in range(2):
+        if sig[off] != 0x02:
+            return sig
+        length = sig[off + 1]
+        ints.append(int.from_bytes(sig[off + 2:off + 2 + length], "big"))
+        off += 2 + length
+    return utils.encode_dss_signature(*ints)
+
+
 def verifies(pub, sig, data):
     try:
-        pub.verify(sig, data, ec.ECDSA(hashes.SHA256()))
+        pub.verify(canonical_der(sig), data, ec.ECDSA(hashes.SHA256()))
         return True
     except Exception:
         return False
