@@ -1,10 +1,11 @@
 #!/bin/bash
-# Runs one M7, M8 or M9 step on the board and appends the CLI output to
+# Runs one M7, M8, M9 or M10 step on the board and appends the CLI output to
 # <log dir>/<date>-<milestone>-<step>.log with the ST-LINK serial number masked.
 # Board state on entry: Open, TZEN 0xB4, BOOT_UBE 0xC3, SECBOOT_LOCK 0xB4 (left locked, D-09).
 # M7 runs the ST chain (OEMuRoT); M8 the custom one (M2 BL2 and bare_slot, images from
-# make_m8_images.sh); M9 the update and rollback steps (make_m9_images.sh). The HDPL2
-# bootloader is called OEMuRoT below; in M8 and M9 it is BL2.
+# make_m8_images.sh); M9 the update and rollback steps (make_m9_images.sh); M10 the Secure and
+# Non-secure images (make_m10_images.sh). The HDPL2 bootloader is called OEMuRoT below; in M8-M10
+# it is BL2.
 #
 # Hotplug programs SECWM-secure flash only while the halted core is Secure (M6). The w* steps
 # halt whatever runs now (the full-secure app, or OEMuRoT stopped in Error_Handler) and refuse
@@ -16,13 +17,13 @@
 # reset with SW1=0, so the core halts at the SECBOOTADD reset vector before OEMuRoT configures
 # anything, which is the state the M6 flash step programmed in. Set SW1 back to 1 before boot.
 #
-# usage: tamper_step.sh [-n] [-u] <m7|m8|m9> <log dir> <step>
+# usage: tamper_step.sh [-n] [-u] <m7|m8|m9|m10> <log dir> <step>
 #   -n       print the commands only
 #   -u       w* steps connect under reset (mode=UR, SW1=0) instead of Hotplug
-#   observe  read-only: VTOR, DSCSR, CFSR, DEMCR, 4 DWT_PCSR samples
+#   observe  read-only: VTOR, DSCSR, CFSR, DEMCR, 4 DWT_PCSR samples, VTOR_NS, SFSR, SFAR, HFSR
 #   ob       read-only: option bytes
 #   boot     clear DEMCR vector catch, NRST via -hardRst, wait, observe
-#   a*, b*, w*, r*  write one image (tables below), read it back into .workspace/tmp/<milestone>
+#   a*, b*, c*, t*, w*, r*  write one image (tables below), read it back into .workspace/tmp/<milestone>
 #               and compare
 set -euo pipefail
 
@@ -30,9 +31,9 @@ dry=0
 ur=0
 if [ "${1:-}" = -n ]; then dry=1; shift; fi
 if [ "${1:-}" = -u ]; then ur=1; shift; fi
-ms=${1:?usage: $0 [-n] [-u] <m7|m8|m9> <log dir> <step>}
-logdir=${2:?usage: $0 [-n] [-u] <m7|m8|m9> <log dir> <step>}
-step=${3:?usage: $0 [-n] [-u] <m7|m8|m9> <log dir> <step>}
+ms=${1:?usage: $0 [-n] [-u] <m7|m8|m9|m10> <log dir> <step>}
+logdir=${2:?usage: $0 [-n] [-u] <m7|m8|m9|m10> <log dir> <step>}
+step=${3:?usage: $0 [-n] [-u] <m7|m8|m9|m10> <log dir> <step>}
 
 repo=$(cd "$(dirname "$0")/.." && pwd)
 b=$repo/build/stirot_oemurot
@@ -87,6 +88,18 @@ m9) img=(
   [b6]="$t/app_v2.bin 0x08018000 0x0C018000 restore-v2"
   [r1]="$m8/bl2_enc.bin 0x081E8000 0x081E8000 recover-m8-bl2"
 ) ;;
+# c: install BL2-c and both images, t: E10.2 tamper and restore, r: back to the M9 end state (R0)
+m10) img=(
+  [c1]="$t/ns_v1.bin 0x08020000 0x08020000 install-ns"
+  [c2]="$t/s_v3.bin 0x08018000 0x0C018000 install-s"
+  [c3]="$t/bl2c_enc.bin 0x081E8000 0x081E8000 install-bl2c"
+  [t1]="$t/s_hash.bin 0x08018000 0x0C018000 E10.2-S-HASH"
+  [t2]="$t/s_v3.bin 0x08018000 0x0C018000 restore-s"
+  [t3]="$t/ns_hash.bin 0x08020000 0x08020000 E10.2-NS-HASH"
+  [t4]="$t/ns_v1.bin 0x08020000 0x08020000 restore-ns"
+  [r1]="$repo/.workspace/tmp/m9/bl2b_enc.bin 0x081E8000 0x081E8000 recover-m9-bl2b"
+  [r2]="$repo/.workspace/tmp/m9/app_v2.bin 0x08018000 0x0C018000 recover-m9-app"
+) ;;
 *) echo "unknown milestone: $ms" >&2; exit 2 ;;
 esac
 
@@ -104,7 +117,8 @@ run() {
 
 observe() {
   run "${hp[@]}" -r32 0xE000ED08 4 -r32 0xE000EE08 4 -r32 0xE000ED28 4 -r32 0xE000EDFC 4 \
-    -r32 0xE000101C 4 -r32 0xE000101C 4 -r32 0xE000101C 4 -r32 0xE000101C 4
+    -r32 0xE000101C 4 -r32 0xE000101C 4 -r32 0xE000101C 4 -r32 0xE000101C 4 \
+    -r32 0xE002ED08 4 -r32 0xE000EDE4 4 -r32 0xE000EDE8 4 -r32 0xE000ED2C 4
 }
 
 [ $dry -eq 1 ] && log=/dev/null || { mkdir -p "$logdir"; echo "# $(date '+%F %T.%3N %z') step $step" >> "$log"; }
@@ -119,7 +133,7 @@ boot)
   run "${hp[@]}" -hardRst
   [ $dry -eq 1 ] || sleep 3
   observe ;;
-[abwr][0-9]*)
+[abctwr][0-9]*)
   [ -n "${img[$step]:-}" ] || { echo "unknown step: $step" >&2; exit 2; }
   read -r file addr rb id <<< "${img[$step]}"
   [ $ur -eq 1 ] && hp=(-c port=SWD speed=fast ap=1 mode=UR)
