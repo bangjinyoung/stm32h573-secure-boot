@@ -36,6 +36,7 @@ add_library(stm32h5_hal STATIC
   ${HAL_DIR}/Src/stm32h5xx_hal_flash.c
   ${HAL_DIR}/Src/stm32h5xx_hal_flash_ex.c
   ${HAL_DIR}/Src/stm32h5xx_hal_gpio.c
+  ${HAL_DIR}/Src/stm32h5xx_hal_gtzc.c
   ${HAL_DIR}/Src/stm32h5xx_hal_pwr.c
   ${HAL_DIR}/Src/stm32h5xx_hal_pwr_ex.c
   ${HAL_DIR}/Src/stm32h5xx_hal_rcc.c

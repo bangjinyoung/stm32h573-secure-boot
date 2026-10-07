@@ -14,6 +14,27 @@ function(stm32h573_linker_script out_file flash_origin flash_length ram_origin r
     file(WRITE ${out_file} "${patched}")
 endfunction()
 
+# Adds a Non-secure callable region after FLASH and places the CMSE veneers (.gnu.sgstubs) in it. __nsc_region_start
+# and __nsc_region_end bound the whole region for the SAU.
+function(stm32h573_linker_script_add_nsc script_file nsc_origin nsc_length)
+    file(READ ${script_file} script)
+    string(REGEX REPLACE "(FLASH \\(rx\\) : ORIGIN = [^\n]*\n)" "\\1  FLASH_NSC (rx) : ORIGIN = ${nsc_origin}, LENGTH = ${nsc_length}\n" patched "${script}")
+    string(REPLACE "  /* Constant data into \"FLASH\" Rom type memory */" "  .gnu.sgstubs :
+  {
+    . = ALIGN(32);
+    *(.gnu.sgstubs*)
+    . = ALIGN(32);
+  } >FLASH_NSC
+  __nsc_region_start = ORIGIN(FLASH_NSC);
+  __nsc_region_end = ORIGIN(FLASH_NSC) + LENGTH(FLASH_NSC);
+
+  /* Constant data into \"FLASH\" Rom type memory */" patched "${patched}")
+    if(NOT patched MATCHES "FLASH_NSC \\(rx\\) : ORIGIN = ${nsc_origin}" OR NOT patched MATCHES "\\.gnu\\.sgstubs")
+        message(FATAL_ERROR "FLASH region or .rodata anchor not found in ${script_file}")
+    endif()
+    file(WRITE ${script_file} "${patched}")
+endfunction()
+
 function(stm32h573_check_range target what address start end)
     math(EXPR value "${address}")
     math(EXPR lower "${start}")
@@ -23,16 +44,21 @@ function(stm32h573_check_range target what address start end)
     endif()
 endfunction()
 
-# stm32h573_executable(<target> FLASH <origin> <length> [RAM <origin> <length>] [STACK <size>] [NONSECURE])
+# stm32h573_executable(<target> FLASH <origin> <length> [RAM <origin> <length>] [STACK <size>] [NSC <origin> <length>] [NONSECURE])
 #   Secure (default): flash and SRAM at the Secure aliases; RAM defaults to all of SRAM1-3 (0x30000000, 640K).
 #   NONSECURE: flash and SRAM at the Non-secure aliases, built without -mcmse, RAM required. The Secure image sets
 #   VTOR_NS, so the Non-secure SystemInit leaves VTOR alone.
+#   NSC (Secure only): a Non-secure callable region for cmse_nonsecure_entry veneers, and <target>_cmse_implib.o, the
+#   import library a Non-secure image links against.
 #   STACK defaults to 0x400 from the CMSIS template.
 function(stm32h573_executable target)
-    cmake_parse_arguments(PARSE_ARGV 1 ARG "NONSECURE" "STACK" "FLASH;RAM")
+    cmake_parse_arguments(PARSE_ARGV 1 ARG "NONSECURE" "STACK" "FLASH;RAM;NSC")
     list(LENGTH ARG_FLASH flash_args)
     if(NOT flash_args EQUAL 2 OR ARG_UNPARSED_ARGUMENTS)
-        message(FATAL_ERROR "${target}: usage stm32h573_executable(<target> FLASH <origin> <length> [RAM <origin> <length>] [STACK <size>] [NONSECURE])")
+        message(FATAL_ERROR "${target}: usage stm32h573_executable(<target> FLASH <origin> <length> [RAM <origin> <length>] [STACK <size>] [NSC <origin> <length>] [NONSECURE])")
+    endif()
+    if(ARG_NSC AND ARG_NONSECURE)
+        message(FATAL_ERROR "${target}: only a Secure image has a Non-secure callable region")
     endif()
     list(GET ARG_FLASH 0 flash_origin)
     list(GET ARG_FLASH 1 flash_length)
@@ -69,6 +95,15 @@ function(stm32h573_executable target)
 
     set(script ${CMAKE_CURRENT_BINARY_DIR}/${target}.ld)
     stm32h573_linker_script(${script} ${flash_origin} ${flash_length} ${ram_origin} ${ram_length} ${ARG_STACK})
+    if(ARG_NSC)
+        list(GET ARG_NSC 0 nsc_origin)
+        list(GET ARG_NSC 1 nsc_length)
+        stm32h573_check_range(${target} NSC ${nsc_origin} 0x0C000000 0x0C200000)
+        stm32h573_linker_script_add_nsc(${script} ${nsc_origin} ${nsc_length})
+        set(implib ${CMAKE_CURRENT_BINARY_DIR}/${target}_cmse_implib.o)
+        target_link_options(${target} PRIVATE -Wl,--cmse-implib -Wl,--out-implib=${implib})
+        set_target_properties(${target} PROPERTIES STM32H573_CMSE_IMPLIB ${implib})
+    endif()
 
     add_dependencies(${target} build_id)
     target_include_directories(${target} PRIVATE ${CMAKE_BINARY_DIR}/generated)

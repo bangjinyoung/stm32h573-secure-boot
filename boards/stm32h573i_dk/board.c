@@ -127,6 +127,27 @@ int _write(int file, char *ptr, int len)
     return len;
 }
 
+int board_console_hand_to_nonsecure(void)
+{
+    uint32_t start = HAL_GetTick();
+
+    while (__HAL_UART_GET_FLAG(&console_uart, UART_FLAG_TC) == RESET) {
+        if ((HAL_GetTick() - start) > BOARD_CONSOLE_TIMEOUT_MS) {
+            return -ETIMEDOUT;
+        }
+    }
+
+    /* Securable peripherals reset Non-secure (RM0481 2.2.1); set it anyway so the hand-over does not depend on
+     * what ran before. GPIO pins reset Secure. */
+    __HAL_RCC_GTZC1_CLK_ENABLE();
+    if (HAL_GTZC_TZSC_ConfigPeriphAttributes(GTZC_PERIPH_USART1, GTZC_TZSC_PERIPH_NSEC | GTZC_TZSC_PERIPH_NPRIV) != HAL_OK) {
+        return -EIO;
+    }
+    HAL_GPIO_ConfigPinAttributes(BOARD_CONSOLE_PORT, BOARD_CONSOLE_TX_PIN | BOARD_CONSOLE_RX_PIN, GPIO_PIN_NSEC);
+
+    return 0;
+}
+
 void SysTick_Handler(void)
 {
     HAL_IncTick();
