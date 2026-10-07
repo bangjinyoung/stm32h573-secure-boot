@@ -1,0 +1,58 @@
+# M10 H: BL2-c and the Secure / Non-secure images for the M10 board steps (host, 2026-10-07)
+
+Firmware: commits 0332fe2 (boot, two images), 73531b8 (cmake, per-target cmse), 0435969 (Secure app),
+118d5b3 (Non-secure app), e530643 (scripts). Built at e530643 (BUILD_ID "e530643" in bl2c.bin, s_v3.bin
+and ns_v1.bin), Release, STM32CubeCLT 1.22.0 GCC:
+
+    cmake -S . -B build/m10 -G Ninja -DCMAKE_TOOLCHAIN_FILE=cmake/arm-none-eabi.cmake \
+          -DCMAKE_BUILD_TYPE=Release -DBL2_ROLLBACK=hw
+    cmake --build build/m10
+    scripts/make_m10_images.sh build/m10
+
+Binaries stay in `.workspace/tmp/m10/` (not in git). ECDSA signing and the STiRoT download encryption are
+randomized: a rerun gives other sha256 values and is reproduced by the properties below.
+
+## Builds
+
+| image | size (text data bss) | link | notes |
+|---|---|---|---|
+| BL2-c | 48920 192 11040 | 0x0C000400, RAM 0x30000000/640K | MCUBOOT_IMAGE_NUMBER 2, overwrite-only, HW_ROLLBACK_PROT. Areas: 0x18000/0x8000 (S primary), 0x20000/0x10000 (NS primary), 0x30000/0x8000, 0x38000/0x10000 |
+| tz_s | 17908 104 2056 | 0x0C018400/28K, NSC 0x0C01F400/1K, RAM 0x30000000/256K | -mcmse. veneer secure_boot_info 0x0C01F400 (sg; b.w), body __acle_se_secure_boot_info 0x0C018CCC |
+| tz_ns | 5644 92 1900 | 0x08020400/62K, RAM 0x20050000/320K | no -mcmse. veneer reached through a linker long-branch stub (ldr pc -> 0x0C01F401) |
+
+E8-K: BL2-c `nm` matches only the weak AES_IRQHandler and SAES_IRQHandler vector aliases; no key output format.
+
+## Images
+
+| step | file | sha256 | content | write address |
+|---|---|---|---|---|
+| c1, t4 | ns_v1.bin | 358e19b820ffdd9a1ce9932ccf70a29f60d761456c25c58742e799d02989ebd7 | tz_ns 1.0.0, SEC_CNT 0, img_size 0x166c, no trailer | 0x08020000 |
+| c2, t2 | s_v3.bin | 6d640b34f3435b77acdfe91335dd8d2a27c34cdf84f6f75cfb0453699247d888 | tz_s 3.0.0, SEC_CNT 2, img_size 0x7020 (veneer inside), no trailer | 0x08018000 |
+| c3 | bl2c_enc.bin | 5f3662f255580f1dde026bb6893db9c6cf4a9893deeb365333adeffe94f3359c | STiRoT download image of BL2-c, 2.0.0, encrypted | 0x081E8000 |
+| (recovery) | bl2c_init.bin | b3fd7385394f254d95315d48addd87baeb4d10b84110882009f63b71adec79b3 | STiRoT execution image of BL2-c | 0x08000000 |
+| t1 | s_hash.bin | 4c55acb31e6a746673330b0e6ae379a055fe84e6b8eb368628d0947c08e05185 | s_v3.bin with bit 0 of byte 0x1400 flipped | 0x08018000 |
+| t3 | ns_hash.bin | 1f833784abd2990a4b5dbbf9c2f56472b1f6259229a3ce297d6e53cbe45c5ff0 | ns_v1.bin with bit 0 of byte 0x1400 flipped | 0x08020000 |
+
+`mcuboot_image.py check`: s_v3 and ns_v1 hash MATCH, signature VALID with keys/mcuboot-ecdsa-p256.pub.pem;
+s_hash and ns_hash hash MISMATCH, signature INVALID; bl2c_init hash MATCH, signature VALID with the STiRoT key,
+STiRoT counter 0x02000000 (same as M8/M9 BL2, D-12).
+
+Vector tables: s_v3 sp=0x30040000 reset=0x0c018ded (BL2 accepts sp in (0x30000000, 0x300A0000]);
+ns_v1 sp=0x200a0000 reset=0x080207ed (tz_s accepts sp in (0x20050000, 0x200A0000], reset in the NS slot).
+
+imgtool runs with --overwrite-only: without it the trailer is sized for swap (0x1850) and the 29K Secure image
+does not fit the 0x8000 slot.
+
+## Test matrix (expected from source; the board decides)
+
+| step | BL2 | write | expected | claim |
+|---|---|---|---|---|
+| c1-c3 | b (gated) | ns_v1, s_v3, bl2c_enc | each write: `hdpl=0x51, not started by stirot: stop`, no slot access | |
+| c4 | b -> c | none, boot | STiRoT installs BL2-c; `rollback=hw`, record valid counter0=2, oemurot hash d5e96ea8, image 0 and 1 validated, no `rollback counter` line; `[s]` banner, SAU and NSC lines; `[ns]` banner, nsc hdpl=0x6f s_version=3.0 | E10.1 |
+| t1 | c | s_hash -> S primary | image 0 primary not valid, no app | E10.2 |
+| t2 | c | s_v3 | as c4 | restore |
+| t3 | c | ns_hash -> NS primary | image 1 primary not valid, no app (Secure app does not run either) | E10.2 |
+| t4 | c | ns_v1 | as c4 | restore |
+| p1 | c | none, VCP s | `probe s: read 0x30000000`, no "read returned"; SecureFault, SFSR AUVIOL, SFAR 0x30000000 | E10.3 |
+| p2 | c | none, VCP f | same for 0x0C018000 | E10.3 |
+| p3 | c | none, VCP c | via veneer prints the info; branch to body 0x0C018CCD: SecureFault, SFSR INVEP | E10.3 |
