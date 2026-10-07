@@ -1,0 +1,35 @@
+M9 A3 (E9.1 normal update): app v2 (2.0.0, SEC_CNT 2) via secondary, BL2-a, 2026-10-06
+
+Before: primary = app_v1.bin (A2 readback m9-a2-readback.bin identical), app 1.0.0 running.
+
+Write (23:01:07, SW1=0, tamper_step.sh -u m9 ... a3, 2026-10-06-m9-a3.log)
+- app_v2_upd.bin sha256 df2aecac5951b1b1... (= host record) -> secondary 0x08020000. Verified, NSSR 0, SECSR 0, readback identical.
+- D-23 gate: 5 restarts, each "[bl2] hdpl=0x51, not started by stirot: stop". The update did not run before the judged boot.
+
+Boot (23:02:45, SW1=1, NRST)
+  23:02:46.767 [bl2] mcuboot build=c2bdcda rollback=sw
+  23:02:46.770 [bl2] rollback record state=virgin
+  23:02:46.774 [bl2] oemurot obk sha256=d5e96ea8
+  23:02:46.781 [mcuboot INF] Image index: 0, Swap type: test
+  23:02:46.792 [mcuboot DBG] boot_version_cmp: ver1 2.0.0 vs ver2 1.0.0
+  23:02:47.550 [mcuboot INF] Image 0 upgrade secondary slot -> primary slot
+  23:02:47.554 [mcuboot INF] Erasing the primary slot                          (4 x 8 KB)
+  23:02:47.623 [mcuboot INF] Image 0 copying the secondary slot to the primary slot: 0x8000 bytes
+  23:02:47.670 [mcuboot DBG] erasing secondary header / 23:02:47.693 erasing secondary trailer
+  23:02:48.475 [bl2] image ok version=2.0.0+0
+  23:02:48.483 [bl2] hdpl=0x8a jump to 0x0c018400 ... reset=0x0c018b81
+  23:02:48.500 [bare] stm32h573 bare app build=c2bdcda, hdpl=0x6f
+  23:03:11.425 [bare] status uptime_ms=22801 hdpl=0x6f vtor=0x0c018400 (key sent from the host)
+- SWD after boot: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0 (2026-10-06-m9-boot.log third entry).
+
+Check (read-only, 2026-10-06-m9-a3-check.log)
+- Primary 0x0C018000 0x8000 after == app_v2_upd.bin (the secondary image, copied whole); header magic 0x96f3b83d, version 2.0.0.
+- app_v2.bin and app_v2_upd.bin: header+body [0:0x476C] identical, they differ only in the TLV area (separate signing).
+- Secondary after: 0x0-0x1FFF and 0x6000-0x7FFF all 0xFF (header and trailer erased); 0x2000-0x5FFF still the v2 body.
+
+Result: E9.1 evidence collected. BL2-a compared 2.0.0 > 1.0.0, validated, copied v2 to primary, and booted 2.0.0.
+Record still virgin (BL2-a never writes the record); OEMuRoT OBK hash unchanged.
+Verdict: pending (user).
+
+Captures: -a3-write-vcp.png, -a3-write.png, -a3-boot-vcp-head.png (banner, swap type, version cmp),
+-a3-boot-vcp-update.png (erase, copy, scramble), -a3-boot-vcp.png (tail to app), -a3-boot-swd.png.

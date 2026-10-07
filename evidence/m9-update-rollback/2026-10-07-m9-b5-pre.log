@@ -1,0 +1,82 @@
+# 2026-10-07 22:22:12 b5 pre-check, read-only (Hotplug)
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C018000 0x8000 .workspace/tmp/m9/m9-b5-primary-before.bin -r 0x08020000 0x8000 .workspace/tmp/m9/m9-b5-secondary-before.bin -r32 0xE000ED08 4 -r32 0xE000EE08 4 -r32 0xE000ED28 4 -r32 0x40022020 4 -r32 0x50022024 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-b5-primary-before.bin
+  Size          : 32768 Bytes
+  Address:      : 0xC018000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.114
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-b5-secondary-before.bin
+  Size          : 32768 Bytes
+  Address:      : 0x8020000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.113
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED08
+0xE000ED08 : 0C018400
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00030000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000ED28
+0xE000ED28 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022024
+0x50022024 : 00000000
+
+
+cmp primary == app_v2_upd.bin: identical
+secondary all 0xFF: True

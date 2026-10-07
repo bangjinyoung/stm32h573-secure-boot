@@ -1,0 +1,40 @@
+M9 A5 (E9.2-L SW limit): app v1 written straight into primary under BL2-a, 2026-10-06
+
+Before: primary = app_v2_upd.bin, secondary erased (A4 check), app 2.0.0 running.
+
+Write (23:13:19, SW1=0, tamper_step.sh -u m9 ... a5, 2026-10-06-m9-a5.log)
+- app_v1.bin sha256 7f349d82ad66d7e1... -> primary 0x08018000. Verified, NSSR 0, SECSR 0, readback 0x480F identical.
+- D-23 gate: each restart "[bl2] hdpl=0x51, not started by stirot: stop"; no mcuboot line in the write window.
+
+Boot (23:14:36, SW1=1, NRST)
+  23:14:37.350 [bl2] mcuboot build=c2bdcda rollback=sw
+  23:14:37.353 [bl2] rollback record state=virgin
+  23:14:37.364 [mcuboot INF] Image index: 0, Swap type: none
+  23:14:37.413 [mcuboot DBG] bootutil_img_validate: TLV off 18288, end 18447   (app_v1.bin)
+  23:14:38.126 [bl2] image ok version=1.0.0+0
+  23:14:38.134 [bl2] hdpl=0x8a jump to 0x0c018400
+  23:14:38.151 [bare] stm32h573 bare app build=c2bdcda, hdpl=0x6f
+- No boot_version_cmp line: with an empty secondary the downgrade check (loader.c:619-631) never runs.
+- SWD after boot: VTOR 0x0C018400, CFSR 0 (2026-10-06-m9-boot.log fifth entry).
+
+Check (read-only, 2026-10-06-m9-a5-check.log)
+- Primary [0:18447] == app_v1.bin, header version 1.0.0; [18447:0x6000] 0xFF; [0x6000:0x8000] still the old
+  v2_upd tail (the CLI erased only the 8 KB sectors it wrote). The tail lies past the TLV end; MCUboot ignores it.
+- Secondary 0x8000 all 0xFF.
+
+Result: E9.2-L evidence collected. BL2-a (version compare only) runs a lower version that reaches primary
+without the update path. Control for E9.3 B5. Verdict: pending (user).
+
+Captures: -a5-write-vcp.png, -a5-write.png, -a5-boot-vcp-head.png, -a5-boot-vcp.png, -a5-boot-swd.png.
+
+A-end (23:16, read-only)
+- -ob displ 36 fields identical to prep (22:49); SECBOOTR_CUR 0x0C0004B4, OPTSR_CUR 0x30F0EDF8. No OB change in stage A.
+- Rollback record virgin and OEMuRoT OBK sha256 d5e96ea8 on every BL2-a boot (A1-A5): no OBK write in stage A.
+
+| step | write                      | judged boot result                                                | claim   |
+|------|----------------------------|-------------------------------------------------------------------|---------|
+| A1   | bl2a_enc -> STiRoT download | STiRoT installs BL2-a; record virgin; hash d5e96ea8; M8 app runs   | setup   |
+| A2   | app_v1 -> primary           | image ok 1.0.0                                                     | baseline|
+| A3   | app_v2_upd -> secondary     | version cmp 2.0.0 vs 1.0.0, copy to primary, image ok 2.0.0        | E9.1    |
+| A4   | app_v1_upd -> secondary     | Insufficient version, secondary scrambled, image ok 2.0.0          | E9.2    |
+| A5   | app_v1 -> primary           | no compare, image ok 1.0.0                                         | E9.2-L  |

@@ -1,0 +1,61 @@
+# 2026-10-07 22:27:05 b6 check, read-only
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C018000 0x4810 .workspace/tmp/m9/m9-b6-primary-after.bin -r 0x08020000 0x8000 .workspace/tmp/m9/m9-b6-secondary-after.bin -r32 0x40022020 4 -r32 0x50022024 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-b6-primary-after.bin
+  Size          : 18448 Bytes
+  Address:      : 0xC018000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.077
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-b6-secondary-after.bin
+  Size          : 32768 Bytes
+  Address:      : 0x8020000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.115
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022024
+0x50022024 : 00000000
+
+
+cmp primary == app_v2.bin: identical
+secondary all 0xFF: True

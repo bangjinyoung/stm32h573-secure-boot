@@ -1,0 +1,48 @@
+# 2026-10-06 23:11:48 a4 check, read-only
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C018000 0x8000 .workspace/tmp/m9/m9-a4-primary-after.bin -r 0x08020000 0x8000 .workspace/tmp/m9/m9-a4-secondary-after.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-a4-primary-after.bin
+  Size          : 32768 Bytes
+  Address:      : 0xC018000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.112
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-a4-secondary-after.bin
+  Size          : 32768 Bytes
+  Address:      : 0x8020000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.119
+rc=0
+primary after A4 == primary after A3 (app_v2_upd.bin): unchanged
+secondary after A4 (0x8000): all 0xFF

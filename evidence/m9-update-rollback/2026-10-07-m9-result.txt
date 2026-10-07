@@ -1,0 +1,34 @@
+M9 Update / Anti-rollback: result, 2026-10-07
+
+Chain: STiRoT (HDPL1, ST default key) -> custom MCUboot BL2 (HDPL2, c2bdcda) -> bare_slot app (HDPL3).
+Board: Open (PRODUCT_STATE 0xED), TZEN 0xB4, BOOT_UBE 0xC3, SECBOOT_LOCK 0xB4. OB unchanged through M9 (C9).
+BL2-a = MCUBOOT_DOWNGRADE_PREVENTION (version compare, no state). BL2-b = MCUBOOT_HW_ROLLBACK_PROT with the
+security counter in an HDPL2 OBK record at 0x0FFD0B10 (boot_rollback.c).
+
+| step | BL2 | input | result | record |
+|---|---|---|---|---|
+| A3 | a | v2 -> secondary | upgrade, image ok 2.0.0 | 2026-10-06-m9-a3.txt |
+| A4 | a | v1 -> secondary | Insufficient version in secondary slot, v2 runs | -m9-a4.txt |
+| A5 | a | v1 -> primary | image ok 1.0.0 (no check on the primary) | -m9-a5.txt |
+| B2 | b | install BL2-b, v2 in secondary | counter 0 -> 2, OEMuRoT OBK hash d5e96ea8 kept | -m9-b2-b3.txt |
+| B3 | b | reboot | valid counter0=2, no write | -m9-b2-b3.txt |
+| B4 | b | v1 -> secondary | security counter 1 < 2, v2 runs | -m9-b4.txt |
+| B5 | b | v1 -> primary | security counter 1 < 2, no bootable image, BL2 stops | 2026-10-07-m9-b5.txt |
+| B6 | b | v2 -> primary | image ok 2.0.0 | -m9-b6.txt |
+| B7 | b | app reads 0x0FFD0B10 at HDPL3 | 0, OBKERR, no fault; SWD read also 0 | -m9-b7.txt |
+| C9 | - | OB read | 36 fields = prep | -m9-c9.txt |
+
+A5 and B5 are the same input with opposite results: BL2-a keeps no state, so a direct primary write
+downgrades it; BL2-b compares against a counter outside the slots and fails closed.
+
+Verdicts (user): E9.1, E9.2 (incl. E9.2-L) VERIFIED 2026-10-06; E9.3, E9.3b VERIFIED 2026-10-07.
+E9.4-E9.6 SKIP (D-21).
+
+Not shown by M9:
+- The counter cannot be lowered. In Open with STiRoT's ST default key, host -sdp or another HDPL2 BL2
+  that STiRoT accepts may rewrite the record (not tested). Moved to M11.
+- Write protection of the record from HDPL3 (E9.3b covers reads only). The blocking rule (RM0481
+  HDPL-based OBK access) is inferred.
+
+Board at the end: STiRoT -> BL2-b -> app v2 (app_v2.bin, SEC_CNT 2), counter0=2, secondary erased, SW1=1.
+Recovery images: m9-plan.md R0.

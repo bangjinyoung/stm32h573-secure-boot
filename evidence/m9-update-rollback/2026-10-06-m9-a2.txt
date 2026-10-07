@@ -1,0 +1,26 @@
+M9 A2: app v1 (1.0.0, SEC_CNT 1) into primary, BL2-a, 2026-10-06
+
+Write (22:56:52, SW1=0, tamper_step.sh -u m9 ... a2, 2026-10-06-m9-a2.log)
+- app_v1.bin sha256 7f349d82ad66d7e1... (= host record) -> 0x08018000, mode=UR, DSCSR CDS=1.
+- Download verified, NSSR 0, SECSR 0, readback 0x0C018000 0x480F identical.
+- D-23 HDPL gate on the board: BL2-a restarted with each UR connect (5 times, 22:56:52-22:56:54) and printed
+  "[bl2] hdpl=0x51, not started by stirot: stop" each time; no mcuboot line, no slot access.
+  Contrast A1, where the M8 BL2 (no gate) validated primary and jumped at hdpl=0x51.
+
+Boot (22:58:25, SW1=1, NRST, 2026-10-06-m9-boot.log second entry)
+  22:58:26.333 [bl2] mcuboot build=c2bdcda rollback=sw
+  22:58:26.336 [bl2] rollback record state=virgin
+  22:58:26.340 [bl2] oemurot obk sha256=d5e96ea8
+  22:58:26.347 [mcuboot INF] Image index: 0, Swap type: none
+  22:58:26.396 [mcuboot DBG] bootutil_img_validate: TLV off 18288, end 18447   (end = app_v1.bin size)
+  22:58:27.109 [bl2] image ok version=1.0.0+0
+  22:58:27.117 [bl2] hdpl=0x8a jump to 0x0c018400 ... reset=0x0c018b81
+  22:58:27.134 [bare] stm32h573 bare app build=c2bdcda, hdpl=0x6f, "press o to probe the hdpl2 obk"
+- SWD after boot: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0, PCSR 0x0C019648/0x0C019696/0x0C018A58/0x0C018D56.
+
+Result
+- BL2-a accepts primary v1 (1.0.0); the new app (c2bdcda, with the o probe) runs. Baseline for A3.
+- Record still virgin, OEMuRoT OBK hash unchanged (d5e96ea8).
+
+Captures: -a2-write-vcp.png, -a2-write.png (taken after the write, gate lines still on screen),
+-a2-boot-vcp-head.png, -a2-boot-vcp.png, -a2-boot-swd.png.

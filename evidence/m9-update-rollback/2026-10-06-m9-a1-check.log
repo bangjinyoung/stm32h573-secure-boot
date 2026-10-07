@@ -1,0 +1,51 @@
+# 2026-10-06 22:54:11 a1 check, read-only
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C000000 0x18000 .workspace/tmp/m9/m9-a1-exec-readback.bin -r 0x081E8000 0x18000 .workspace/tmp/m9/m9-a1-dl-after.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.26V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-a1-exec-readback.bin
+  Size          : 98304 Bytes
+  Address:      : 0xC000000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.285
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-a1-dl-after.bin
+  Size          : 98304 Bytes
+  Address:      : 0x81E8000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.292
+rc=0
+.workspace/tmp/m9/bl2a_init.bin .workspace/tmp/m9/m9-a1-exec-readback.bin differ: byte 98089, line 263
+cmp exec area vs bl2a_init.bin: DIFFERENT
+download slot after boot: all 0xFF
+diff range 0x17f28-0x17fdf (176 bytes), inside the TLV area (starts 0x17ec0 = hdr 0x400 + img 0x17ac0);
+0x0-0x17f27 identical to bl2a_init.bin; 0x17f28-end identical to bl2a_enc.bin (unprotected TLVs from the download image, as in M7)

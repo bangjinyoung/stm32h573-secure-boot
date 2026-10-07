@@ -1,0 +1,53 @@
+# 2026-10-06 23:03:10 a3 check, read-only
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C018000 0x8000 .workspace/tmp/m9/m9-a3-primary-after.bin -r 0x08020000 0x8000 .workspace/tmp/m9/m9-a3-secondary-after.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-a3-primary-after.bin
+  Size          : 32768 Bytes
+  Address:      : 0xC018000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.117
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-a3-secondary-after.bin
+  Size          : 32768 Bytes
+  Address:      : 0x8020000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.118
+rc=0
+primary before (A2 readback) == app_v1.bin: True
+primary after [0:18448] == app_v2.bin: False
+primary after [0:0x8000] == app_v2_upd.bin: True
+primary after header: magic 0x96f3b83d version 2.0.0
+secondary after: 0x0-0x1FFF all FF: True , 0x6000-0x7FFF all FF: True , 0x2000-0x5FFF == app_v2_upd: True
+app_v2 vs app_v2_upd: header+body [0:0x476c] identical: True | header flags 00000000 00000000
+first diff 0x477a (TLV area from 0x476c); sizes 18448 vs 32768 (TLV end in boot log 18446)

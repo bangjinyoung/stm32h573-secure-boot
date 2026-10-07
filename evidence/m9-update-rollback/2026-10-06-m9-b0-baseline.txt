@@ -1,0 +1,32 @@
+M9 B0: read-only baseline before the first OBK write (user request), 2026-10-06 23:3x
+
+Order: taken before B1, because a boot with v2 in the secondary would run the BL2-a update.
+No flash, OB or OBK write in this step. Log 2026-10-06-m9-b0-baseline.log.
+
+Option bytes (SW1=1, Hotplug)
+- -ob displ: 36 fields identical to prep (22:49) and A-end (23:16).
+- SECBOOTR_CUR 0x0C0004B4, OPTSR_CUR 0x30F0EDF8, NSSR 0, SECSR 0.
+
+SWD read of the HDPL2 OBK with the app running at HDPL3 (attempt, read-only)
+- -r32 0x0FFD0B10 0x40 -> 64 bytes of 0x00000000, rc=0.
+- -r32 0x0FFD0900 0x10 (OEMuRoT config) -> 0x00000000 x4, rc=0.
+- Then FLASH SECSR 0x00200000 = OBKERR (bit 21, FLASH_SR_OBKERR_Pos in stm32h573xx.h); NSSR 0; CFSR 0; VTOR 0x0C018400.
+- The debugger access was refused at HDPL3 and read as zero; the BL2 at HDPL2 reads the same record as virgin (0xFF).
+  So a debugger cannot read the record in this state, and SWD is not a readback method for E9.3 (BL2 log stays the method).
+  This is also debugger-side evidence for E9.3b; the app-side probe stays at B7.
+- After the NRST boot below SECSR read 0x00000000: reset clears OBKERR, so the flag does not carry into B2.
+
+Baseline NRST boot (23:38:48, SW1=1, no write)
+  23:38:49.189 [bl2] mcuboot build=c2bdcda rollback=sw
+  23:38:49.192 [bl2] rollback record state=virgin
+  23:38:49.196 [bl2] oemurot obk sha256=d5e96ea8
+  23:38:49.203 [mcuboot INF] Image index: 0, Swap type: none
+  23:38:49.965 [bl2] image ok version=1.0.0+0
+  23:38:49.973 [bl2] hdpl=0x8a jump to 0x0c018400
+  23:38:49.989 [bare] stm32h573 bare app build=c2bdcda, hdpl=0x6f
+
+Flash state (from the A5 check, unchanged since): primary = app_v1.bin (+ old v2_upd tail past 0x6000), secondary all 0xFF,
+STiRoT download slot all 0xFF (A1 check), BL2 execution area = BL2-a.
+
+Baseline for B2: record virgin, OEMuRoT OBK sha256 prefix d5e96ea8, OB as above.
+Captures: -b0-boot-vcp.png, -b0-boot-swd.png.

@@ -1,0 +1,27 @@
+M9 B7 (E9.3b): read of the HDPL2 rollback record (0x0FFD0B10) from HDPL3, 2026-10-07. No flash write.
+
+Record content if it leaked: word0 = magic 0x4B425231, word1 = format 0x00000001 (boot_rollback.c:17-18).
+Same boot record, from BL2 at HDPL2: state=valid counter0=2.
+
+Before (22:29:06, SWD Hotplug): VTOR 0x0C018400 (app), CFSR 0, SECSR 0, NSSR 0.
+
+App probe (VCP 'o', app at hdpl=0x6f, app/bare/main.c:26-36)
+  22:29:07.376 [bare] obk probe addr=0x0ffd0b10 secsr=0x00000000
+  22:29:07.381 [bare] obk probe read=00000000 00000000 secsr=0x00200000
+- The read returned 0 for both words, not the magic/format. SECSR went 0 -> 0x00200000 (OBKERR).
+- No fault: CFSR 0 after the probe, VTOR 0x0C018400, PC samples 0x0C019696..0x0C019838 in the app, and the app
+  answered a status key at 22:29:09 (hdpl=0x6f). BFAR is not valid (CFSR.BFARVALID 0).
+
+Debugger read (22:29:19, SWD Hotplug while the app runs at HDPL3)
+  -r32 0x0FFD0B10 8 -> 00000000 00000000; CFSR 0, SECSR 0x00200000 (already set by the app probe).
+  Same result as B0 (2026-10-06).
+
+Reset (22:29:27, NRST via tamper_step boot): record state=valid counter0=2, OEMuRoT hash d5e96ea8,
+image ok version=2.0.0+0, app runs. SECSR 0 afterwards (OBKERR cleared by reset). The read attempts changed
+nothing in the record.
+
+Result: E9.3b evidence collected. HDPL3 code (app or debugger) reads 0 and sets OBKERR; the counter value is
+not exposed and the app does not fault. Which hardware rule blocks it (HDPL-based OBK access, RM0481) is
+inferred, not tested separately. Verdict: pending (user).
+
+Captures: -b7-vcp.png, -b7-swd.png, -b7-reset-vcp.png.

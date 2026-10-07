@@ -1,0 +1,28 @@
+M9 A4 (E9.2 SW downgrade rejection): app v1 in secondary under BL2-a, 2026-10-06
+
+Before: primary = app_v2_upd.bin (A3 check), app 2.0.0 running.
+
+Write (23:08:02, SW1=0, tamper_step.sh -u m9 ... a4, 2026-10-06-m9-a4.log)
+- app_v1_upd.bin sha256 b3cb4e0660684ddc... (= host record) -> secondary 0x08020000. Verified, NSSR 0, SECSR 0, readback identical.
+- D-23 gate: 5 restarts, each "[bl2] hdpl=0x51, not started by stirot: stop".
+
+Boot (23:11:28, SW1=1, NRST)
+  23:11:29.782 [bl2] mcuboot build=c2bdcda rollback=sw
+  23:11:29.785 [bl2] rollback record state=virgin
+  23:11:29.796 [mcuboot INF] Image index: 0, Swap type: test
+  23:11:29.807 [mcuboot DBG] boot_version_cmp: ver1 1.0.0 vs ver2 2.0.0
+  23:11:29.812 [mcuboot ERR] Insufficient version in secondary slot
+  23:11:29.817 [mcuboot DBG] boot_scramble_region: 0xc00af38 0 32768 0
+  23:11:30.600 [bl2] image ok version=2.0.0+0
+  23:11:30.608 [bl2] hdpl=0x8a jump to 0x0c018400
+  23:11:30.624 [bare] stm32h573 bare app build=c2bdcda, hdpl=0x6f
+- SWD after boot: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0 (2026-10-06-m9-boot.log fourth entry).
+
+Check (read-only, 2026-10-06-m9-a4-check.log)
+- Primary 0x0C018000 0x8000 identical to the A3 after-state (app_v2_upd.bin): not touched.
+- Secondary 0x08020000 0x8000 all 0xFF: the rejected v1 was scrambled.
+
+Result: E9.2 evidence collected. BL2-a refused the lower version on the update path (version compare
+before any hash/signature step), erased the secondary, and kept booting 2.0.0. Verdict: pending (user).
+
+Captures: -a4-write-vcp.png, -a4-write.png, -a4-boot-vcp-head.png (banner to scramble), -a4-boot-vcp.png, -a4-boot-swd.png.

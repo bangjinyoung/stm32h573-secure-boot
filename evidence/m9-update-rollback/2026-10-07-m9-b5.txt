@@ -1,0 +1,34 @@
+M9 B5 (E9.3 primary): app v1 (SEC_CNT 1) written directly to primary under BL2-b, counter0=2, 2026-10-07
+
+Pre-check (22:22, read-only, 2026-10-07-m9-b5-pre.log)
+- Primary == app_v2_upd.bin (B2 after-state), secondary all 0xFF, VTOR 0x0C018400, DSCSR 0x00030000,
+  CFSR 0, NSSR/SECSR 0. App status line hdpl=0x6f.
+
+Write (22:23:12, SW1=0, -u, 2026-10-07-m9-b5.log)
+- app_v1.bin (7f349d82ad66d7e1...) -> primary 0x08018000. Verified, NSSR/SECSR 0, readback identical.
+- Gate with BL2-b installed: 6 restarts, 3 complete "hdpl=0x51, not started by stirot: stop" lines, the
+  other 3 cut by the next UR reset. No "rollback record" or mcuboot line (D-23).
+
+Boot (22:23:54, SW1=1, NRST, 2026-10-07-m9-boot.log)
+  22:23:55.416 [bl2] mcuboot build=c2bdcda rollback=hw
+  22:23:55.421 [bl2] rollback record state=valid counter0=2
+  22:23:55.425 [bl2] oemurot obk sha256=d5e96ea8
+  22:23:55.432 [mcuboot INF] Image index: 0, Swap type: none
+  22:23:55.481 [mcuboot DBG] bootutil_img_validate: TLV off 18288, end 18447
+  22:23:55.503 [mcuboot ERR] Image security counter value 1 lower than monotonic value 2
+  22:23:55.508 [mcuboot ERR] Image in the primary slot is not valid!
+  22:23:55.510 [bl2] no bootable image
+- Swap type none: the rejection is the primary-slot validation done on every boot, not an upgrade check.
+- No counter write line; OEMuRoT OBK hash unchanged. One BL2 banner: no reset loop.
+- SWD after boot: VTOR 0x0C000400 (BL2), DSCSR 0x00030000, CFSR 0, PC samples 0x0C00298C/0x0C002990/0x0C002992
+  = HAL_Delay (bl2.elf), i.e. the LED-toggle loop after "no bootable image" (boot/mcuboot/main.c:60-64).
+  The app did not run.
+
+Check (22:24, read-only, 2026-10-07-m9-b5-check.log)
+- Primary 0x480f == app_v1.bin: BL2 does not erase the rejected primary. Secondary all 0xFF. NSSR/SECSR 0.
+
+Result: E9.3 primary part collected. Same input as A5 (primary v1): BL2-a booted it (no version check on the
+primary), BL2-b refused it by the trusted counter and failed closed. Verdict: pending (user, with B4).
+TLV end 18447 confirms the app_v1.bin size for the H6 host-record fix.
+
+Captures: -b5-write-vcp.png, -b5-write.png, -b5-boot-vcp-head.png, -b5-boot-vcp.png, -b5-boot-swd.png.

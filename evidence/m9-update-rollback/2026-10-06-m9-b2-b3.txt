@@ -1,0 +1,42 @@
+M9 B1-B3: install BL2-b (rollback=hw), first OBK write (counter 0 -> 2), persistence, 2026-10-06
+
+Baseline: 2026-10-06-m9-b0-baseline.txt (record virgin, OEMuRoT OBK sha256 d5e96ea8, OB = prep).
+
+Writes (SW1=0, -u)
+- B1 23:39:59: app_v2_upd.bin (df2aecac...) -> secondary 0x08020000. Verified, NSSR/SECSR 0, readback identical.
+- B2 23:40:17: bl2b_enc.bin (4d56c47395a5bb50..., = host record) -> STiRoT download 0x081E8000. Verified, NSSR/SECSR 0, readback identical.
+- Both write windows: BL2-a still installed, each restart stopped at "hdpl=0x51, not started by stirot: stop", no mcuboot line.
+
+B2 boot (23:41:44, SW1=1, NRST) - first OBK write
+  23:41:45.747 [bl2] mcuboot build=c2bdcda rollback=hw
+  23:41:45.751 [bl2] rollback record state=virgin
+  23:41:45.754 [bl2] oemurot obk sha256=d5e96ea8
+  23:41:45.761 [mcuboot INF] Image index: 0, Swap type: test
+  23:41:45.767 [mcuboot DBG] boot_validate_slot: slot 1, expected_swap_type 2       (no boot_version_cmp: downgrade prevention off, D-20)
+  23:41:46.527 [mcuboot INF] Image 0 upgrade secondary slot -> primary slot
+  23:41:46.598 [mcuboot INF] Image 0 copying the secondary slot to the primary slot: 0x8000 bytes
+  23:41:46.647 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1                (SEC_CNT TLV 0x50, protected)
+  23:41:46.674 [bl2] rollback counter image 0: 0 -> 2, record state=valid
+  23:41:46.678 [bl2] rollback record state=valid counter0=2
+  23:41:46.682 [bl2] oemurot obk sha256=d5e96ea8
+  23:41:47.491 [bl2] image ok version=2.0.0+0
+  23:41:47.499 [bl2] hdpl=0x8a jump to 0x0c018400
+  23:41:47.516 [bare] stm32h573 bare app build=c2bdcda, hdpl=0x6f
+
+B2 check (read-only, 2026-10-06-m9-b2-check.log)
+- STiRoT accepted and installed BL2-b: execution area 0x0C000000 [0:0x17F28] == bl2b_init.bin; 0x17F28-0x17FDF holds the
+  download image's unprotected TLVs (same pattern as A1). Banner rollback=hw. Download slot all 0xFF.
+- Primary 0x8000 == app_v2_upd.bin (version 2.0.0). Secondary header/trailer 0xFF. NSSR 0, SECSR 0 after boot.
+- R4 (OBK write failure) not hit. R5: OEMuRoT OBK hash d5e96ea8 before and after the write (same as B0); the next boot (B3)
+  shows STiRoT still verifying and starting BL2-b, so the HDPL1 keys STiRoT uses were not lost.
+
+B3 boot (23:42:19, SW1=1, NRST, no write)
+  23:42:20.780 [bl2] mcuboot build=c2bdcda rollback=hw
+  23:42:20.784 [bl2] rollback record state=valid counter0=2
+  23:42:20.788 [bl2] oemurot obk sha256=d5e96ea8
+  23:42:20.795 [mcuboot INF] Image index: 0, Swap type: none
+  23:42:21.558 [bl2] image ok version=2.0.0+0
+- No "rollback counter" line: equal counter, no OBK write (no-op as designed). Record persists across reset.
+
+Captures: -b1-write*.png, -b2-write*.png, -b2-boot-vcp-head.png, -b2-boot-vcp-obk.png (copy, counter write, hash),
+-b2-boot-vcp.png, -b2-boot-swd.png, -b3-boot-vcp.png, -b3-boot-swd.png.

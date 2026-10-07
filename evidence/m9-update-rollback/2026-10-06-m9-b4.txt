@@ -1,0 +1,30 @@
+M9 B4 (E9.3 secondary): app v1 (SEC_CNT 1) in secondary under BL2-b, counter0=2, 2026-10-06
+
+Write (23:46:00, SW1=0, -u, 2026-10-06-m9-b4.log)
+- app_v1_upd.bin (b3cb4e0660684ddc...) -> secondary 0x08020000. Verified, NSSR/SECSR 0, readback identical.
+- Gate with BL2-b installed: 3 restarts, each "hdpl=0x51, not started by stirot: stop", no "rollback record" line
+  (BL2 stops before any OBK access at HDPL1, D-23).
+
+Boot (23:46:40, SW1=1, NRST)
+  23:46:41.027 [bl2] mcuboot build=c2bdcda rollback=hw
+  23:46:41.032 [bl2] rollback record state=valid counter0=2
+  23:46:41.036 [bl2] oemurot obk sha256=d5e96ea8
+  23:46:41.043 [mcuboot INF] Image index: 0, Swap type: test
+  23:46:41.092 [mcuboot DBG] bootutil_img_validate: TLV off 18288, end 18446
+  23:46:41.114 [mcuboot ERR] Image security counter value 1 lower than monotonic value 2
+  23:46:41.119 [mcuboot ERR] Image in the secondary slot is not valid!
+  23:46:41.124 [mcuboot DBG] boot_scramble_region: 0xc00b3e8 0 32768 0
+  23:46:41.908 [bl2] image ok version=2.0.0+0
+  23:46:41.916 [bl2] hdpl=0x8a jump to 0x0c018400
+- No version compare (BL2-b has no downgrade prevention, D-20): the counter is the only reason for the rejection.
+  The rejection comes after the hash step and before the signature step for the secondary.
+- No counter write line; OEMuRoT OBK hash unchanged.
+- SWD after boot: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0.
+
+Check (read-only, 2026-10-06-m9-b4-check.log)
+- Primary 0x8000 identical to the B2 after-state (app_v2_upd.bin). Secondary 0x8000 all 0xFF. NSSR/SECSR 0.
+
+Result: E9.3 secondary part collected. Same input as A4 (secondary v1); A4 refused it by version,
+B4 by the trusted counter. Verdict: pending (user, with B5).
+
+Captures: -b4-write-vcp.png, -b4-write.png, -b4-boot-vcp-head.png, -b4-boot-vcp.png, -b4-boot-swd.png.

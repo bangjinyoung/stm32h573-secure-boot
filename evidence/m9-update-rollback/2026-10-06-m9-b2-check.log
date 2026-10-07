@@ -1,0 +1,84 @@
+# 2026-10-06 23:42:10 b2 check, read-only
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r 0x0C000000 0x18000 .workspace/tmp/m9/m9-b2-exec-readback.bin -r 0x081E8000 0x18000 .workspace/tmp/m9/m9-b2-dl-after.bin -r 0x0C018000 0x8000 .workspace/tmp/m9/m9-b2-primary-after.bin -r 0x08020000 0x8000 .workspace/tmp/m9/m9-b2-secondary-after.bin -r32 0x40022020 4 -r32 0x50022024 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Hot Plug
+Reset mode  : Software reset
+Device ID   : 0x484
+Revision ID : Rev X
+ICache disabled
+Device name : STM32H56x/573
+ICache enabled
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-b2-exec-readback.bin
+  Size          : 98304 Bytes
+  Address:      : 0xC000000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.282
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-b2-dl-after.bin
+  Size          : 98304 Bytes
+  Address:      : 0x81E8000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.287
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-b2-primary-after.bin
+  Size          : 32768 Bytes
+  Address:      : 0xC018000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.113
+
+UPLOADING ...
+  File          : .workspace/tmp/m9/m9-b2-secondary-after.bin
+  Size          : 32768 Bytes
+  Address:      : 0x8020000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.113
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022024
+0x50022024 : 00000000
+
+
+rc=0
+BL2 exec area == bl2b_init.bin: False | diff 0x17f28-0x17fdf (175 B), TLV area from 0x17ec0, diff bytes == bl2b_enc: True, [0:0x17f28] identical: True
+download slot all 0xFF: True
+primary == app_v2_upd.bin: True , version 2.0.0
+secondary header/trailer 0xFF: True

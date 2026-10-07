@@ -1,0 +1,27 @@
+M9 B6 (restore-v2): app v2 (SEC_CNT 2) written directly to primary under BL2-b, counter0=2, 2026-10-07
+
+Write (22:25:53, SW1=0, -u, 2026-10-07-m9-b6.log)
+- app_v2.bin (c2efa5b971421e37...) -> primary 0x08018000. Verified, NSSR/SECSR 0, readback 0x4810 identical.
+- Gate: 6 restarts, 3 complete "hdpl=0x51, not started by stirot: stop" lines, the rest cut by the next
+  UR reset. No "rollback record" or mcuboot line (D-23).
+
+Boot (22:26:45, SW1=1, NRST, 2026-10-07-m9-boot.log, third observe)
+  22:26:46.715 [bl2] mcuboot build=c2bdcda rollback=hw
+  22:26:46.719 [bl2] rollback record state=valid counter0=2
+  22:26:46.723 [bl2] oemurot obk sha256=d5e96ea8
+  22:26:46.730 [mcuboot INF] Image index: 0, Swap type: none
+  22:26:47.493 [bl2] image ok version=2.0.0+0
+  22:26:47.501 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b81 via rss 0x0ff95079
+  22:26:47.518 [bare] stm32h573 bare app build=c2bdcda
+  22:26:47.531 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+- SEC_CNT 2 == stored 2: accepted, no counter write line (none in the whole 2026-10-07 VCP log).
+- SWD after boot: VTOR 0x0C018400, DSCSR 0x00030000, CFSR 0, PC samples in the app (0x0C018A86..0x0C019784).
+  The boot log's first two observe blocks are the B5 boot, repeated by tamper_step's cumulative grep.
+
+Check (22:27, read-only, 2026-10-07-m9-b6-check.log)
+- Primary 0x4810 == app_v2.bin. Secondary all 0xFF. NSSR/SECSR 0.
+
+Result: the B5 fail-closed state recovers by writing an image with SEC_CNT >= the stored counter.
+Board: STiRoT -> BL2-b -> app v2 (no trailer), counter0=2, OEMuRoT hash d5e96ea8, SW1=1.
+
+Captures: -b6-write-vcp.png, -b6-write.png, -b6-boot-vcp-head.png, -b6-boot-vcp.png, -b6-boot-swd.png.

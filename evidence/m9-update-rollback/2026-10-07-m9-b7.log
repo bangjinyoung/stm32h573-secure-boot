@@ -1,0 +1,46 @@
+# 2026-10-07 22:29:06.927 +0900 step b7 (E9.3b), read-only
+## before probe: VTOR, CFSR, BFAR, SECSR, NSSR
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED08 4 -r32 0xE000ED28 4 -r32 0xE000ED38 4 -r32 0x50022024 4 -r32 0x40022020 4
+0xE000ED08 : 0C018400
+0xE000ED28 : 00000000
+0xE000ED38 : 3009FF74
+0x50022024 : 00000000
+0x40022020 : 00000000
+## 22:29:07.369 VCP 'o' (app probe of 0x0FFD0B10 at HDPL3)
+vcp: 2026-10-07 22:29:07.376 [bare] obk probe addr=0x0ffd0b10 secsr=0x00000000
+vcp: 2026-10-07 22:29:07.381 [bare] obk probe read=00000000 00000000 secsr=0x00200000
+## after app probe: VTOR, CFSR, BFAR, SECSR, PC x4
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED08 4 -r32 0xE000ED28 4 -r32 0xE000ED38 4 -r32 0x50022024 4 -r32 0xE000101C 4 -r32 0xE000101C 4 -r32 0xE000101C 4 -r32 0xE000101C 4
+0xE000ED08 : 0C018400
+0xE000ED28 : 00000000
+0xE000ED38 : 300000E6
+0x50022024 : 00200000
+0xE000101C : 0C019838
+0xE000101C : 0C019834
+0xE000101C : 0C019696
+0xE000101C : 0C019838
+vcp: 2026-10-07 22:29:09.335 [bare] status uptime_ms=141145 hdpl=0x6f vtor=0x0c018400 mpu_ctrl=0x00000004
+## 22:29:19.051 SWD read of 0x0FFD0B10 (debugger at HDPL3), then CFSR, SECSR
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0x0FFD0B10 8 -r32 0xE000ED08 4 -r32 0xE000ED28 4 -r32 0x50022024 4
+0x0FFD0B10 : 00000000 00000000
+0xE000ED08 : 0C018400
+0xE000ED28 : 00000000
+0x50022024 : 00200000
+## 22:29:27.890 NRST to clear OBKERR (tamper_step boot, 2026-10-07-m9-boot.log)
+vcp: 2026-10-07 22:29:28.818 
+vcp: 2026-10-07 22:29:28.821 [bl2] mcuboot build=c2bdcda rollback=hw
+vcp: 2026-10-07 22:29:28.825 [bl2] rollback record state=valid counter0=2
+vcp: 2026-10-07 22:29:28.829 [bl2] oemurot obk sha256=d5e96ea8
+vcp: 2026-10-07 22:29:28.836 [mcuboot INF] Image index: 0, Swap type: none
+vcp: 2026-10-07 22:29:29.599 [bl2] image ok version=2.0.0+0
+vcp: 2026-10-07 22:29:29.607 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x300a0000 reset=0x0c018b81 via rss 0x0ff95079
+vcp: 2026-10-07 22:29:29.620 
+vcp: 2026-10-07 22:29:29.624 [bare] stm32h573 bare app build=c2bdcda
+vcp: 2026-10-07 22:29:29.629 [bare] vtor=0x0c018400 sp=0x300a0000 reset_handler=0x0c018b81
+vcp: 2026-10-07 22:29:29.634 [bare] reset_flags=0x00000000 core_clock_hz=64000000
+vcp: 2026-10-07 22:29:29.637 [bare] hdpl=0x6f mpu_ctrl=0x00000004
+vcp: 2026-10-07 22:29:29.644 [bare] running; press o to probe the hdpl2 obk, any other key for a status line
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=Hotplug -r32 0xE000ED08 4 -r32 0xE000ED28 4 -r32 0x50022024 4
+0xE000ED08 : 0C018400
+0xE000ED28 : 00000000
+0x50022024 : 00000000
