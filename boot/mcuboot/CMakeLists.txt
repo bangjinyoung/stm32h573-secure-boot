@@ -80,7 +80,7 @@ add_executable(bl2
 target_link_libraries(bl2 PRIVATE board mcuboot_bootutil)
 # MCUboot's ECDSA verification overflows the template's 1 KB stack (UsageFault STKOF on the H573).
 # STiRoT installs BL2 at the start of flash behind its 0x400 image header; 92K leaves room for the TLVs in the 0x18000 area.
-stm32h573_executable(bl2 0x0C000400 92K 0x2000)
+stm32h573_executable(bl2 FLASH 0x0C000400 92K STACK 0x2000)
 
 # Flash driver files derived from the ST OEMiROT_Boot port keep ST's style; build them like the vendor code.
 set_source_files_properties(port/flash_map_backend.c port/low_level_device.c port/low_level_flash.c
