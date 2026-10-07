@@ -45,7 +45,7 @@ build, where newlib uint32_t is unsigned long). Same width on this target; left 
 | (recovery) | bl2a_init.bin | c5b0991b6e15d8f3b9767807c8410a82fd30116f9c2da32dcf3c0997f70b650e | STiRoT execution image of BL2-a | 0x08000000 |
 | b2 | bl2b_enc.bin | 4d56c47395a5bb506f270d85e8a62fb0c097998db74384f0275ed490e4da2e7c | STiRoT download image of BL2-b, version 2.0.0, encrypted | 0x081E8000 |
 | (recovery) | bl2b_init.bin | eac5f588d68699c8897391fab0cd5a512d539ac88c142541d84678dc1daad1b0 | STiRoT execution image of BL2-b | 0x08000000 |
-| a2, a5, b5 | app_v1.bin | 7f349d82ad66d7e112bf8688c8f7d2921443ee76e76c9c664bd2854ed91822f8 | bare_slot 1.0.0, SEC_CNT 1, no trailer, 18451 B | 0x08018000 |
+| a2, a5, b5 | app_v1.bin | 7f349d82ad66d7e112bf8688c8f7d2921443ee76e76c9c664bd2854ed91822f8 | bare_slot 1.0.0, SEC_CNT 1, no trailer, 18447 B (corrected 2026-10-07: was 18451; sha256 unchanged, B5 TLV end 18447) | 0x08018000 |
 | b6 | app_v2.bin | c2efa5b971421e37ec2f44bf6585829d76366a2d3fc55f47620a6f60c7ba3db4 | bare_slot 2.0.0, SEC_CNT 2, no trailer | 0x08018000 |
 | a4, b4 | app_v1_upd.bin | b3cb4e0660684ddcf1200c896115934220f2eedfeeaf8e35d0090e8905e86a35 | app_v1 padded to 0x8000 with trailer magic | 0x08020000 |
 | a3, b1 | app_v2_upd.bin | df2aecac5951b1b171a231b5cf9e09d8da5b13fd5208d5112ac685bedb013854 | app_v2 padded to 0x8000 with trailer magic | 0x08020000 |
