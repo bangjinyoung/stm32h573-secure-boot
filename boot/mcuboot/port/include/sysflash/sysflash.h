@@ -1,9 +1,9 @@
 /*
  * sysflash/sysflash.h - flash-area IDs for the STM32H5 OEMiROT slot layout.
  *
- * Single application image: slot 0 (primary), slot 1 (secondary).
- * Numeric IDs are opaque handles passed to flash_area_open() and matched
- * inside the port's flash_map_backend implementation.
+ * Image 0 is the Secure app, image 1 the Non-secure app; each has a primary
+ * and a secondary slot. Numeric IDs are opaque handles passed to
+ * flash_area_open() and matched inside the port's flash_map_backend.
  */
 
 #ifndef SYSFLASH_SYSFLASH_H
@@ -11,15 +11,15 @@
 
 
 #define FLASH_AREA_BL2              0
-#define FLASH_AREA_IMAGE_0          1
-#define FLASH_AREA_IMAGE_1          2
-#define FLASH_AREA_IMAGE_SCRATCH    3
+#define FLASH_AREA_0_ID             1
+#define FLASH_AREA_1_ID             2
+#define FLASH_AREA_2_ID             3
+#define FLASH_AREA_3_ID             4
+/* Overwrite-only has no scratch area; the id matches no table entry. */
+#define FLASH_AREA_IMAGE_SCRATCH    5
+#define FLASH_AREA_ID_NONE          255
 
-/*
- * Only image_index == 0 is supported. The argument is intentionally unused
- * because this project has one image with primary and secondary slots.
- */
-#define FLASH_AREA_IMAGE_PRIMARY(x)     ((void)(x), FLASH_AREA_IMAGE_0)
-#define FLASH_AREA_IMAGE_SECONDARY(x)   ((void)(x), FLASH_AREA_IMAGE_1)
+#define FLASH_AREA_IMAGE_PRIMARY(x)   (((x) == 0) ? FLASH_AREA_0_ID : ((x) == 1) ? FLASH_AREA_1_ID : FLASH_AREA_ID_NONE)
+#define FLASH_AREA_IMAGE_SECONDARY(x) (((x) == 0) ? FLASH_AREA_2_ID : ((x) == 1) ? FLASH_AREA_3_ID : FLASH_AREA_ID_NONE)
 
 #endif /* SYSFLASH_SYSFLASH_H */

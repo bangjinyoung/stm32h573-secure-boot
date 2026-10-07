@@ -14,12 +14,12 @@ struct boot_sau_region {
     uint32_t limit;
 };
 
-/* Same Non-secure ranges as ST OEMuRoT's sau_init_cfg, for a single Secure image. */
+/* Non-secure ranges as in ST OEMuRoT's sau_init_cfg; the flash range covers every slot but the image 0 primary. */
 static const struct boot_sau_region boot_sau_regions[] = {
     /* The flash driver programs and erases the Non-secure secondary slot through FLASH_NS. */
     {(uint32_t)FLASH_NS, (uint32_t)FLASH_NS + 0xFFFFU},
-    /* The flash driver reads the secondary slot through the Non-secure flash alias. */
-    {FLASH_BASE_ADDRESS_NS + FLASH_AREA_1_OFFSET, FLASH_BASE_ADDRESS_NS + FLASH_AREA_1_OFFSET + FLASH_AREA_1_SIZE - 1U},
+    /* The flash driver reads the Non-secure slots through the Non-secure flash alias. */
+    {FLASH_BASE_ADDRESS_NS + FLASH_AREA_1_OFFSET, FLASH_BASE_ADDRESS_NS + FLASH_AREA_END_OFFSET - 1U},
     {BOOT_SAU_ENGI_BASE_NS, BOOT_SAU_ENGI_BASE_NS + BOOT_SAU_ENGI_SIZE - 1U},
     /* RSS library function table used for the HDPL3 handoff. */
     {RSSLIB_SYS_FLASH_NS_PFUNC_START, RSSLIB_SYS_FLASH_NS_PFUNC_END},

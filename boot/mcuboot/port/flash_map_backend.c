@@ -6,7 +6,8 @@
  * port/stm32h5/src/low_level_flash.c.
  *
  * Scope:
- *   - Primary and secondary slots of one signed application image.
+ *   - Primary and secondary slots of two signed images: image 0 is the
+ *     Secure app, image 1 the Non-secure app.
  *   - Internal Flash device only.
  *   - Encryption and hardware rollback protection are not configured.
  *
@@ -46,6 +47,7 @@
 #endif
 
 #include "flash_layout.h"
+#include "mcuboot_config/mcuboot_config.h"
 #include "sysflash/sysflash.h"
 #include "flash_map_backend/flash_map_backend.h"
 
@@ -70,29 +72,28 @@ enum {
 };
 
 /*
- * Static flash-area table for both slots of the single application
- * image. The offsets/sizes come from
- * config/flash_layout.h, which is the single source of truth for
- * the on-flash layout.
+ * Static flash-area table for both slots of both images. The
+ * offsets/sizes come from config/flash_layout.h, which is the single
+ * source of truth for the on-flash layout.
  *
- * FLASH_AREA_0 is the active primary slot. FLASH_AREA_1 is the staging
- * slot used by MCUboot's overwrite-only update path.
+ * Areas 0 and 1 are the active primary slots of image 0 and image 1.
+ * Areas 2 and 3 are their staging slots for MCUboot's overwrite-only
+ * update path.
  */
+#define FLASH_MAP_AREA(n)                               \
+    {                                                   \
+        .fa_id        = FLASH_AREA_##n##_ID,            \
+        .fa_device_id = FLASH_AREA_##n##_DEVICE_ID,     \
+        .pad16        = 0,                              \
+        .fa_off       = FLASH_AREA_##n##_OFFSET,        \
+        .fa_size      = FLASH_AREA_##n##_SIZE,          \
+    }
+
 static const struct flash_area s_flash_map[] = {
-    {
-        .fa_id        = FLASH_AREA_IMAGE_0,        /* sysflash.h: 1 */
-        .fa_device_id = FLASH_AREA_0_DEVICE_ID,
-        .pad16        = 0,
-        .fa_off       = FLASH_AREA_0_OFFSET,
-        .fa_size      = FLASH_AREA_0_SIZE,
-    },
-    {
-        .fa_id        = FLASH_AREA_IMAGE_1,        /* sysflash.h: 2 */
-        .fa_device_id = FLASH_AREA_1_DEVICE_ID,
-        .pad16        = 0,
-        .fa_off       = FLASH_AREA_1_OFFSET,
-        .fa_size      = FLASH_AREA_1_SIZE,
-    },
+    FLASH_MAP_AREA(0),
+    FLASH_MAP_AREA(1),
+    FLASH_MAP_AREA(2),
+    FLASH_MAP_AREA(3),
 };
 
 static const size_t s_flash_map_len =
@@ -298,32 +299,32 @@ int flash_area_get_sector(const struct flash_area *fap, uint32_t off,
 
 int flash_area_id_from_image_slot(int slot)
 {
-    if (slot == 0) {
-        return FLASH_AREA_IMAGE_0;
-    }
-    if (slot == 1) {
-        return FLASH_AREA_IMAGE_1;
-    }
-    return -1;
+    return flash_area_id_from_multi_image_slot(0, slot);
 }
 
 int flash_area_id_from_multi_image_slot(int image_index, int slot)
 {
-    if (image_index != 0) {
+    if ((image_index < 0) || (image_index >= MCUBOOT_IMAGE_NUMBER)) {
         return -1;
     }
-    return flash_area_id_from_image_slot(slot);
+    if (slot == 0) {
+        return FLASH_AREA_IMAGE_PRIMARY(image_index);
+    }
+    if (slot == 1) {
+        return FLASH_AREA_IMAGE_SECONDARY(image_index);
+    }
+    return -1;
 }
 
 int flash_area_id_to_multi_image_slot(int image_index, int area_id)
 {
-    if (image_index != 0) {
+    if ((image_index < 0) || (image_index >= MCUBOOT_IMAGE_NUMBER)) {
         return -1;
     }
-    if (area_id == FLASH_AREA_IMAGE_0) {
+    if (area_id == FLASH_AREA_IMAGE_PRIMARY(image_index)) {
         return 0;
     }
-    if (area_id == FLASH_AREA_IMAGE_1) {
+    if (area_id == FLASH_AREA_IMAGE_SECONDARY(image_index)) {
         return 1;
     }
     return -1;
