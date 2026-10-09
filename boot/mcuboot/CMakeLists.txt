@@ -60,6 +60,15 @@ elseif(NOT BL2_ROLLBACK STREQUAL sw)
     message(FATAL_ERROR "BL2_ROLLBACK must be hw or sw, got ${BL2_ROLLBACK}")
 endif()
 
+# X4 boot timing: DWT cycle counts of each image check, printed after boot_go(). MCUboot logs at INFO so
+# UART output stays out of the measured intervals.
+option(BL2_TIMING "Measure MCUboot image checks with the DWT cycle counter" OFF)
+set(BL2_SYSCLK hsi CACHE STRING "BL2 SYSCLK: hsi (as STiRoT leaves it) or pll250 (H573 maximum, 250 MHz)")
+set_property(CACHE BL2_SYSCLK PROPERTY STRINGS hsi pll250)
+if(NOT BL2_SYSCLK MATCHES "^(hsi|pll250)$")
+    message(FATAL_ERROR "BL2_SYSCLK must be hsi or pll250, got ${BL2_SYSCLK}")
+endif()
+
 set(BL2_PUBLIC_KEY ${CMAKE_SOURCE_DIR}/keys/mcuboot-ecdsa-p256.pub.pem)
 set(BL2_KEYS_C ${CMAKE_CURRENT_BINARY_DIR}/bootutil_keys.c)
 add_custom_command(
@@ -72,12 +81,23 @@ add_executable(bl2
     port/boot_handoff.c
     port/boot_rollback.c
     port/boot_security.c
+    $<$<BOOL:${BL2_TIMING}>:port/boot_timing.c>
+    $<$<STREQUAL:${BL2_SYSCLK},pll250>:port/boot_clock.c>
     port/flash_map_backend.c
     port/low_level_device.c
     port/low_level_flash.c
     port/mcuboot_logging.c
     ${BL2_KEYS_C})
 target_link_libraries(bl2 PRIVATE board mcuboot_bootutil)
+if(BL2_TIMING)
+    target_compile_definitions(bl2 PRIVATE BL2_TIMING)
+    target_compile_definitions(mcuboot_bootutil PUBLIC MCUBOOT_LOG_LEVEL=MCUBOOT_LOG_LEVEL_INFO)
+    target_link_options(bl2 PRIVATE
+        -Wl,--wrap=bootutil_img_validate -Wl,--wrap=bootutil_img_hash -Wl,--wrap=bootutil_verify_sig)
+endif()
+if(BL2_SYSCLK STREQUAL pll250)
+    target_compile_definitions(bl2 PRIVATE BL2_SYSCLK_PLL250)
+endif()
 # MCUboot's ECDSA verification overflows the template's 1 KB stack (UsageFault STKOF on the H573).
 # STiRoT installs BL2 at the start of flash behind its 0x400 image header; 92K leaves room for the TLVs in the 0x18000 area.
 stm32h573_executable(bl2 FLASH 0x0C000400 92K STACK 0x2000)

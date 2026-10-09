@@ -3,9 +3,16 @@
 #include "build_id.h"
 
 #include "board.h"
+#ifdef BL2_SYSCLK_PLL250
+#include "boot_clock.h"
+#include "stm32h5xx_hal.h"
+#endif
 #include "boot_handoff.h"
 #include "boot_rollback.h"
 #include "boot_security.h"
+#ifdef BL2_TIMING
+#include "boot_timing.h"
+#endif
 #include "bootutil/bootutil.h"
 #include "bootutil/image.h"
 #include "mcuboot_config/mcuboot_config.h"
@@ -33,6 +40,13 @@ int main(void)
     struct boot_rsp rsp;
     fih_ret fih_rc;
     int ret;
+#ifdef BL2_SYSCLK_PLL250
+    int clock_ret;
+
+    /* board_init() calls HAL_Init() again, which recomputes SystemCoreClock for SysTick and the console baud rate. */
+    (void)HAL_Init();
+    clock_ret = boot_clock_set_max();
+#endif
 
     if (board_init() != 0) {
         while (1) {
@@ -40,6 +54,9 @@ int main(void)
     }
 
     printf("\r\n[bl2] mcuboot build=%s rollback=%s\r\n", BUILD_ID, BL2_ROLLBACK_NAME);
+#ifdef BL2_SYSCLK_PLL250
+    printf("[bl2] sysclk=%lu hz (pll250 ret=%d)\r\n", SystemCoreClock, clock_ret);
+#endif
 
     /*
      * With SW1=0 the core runs this image from SECBOOTADD without STiRoT, at HDPL1, between
@@ -55,7 +72,13 @@ int main(void)
     boot_security_init();
     boot_rollback_init();
 
+#ifdef BL2_TIMING
+    boot_timing_start();
+#endif
     FIH_CALL(boot_go, fih_rc, &rsp);
+#ifdef BL2_TIMING
+    boot_timing_report();
+#endif
     if (FIH_NOT_EQ(fih_rc, FIH_SUCCESS)) {
         printf("[bl2] no bootable image\r\n");
         while (1) {
