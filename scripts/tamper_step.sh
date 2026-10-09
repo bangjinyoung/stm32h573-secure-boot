@@ -23,7 +23,7 @@
 #   observe  read-only: VTOR, DSCSR, CFSR, DEMCR, 4 DWT_PCSR samples, VTOR_NS, SFSR, SFAR, HFSR
 #   ob       read-only: option bytes
 #   boot     clear DEMCR vector catch, NRST via -hardRst, wait, observe
-#   a*, b*, c*, t*, w*, r*  write one image (tables below), read it back into .workspace/tmp/<milestone>
+#   a*, b*, c*, t*, w*, r*, x*  write one image (tables below), read it back into .workspace/tmp/<milestone>
 #               and compare
 set -euo pipefail
 
@@ -99,6 +99,8 @@ m10) img=(
   [t4]="$t/ns_v1.bin 0x08020000 0x08020000 restore-ns"
   [r1]="$repo/.workspace/tmp/m9/bl2b_enc.bin 0x081E8000 0x081E8000 recover-m9-bl2b"
   [r2]="$repo/.workspace/tmp/m9/app_v2.bin 0x08018000 0x0C018000 recover-m9-app"
+  [x1]="$repo/.workspace/tmp/x4/bl2t_hsi_enc.bin 0x081E8000 0x081E8000 install-bl2t-hsi"
+  [x2]="$repo/.workspace/tmp/x4/bl2t_pll250_enc.bin 0x081E8000 0x081E8000 install-bl2t-pll250"
 ) ;;
 *) echo "unknown milestone: $ms" >&2; exit 2 ;;
 esac
@@ -133,7 +135,7 @@ boot)
   run "${hp[@]}" -hardRst
   [ $dry -eq 1 ] || sleep 3
   observe ;;
-[abctwr][0-9]*)
+[abctwrx][0-9]*)
   [ -n "${img[$step]:-}" ] || { echo "unknown step: $step" >&2; exit 2; }
   read -r file addr rb id <<< "${img[$step]}"
   [ $ur -eq 1 ] && hp=(-c port=SWD speed=fast ap=1 mode=UR)
