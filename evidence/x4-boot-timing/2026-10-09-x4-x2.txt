@@ -1,0 +1,48 @@
+X4 x2: BL2 timing build at 250 MHz (bl2t_pll250), 2026-10-09
+
+Build: BUILD_ID 48d4e12, Release, BL2_ROLLBACK=hw, BL2_TIMING=ON (log level INFO), BL2_SYSCLK=pll250
+(VOS0, HSE 25 MHz digital bypass from ST-LINK MCO, PLL1 /5 x100 /2, flash latency 5). Host record
+2026-10-09-x4-host.txt. x1 (64 MHz timing build) skipped by the user.
+
+Write 13:10:37 (SW1=0, connect under reset): bl2t_pll250_enc.bin sha256 6b5b4b553733efca -> 0x081E8000
+(STiRoT install area), "Download verified successfully", readback 0x18000 identical, flash error
+registers 0x40022020/0x50022024 = 0, DSCSR 0x00030000 (2026-10-09-m10-x2.log).
+VCP during the write: only the BL2-c gate lines (hdpl=0x51, not started by stirot: stop).
+Captures: 2026-10-09-x4-x2-write.png, -x2-write-vcp.png.
+
+Boots (SW1=1, NRST via tamper_step.sh m10 ... boot; VCP in evidence/m10-trustzone/2026-10-09-m10-vcp.log,
+SWD in 2026-10-09-m10-boot.log, seventh to eleventh "step boot"):
+  boot1 13:11:24 (STiRoT installs bl2t_pll250 on this boot), boot2 13:11:44, boot3 13:11:56,
+  boot4 13:12:08, boot5 13:12:20. Each: "[bl2] mcuboot build=48d4e12", "[bl2] sysclk=250000000 hz
+  (pll250 ret=0)", record valid counter0=2, obk d5e96ea8, image ok 3.0.0, [s] and [ns] lines as C4.
+
+DWT CYCCNT, measured (all 5 boots gave identical counts, to the cycle):
+  boot_go total          81,925,894 cycles  327,703 us
+  area 1 (image 0, S, hashed region 29,732 B):
+    validate 40,851,076 (163,404 us) = hash 2,472,482 (9,889 us) + ECDSA P-256 verify 38,361,765 (153,447 us)
+    + rest 16,829 (67 us)
+  area 2 (image 1, NS, hashed region 6,768 B):
+    validate 39,010,645 (156,042 us) = hash 571,531 (2,286 us) + ECDSA P-256 verify 38,422,335 (153,689 us)
+    + rest 16,779 (67 us)
+  boot_go outside the two validates: 2,064,173 cycles (8,257 us); includes the two INFO
+  "Image index ... Swap type" UART lines (not separated).
+
+Derived from the counts above:
+  SHA-256 (mbedTLS, flash read into tmp buf included): 83.2 cycles/B (image 0), 84.4 cycles/B (image 1),
+  about 3.0 MB/s at 250 MHz.
+  ECDSA P-256 verify: about 38.4 M cycles per image, 97 % of each validate.
+
+Inferred, not measured:
+  - Identical counts over 5 boots: same code, same inputs, ICACHE state, no interrupts in boot_go.
+  - 64 MHz comparison (x1 skipped): VCP timestamps at 64 MHz with DEBUG logs gave ECDSA ~616-618 ms and
+    image 0 hash ~44 ms. 38.4 M cycles at 64 MHz would be ~600 ms, so the cycle count is close to the
+    same at both clocks; the remainder is the DEBUG UART output. Flash latency differs (7 WS at 64 MHz
+    as left by STiRoT, 5 WS at 250 MHz).
+
+Captures: 2026-10-09-x4-x2-boot1-vcp.png ... -boot5-vcp.png (zoomed VCP pane), -boot1-swd.png ... -boot5-swd.png.
+Board state after: BL2 = bl2t_pll250 (timing build), S s_v3, NS ns_v1. Restore BL2-c with step c3 before P1-P3.
+
+Restore 17:10:25 (SW1=0, step c3 again, second "step c3" in evidence/m10-trustzone/2026-10-09-m10-c3.log):
+bl2c_enc.bin sha256 5f3662f2 -> 0x081E8000, "Download verified successfully", readback identical, flash error
+registers 0. VCP during the write: timing BL2 gate lines only ("sysclk=250000000 hz ... hdpl=0x51 ... stop").
+BL2-c becomes active at the next SW1=1 boot (STiRoT install). Captures: evidence/m10-trustzone/2026-10-09-m10-c3b-write.png, -c3b-write-vcp.png.

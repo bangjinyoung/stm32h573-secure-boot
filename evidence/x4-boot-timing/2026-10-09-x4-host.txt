@@ -1,0 +1,16 @@
+X4 boot timing, host record, 2026-10-09
+
+Code: 48d4e12 (boot: measure image checks with the DWT cycle counter), 94fd832 (tamper_step x1/x2).
+Builds (Release, BL2_ROLLBACK=hw, BL2_TIMING=ON, MCUBOOT_LOG_LEVEL INFO, BUILD_ID 48d4e12, clean):
+  build/x4-hsi     BL2_SYSCLK=hsi     SYSCLK as STiRoT leaves it (read 2026-10-09: HSI 64 MHz, FLASH 7 WS, ICACHE on)
+  build/x4-pll250  BL2_SYSCLK=pll250  VOS0, HSE 25 MHz digital bypass (ST-LINK MCO) /5 *100 /2 = 250 MHz, 5 WS,
+                                      program delay 2 (CubeH5 STM32H573I-DK SystemClock_Config)
+Measurement: DWT CYCCNT, linker --wrap of bootutil_img_validate (whole check per image), bootutil_img_hash
+(SHA-256 over header+body+protected TLVs), bootutil_verify_sig (ECDSA P-256, mbedTLS software). Call sites
+checked with objdump: loader -> __wrap_bootutil_img_validate, image_validate -> __wrap_bootutil_img_hash and
+__wrap_bootutil_verify_sig. Printed after boot_go(); nothing is printed inside the measured intervals.
+
+Images (.workspace/tmp/x4, STiRoT image version 2.0.0, signature VALID with STiRoT_Authentication_pub.pem):
+  x1 bl2t_hsi_enc.bin     afeece2d28ca46e1 -> 0x081E8000
+  x2 bl2t_pll250_enc.bin  6b5b4b553733efca -> 0x081E8000
+Restore after X4: c3 bl2c_enc.bin (BL2-c e530643).
