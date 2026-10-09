@@ -103,6 +103,8 @@ function(stm32h573_executable target)
         set(implib ${CMAKE_CURRENT_BINARY_DIR}/${target}_cmse_implib.o)
         target_link_options(${target} PRIVATE -Wl,--cmse-implib -Wl,--out-implib=${implib})
         set_target_properties(${target} PROPERTIES STM32H573_CMSE_IMPLIB ${implib})
+        # The linker writes the import library; declare it so a Non-secure image linking it waits for this link.
+        add_custom_command(TARGET ${target} POST_BUILD BYPRODUCTS ${implib} COMMAND ${CMAKE_COMMAND} -E true)
     endif()
 
     add_dependencies(${target} build_id)
