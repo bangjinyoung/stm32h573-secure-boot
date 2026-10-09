@@ -1,0 +1,84 @@
+# 2026-10-09 rebuild of 957db98 (Release, BL2_ROLLBACK=hw, STM32CubeCLT 1.22.0 GCC 14.3.1); BL2 bin equals .workspace/tmp/m10/bl2c.bin (BL2-c, e530643) except the 7-byte BUILD_ID
+$ arm-none-eabi-size -A boot/mcuboot/bl2.elf
+boot/mcuboot/bl2.elf  :
+section               size        addr
+.isr_vector            588   201327616
+.text                41556   201328204
+.rodata               6760   201369760
+.ARM.extab               0   201376520
+.ARM                     8   201376520
+.preinit_array           0   201376528
+.init_array              4   201376528
+.fini_array              4   201376532
+.data                  192   805306368
+.bss                  2332   805306560
+._user_heap_stack     8708   805308892
+Total               737235
+$ arm-none-eabi-size -A app/tz_s/tz_s.elf
+app/tz_s/tz_s.elf  :
+section               size        addr
+.isr_vector            588   201425920
+.text                16868   201426508
+.gnu.sgstubs            32   201454592
+.rodata                404   201443376
+.ARM.extab               0   201443780
+.ARM                     8   201443780
+.preinit_array           0   201443788
+.init_array              4   201443788
+.fini_array              4   201443792
+.data                  104   805306368
+.bss                   520   805306472
+._user_heap_stack     1536   805306992
+Total               321203
+$ arm-none-eabi-size -A app/tz_ns/tz_ns.elf
+app/tz_ns/tz_ns.elf  :
+section               size        addr
+.isr_vector            588   134349824
+.text                 4536   134350416
+.rodata                512   134354952
+.ARM.extab               0   134355464
+.ARM                     0   134355464
+.preinit_array           0   134355464
+.init_array              4   134355464
+.fini_array              4   134355468
+.data                   92   537198592
+.bss                   364   537198684
+._user_heap_stack     1536   537199048
+Total               123998
+$ ls -l *.bin
+49112 boot/mcuboot/bl2.bin
+28704 app/tz_s/tz_s.bin
+5740 app/tz_ns/tz_ns.bin
+# memory regions (map)
+## boot/mcuboot/bl2.map
+RAM              0x30000000         0x000a0000         xrw
+FLASH            0x0c000400         0x00017000         xr
+## app/tz_s/tz_s.map
+RAM              0x30000000         0x00040000         xrw
+FLASH            0x0c018400         0x00007000         xr
+FLASH_NSC        0x0c01f400         0x00000400         xr
+## app/tz_ns/tz_ns.map
+RAM              0x20050000         0x00050000         xrw
+FLASH            0x08020400         0x0000f800         xr
+# timing builds (48d4e12, build/x4-*)
+   text	   data	    bss	    dec	    hex	filename
+  47212	    192	  11128	  58532	   e4a4	build/x4-hsi/boot/mcuboot/bl2.elf
+  49396	    192	  11128	  60716	   ed2c	build/x4-pll250/boot/mcuboot/bl2.elf
+# input-section bytes by component (scripts not kept; .text/.rodata/.data before string merging, approximate)
+## boot/mcuboot/bl2.map
+mbedtls          17710
+HAL/CMSIS        11981
+mcuboot core      9257
+project           8188
+libc/libgcc       5606
+sum 52742
+## app/tz_s/tz_s.map
+HAL/CMSIS        11291
+libc/libgcc       4993
+project           1094
+sum 17378
+## app/tz_ns/tz_ns.map
+libc/libgcc       4191
+project           1249
+HAL/CMSIS           96
+sum 5536
