@@ -1,0 +1,12 @@
+M10 board prep, 2026-10-09 09:42 (read-only, Hotplug, no reset)
+
+ob: 2026-10-09-m10-ob.log. All 60 "-ob displ" value lines (36 fields) identical to the M9 end read
+(evidence/m9-update-rollback/2026-10-07-m9-ob.log). PRODUCT_STATE 0xED (Open), TZEN 0xB4,
+BOOT_UBE 0xC3, SECBOOT_LOCK 0xB4, SECBOOTADD 0xC0004, SECWM1 0x0-0xF.
+
+observe: 2026-10-09-m10-observe.log. VTOR 0x0C018400 (app v2 in the primary slot), DSCSR 0x00030000
+(CDS=1, Secure), CFSR 0, DEMCR 0x00100000, DWT_PCSR 0xFFFFFFFF x4 (same as the M9 observe read),
+VTOR_NS 0, SFSR 0, SFAR 0x50013808 (SFSR.SFARVALID=0, not meaningful), HFSR 0.
+
+Result: board matches the M9 end state recorded in the M10 plan's start condition. Ready for C1-C3.
+VCP logger: 2026-10-09-m10-vcp.log.

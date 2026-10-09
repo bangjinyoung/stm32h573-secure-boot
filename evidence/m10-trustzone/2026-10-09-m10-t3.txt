@@ -1,0 +1,22 @@
+M10 T3: Non-secure image payload tamper, 2026-10-09 (E10.2, negative)
+
+Write 10:23:08 (SW1=0, connect under reset): ns_hash.bin sha256 1f833784abd2990a (ns_v1.bin, bit 0 of byte
+0x1400 flipped) -> 0x08020000, readback identical, flash error registers 0 (2026-10-09-m10-t3.log).
+VCP during the write: only the BL2-c gate lines. Captures: -t3-write.png, -t3-write-vcp.png.
+
+Boot attempt 1, 10:24:41: BL2 ran at HDPL1 ("[bl2] hdpl=0x51, not started by stirot: stop"), PC 0x0C000A44
+(bl2 main.c:51, the gate loop), no slot access. Inferred: SW1 still read as 0 at reset; the user re-seated SW1.
+Captures: -t3-boot1-hdpl1-vcp.png, -t3-boot1-hdpl1-swd.png (fourth "step boot" in 2026-10-09-m10-boot.log).
+
+Boot 10:30:23 (SW1=1, NRST), VCP 10:30:24-10:30:25:
+  record state=valid counter0=2, obk d5e96ea8
+  image 0 (0xc00b978, S): hash, EXPECTED_HASH/KEY/SIG_TLV, ECDSA verify -> passes
+  image 1 (0xc00b984, NS): bootutil_img_hash, EXPECTED_HASH_TLV, then
+  [mcuboot ERR] Image in the primary slot is not valid!
+  [bl2] no bootable image
+  No "image ok", no [s] or [ns] line: the Secure app does not run either.
+SWD (fifth "step boot"): VTOR 0x0C000400 (BL2), DSCSR 0x00030000, DWT_PCSR 0x0C002E2E x3, 0x0C002E2C
+(HAL_Delay, BL2 LED loop), CFSR/SFSR/HFSR 0. SFAR 0x30000884 with SFARVALID=0.
+Captures: -t3-boot-vcp-full.png, -t3-boot-swd.png.
+
+Against E10.2 (NS half): NS tamper rejected by BL2 at image 1, neither app runs. Verdict: VERIFIED (user, 2026-10-09).

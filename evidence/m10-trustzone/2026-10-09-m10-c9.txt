@@ -1,0 +1,20 @@
+M10 C9: option bytes after M10, 2026-10-09 (read-only, 2026-10-09-m10-ob.log)
+
+Read 19:07:02 (-ob displ, Hotplug, NS app running after the P3 recovery boot) compared with the prep read
+09:42:05 (BL2 stopped at the HDPL1 gate, core Secure): PRODUCT_STATE 0xED (Open) both; of the other 34 fields 32 identical, 2 differ:
+  SECBOOT_LOCK 0xB4 -> 0x0, SECBOOTADD 0xC0004 -> 0x0.
+Cause check (19:08, same log, read-only): FLASH_SECBOOTR_CUR secure alias 0x50022088 = 0x0C0004B4
+(SECBOOTADD 0xC0004, SECBOOT_LOCK 0xB4), NS alias 0x40022088 = 0, DSCSR 0x00020000 (CDS=0).
+The register is unchanged; -ob displ shows 0 for it when the core runs Non-secure, as recorded in
+.workspace/context/provisioning.md (M6, full-secure app). No option byte was written in M10.
+
+Fields as -ob displ printed them at 19:07:
+  BOR_LEV=0x0 BORH_EN=0x0 IO_VDD_HSLV=0x0 IWDG_STOP=0x1 IWDG_STDBY=0x1 BOOT_UBE=0xC3 SWAP_BANK=0x0 
+  IWDG_SW=0x1 NRST_STOP=0x1 NRST_STDBY=0x1 TZEN=0xB4 USBPD_DIS=0x1 SRAM2_ECC=0x0 SRAM3_ECC=0x1 
+  BKPRAM_ECC=0x1 SRAM2_RST=0x0 SRAM1_3_RST=0x1 NSBOOTADD=0x80000 NSBOOT_LOCK=0xC3 SECBOOT_LOCK=0x0 
+  SECBOOTADD=0x0 SECWM1_STRT=0x0 SECWM1_END=0xF SECWM2_STRT=0x7F SECWM2_END=0x0 LOCKBL=0x0 
+  EDATA1_EN=0x0 EDATA1_STRT=0x0 EDATA2_EN=0x0 EDATA2_STRT=0x0 HDP1_STRT=0x1 HDP1_END=0x0 
+  HDP2_STRT=0x1 HDP2_END=0x0 
+
+Result: M10 changed no option byte. Persistent board state after M10: BL2-c (e530643) in the STiRoT
+install area, S s_v3 (3.0.0), NS ns_v1, HDPL2 OBK record counter0=2, TZEN 0xB4, Open.

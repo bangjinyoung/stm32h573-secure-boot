@@ -1,0 +1,20 @@
+M10 BL2 validation time from VCP host timestamps, 2026-10-09 (estimate, not an instrumented measurement)
+
+Clock read by SWD at 10:2x with the S/NS app running (2026-10-09-m10-clock-read.log). BL2 and the apps
+have no clock code (grep RCC_OscInit/ClockConfig/PLL: none), so this is assumed to be the clock BL2 ran at:
+  RCC_CR 0x00000023: HSI on, HSIDIV /1 -> 64 MHz.  CFGR1 0 (SYSCLK = HSI), CFGR2 0 (AHB /1).  PLL1 off.
+  ICACHE_CR 0x00000005 (enabled).  FLASH_ACR 0x00000107 (LATENCY 7 WS, prefetch on).
+Crypto: MCUBOOT_SIGN_EC256 + MCUBOOT_USE_MBED_TLS, mbedTLS software SHA-256 and ECDSA P-256 (no HASH/PKA
+peripheral), MCUBOOT_LOG_LEVEL DEBUG.
+
+| interval                         | C4 (09:52)  | T2 (10:17)  | bytes        |
+| image 0 (S) hash                 | 44 ms       | 45 ms       | 29732 hashed |
+| image 0 ECDSA verify             | 616 ms      | 616 ms      |              |
+| image 1 (NS) hash                | 14 ms       | 15 ms       | 6768 hashed  |
+| image 1 ECDSA verify             | 618 ms      | 617 ms      |              |
+| BL2 banner -> jump line          | 1587 ms     | 1587 ms     |              |
+
+Hash interval: "bootutil_img_hash" line -> "bootutil_tlv_iter_begin" line. ECDSA: "bootutil_verify_sig" line ->
+next line. Error: each interval includes the closing line's UART time (115200 baud, about 87 us/char, 3-8 ms)
+and ST-LINK VCP buffering; the hash numbers carry about +-10 ms, the ECDSA numbers are stable across runs.
+The total includes about 60 DEBUG lines printed at 115200 baud.

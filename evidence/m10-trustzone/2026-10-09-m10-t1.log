@@ -1,0 +1,160 @@
+# 2026-10-09 10:12:10.419 +0900 step t1
+# E10.2-S-HASH s_hash.bin sha256 4c55acb31e6a7466 -> 0x08018000
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=UR -r32 0xE000EE08 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Under Reset
+Reset mode  : Hardware reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0xE000EE08
+0xE000EE08 : 00030000
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=UR -d /home/bjy/workspaces/stm32h573-secure-boot/.workspace/tmp/m10/s_hash.bin 0x08018000 -v
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Under Reset
+Reset mode  : Hardware reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+
+Opening and parsing file: s_hash.bin
+
+
+Memory Programming ...
+  File          : s_hash.bin
+  Size          : 29.19 KB 
+  Address       : 0x08018000
+
+
+Erasing memory corresponding to segment 0:
+Erasing internal memory sectors [12 15]
+Download in Progress:
+[==================================================] 100% 
+
+File download complete
+Time elapsed during download operation: 00:00:00.353
+
+
+
+Verifying...
+
+
+File size < 32KB legacy verify will be used
+Read progress:
+[==================================================] 100% 
+
+Time elapsed during verifying operation: 00:00:00.110
+
+
+Download verified successfully
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=UR -r32 0x40022020 4 -r32 0x50022024 4
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Under Reset
+Reset mode  : Hardware reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x40022020
+0x40022020 : 00000000
+
+
+
+Reading 32-bit memory content
+  Size          : 4 Bytes
+  Address:      : 0x50022024
+0x50022024 : 00000000
+
+
+rc=0
+$ STM32_Programmer_CLI -c port=SWD speed=fast ap=1 mode=UR -r 0x0C018000 0x74c2 /home/bjy/workspaces/stm32h573-secure-boot/.workspace/tmp/m10/m10-t1-readback.bin
+      -------------------------------------------------------------------
+                        STM32CubeProgrammer v2.23.0                  
+      -------------------------------------------------------------------
+
+ST-LINK SN  : <masked>
+ST-LINK FW  : V3J17M10
+Board       : STM32H573I-DK
+Voltage     : 3.27V
+SWD freq    : 8000 KHz
+Connect mode: Under Reset
+Reset mode  : Hardware reset
+Device ID   : 0x484
+Revision ID : Rev X
+Device name : STM32H56x/573
+NVM size    : 2 MBytes
+Device type : MCU
+Device CPU  : Cortex-M33
+BL Version  : 0xE4
+SFSP Version: v2.5.0
+Debug in Low Power mode enabled
+
+
+UPLOADING ...
+  File          : /home/bjy/workspaces/stm32h573-secure-boot/.workspace/tmp/m10/m10-t1-readback.bin
+  Size          : 29890 Bytes
+  Address:      : 0xC018000
+Read progress:
+[==================================================] 100% 
+
+Data read successfully
+Time elapsed during read operation is: 00:00:00.122
+rc=0
+cmp E10.2-S-HASH: identical

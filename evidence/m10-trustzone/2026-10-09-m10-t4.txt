@@ -1,0 +1,14 @@
+M10 T4: restore the Non-secure image after T3, 2026-10-09
+
+Write 10:31:34 (SW1=0, connect under reset): ns_v1.bin -> 0x08020000, readback identical
+(cmp restore-ns), flash error registers 0x40022020/0x50022024 = 0 (2026-10-09-m10-t4.log).
+VCP: only the BL2-c gate lines (hdpl=0x51, not started by stirot: stop).
+
+Boot 13:01:34 (SW1=1, NRST), VCP 13:01:35.619-13:01:37.264: same as C4. Record valid counter0=2,
+obk d5e96ea8, image 0 (0xc00b978, TLV off 29732) and image 1 (0xc00b984, TLV off 6768) each to
+EXPECTED_SIG_TLV and ECDSA verify, no "rollback counter" line, image ok 3.0.0, hdpl=0x8a jump,
+[s] hdpl=0x6f, SAU ctrl=1, NSC 0x0c01f400-0x0c01f7ff, [ns] banner, nsc hdpl=0x6f s_version=3.0.
+SWD (sixth "step boot" in 2026-10-09-m10-boot.log): VTOR 0x08020400, DSCSR 0x00020000 (CDS=0),
+DWT_PCSR 0x080207B8, 0x080207AE x2, 0x080207A8 (NS slot), SFSR/SFAR/HFSR/CFSR 0.
+
+Captures (live): 2026-10-09-m10-t4-write.png, -t4-write-vcp.png, -t4-boot-vcp-full.png, -t4-boot-swd.png.

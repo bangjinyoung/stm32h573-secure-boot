@@ -1,0 +1,17 @@
+M10 result: TrustZone Secure / Non-Secure, 2026-10-09
+
+Chain: STiRoT (HDPL1) -> custom MCUboot BL2-c (HDPL2, e530643, 2 images, overwrite-only, rollback=hw)
+-> Secure app 3.0.0 (HDPL3, 0x08018000, SAU/GTZC/NSC) -> Non-secure app 1.0.0 (0x08020000).
+
+E10.1 S/NS 2 image boot      VERIFIED (user)  2026-10-09-m10-c4.txt, -t2.txt, -t4.txt
+E10.2 S/NS tamper            VERIFIED (user)  2026-10-09-m10-t1.txt .. -t4.txt
+E10.3 NS isolation           VERIFIED (user)  2026-10-09-m10-p.txt
+C9 option bytes unchanged                     2026-10-09-m10-c9.txt
+
+Limitations (not verified):
+  - VTOR_NS alias 0xE002ED08 reads 0 from the debugger; NS VTOR confirmed via 0xE000ED08 and the S log.
+  - MCUboot's ERR line has no image index; the rejected image is identified by the preceding flash area.
+  - Tamper covered payload hash only (no header/TLV/signature/other-key cases).
+
+Timing (X4, 250 MHz, DWT CYCCNT): ../x4-boot-timing/2026-10-09-x4-x2.txt.
+Steps: 2026-10-09-m10-prep.txt; board writes each with the user's ok, SW1 toggled by the user.

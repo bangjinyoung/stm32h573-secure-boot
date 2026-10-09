@@ -1,0 +1,33 @@
+M10 C4: boot after C1-C3, 2026-10-09 09:52:22 (SW1=1, NRST via -hardRst, no write)
+
+Writes before it (SW1=0, connect under reset, readback identical, flash error registers 0):
+  c1 09:44:50 ns_v1.bin    358e19b8 -> 0x08020000   2026-10-09-m10-c1.log
+  c2 09:45:42 s_v3.bin     6d640b34 -> 0x08018000   2026-10-09-m10-c2.log
+  c3 09:47:13 bl2c_enc.bin 5f3662f2 -> 0x081E8000   2026-10-09-m10-c3.log
+  VCP during c1-c3: only the BL2-b gate lines ("hdpl=0x51, not started by stirot: stop").
+
+VCP (2026-10-09-m10-vcp.log, 09:52:24-09:52:26):
+  [bl2] mcuboot build=e530643 rollback=hw          BL2-c runs (was c2bdcda): STiRoT installed it
+  [bl2] rollback record state=valid counter0=2
+  [bl2] oemurot obk sha256=d5e96ea8                 unchanged since M9
+  Image index 0 and 1: Swap type none
+  boot_validate_slot x2: flash area 0xc00b978 (TLV off 29732, S) and 0xc00b984 (TLV off 6768, NS),
+    each EXPECTED_HASH_TLV, EXPECTED_KEY_TLV, EXPECTED_SIG_TLV, ECDSA builtin key 0
+  no "rollback counter" line (counter write none, D-26)
+  [bl2] image ok version=3.0.0+0
+  [bl2] hdpl=0x8a jump to 0x0c018400 ... via rss
+  [s] hdpl=0x6f vtor=0x0c018400; sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff
+      entry secure_boot_info=0x0c018ccd; ns vtor=0x08020400 reset=0x080207ed, console to ns
+  [ns] stm32h573 non-secure app build=e530643, vtor=0x08020400
+  [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+
+SWD after boot (2026-10-09-m10-boot.log):
+  DSCSR 0x00020000 (CDS=0: core in Non-secure state)
+  VTOR (0xE000ED08) 0x08020400, DWT_PCSR 0x080207AE 0x080206EC 0x080207A8 0x080206E2 (NS slot code)
+  CFSR 0, SFSR 0, SFAR 0, HFSR 0
+  0xE002ED08 (VTOR_NS alias) read 0. Inferred, not checked: the debugger's SCS accesses were
+  Non-secure here (0xE000ED08 returned the NS VTOR), and the NS alias reads as zero from NS.
+
+Against E10.1: two image validations, HDPL3 S app, NS app entered and running in Non-secure state,
+NSC call returns. Verdict: VERIFIED (user, 2026-10-09).
+Captures: 2026-10-09-m10-c4-boot-vcp-rerender.png, -c4-boot-swd-rerender.png (re-rendered at 10:15 from the logs above; the live panes had scrolled).

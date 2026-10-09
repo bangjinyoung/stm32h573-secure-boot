@@ -1,0 +1,790 @@
+2026-10-09 09:44:50.731 
+2026-10-09 09:44:50.735 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:44:51.155 [bl2] hdpl=0x5±
+2026-10-09 09:44:51.159 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:44:51.163 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:44:51.190 
+2026-10-09 09:44:51.194 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:44:51.824 [bl2] hdpl=0x51ü
+2026-10-09 09:44:51.828 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:44:52.225 [bl2] hdpl=ð
+2026-10-09 09:44:52.229 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:44:52.233 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:44:52.262 
+2026-10-09 09:44:52.266 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:44:52.738 [bl2] hdpl=0x
+2026-10-09 09:44:52.742 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:44:52.746 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:45:42.615 
+2026-10-09 09:45:42.619 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:45:43.053 [bl2] hdpl=0x51,à
+2026-10-09 09:45:43.057 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:45:43.061 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:45:43.094 
+2026-10-09 09:45:43.098 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:45:44.012 [bl2] hdpl=0x51, not starteä
+2026-10-09 09:45:44.016 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:45:44.446 [bl2] hdpl=0x51,
+2026-10-09 09:45:44.449 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:45:44.454 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:45:44.483 
+2026-10-09 09:45:44.487 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:45:45.028 [bl2] hdpl=0x51,ÿ
+2026-10-09 09:45:45.032 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:45:45.036 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:47:13.783 
+2026-10-09 09:47:13.787 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:47:14.214 [bl2] hdpl=0x51, not staÿ
+2026-10-09 09:47:14.218 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:47:14.222 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:47:14.249 
+2026-10-09 09:47:14.252 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:47:15.806 [bl2] hdpl=0x51, þ
+2026-10-09 09:47:15.809 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:47:16.236 [bl2] hdpl=0x51,
+2026-10-09 09:47:16.239 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:47:16.244 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:47:16.271 
+2026-10-09 09:47:16.275 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:47:16.960 [bl2] hdpl=0x5ÿ
+2026-10-09 09:47:16.964 [bl2] mcuboot build=c2bdcda rollback=hw
+2026-10-09 09:47:16.968 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 09:52:24.370 
+2026-10-09 09:52:24.374 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 09:52:24.378 [bl2] rollback record state=valid counter0=2
+2026-10-09 09:52:24.382 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 09:52:24.385 [mcuboot DBG] context_boot_go
+2026-10-09 09:52:24.389 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 09:52:24.393 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 09:52:24.399 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 09:52:24.404 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 09:52:24.407 [mcuboot DBG] bootutil_img_hash
+2026-10-09 09:52:24.451 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 09:52:24.457 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 09:52:24.467 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 09:52:24.473 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 09:52:24.482 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 09:52:24.489 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 09:52:24.494 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 09:52:24.504 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29780 ending at 29890
+2026-10-09 09:52:24.510 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 29784 (size 32)
+2026-10-09 09:52:24.515 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 09:52:24.518 [mcuboot DBG] bootutil_find_key
+2026-10-09 09:52:24.528 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29816 ending at 29890
+2026-10-09 09:52:24.534 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 29820 (size 70)
+2026-10-09 09:52:24.540 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 09:52:24.545 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 09:52:25.161 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29890 ending at 29890
+2026-10-09 09:52:25.166 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 09:52:25.172 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 09:52:25.181 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 09:52:25.187 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 09:52:25.193 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 09:52:25.198 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b984
+2026-10-09 09:52:25.201 [mcuboot DBG] bootutil_img_hash
+2026-10-09 09:52:25.215 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 09:52:25.221 [mcuboot DBG] bootutil_img_validate: TLV off 6768, end 6926
+2026-10-09 09:52:25.230 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 09:52:25.236 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 09:52:25.246 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6776 ending at 6926
+2026-10-09 09:52:25.252 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 6784 (size 32)
+2026-10-09 09:52:25.257 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 09:52:25.267 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6816 ending at 6926
+2026-10-09 09:52:25.273 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 6820 (size 32)
+2026-10-09 09:52:25.278 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 09:52:25.281 [mcuboot DBG] bootutil_find_key
+2026-10-09 09:52:25.291 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6852 ending at 6926
+2026-10-09 09:52:25.297 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 6856 (size 70)
+2026-10-09 09:52:25.302 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 09:52:25.307 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 09:52:25.925 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6926 ending at 6926
+2026-10-09 09:52:25.930 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 09:52:25.935 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 09:52:25.944 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 09:52:25.950 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 09:52:25.953 [bl2] image ok version=3.0.0+0
+2026-10-09 09:52:25.961 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 09:52:25.974 
+2026-10-09 09:52:25.978 [s] stm32h573 secure app build=e530643
+2026-10-09 09:52:25.982 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 09:52:25.989 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 09:52:25.995 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 09:52:25.996 
+2026-10-09 09:52:26.000 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 09:52:26.003 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 09:52:26.008 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 09:52:26.015 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 10:12:10.481 
+2026-10-09 10:12:10.484 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:12:10.926 [bl2] hdpl=0x51, no
+2026-10-09 10:12:10.930 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:12:10.934 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:12:10.966 
+2026-10-09 10:12:10.970 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:12:11.930 [bl2] hdpl=0x51, not ÿ
+2026-10-09 10:12:11.933 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:12:12.373 [bl2] hdpl=0x51, not stÿ
+2026-10-09 10:12:12.377 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:12:12.381 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:12:12.411 
+2026-10-09 10:12:12.414 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:12:12.989 [bl2] hdpl=0x51, þ
+2026-10-09 10:12:12.993 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:12:12.997 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:12:56.426 
+2026-10-09 10:12:56.429 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:12:56.433 [bl2] rollback record state=valid counter0=2
+2026-10-09 10:12:56.437 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 10:12:56.440 [mcuboot DBG] context_boot_go
+2026-10-09 10:12:56.444 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 10:12:56.448 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 10:12:56.454 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 10:12:56.459 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 10:12:56.462 [mcuboot DBG] bootutil_img_hash
+2026-10-09 10:12:56.506 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 10:12:56.512 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 10:12:56.522 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 10:12:56.528 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 10:12:56.537 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 10:12:56.544 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 10:12:56.549 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 10:12:56.554 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-09 10:12:56.556 [bl2] no bootable image
+2026-10-09 10:16:24.060 
+2026-10-09 10:16:24.064 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:16:24.499 [bl2] hdpl=0x51, notø
+2026-10-09 10:16:24.502 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:16:24.507 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:16:24.538 
+2026-10-09 10:16:24.541 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:16:25.502 [bl2] hdpl=0x51, noü
+2026-10-09 10:16:25.505 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:16:25.955 [bl2] hdpl=0x51, nÿ
+2026-10-09 10:16:25.958 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:16:25.962 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:16:25.991 
+2026-10-09 10:16:25.995 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:16:26.541 [bl2] hdpl=0x51, noü
+2026-10-09 10:16:26.544 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:16:26.548 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:17:06.034 
+2026-10-09 10:17:06.037 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:17:06.041 [bl2] rollback record state=valid counter0=2
+2026-10-09 10:17:06.045 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 10:17:06.048 [mcuboot DBG] context_boot_go
+2026-10-09 10:17:06.052 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 10:17:06.057 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 10:17:06.062 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 10:17:06.068 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 10:17:06.070 [mcuboot DBG] bootutil_img_hash
+2026-10-09 10:17:06.115 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 10:17:06.120 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 10:17:06.130 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 10:17:06.136 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 10:17:06.146 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 10:17:06.152 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 10:17:06.158 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 10:17:06.167 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29780 ending at 29890
+2026-10-09 10:17:06.181 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 29784 (size 32)
+2026-10-09 10:17:06.181 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 10:17:06.182 [mcuboot DBG] bootutil_find_key
+2026-10-09 10:17:06.191 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29816 ending at 29890
+2026-10-09 10:17:06.198 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 29820 (size 70)
+2026-10-09 10:17:06.203 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 10:17:06.208 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 10:17:06.824 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29890 ending at 29890
+2026-10-09 10:17:06.830 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 10:17:06.835 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 10:17:06.844 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 10:17:06.850 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 10:17:06.856 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 10:17:06.861 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b984
+2026-10-09 10:17:06.864 [mcuboot DBG] bootutil_img_hash
+2026-10-09 10:17:06.879 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 10:17:06.884 [mcuboot DBG] bootutil_img_validate: TLV off 6768, end 6926
+2026-10-09 10:17:06.894 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 10:17:06.900 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 10:17:06.909 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6776 ending at 6926
+2026-10-09 10:17:06.915 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 6784 (size 32)
+2026-10-09 10:17:06.921 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 10:17:06.930 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6816 ending at 6926
+2026-10-09 10:17:06.936 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 6820 (size 32)
+2026-10-09 10:17:06.942 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 10:17:06.945 [mcuboot DBG] bootutil_find_key
+2026-10-09 10:17:06.954 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6852 ending at 6926
+2026-10-09 10:17:06.960 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 6856 (size 70)
+2026-10-09 10:17:06.966 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 10:17:06.971 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 10:17:07.588 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6926 ending at 6926
+2026-10-09 10:17:07.593 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 10:17:07.599 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 10:17:07.608 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 10:17:07.614 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 10:17:07.617 [bl2] image ok version=3.0.0+0
+2026-10-09 10:17:07.624 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 10:17:07.638 
+2026-10-09 10:17:07.641 [s] stm32h573 secure app build=e530643
+2026-10-09 10:17:07.645 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 10:17:07.653 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 10:17:07.659 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 10:17:07.659 
+2026-10-09 10:17:07.663 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 10:17:07.666 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 10:17:07.672 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 10:17:07.679 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 10:23:08.795 
+2026-10-09 10:23:08.799 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:23:09.247 [bl2] hdpl=0x51, not
+2026-10-09 10:23:09.250 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:23:09.255 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:23:09.286 
+2026-10-09 10:23:09.290 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:23:10.022 [bl2] hdpl=0x51, not start
+2026-10-09 10:23:10.026 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:23:10.508 [bl2] hdpl=0x51, not started bù
+2026-10-09 10:23:10.512 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:23:10.516 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:23:10.546 
+2026-10-09 10:23:10.550 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:23:11.052 [bl2] hdpl=0x51, not sü
+2026-10-09 10:23:11.056 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:23:11.060 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:24:42.444 
+2026-10-09 10:24:42.448 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:24:42.452 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:30:24.672 
+2026-10-09 10:30:24.675 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:30:24.679 [bl2] rollback record state=valid counter0=2
+2026-10-09 10:30:24.683 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 10:30:24.686 [mcuboot DBG] context_boot_go
+2026-10-09 10:30:24.690 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 10:30:24.695 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 10:30:24.700 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 10:30:24.705 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 10:30:24.708 [mcuboot DBG] bootutil_img_hash
+2026-10-09 10:30:24.753 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 10:30:24.758 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 10:30:24.768 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 10:30:24.774 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 10:30:24.784 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 10:30:24.790 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 10:30:24.795 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 10:30:24.805 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29780 ending at 29890
+2026-10-09 10:30:24.811 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 29784 (size 32)
+2026-10-09 10:30:24.817 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 10:30:24.820 [mcuboot DBG] bootutil_find_key
+2026-10-09 10:30:24.829 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29816 ending at 29890
+2026-10-09 10:30:24.836 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 29820 (size 70)
+2026-10-09 10:30:24.841 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 10:30:24.846 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 10:30:25.463 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29890 ending at 29890
+2026-10-09 10:30:25.468 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 10:30:25.473 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 10:30:25.482 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 10:30:25.489 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 10:30:25.494 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 10:30:25.499 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b984
+2026-10-09 10:30:25.502 [mcuboot DBG] bootutil_img_hash
+2026-10-09 10:30:25.517 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 10:30:25.522 [mcuboot DBG] bootutil_img_validate: TLV off 6768, end 6926
+2026-10-09 10:30:25.532 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 10:30:25.538 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 10:30:25.547 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6776 ending at 6926
+2026-10-09 10:30:25.553 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 6784 (size 32)
+2026-10-09 10:30:25.559 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 10:30:25.564 [mcuboot ERR] Image in the primary slot is not valid!
+2026-10-09 10:30:25.566 [bl2] no bootable image
+2026-10-09 10:31:34.328 
+2026-10-09 10:31:34.332 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:31:34.765 [bl2] hdpl=0x51, 
+2026-10-09 10:31:34.769 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:31:34.773 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:31:34.803 
+2026-10-09 10:31:34.807 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:31:35.483 [bl2] hdpl=0x51, not ÿ
+2026-10-09 10:31:35.487 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:31:35.921 [bl2] hdpl=0x51ü
+2026-10-09 10:31:35.925 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:31:35.929 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 10:31:35.959 
+2026-10-09 10:31:35.962 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:31:36.507 [bl2] hdpl=0xý
+2026-10-09 10:31:36.511 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 10:31:36.515 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 13:01:35.619 
+2026-10-09 13:01:35.622 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 13:01:35.626 [bl2] rollback record state=valid counter0=2
+2026-10-09 13:01:35.630 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 13:01:35.633 [mcuboot DBG] context_boot_go
+2026-10-09 13:01:35.637 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 13:01:35.641 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 13:01:35.647 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 13:01:35.652 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 13:01:35.655 [mcuboot DBG] bootutil_img_hash
+2026-10-09 13:01:35.699 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 13:01:35.705 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 13:01:35.715 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 13:01:35.721 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 13:01:35.730 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 13:01:35.737 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 13:01:35.742 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 13:01:35.752 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29780 ending at 29890
+2026-10-09 13:01:35.758 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 29784 (size 32)
+2026-10-09 13:01:35.763 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 13:01:35.766 [mcuboot DBG] bootutil_find_key
+2026-10-09 13:01:35.776 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29816 ending at 29890
+2026-10-09 13:01:35.782 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 29820 (size 70)
+2026-10-09 13:01:35.788 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 13:01:35.793 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 13:01:36.409 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29890 ending at 29890
+2026-10-09 13:01:36.414 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 13:01:36.420 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 13:01:36.429 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 13:01:36.435 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 13:01:36.441 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 13:01:36.446 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b984
+2026-10-09 13:01:36.449 [mcuboot DBG] bootutil_img_hash
+2026-10-09 13:01:36.463 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 13:01:36.469 [mcuboot DBG] bootutil_img_validate: TLV off 6768, end 6926
+2026-10-09 13:01:36.478 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 13:01:36.484 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 13:01:36.494 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6776 ending at 6926
+2026-10-09 13:01:36.500 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 6784 (size 32)
+2026-10-09 13:01:36.505 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 13:01:36.515 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6816 ending at 6926
+2026-10-09 13:01:36.521 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 6820 (size 32)
+2026-10-09 13:01:36.526 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 13:01:36.529 [mcuboot DBG] bootutil_find_key
+2026-10-09 13:01:36.539 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6852 ending at 6926
+2026-10-09 13:01:36.545 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 6856 (size 70)
+2026-10-09 13:01:36.550 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 13:01:36.555 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 13:01:37.173 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6926 ending at 6926
+2026-10-09 13:01:37.178 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 13:01:37.183 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 13:01:37.192 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 13:01:37.198 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 13:01:37.201 [bl2] image ok version=3.0.0+0
+2026-10-09 13:01:37.209 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 13:01:37.222 
+2026-10-09 13:01:37.226 [s] stm32h573 secure app build=e530643
+2026-10-09 13:01:37.230 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 13:01:37.237 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 13:01:37.243 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 13:01:37.244 
+2026-10-09 13:01:37.248 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 13:01:37.251 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 13:01:37.256 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 13:01:37.264 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 13:10:37.418 
+2026-10-09 13:10:37.421 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 13:10:37.837 [bl2] hdpl=0x51
+2026-10-09 13:10:37.841 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 13:10:37.845 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 13:10:37.874 
+2026-10-09 13:10:37.878 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 13:10:39.458 [bl2] hdpl=0x51, notø
+2026-10-09 13:10:39.462 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 13:10:39.907 [bl2] hdpl=0x51, nÿ
+2026-10-09 13:10:39.910 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 13:10:39.915 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 13:10:39.944 
+2026-10-09 13:10:39.948 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 13:10:40.685 [bl2] hdpl=0x51, not star
+2026-10-09 13:10:40.689 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 13:10:40.693 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 13:11:26.001 
+2026-10-09 13:11:26.004 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 13:11:26.008 [bl2] sysclk=250000000 hz (pll250 ret=0)
+2026-10-09 13:11:26.012 [bl2] rollback record state=valid counter0=2
+2026-10-09 13:11:26.015 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 13:11:26.019 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 13:11:26.024 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 13:11:26.349 [bl2] timing sysclk=250000000 hz boot_go=81925894 cycles (327703 us)
+2026-10-09 13:11:26.358 [bl2] timing area=1 rc=0 validate=40851076 hash=2472482 sig=38361765 cycles (163404/9889/153447 us)
+2026-10-09 13:11:26.367 [bl2] timing area=2 rc=0 validate=39010645 hash=571531 sig=38422335 cycles (156042/2286/153689 us)
+2026-10-09 13:11:26.369 [bl2] image ok version=3.0.0+0
+2026-10-09 13:11:26.377 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 13:11:26.381 
+2026-10-09 13:11:26.384 [s] stm32h573 secure app build=e530643
+2026-10-09 13:11:26.388 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 13:11:26.396 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 13:11:26.402 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 13:11:26.402 
+2026-10-09 13:11:26.406 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 13:11:26.409 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 13:11:26.415 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 13:11:26.422 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 13:11:45.441 
+2026-10-09 13:11:45.444 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 13:11:45.448 [bl2] sysclk=250000000 hz (pll250 ret=0)
+2026-10-09 13:11:45.452 [bl2] rollback record state=valid counter0=2
+2026-10-09 13:11:45.455 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 13:11:45.459 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 13:11:45.463 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 13:11:45.789 [bl2] timing sysclk=250000000 hz boot_go=81925894 cycles (327703 us)
+2026-10-09 13:11:45.798 [bl2] timing area=1 rc=0 validate=40851076 hash=2472482 sig=38361765 cycles (163404/9889/153447 us)
+2026-10-09 13:11:45.807 [bl2] timing area=2 rc=0 validate=39010645 hash=571531 sig=38422335 cycles (156042/2286/153689 us)
+2026-10-09 13:11:45.809 [bl2] image ok version=3.0.0+0
+2026-10-09 13:11:45.817 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 13:11:45.820 
+2026-10-09 13:11:45.824 [s] stm32h573 secure app build=e530643
+2026-10-09 13:11:45.828 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 13:11:45.836 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 13:11:45.842 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 13:11:45.842 
+2026-10-09 13:11:45.846 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 13:11:45.849 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 13:11:45.855 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 13:11:45.862 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 13:11:57.522 
+2026-10-09 13:11:57.525 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 13:11:57.529 [bl2] sysclk=250000000 hz (pll250 ret=0)
+2026-10-09 13:11:57.533 [bl2] rollback record state=valid counter0=2
+2026-10-09 13:11:57.536 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 13:11:57.540 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 13:11:57.544 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 13:11:57.870 [bl2] timing sysclk=250000000 hz boot_go=81925894 cycles (327703 us)
+2026-10-09 13:11:57.879 [bl2] timing area=1 rc=0 validate=40851076 hash=2472482 sig=38361765 cycles (163404/9889/153447 us)
+2026-10-09 13:11:57.887 [bl2] timing area=2 rc=0 validate=39010645 hash=571531 sig=38422335 cycles (156042/2286/153689 us)
+2026-10-09 13:11:57.890 [bl2] image ok version=3.0.0+0
+2026-10-09 13:11:57.898 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 13:11:57.901 
+2026-10-09 13:11:57.905 [s] stm32h573 secure app build=e530643
+2026-10-09 13:11:57.909 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 13:11:57.916 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 13:11:57.922 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 13:11:57.923 
+2026-10-09 13:11:57.927 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 13:11:57.930 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 13:11:57.935 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 13:11:57.943 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 13:12:09.656 
+2026-10-09 13:12:09.660 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 13:12:09.663 [bl2] sysclk=250000000 hz (pll250 ret=0)
+2026-10-09 13:12:09.668 [bl2] rollback record state=valid counter0=2
+2026-10-09 13:12:09.671 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 13:12:09.675 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 13:12:09.679 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 13:12:10.005 [bl2] timing sysclk=250000000 hz boot_go=81925894 cycles (327703 us)
+2026-10-09 13:12:10.013 [bl2] timing area=1 rc=0 validate=40851076 hash=2472482 sig=38361765 cycles (163404/9889/153447 us)
+2026-10-09 13:12:10.022 [bl2] timing area=2 rc=0 validate=39010645 hash=571531 sig=38422335 cycles (156042/2286/153689 us)
+2026-10-09 13:12:10.025 [bl2] image ok version=3.0.0+0
+2026-10-09 13:12:10.032 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 13:12:10.036 
+2026-10-09 13:12:10.040 [s] stm32h573 secure app build=e530643
+2026-10-09 13:12:10.043 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 13:12:10.051 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 13:12:10.057 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 13:12:10.058 
+2026-10-09 13:12:10.062 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 13:12:10.065 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 13:12:10.070 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 13:12:10.077 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 13:12:21.733 
+2026-10-09 13:12:21.737 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 13:12:21.740 [bl2] sysclk=250000000 hz (pll250 ret=0)
+2026-10-09 13:12:21.744 [bl2] rollback record state=valid counter0=2
+2026-10-09 13:12:21.748 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 13:12:21.752 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 13:12:21.756 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 13:12:22.081 [bl2] timing sysclk=250000000 hz boot_go=81925894 cycles (327703 us)
+2026-10-09 13:12:22.090 [bl2] timing area=1 rc=0 validate=40851076 hash=2472482 sig=38361765 cycles (163404/9889/153447 us)
+2026-10-09 13:12:22.099 [bl2] timing area=2 rc=0 validate=39010645 hash=571531 sig=38422335 cycles (156042/2286/153689 us)
+2026-10-09 13:12:22.102 [bl2] image ok version=3.0.0+0
+2026-10-09 13:12:22.109 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 13:12:22.113 
+2026-10-09 13:12:22.116 [s] stm32h573 secure app build=e530643
+2026-10-09 13:12:22.120 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 13:12:22.128 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 13:12:22.134 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 13:12:22.134 
+2026-10-09 13:12:22.138 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 13:12:22.141 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 13:12:22.147 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 13:12:22.154 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 17:10:25.542 
+2026-10-09 17:10:25.545 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 17:10:25.960 [bl2] sysclk=25000000ð
+2026-10-09 17:10:25.963 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 17:10:25.967 [bl2] sysclk=250000000 hz (pll250 ret=0)
+2026-10-09 17:10:25.971 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 17:10:25.999 
+2026-10-09 17:10:26.002 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 17:10:27.620 [bl2] sysclk=250000000 hz ü
+2026-10-09 17:10:27.623 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 17:10:28.062 [bl2] sysclk=2500
+2026-10-09 17:10:28.065 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 17:10:28.069 [bl2] sysclk=250000000 hz (pll250 ret=0)
+2026-10-09 17:10:28.073 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 17:10:28.099 
+2026-10-09 17:10:28.103 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 17:10:28.820 [bl2] sysclk=2500
+2026-10-09 17:10:28.824 [bl2] mcuboot build=48d4e12 rollback=hw
+2026-10-09 17:10:28.827 [bl2] sysclk=250000000 hz (pll250 ret=0)
+2026-10-09 17:10:28.831 [bl2] hdpl=0x51, not started by stirot: stop
+2026-10-09 17:12:40.571 
+2026-10-09 17:12:40.575 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 17:12:40.579 [bl2] rollback record state=valid counter0=2
+2026-10-09 17:12:40.583 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 17:12:40.586 [mcuboot DBG] context_boot_go
+2026-10-09 17:12:40.590 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 17:12:40.594 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 17:12:40.600 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 17:12:40.605 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 17:12:40.608 [mcuboot DBG] bootutil_img_hash
+2026-10-09 17:12:40.652 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 17:12:40.658 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 17:12:40.667 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 17:12:40.674 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 17:12:40.683 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 17:12:40.689 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 17:12:40.695 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 17:12:40.705 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29780 ending at 29890
+2026-10-09 17:12:40.711 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 29784 (size 32)
+2026-10-09 17:12:40.716 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 17:12:40.719 [mcuboot DBG] bootutil_find_key
+2026-10-09 17:12:40.729 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29816 ending at 29890
+2026-10-09 17:12:40.735 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 29820 (size 70)
+2026-10-09 17:12:40.740 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 17:12:40.745 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 17:12:41.362 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29890 ending at 29890
+2026-10-09 17:12:41.367 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 17:12:41.372 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 17:12:41.382 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 17:12:41.388 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 17:12:41.394 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 17:12:41.399 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b984
+2026-10-09 17:12:41.402 [mcuboot DBG] bootutil_img_hash
+2026-10-09 17:12:41.416 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 17:12:41.422 [mcuboot DBG] bootutil_img_validate: TLV off 6768, end 6926
+2026-10-09 17:12:41.431 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 17:12:41.437 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 17:12:41.446 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6776 ending at 6926
+2026-10-09 17:12:41.453 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 6784 (size 32)
+2026-10-09 17:12:41.458 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 17:12:41.468 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6816 ending at 6926
+2026-10-09 17:12:41.474 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 6820 (size 32)
+2026-10-09 17:12:41.479 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 17:12:41.482 [mcuboot DBG] bootutil_find_key
+2026-10-09 17:12:41.492 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6852 ending at 6926
+2026-10-09 17:12:41.498 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 6856 (size 70)
+2026-10-09 17:12:41.503 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 17:12:41.508 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 17:12:42.125 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6926 ending at 6926
+2026-10-09 17:12:42.130 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 17:12:42.136 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 17:12:42.145 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 17:12:42.151 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 17:12:42.154 [bl2] image ok version=3.0.0+0
+2026-10-09 17:12:42.162 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 17:12:42.175 
+2026-10-09 17:12:42.178 [s] stm32h573 secure app build=e530643
+2026-10-09 17:12:42.182 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 17:12:42.190 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 17:12:42.196 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 17:12:42.196 
+2026-10-09 17:12:42.200 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 17:12:42.203 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 17:12:42.209 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 17:12:42.216 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 17:12:56.991 [ns] probe s: read 0x30000000
+2026-10-09 17:13:22.558 
+2026-10-09 17:13:22.561 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 17:13:22.566 [bl2] rollback record state=valid counter0=2
+2026-10-09 17:13:22.570 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 17:13:22.572 [mcuboot DBG] context_boot_go
+2026-10-09 17:13:22.577 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 17:13:22.581 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 17:13:22.586 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 17:13:22.592 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 17:13:22.595 [mcuboot DBG] bootutil_img_hash
+2026-10-09 17:13:22.639 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 17:13:22.645 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 17:13:22.654 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 17:13:22.660 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 17:13:22.670 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 17:13:22.676 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 17:13:22.682 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 17:13:22.691 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29780 ending at 29890
+2026-10-09 17:13:22.697 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 29784 (size 32)
+2026-10-09 17:13:22.703 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 17:13:22.706 [mcuboot DBG] bootutil_find_key
+2026-10-09 17:13:22.715 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29816 ending at 29890
+2026-10-09 17:13:22.722 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 29820 (size 70)
+2026-10-09 17:13:22.727 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 17:13:22.732 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 17:13:23.349 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29890 ending at 29890
+2026-10-09 17:13:23.354 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 17:13:23.359 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 17:13:23.368 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 17:13:23.375 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 17:13:23.380 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 17:13:23.385 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b984
+2026-10-09 17:13:23.388 [mcuboot DBG] bootutil_img_hash
+2026-10-09 17:13:23.403 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 17:13:23.408 [mcuboot DBG] bootutil_img_validate: TLV off 6768, end 6926
+2026-10-09 17:13:23.418 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 17:13:23.424 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 17:13:23.433 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6776 ending at 6926
+2026-10-09 17:13:23.439 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 6784 (size 32)
+2026-10-09 17:13:23.445 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 17:13:23.454 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6816 ending at 6926
+2026-10-09 17:13:23.460 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 6820 (size 32)
+2026-10-09 17:13:23.466 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 17:13:23.469 [mcuboot DBG] bootutil_find_key
+2026-10-09 17:13:23.478 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6852 ending at 6926
+2026-10-09 17:13:23.484 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 6856 (size 70)
+2026-10-09 17:13:23.490 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 17:13:23.495 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 17:13:24.112 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6926 ending at 6926
+2026-10-09 17:13:24.117 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 17:13:24.122 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 17:13:24.132 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 17:13:24.138 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 17:13:24.140 [bl2] image ok version=3.0.0+0
+2026-10-09 17:13:24.148 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 17:13:24.161 
+2026-10-09 17:13:24.165 [s] stm32h573 secure app build=e530643
+2026-10-09 17:13:24.169 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 17:13:24.176 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 17:13:24.183 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 17:13:24.183 
+2026-10-09 17:13:24.187 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 17:13:24.190 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 17:13:24.195 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 17:13:24.203 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 17:13:31.005 [ns] probe f: read 0x0c018000
+2026-10-09 17:13:44.058 
+2026-10-09 17:13:44.062 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 17:13:44.066 [bl2] rollback record state=valid counter0=2
+2026-10-09 17:13:44.070 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 17:13:44.073 [mcuboot DBG] context_boot_go
+2026-10-09 17:13:44.077 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 17:13:44.081 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 17:13:44.087 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 17:13:44.092 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 17:13:44.095 [mcuboot DBG] bootutil_img_hash
+2026-10-09 17:13:44.139 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 17:13:44.145 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 17:13:44.155 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 17:13:44.161 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 17:13:44.170 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 17:13:44.177 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 17:13:44.182 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 17:13:44.192 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29780 ending at 29890
+2026-10-09 17:13:44.198 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 29784 (size 32)
+2026-10-09 17:13:44.203 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 17:13:44.206 [mcuboot DBG] bootutil_find_key
+2026-10-09 17:13:44.216 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29816 ending at 29890
+2026-10-09 17:13:44.222 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 29820 (size 70)
+2026-10-09 17:13:44.228 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 17:13:44.233 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 17:13:44.849 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29890 ending at 29890
+2026-10-09 17:13:44.854 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 17:13:44.860 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 17:13:44.869 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 17:13:44.875 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 17:13:44.881 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 17:13:44.886 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b984
+2026-10-09 17:13:44.889 [mcuboot DBG] bootutil_img_hash
+2026-10-09 17:13:44.903 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 17:13:44.909 [mcuboot DBG] bootutil_img_validate: TLV off 6768, end 6926
+2026-10-09 17:13:44.918 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 17:13:44.924 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 17:13:44.934 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6776 ending at 6926
+2026-10-09 17:13:44.940 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 6784 (size 32)
+2026-10-09 17:13:44.945 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 17:13:44.955 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6816 ending at 6926
+2026-10-09 17:13:44.961 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 6820 (size 32)
+2026-10-09 17:13:44.966 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 17:13:44.969 [mcuboot DBG] bootutil_find_key
+2026-10-09 17:13:44.979 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6852 ending at 6926
+2026-10-09 17:13:44.985 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 6856 (size 70)
+2026-10-09 17:13:44.990 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 17:13:44.995 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 17:13:45.613 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6926 ending at 6926
+2026-10-09 17:13:45.618 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 17:13:45.623 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 17:13:45.632 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 17:13:45.638 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 17:13:45.641 [bl2] image ok version=3.0.0+0
+2026-10-09 17:13:45.649 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 17:13:45.662 
+2026-10-09 17:13:45.666 [s] stm32h573 secure app build=e530643
+2026-10-09 17:13:45.670 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 17:13:45.677 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 17:13:45.683 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 17:13:45.684 
+2026-10-09 17:13:45.687 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 17:13:45.691 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 17:13:45.696 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 17:13:45.704 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line
+2026-10-09 17:13:52.547 [ns] probe c: veneer secure_boot_info=0x0c01f401 body=0x0c018ccc
+2026-10-09 17:13:52.554 [ns] probe c: via veneer secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 17:13:52.557 [ns] probe c: branch to body
+2026-10-09 17:14:17.889 
+2026-10-09 17:14:17.892 [bl2] mcuboot build=e530643 rollback=hw
+2026-10-09 17:14:17.897 [bl2] rollback record state=valid counter0=2
+2026-10-09 17:14:17.900 [bl2] oemurot obk sha256=d5e96ea8
+2026-10-09 17:14:17.903 [mcuboot DBG] context_boot_go
+2026-10-09 17:14:17.908 [mcuboot INF] Image index: 0, Swap type: none
+2026-10-09 17:14:17.912 [mcuboot INF] Image index: 1, Swap type: none
+2026-10-09 17:14:17.917 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 17:14:17.923 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b978
+2026-10-09 17:14:17.926 [mcuboot DBG] bootutil_img_hash
+2026-10-09 17:14:17.970 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 17:14:17.975 [mcuboot DBG] bootutil_img_validate: TLV off 29732, end 29890
+2026-10-09 17:14:17.985 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 17:14:17.991 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 17:14:18.001 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29740 ending at 29890
+2026-10-09 17:14:18.007 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 29748 (size 32)
+2026-10-09 17:14:18.013 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 17:14:18.022 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29780 ending at 29890
+2026-10-09 17:14:18.028 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 29784 (size 32)
+2026-10-09 17:14:18.034 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 17:14:18.037 [mcuboot DBG] bootutil_find_key
+2026-10-09 17:14:18.046 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29816 ending at 29890
+2026-10-09 17:14:18.053 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 29820 (size 70)
+2026-10-09 17:14:18.058 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 17:14:18.063 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 17:14:18.679 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 29890 ending at 29890
+2026-10-09 17:14:18.685 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 17:14:18.690 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 17:14:18.699 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 29732 ending at 29890
+2026-10-09 17:14:18.705 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 29736 (size 4)
+2026-10-09 17:14:18.711 [mcuboot DBG] boot_validate_slot: slot 0, expected_swap_type 0
+2026-10-09 17:14:18.716 [mcuboot DBG] bootutil_img_validate: flash area 0xc00b984
+2026-10-09 17:14:18.719 [mcuboot DBG] bootutil_img_hash
+2026-10-09 17:14:18.734 [mcuboot DBG] bootutil_tlv_iter_begin: type 65535, prot == 0
+2026-10-09 17:14:18.739 [mcuboot DBG] bootutil_img_validate: TLV off 6768, end 6926
+2026-10-09 17:14:18.749 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 17:14:18.755 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 17:14:18.764 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6776 ending at 6926
+2026-10-09 17:14:18.770 [mcuboot DBG] bootutil_tlv_iter_next: TLV 16 found at 6784 (size 32)
+2026-10-09 17:14:18.776 [mcuboot DBG] bootutil_img_validate: EXPECTED_HASH_TLV == 16
+2026-10-09 17:14:18.785 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6816 ending at 6926
+2026-10-09 17:14:18.791 [mcuboot DBG] bootutil_tlv_iter_next: TLV 1 found at 6820 (size 32)
+2026-10-09 17:14:18.797 [mcuboot DBG] bootutil_img_validate: EXPECTED_KEY_TLV == 1
+2026-10-09 17:14:18.799 [mcuboot DBG] bootutil_find_key
+2026-10-09 17:14:18.809 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6852 ending at 6926
+2026-10-09 17:14:18.815 [mcuboot DBG] bootutil_tlv_iter_next: TLV 34 found at 6856 (size 70)
+2026-10-09 17:14:18.821 [mcuboot DBG] bootutil_img_validate: EXPECTED_SIG_TLV == 34
+2026-10-09 17:14:18.826 [mcuboot DBG] bootutil_verify_sig: ECDSA builtin key 0
+2026-10-09 17:14:19.443 [mcuboot DBG] bootutil_tlv_iter_next: searching for 65535 (65535 is any) starting at 6926 ending at 6926
+2026-10-09 17:14:19.448 [mcuboot DBG] bootutil_tlv_iter_next: TLV 65535 not found
+2026-10-09 17:14:19.453 [mcuboot DBG] bootutil_tlv_iter_begin: type 80, prot == 1
+2026-10-09 17:14:19.462 [mcuboot DBG] bootutil_tlv_iter_next: searching for 80 (65535 is any) starting at 6768 ending at 6926
+2026-10-09 17:14:19.469 [mcuboot DBG] bootutil_tlv_iter_next: TLV 80 found at 6772 (size 4)
+2026-10-09 17:14:19.471 [bl2] image ok version=3.0.0+0
+2026-10-09 17:14:19.479 [bl2] hdpl=0x8a jump to 0x0c018400 sp=0x30040000 reset=0x0c018ded via rss 0x0ff95079
+2026-10-09 17:14:19.492 
+2026-10-09 17:14:19.496 [s] stm32h573 secure app build=e530643
+2026-10-09 17:14:19.500 [s] hdpl=0x6f vtor=0x0c018400 sp=0x30040000
+2026-10-09 17:14:19.507 [s] sau ctrl=0x00000001 nsc=0x0c01f400-0x0c01f7ff entry secure_boot_info=0x0c018ccd
+2026-10-09 17:14:19.513 [s] ns vtor=0x08020400 sp=0x200a0000 reset=0x080207ed, console to ns
+2026-10-09 17:14:19.514 
+2026-10-09 17:14:19.518 [ns] stm32h573 non-secure app build=e530643
+2026-10-09 17:14:19.521 [ns] vtor=0x08020400 sp=0x2009fff0
+2026-10-09 17:14:19.526 [ns] nsc secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0
+2026-10-09 17:14:19.534 [ns] running; s/f/c probe secure sram/flash/call, any other key for a status line

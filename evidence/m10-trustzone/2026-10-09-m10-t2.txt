@@ -1,0 +1,12 @@
+M10 T2: restore the Secure image after T1, 2026-10-09
+
+Write 10:16:24 (SW1=0, connect under reset): s_v3.bin sha256 6d640b34f3435b77 -> 0x08018000, readback
+identical, flash error registers 0 (2026-10-09-m10-t2.log). VCP: only the BL2-c gate lines.
+
+Boot 10:17:04 (SW1=1, NRST), VCP 10:17:06-10:17:07: same as C4. Record valid counter0=2, obk d5e96ea8,
+image 0 (0xc00b978) and image 1 (0xc00b984) each to EXPECTED_SIG_TLV and ECDSA verify, no "rollback counter"
+line, image ok 3.0.0, [s] banner and SAU/NSC lines, [ns] banner, nsc hdpl=0x6f s_version=3.0.
+SWD (third "step boot" in 2026-10-09-m10-boot.log): VTOR 0x08020400, DSCSR 0x00020000 (CDS=0),
+DWT_PCSR 0x080207AE x3, 0x080206E6 (NS slot), CFSR/SFSR/SFAR/HFSR 0.
+
+Captures (live): 2026-10-09-m10-t2-write.png, -t2-write-vcp.png, -t2-boot-vcp-full.png, -t2-boot-swd.png.

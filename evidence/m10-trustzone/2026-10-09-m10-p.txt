@@ -1,0 +1,28 @@
+M10 P1-P3: isolation probes from the Non-secure app (E10.3, negative), 2026-10-09
+
+Setup: BL2-c restored (step c3 17:10:25, see evidence/x4-boot-timing/2026-10-09-x4-x2.txt), boot 17:12:39
+(SW1=1): BL2 build e530643, same log as C4, [ns] running. Captures: -c3b-boot-vcp.png, -c3b-boot-swd.png.
+Keys sent by the agent to the VCP tty; registers read by SWD Hotplug (2026-10-09-m10-observe.log, the
+three "step observe" sections at 17:12:58, 17:13:33, 17:13:54). NRST (step boot) before P2, P3 and after P3.
+S build symbols (build/m10/app/tz_s/tz_s.elf, nm): SecureFault_Handler 0x0c018b18,
+__acle_se_secure_boot_info 0x0c018ccc (body, outside NSC), secure_boot_info 0x0c01f400 (veneer, NSC).
+
+P1 17:12:56 key s:
+  VCP: "[ns] probe s: read 0x30000000", no "read returned" line.
+  SWD: SFSR 0x00000048 (AUVIOL | SFARVALID), SFAR 0x30000000, CFSR 0, HFSR 0, DSCSR 0x00030000 (CDS=1),
+  VTOR 0x0C018400, PCSR 0x0C018B18 x4 = SecureFault_Handler (addr2line, app/tz_s/main.c:61).
+P2 17:13:30 key f:
+  VCP: "[ns] probe f: read 0x0c018000", no "read returned" line.
+  SWD: SFSR 0x00000048 (AUVIOL | SFARVALID), SFAR 0x0C018000, CFSR 0, HFSR 0, CDS=1, PCSR 0x0C018B18 x4.
+P3 17:13:52 key c:
+  VCP: "probe c: veneer secure_boot_info=0x0c01f401 body=0x0c018ccc"
+       "probe c: via veneer secure_boot_info=0x0000036f hdpl=0x6f s_version=3.0"   (veneer call passes)
+       "probe c: branch to body", no "via body" line.
+  SWD: SFSR 0x00000001 (INVEP), SFARVALID=0 so SFAR 0x2009FF9C is not meaningful, CFSR 0, HFSR 0, CDS=1,
+  PCSR 0x0C018B18 x4 (SecureFault_Handler).
+No escalation to HardFault in any probe (HFSR 0, R10-6 not hit).
+After P3: NRST, normal boot, [ns] running.
+
+Against E10.3: NS direct reads of Secure SRAM and Secure flash fault with AUVIOL at the exact address,
+the body branch faults with INVEP, the same function through the NSC veneer returns. Verdict: VERIFIED (user, 2026-10-09).
+Captures: -p1-vcp.png, -p1-swd.png, -p2-vcp.png, -p2-swd.png, -p3-vcp.png, -p3-swd.png.

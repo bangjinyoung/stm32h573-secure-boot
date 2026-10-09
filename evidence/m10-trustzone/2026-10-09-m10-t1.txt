@@ -1,0 +1,22 @@
+M10 T1: Secure image payload tamper, 2026-10-09 (E10.2, negative)
+
+Write 10:12:10 (SW1=0, connect under reset): s_hash.bin sha256 4c55acb31e6a7466 (s_v3.bin, bit 0 of byte
+0x1400 flipped) -> 0x08018000, readback identical, flash error registers 0 (2026-10-09-m10-t1.log).
+VCP during the write: only "[bl2] mcuboot build=e530643 ... hdpl=0x51, not started by stirot: stop".
+
+Boot 10:12:55 (SW1=1, NRST), VCP 10:12:56:
+  [bl2] mcuboot build=e530643 rollback=hw; record state=valid counter0=2; oemurot obk sha256=d5e96ea8
+  Image index 0 and 1: Swap type none
+  boot_validate_slot: slot 0 -> bootutil_img_validate: flash area 0xc00b978 (image 0, S; same area as C4)
+  [mcuboot ERR] Image in the primary slot is not valid!
+  [bl2] no bootable image
+  No EXPECTED_SIG_TLV line: rejected at the hash check, before the signature (D-14).
+  Image 1 (0xc00b984) not validated; no [s] or [ns] line.
+
+SWD after boot (2026-10-09-m10-boot.log, second "step boot"):
+  VTOR 0x0C000400 (BL2), DSCSR 0x00030000 (CDS=1), CFSR 0, SFSR 0, HFSR 0
+  DWT_PCSR 0x0C002E28 0x0C002E2C 0x0C002E2E 0x0C002E2E = HAL_Delay (bl2.elf addr2line): BL2 LED loop
+  SFAR 0x30000884 with SFSR.SFARVALID=0, not meaningful.
+
+Against E10.2 (S half): S tamper rejected by BL2 at image 0, no app runs. Verdict: VERIFIED (user, 2026-10-09).
+Captures (live panes, 10:15): 2026-10-09-m10-t1-boot-vcp.png, -t1-boot-swd.png.
